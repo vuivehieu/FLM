@@ -25,6 +25,36 @@
         <link href="css/style.css" rel="stylesheet" />
         <!-- RESPONSIVE.CSS ONLY FOR MOBILE AND TABLET VIEWS -->
         <link href="css/style-mob.css" rel="stylesheet" />
+                <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+                <script type="text/javascript">
+            $(document).ready(function () {
+                var table = $('#example').DataTable({
+                    lengthChange: false,
+                    buttons: ['copy', 'excel', 'pdf', 'colvis']
+                });
+                table.buttons().container()
+                        .appendTo('#example_wrapper .col-md-6:eq(0)');
+
+                $('#editModal').on('show.bs.modal', function (event) {
+                    var button = $(event.relatedTarget); // Button that triggered the modal
+                    var status = button.data('status'); // Extract value from data-* attributes
+                    var role = button.data('role');
+                    console.log(status);
+                    console.log(role);
+                    // Set the selected value of the "statusRadio" radio buttons based on the "data-status" attribute
+                    if (status === 1) {
+                        $('#activeStatus').prop('checked', 'checked');
+                    } else {
+                        $('#inactiveStatus').prop('checked', 'checked');
+                    }
+
+                    // Set the selected value of the "roleEdit" select box based on the "data-role" attribute
+                    $('#roleSelect option[value='+role+']').attr('selected',true);
+                });
+
+                // Set the selected value of the "roleEdit" select box based on the "data-role" attribute
+            });
+        </script>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -56,9 +86,6 @@
                                 <li><a href="dashboard"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
                                 <li class="active-bre"><a> Users</a></li>
                             </ul>
-                        </div>
-                        <div class="float-right">
-                            <a href="admin-adduser"><button class="btn btn-warning">Add Student</button></a>
                         </div>
                     </div>
 
@@ -115,7 +142,7 @@
                                                                     ${user.status == 0 ? 'Block' : user.status == 1 ? 'Active' : user.status == 2 ? 'Not Verify Email' : '' }</span>
                                                             </td>
                                                             <td>
-                                                                <a href="admin-student-details.html" class="ad-st-view">View</a>
+                                                                <button type="button" class="ad-st-view" data-toggle="modal" data-target="#editModal" data-status="${user.status}" data-role="${user.role.rid}">Edit</button>
                                                                 <!--<a href="admin-student-details.html" class="ad-">Block</a>-->
                                                             </td>
                                                         </tr>
@@ -124,20 +151,56 @@
                                                 </tbody>
                                             </table>
 
-                                            
+
                                         </div>
                                         <div class="pg-pagina">
-                                                <ul class="pagination">
-                                                    <li class="disabled"><a href="#!">Pre</a></li>
-                                                    <li class="active"><a href="#!">1</a></li>
-                                                    <li class="waves-effect"><a href="#!">2</a></li>
-                                                    <li class="waves-effect"><a href="#!">3</a></li>
-                                                    <li class="waves-effect"><a href="#!">4</a></li>
-                                                    <li class="waves-effect"><a href="#!">5</a></li>
-                                                    <li class="waves-effect"><a href="#!">Next</a></li>
-                                                </ul>
+                                            <ul class="pagination">
+                                                <li class="disabled"><a href="#!">Pre</a></li>
+                                                <li class="active"><a href="#!">1</a></li>
+                                                <li class="waves-effect"><a href="#!">2</a></li>
+                                                <li class="waves-effect"><a href="#!">3</a></li>
+                                                <li class="waves-effect"><a href="#!">4</a></li>
+                                                <li class="waves-effect"><a href="#!">5</a></li>
+                                                <li class="waves-effect"><a href="#!">Next</a></li>
+                                            </ul>
 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 200px;">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Edit Student</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="form-group selectDiv">
+                                                <label for="roleSelect" class="col-form-label">Role</label>
+                                                <select name="roleEdit" id="roleSelect">
+                                                    <c:forEach items="${roles}" var="role">
+                                                        <option value="${role.rid}"><c:out value="${role.rname}"></c:out></option>
+                                                    </c:forEach>
+                                                </select>
                                             </div>
+                                            <div class="form-group">
+                                                <p>Status</p>
+                                                <input type="radio" id="activeStatus" name="statusRadio" value="1">
+                                                <label for="activeStatus">Active</label><br>
+                                                <input type="radio" id="inactiveStatus" name="statusRadio" value="0">
+                                                <label for="inactiveStatus">Inactive</label><br>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary">Save</button>
                                     </div>
                                 </div>
                             </div>
@@ -152,7 +215,6 @@
         <script src="js/main.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
 
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
         <script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
@@ -163,23 +225,8 @@
         <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
         <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
         <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.colVis.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                var table = $('#example').DataTable({
-                    lengthChange: false,
-                    buttons: ['copy', 'excel', 'pdf', 'colvis']
-                });
-                table.buttons().container()
-                        .appendTo('#example_wrapper .col-md-6:eq(0)');
-            });
-            
-        </script>
-
         <script src="js/materialize.min.js"></script>
         <script src="js/custom.js"></script>
-
-
-
     </body>
 
 

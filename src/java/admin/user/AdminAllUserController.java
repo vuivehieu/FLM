@@ -6,6 +6,7 @@
 package admin.user;
 
 import DAL.AccountDAO;
+import DAL.RoleDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -58,7 +59,8 @@ public class AdminAllUserController extends HttpServlet {
     throws ServletException, IOException {
         
         AccountDAO accountDAO = new AccountDAO();
-        
+        RoleDAO roleDAO = new RoleDAO();
+        request.setAttribute("roles", roleDAO.getAllRole());
         request.setAttribute("list", accountDAO.getAllAccount());
         request.getRequestDispatcher("gui/admin/user/allUser.jsp").forward(request, response);
     } 
