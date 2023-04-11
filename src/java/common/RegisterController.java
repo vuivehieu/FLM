@@ -99,16 +99,16 @@ public class RegisterController extends HttpServlet {
 //            HttpSession session = request.getSession();
 //            session.setAttribute("account", a);
 
-            sendMail(request, response);
-            request.getRequestDispatcher("gui/common/home.jsp").forward(request, response);
+            this.sendMail(request, response);
+            request.getRequestDispatcher("gui/common/heading/home.jsp").forward(request, response);
         } else {
 
-            request.setAttribute("userName", userName);
-            request.setAttribute("fullName", fullName);
-            request.setAttribute("email", email);
-            request.setAttribute("password", password);
-            request.setAttribute("messageRegister", ad.checkRegister(userName, email));
-            request.getRequestDispatcher("gui/common/home.jsp").forward(request, response);
+//            request.setAttribute("userName", userName);
+//            request.setAttribute("fullName", fullName);
+//            request.setAttribute("email", email);
+//            request.setAttribute("password", password);
+//            request.setAttribute("messageRegister", ad.checkRegister(userName, email)); // neu tk duoc tao return 'OK', con duoc tao thi tra ve ten + mail
+//            request.getRequestDispatcher("gui/common/heading/register.jsp").forward(request, response);
         }
 
     }
@@ -123,13 +123,13 @@ public class RegisterController extends HttpServlet {
         // Trong ví dụ này, chúng ta sẽ in mã xác thực ra màn hình để kiểm tra xem nó hoạt động như thế nào
 //        System.out.println("Verification code: " + uuid);
         // Thiết lập thông tin email
-        final String username = "phanhieu000lc@gmail.com";
-        final String password = "kenbyojmgcjglacz";
+        final String from = "dinhvu091193@gmail.com";
+        final String password = "ymdngxlplsegrygp";
         String host = "smtp.gmail.com";
         int port = 587;
-        String from = userEmail;
+        String to = userEmail;
         String subject = "Email verification";
-        String content = "Nhan Vao Link Ben Duoi De Xac Nhan Email:\nhttp://localhost:9999/SWP391-G2/comfirmEmail?code=" + uuid;
+        String content = "Nhan Vao Link Ben Duoi De Xac Nhan Email:\nhttp://localhost:8080/SWP391-G2/comfirmEmail?code=" + uuid;
 
         // Thiết lập các thuộc tính email
         Properties properties = new Properties();
@@ -141,7 +141,7 @@ public class RegisterController extends HttpServlet {
         // Tạo phiên gửi email và thiết lập thông tin người gửi
         Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
+                return new PasswordAuthentication(from, password);
             }
         });
 
@@ -149,7 +149,7 @@ public class RegisterController extends HttpServlet {
             // Tạo đối tượng MimeMessage và thiết lập các thuộc tính email
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(from));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userEmail));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
             message.setSubject(subject);
             message.setText(content);
 
@@ -161,7 +161,7 @@ public class RegisterController extends HttpServlet {
 
             // Chuyển hướng đến trang xác nhận email
         } catch (MessagingException e) {
-            throw new RuntimeException("SendMail Controller -> doGet(): " + e);
+            throw new RuntimeException("error: " + e);
         }
     }
 

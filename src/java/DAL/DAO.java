@@ -2593,5 +2593,22 @@ public class DAO extends DBContext {
         }
         return "";
     }
+    
+    public int getAccountIdByCodeSendMail(String codeSendMail){
+        try {
+            String sql = "select accountID from codesendmail where code = ?";
+
+            PreparedStatement st = connection.prepareStatement(sql);
+
+            ResultSet rs = st.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("DAO -> getCodeMailLast():");
+        }
+        return 0;
+    }
 
 }

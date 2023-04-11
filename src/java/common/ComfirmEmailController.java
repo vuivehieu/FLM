@@ -67,12 +67,17 @@ public class ComfirmEmailController extends HttpServlet {
 
         // Kiểm tra mã xác thực có hợp lệ hay không
         // Trong ví dụ này, chúng ta chỉ kiểm tra mã xác thực có bằng với một giá trị cứng hay không
-        HttpSession session = request.getSession();
-        Account account = (Account) session.getAttribute("account");
-        String code = new DAO().getCodeMailLast(account.getAccountID());
+//        HttpSession session = request.getSession();
+//        Account account = (Account) session.getAttribute("account");
+//        String code = new DAO().getCodeMailLast(account.getAccountID());
+
+        int AccountId = new DAO().getAccountIdByCodeSendMail(verificationCode);
+
         PrintWriter out = response.getWriter();
-        if (!code.isEmpty()) {
-            if (verificationCode.equalsIgnoreCase(code)) {
+        if (AccountId != 0) {
+            
+            Account account = dao.getAccountByAccountID(AccountId);
+            if (account.getStatus() == 2) {
                 // Xác minh email thành công
                 out.println("Email verified successfully!");
                 account.setStatus(1);

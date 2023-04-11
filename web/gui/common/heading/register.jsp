@@ -22,7 +22,7 @@
                 </a>
                 <h4>Create an Account</h4>
                 <p>Don't have an account? Create your account. It's take less then a minutes</p>
-                <form class="s12" action="register" method="post">
+                <form class="s12" action="register" method="post" onsubmit="checkData()">
                     <div id="data"></div>
                     <div>
                         <div class="input-field s12">
@@ -57,39 +57,40 @@
 
                     <div>
                         <div class="input-field s4">
-                            <input type="submit" onsubmit="return checkData();" value="Register" class="waves-effect waves-light log-in-btn"> </div>
+                            <input type="submit" value="Register" class="waves-effect waves-light log-in-btn"> </div>
                     </div>
                     <div>
                         <div class="input-field s12"> <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal1" onclick="closeModal2()">Are you a already member ? Login</a> </div>
                     </div>
-                    <span id="messageRegister" style="display: none">${messageRegister != null ? messageRegister : 'false'}</span>
-                   
+                    <!--<span id="messageRegister" style="display: none">${messageRegister != null ? messageRegister : 'false'}</span>-->
+                   <span id="errorMessage" style="color: red"></span>
                     <script>
                        
-                        let messageRegister = document.getElementById('messageRegister');
-
-                        if (messageRegister.innerHTML !== 'OK' && messageRegister.innerHTML !== 'false') {
-
-                            if (messageRegister.innerHTML === 'userNameemail') {
-                                document.getElementById('userName').style.border = '1px solid red';
-                                document.getElementById('email').style.border = '1px solid red';
-                            } else if (messageRegister.innerHTML === 'userName') {
-                                document.getElementById('userName').style.border = '1px solid red';
-                                document.getElementById('userName').focus();
-                            } else if (messageRegister.innerHTML === 'email') {
-                                document.getElementById('email').style.border = '1px solid red';
-                            }
-                            document.getElementById('modal2').style.display = 'block';
-                            document.getElementById('modal2').classList.add('in');
-                            document.getElementById('btn-close-2').addEventListener('click', function () {
-                                document.getElementById('modal2').style.display = 'none';
-                                document.getElementById('modal2').classList.remove('in');
-                            });
-                        }
+//                        let messageRegister = document.getElementById('messageRegister');
+//
+//                        if (messageRegister.innerHTML !== 'OK' && messageRegister.innerHTML !== 'false') {
+//
+//                            if (messageRegister.innerHTML === 'userNameemail') {
+//                                document.getElementById('userName').style.border = '1px solid red';
+//                                document.getElementById('email').style.border = '1px solid red';
+//                            } else if (messageRegister.innerHTML === 'userName') {
+//                                document.getElementById('userName').style.border = '1px solid red';
+//                                document.getElementById('userName').focus();
+//                            } else if (messageRegister.innerHTML === 'email') {
+//                                document.getElementById('email').style.border = '1px solid red';
+//                            }
+//                            document.getElementById('modal2').style.display = 'block';
+//                            document.getElementById('modal2').classList.add('in');
+//                            document.getElementById('btn-close-2').addEventListener('click', function () {
+//                                document.getElementById('modal2').style.display = 'none';
+//                                document.getElementById('modal2').classList.remove('in');
+//                            });
+//                        }
 
                         function checkPassword() {
                             var password = document.getElementById('password');
                             var confirm_password = document.getElementById('comfirm-password');
+                            
                             if (password.value !== confirm_password.value || password.length < 6 || password.length > 20) {
                                 password.style.border = '1px solid red';
                                 confirm_password.style.border = '1px solid red';
@@ -100,10 +101,18 @@
                         }
 
                         function checkData() {
-                            if (checkPassword()) {
-                                return true;
+                            var password = document.getElementById('password');
+                            var confirm_password = document.getElementById('comfirm-password');
+                            
+                            if (password.value !== confirm_password.value || password.length < 6 || password.length > 20) {
+                                event.preventDefault();
+                                 document.getElementById("errorMessage").innerHTML = "Password don't match";
                             }
-                            return false;
+                            
+//                            if (checkPassword()) {
+//                                return true;
+//                            }
+//                            return false;
                         }
 
                         function closeModal2() {
