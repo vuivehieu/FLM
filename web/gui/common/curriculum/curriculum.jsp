@@ -75,15 +75,13 @@
                 </div>
 
                 <div class="col-12" style="display: flex;align-items: center;">
-                    <!-- Example split primary button -->
-                   <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-mdb-toggle="dropdown" aria-expanded="false" style="font-size: 1rem;" value="curCode">
-                          CurriculumCode
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                          <li><button class="dropdown-item" type="button" value="curName_VI">Name</button></li>
-                        </ul>
-                  </div>
+                    <!-- start select -->
+                        <select id="sel" name="select" class="browser-default">
+                          <option value='curCode' selected>Code</option>
+                          <option value='curName'>Name</option>
+                        </select>
+                    <!--end select-->
+                    
                     <form class="form-inline" style="width: 100%;padding-left: 3rem;">
                         <div style="position: relative">
                             <input type="text" name="type" value="curriculum" hidden="">
@@ -168,8 +166,15 @@
         <script>
             let request;
             function searchCurriculum() {
+//                start select
+                let select = document.getElementById('sel');
+                let selectValue = select.value;
+                select.addEventListener('change',function(){
+                    selectValue = select.value;
+                });
+//                end select
                 let key = document.getElementById("search").value;
-                let url = './search?type=curriculum&keysearch=' + key;
+                let url = './search?type=curriculum&keysearch=' + key + '&filter=' +selectValue;
 
 
                 if (window.XMLHttpRequest) {
@@ -189,7 +194,8 @@
             
             function changePage(page) {
                 let key = document.getElementById("search").value;
-                let url = './search?type=curriculum&keysearch=' + key + '&page=' + page;
+                let selectValue = document.getElementById('sel').value;
+                let url = './search?type=curriculum&keysearch=' + key + '&filter=' +selectValue + '&page=' + page;
 
 
                 if (window.XMLHttpRequest) {

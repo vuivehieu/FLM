@@ -7,7 +7,7 @@
 
 <section>
     <!-- REGISTER SECTION -->
-    <div id="modal2" class="modal fade" role="dialog">
+    <div id="modal2" class="modal" role="dialog">
         <div class="log-in-pop">
             <div class="log-in-pop-left">
                 <h1>Hello...</h1>
@@ -54,6 +54,7 @@
                             <label>Confirm password</label>
                         </div>
                     </div>
+
                     <div>
                         <div class="input-field s4">
                             <input type="submit" onsubmit="return checkData();" value="Register" class="waves-effect waves-light log-in-btn"> </div>

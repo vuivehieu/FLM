@@ -61,6 +61,7 @@ public class SearchControllerr extends HttpServlet {
             throws ServletException, IOException {
         String type = request.getParameter("type");
         String key = request.getParameter("keysearch");
+        String filter = request.getParameter("filter");
         String url = "";
 
         url = (type == null
@@ -77,7 +78,7 @@ public class SearchControllerr extends HttpServlet {
 
             switch (type) {
                 case "curriculum":
-                    list = searchCurriculum(key);
+                    list = searchCurriculum(key, filter);
                     break;
                 case "syllabus":
                     list = searchSyllabus(key);
@@ -136,22 +137,23 @@ public class SearchControllerr extends HttpServlet {
             throws ServletException, IOException {
         String type = request.getParameter("type");
         String key = request.getParameter("keysearch");
+        String filter = request.getParameter("filter");
         String page = request.getParameter("page");
 
         response.setContentType("text/html;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
 
-        response.getWriter().write(getResponse(type, key, page));
+        response.getWriter().write(getResponse(type, key, filter, page));
 
     }
 
-    private String getResponse(String type, String key, String xpage) {
+    private String getResponse(String type, String key,String filter, String xpage) {
         List<?> list = new ArrayList<>();
         List<?> listByPage = new ArrayList<>();
 
         switch (type) {
             case "curriculum":
-                list = searchCurriculum(key);
+                list = searchCurriculum(key, filter);
                 break;
             case "syllabus":
                 list = searchSyllabus(key);
@@ -189,7 +191,7 @@ public class SearchControllerr extends HttpServlet {
 
         switch (type) {
             case "curriculum":
-                return getResponseCurriculum(listByPage, key, type, size, page, numberOfPage, start, startPage, endPage);
+                return getResponseCurriculum(listByPage, key, type,filter, size, page, numberOfPage, start, startPage, endPage);
             case "syllabus":
                 return getResponseSyllabus(listByPage, key, type, size, page, numberOfPage, startPage, endPage);
             case "preRequisite":
@@ -201,7 +203,7 @@ public class SearchControllerr extends HttpServlet {
 
     }
 
-    private String getResponseCurriculum(List<?> list, String key, String type, int size, int page, int numberOfPage, int start, int startPage, int endPage) {
+    private String getResponseCurriculum(List<?> list, String key, String type,String filter, int size, int page, int numberOfPage, int start, int startPage, int endPage) {
         String response = "";
         if (list.isEmpty()) {
             response += "<div class='row'><h5 class='text-center' style='color: red'>Not Found</h3></div>";
@@ -406,13 +408,26 @@ public class SearchControllerr extends HttpServlet {
         return response;
     }
 
-    private List<Curriculum> searchCurriculum(String key) {
+    private List<Curriculum> searchCurriculum(String key, String filter) {
         List<Curriculum> result = new ArrayList<>();
         for (Curriculum item : listCurriculum) {
-            if (item.getCurCode().toLowerCase().contains(key.toLowerCase())
-                    || item.getCurName_EN().toLowerCase().contains(key.toLowerCase())
-                    || item.getCurName_VI().toLowerCase().contains(key.toLowerCase())) {
-                result.add(item);
+//            if (item.getCurCode().toLowerCase().contains(key.toLowerCase())
+//                    || item.getCurName_EN().toLowerCase().contains(key.toLowerCase())
+//                    || item.getCurName_VI().toLowerCase().contains(key.toLowerCase())) {
+//                result.add(item);
+//            }
+
+            if(filter.toLowerCase().contains("curcode")){
+                if (item.getCurCode().toLowerCase().contains(key.toLowerCase())){
+                    result.add(item);
+                }
+            }
+            
+            if(filter.toLowerCase().contains("curname")){
+                if (item.getCurName_EN().toLowerCase().contains(key.toLowerCase())
+                   || item.getCurName_VI().toLowerCase().contains(key.toLowerCase())){
+                    result.add(item);
+                }
             }
         }
         return result;
