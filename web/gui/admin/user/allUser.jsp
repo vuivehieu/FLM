@@ -6,7 +6,7 @@
 
 
     <head>
-        <title>EEducation Master Template</title>
+        <title>Education Master Template</title>
         <!-- META TAGS -->
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,7 +25,7 @@
         <link href="css/style.css" rel="stylesheet" />
         <!-- RESPONSIVE.CSS ONLY FOR MOBILE AND TABLET VIEWS -->
         <link href="css/style-mob.css" rel="stylesheet" />
-                <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
                 <script type="text/javascript">
             $(document).ready(function () {
                 var table = $('#example').DataTable({
@@ -39,6 +39,9 @@
                     var button = $(event.relatedTarget); // Button that triggered the modal
                     var status = button.data('status'); // Extract value from data-* attributes
                     var role = button.data('role');
+                    var name = button.data('name');
+                    var username = button.data('username');
+                    var email = button.data('email');
                     console.log(status);
                     console.log(role);
                     // Set the selected value of the "statusRadio" radio buttons based on the "data-status" attribute
@@ -47,13 +50,17 @@
                     } else {
                         $('#inactiveStatus').prop('checked', 'checked');
                     }
-
+                    $('#studentName').attr('value',name);
+                    $('#studentUsername').attr('value',username);
+                    $('#studentEmail').attr('value',email);
                     // Set the selected value of the "roleEdit" select box based on the "data-role" attribute
-                    $('#roleSelect option[value='+role+']').attr('selected',true);
+                    $('#roleSelect').val(role);
                 });
-
                 // Set the selected value of the "roleEdit" select box based on the "data-role" attribute
             });
+            function submitForm(){
+                    $('#updateForm').submit();
+                }
         </script>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -142,7 +149,7 @@
                                                                     ${user.status == 0 ? 'Block' : user.status == 1 ? 'Active' : user.status == 2 ? 'Not Verify Email' : '' }</span>
                                                             </td>
                                                             <td>
-                                                                <button type="button" class="ad-st-view" data-toggle="modal" data-target="#editModal" data-status="${user.status}" data-role="${user.role.rid}">Edit</button>
+                                                                <button type="button" class="ad-st-view" data-toggle="modal" data-target="#editModal" data-status="${user.status}" data-role="${user.role.rid}" data-name="${user.displayName}" data-username="${user.userName}" data-email="${user.email}">Edit</button>
                                                                 <!--<a href="admin-student-details.html" class="ad-">Block</a>-->
                                                             </td>
                                                         </tr>
@@ -171,7 +178,7 @@
                         </div>
 
 
-                        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 200px;">
+                        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 100px;">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -181,10 +188,23 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form>
-                                            <div class="form-group selectDiv">
+                                        <form action="admin-updateuser" id="updateForm" method="post">
+                                            <div class="form-group">
+                                                <label for="studentName" class="col-form-label">Name</label>
+                                                <input type="text" id="studentName" name="studentName" value="" disabled="disabled" style="font-size: 15px; color: black"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="studentUsername" class="col-form-label">Username</label>
+                                                <input type="text" value="" id="studentUsername" name="studentUsername" style="font-size: 15px; color: black; display: none"/>
+                                                <input type="text" value="" id="studentUsername2" name="studentUsername" disabled="disabled" style="font-size: 15px; color: black"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="studentEmail" class="col-form-label">Email</label>
+                                                <input type="text" value="" id="studentEmail" name="studentEmail" disabled="disabled" style="font-size: 15px; color: black"/>
+                                            </div>
+                                            <div class="form-group">
                                                 <label for="roleSelect" class="col-form-label">Role</label>
-                                                <select name="roleEdit" id="roleSelect">
+                                                <select name="roleEdit" class="browser-default" id="roleSelect" required="true">
                                                     <c:forEach items="${roles}" var="role">
                                                         <option value="${role.rid}"><c:out value="${role.rname}"></c:out></option>
                                                     </c:forEach>
@@ -200,7 +220,7 @@
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary">Save</button>
+                                        <button type="button" class="btn btn-primary" onclick="submitForm()">Save</button>
                                     </div>
                                 </div>
                             </div>
