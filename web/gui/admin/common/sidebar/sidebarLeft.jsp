@@ -10,15 +10,6 @@
     <!--== LEFT MENU ==-->
     <div class="sb2-13">
         <ul class="collapsible" data-collapsible="accordion">
-            <li><a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-home" aria-hidden="true"></i>Home</a>
-                <div class="collapsible-body left-sub-menu">
-                    <ul>
-                        <li><a href="dashboard"><i class="fa fa-dashboard" aria-hidden="true"></i>Dashboard</a></li>
-                        <li><a href="home"><i class="fa fa-home" aria-hidden="true"></i>FLM Home</a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
             <c:if test="${account  != null && account.role.rid == 6}">
                 <li><a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-users" aria-hidden="true"></i> Users</a>
                     <div class="collapsible-body left-sub-menu">
