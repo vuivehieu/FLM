@@ -77,11 +77,25 @@
         }
 
     </style>
-    <div class="ed-top">
+<!--    <div class="ed-top">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="ed-com-t1-left">
+                    <div class="wed-logo">
+                        <a href="home">
+                            <img style="height: calc(100px-12px)" src="images/Logo_Đại_học_FPT.png" alt="" />
+                        </a>
+                    </div>
+                    <div class="main-menu">
+                        <ul>
+                            <li><a href="search?type=curriculum">All Curriculum</a></li>
+
+                            <c:if test="${account != null}">
+                                <li><a href="search?type=syllabus">All Syllabus</a></li>
+                                </c:if>
+                            <li><a href="search?type=preRequisite">All PreRequisite</a></li>
+                            <li><a href="search?type=corollary">All Corollary</a></li>
+                        </ul>
                     </div>
                     <div class="${account == null ? 'ed-com-t1-right' : ''}" style="${account == null ? '' : 'float: right;'}">
                         <ul>
@@ -115,38 +129,124 @@
                             </div>
                         </c:if>
                     </div>
-
                 </div>
             </div>
         </div>
+    </div>-->
+
+
+<!-- Navbar -->
+<div class="ed-top">
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+   <!--Container wrapper--> 
+  <div class="container-fluid">
+     <!--Toggle button--> 
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+     <!--Collapsible wrapper--> 
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+       <!--Navbar brand--> 
+      <a class="navbar-brand mt-2 mt-lg-0" href="home">
+        <img
+          src="images/Logo_Đại_học_FPT.png"
+          height="100%"
+          alt="FPT Logo"
+          loading="lazy"
+        />
+      </a>
+       <!--Left links--> 
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item" style="font-weight: bold;">
+          <a class="nav-link" href="search?type=curriculum">All Curriculum</a>
+        </li>
+        <li class="nav-item" style="font-weight: bold;">
+          <a class="nav-link" href="search?type=preRequisite">All PreRequisite</a>
+        </li>
+        <c:if test="${account != null}">
+        <li class="nav-item" style="font-weight: bold;">
+          <a class="nav-link" href="search?type=syllabus">All Syllabus</a>
+        </li>
+        </c:if>
+        <li class="nav-item" style="font-weight: bold;">
+          <a class="nav-link" href="search?type=corollary">All Corollary</a>
+        </li>
+      </ul>
+  
+       <!--Left links--> 
     </div>
+     <!--Collapsible wrapper--> 
 
-
-    <!-- LOGO AND MENU SECTION -->
-    <div class="top-logo" data-spy="affix" data-offset-top="250">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="wed-logo">
-                        <a href="home">
-                            <img style="height: calc(100px-12px)" src="images/Logo_Đại_học_FPT.png" alt="" />
-                        </a>
-                    </div>
-                    <div class="main-menu">
-                        <ul>
-                            <li><a href="search?type=curriculum">All Curriculum</a></li>
-
-                            <c:if test="${account != null}">
-                                <li><a href="search?type=syllabus">All Syllabus</a></li>
-                                </c:if>
-                            <li><a href="search?type=preRequisite">All PreRequisite</a></li>
-                            <li><a href="search?type=corollary">All Corollary</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+     <!--Right elements--> 
+    <c:if test="${account == null}">
+    <div class="d-flex align-items-center">
+        <button type="button" class="btn btn-dark me-3">
+          <a href="#!" data-toggle="modal" data-target="#modal1">Sign In</a>
+        </button>
+        <button type="button" class="btn btn-primary me-3">
+           <a href="#!" data-toggle="modal" data-target="#modal2">Sign Up</a>
+        </button>
     </div>
+    </c:if>
+    <c:if test="${account != null}">
+          <!--Avatar--> 
+      <div class="dropdown">
+        <a
+          class="dropdown-toggle d-flex align-items-center hidden-arrow"
+          href="#"
+          id="navbarDropdownMenuAvatar"
+          role="button"
+          data-mdb-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img
+            src="${account.avatar}"
+            class="rounded-circle"
+            height="25"
+            alt="Black and White Portrait of a Man"
+            loading="lazy"
+          />
+        </a>
+        <ul
+          class="dropdown-menu dropdown-menu-end"
+          aria-labelledby="navbarDropdownMenuAvatar"
+        >
+          <c:if test="${!(account.role.rid == 1) && !(account.role.rid == 2) && !(account.role.rid == 3)}">
+          <li>
+            <a class="dropdown-item" href="dashboard">Dashboard</a>
+          </li>
+          </c:if>
+          <li>
+            <a class="dropdown-item" href="profile">My profile</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="changePassword">Change Password</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="changeAvatar">Change Avatar</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="logout">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    </c:if>
+     <!--Right elements--> 
+  </div>
+   <!--Container wrapper--> 
+</nav>
+</div>
+<!-- Navbar -->
 
 </section>
 <div style="position: fixed; top: 0; right: 0;" id="toastMessage">

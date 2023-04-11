@@ -31,6 +31,21 @@
             <script src="js/respond.min.js"></script>
             <![endif]-->
 
+        <!-- Font Awesome -->
+        <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          rel="stylesheet"
+        />
+        <!-- Google Fonts -->
+        <link
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          rel="stylesheet"
+        />
+        <!-- MDB -->
+        <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
+          rel="stylesheet"
+        />
         <style>
             pad-bot-70 {
                 padding-left: 5rem;
@@ -59,8 +74,17 @@
                     </div>
                 </div>
 
-                <div class="col-12">
-                    <form class="form-inline">
+                <div class="col-12" style="display: flex;align-items: center;">
+                    <!-- Example split primary button -->
+                   <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-mdb-toggle="dropdown" aria-expanded="false" style="font-size: 1rem;" value="curCode">
+                          CurriculumCode
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                          <li><button class="dropdown-item" type="button" value="curName_VI">Name</button></li>
+                        </ul>
+                  </div>
+                    <form class="form-inline" style="width: 100%;padding-left: 3rem;">
                         <div style="position: relative">
                             <input type="text" name="type" value="curriculum" hidden="">
                             <input class="" name="keysearch" id="search" value="${key}" style="height: 5rem;font-size: unset" type="text" placeholder="Search" oninput="searchCurriculum()">
@@ -190,6 +214,11 @@
                 }
             }
         </script>
+        <!-- MDB -->
+        <script
+          type="text/javascript"
+          src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
+        ></script>
 
         <!--Import jQuery before materialize.js-->
         <script src="js/main.min.js"></script>

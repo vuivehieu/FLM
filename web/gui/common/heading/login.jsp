@@ -1,6 +1,6 @@
 <section>
     <!-- LOGIN SECTION -->
-    <div id="modal1" class="modal fade" role="dialog">
+    <div id="modal1" class="modal" role="dialog">
         <div class="log-in-pop">
             <div class="log-in-pop-left">
                 <h1>Welcome to FPT Learning Material</h1>
