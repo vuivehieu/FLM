@@ -147,17 +147,17 @@
                   <h4 class="mt-1 mb-5 pb-1">Create an Account</h4>
                 </div>
 
-                <form action="register" method="post" onsubmit="checkData()">
+                <!--<form action="register" method="post" onsubmit="checkData()">-->
                   <!--<p>Please login to your account</p>-->
 
                   <div class="form-outline mb-4">
-                    <input type="text" class="form-control validate" style="font-size: 15px;"
+                    <input type="text" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;" disabled
                       placeholder="User Name"  name="userName" value="${userName != null ? userName : ''}" id="userName" />
                     <label class="form-label" for="userName">User Name</label>
                   </div>
                     
                   <div class="form-outline mb-4">
-                    <input type="text" class="form-control validate" style="font-size: 15px;"
+                    <input type="text" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;" disabled
                       placeholder="Full Name"  value="${fullName != null ? fullName : ''}" name="fullName" id="fullName" />
                     <label class="form-label" for="fullName">Full Name</label>
                   </div>
@@ -169,39 +169,38 @@
                   </div>
 
                   <div class="form-outline mb-4">
-                    <input type="password" class="form-control validate" style="font-size: 15px;" name="password" value="${password != null ? password : ''}" id="password"  />
+                    <input type="password" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;" disabled name="password" value="${password != null ? password : ''}" id="password"  />
                     <label class="form-label" for="password">Password</label>
                   </div>
                     
                   <div class="form-outline mb-4">
-                    <input type="password" class="form-control validate" style="font-size: 15px;" name="comfirm-password" value="${password != null ? password : ''}" id="comfirm-password"  />
-                    <label class="form-label" for="password">Confirm password</label>
+                     <input type="password" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;" disabled name="comfirm-password" value="${password != null ? password : ''}" id="comfirm-password"  />
+                      <label class="form-label" for="password">Confirm password</label>
                   </div>
+                       
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                         <input type="text" class="form-control validate"
+                          value="${verifyCode != null ? verifyCode : ''}" name="verifyCode" id="verifyCode" style="font-size: 15px;"/>
+                       <label class="form-label" for="verifyCode">Input Code</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button" style="font-size: 15px;" id="verifyCodeBtn" onclick="verifyEnail()">Verify Email</button>
+                    </div>
+                  </div>
+                </div>
+                       
                         
-                  <div class="text-center pt-1 pb-1">
-                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" style="font-size: 15px;" id="register">Register</button>
-                  </div>
+                <div class="text-center pt-1 pb-1">
+                  <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3 disabled" type="button" style="font-size: 15px;" id="register">Register</button>
+                </div>
                    
                    <span id="messageRegister" style="display: none">${messageRegister != null ? messageRegister : 'false'}</span>
                    <p id="errorMessage" style="color: red; text-align: center; margin-bottom: 30px;"></p>
-                </form>
-                   
-                  <!--start form xac nhan ma code-->
-                 <form action="verifyCode" method="post" >
-                     <div class="form-outline mb-4">
-                       <input type="text" class="form-control validate"
-                         placeholder="Full Name"  value="${verifyCode != null ? verifyCode : ''}" name="verifyCode" id="verifyCode" style="font-size: 15px;"/>
-                       <label class="form-label" for="verifyCode">Input Code</label>
-                     </div>
-                     <div class="text-center pt-1 mb-5 pb-1">
-                       <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3 disabled" type="submit" style="font-size: 15px;" id="verifyCodeBtn">Verify Code</button>
-                     </div>
-                       <div>
-                    </div>
-                      <span id="messageVerifyCode" style="display: none">${messageVerifyCode != null ? messageVerifyCode : 'false'}</span>
-                      <span id="successRegisterMessage" style="display: none">${successRegisterMessage != null ? successRegisterMessage : 'false'}</span>
-                      <p id="successRegisterMessageShow" style="color: blue; text-align: center; margin-bottom: 30px;"></p>
-                 </form>
+
                 <div class="input-field s12" style="text-align: center;"> <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal1" onclick="closeModal2()">Are you a already member ? Login</a> </div>
 
                   <!--end form xac nhan ma code-->  
@@ -265,6 +264,69 @@
                             document.getElementById('register').classList.remove("disabled");
                             document.getElementById('verifyCodeBtn').classList.remove("disabled");
                         }
+                        
+                        function verifyEnail(){
+//                            $.ajax({
+//                                url: "/api/gallery/galleryId/"  + id, // url where to submit the request
+//                                method: "GET", // type of action POST || GET
+//                                success: function (data) {
+//                                    console.log("data", data);
+//
+//                                },
+//                                error: function (xhr, status, error) {
+//                                    console.log("error: ", error);
+//                                    return false;
+//                                }
+//                            });
+                            
+                            let formData = {a: document.getElementById('email').value};
+                            console.log("formData", formData);
+                            
+                            $.ajax({
+                                url: '/api/file/upload',
+                                type: 'POST',
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+                                success: function (data) {
+                                    // handle success
+                                    
+                                },
+                                error: function (xhr, status, error) {
+                                    console.log("error: ", error);
+                                    
+                                    // handle error
+                                }
+                            });
+                        }
+                        
+//                        $('#fileInput').on('change', function () {
+//                            var file = this.files[0];
+//                            var formData = new FormData();
+//                            formData.append('file', file);
+//                            $.ajax({
+//                                url: '/api/file/upload',
+//                                type: 'POST',
+//                                data: formData,
+//                                processData: false,
+//                                contentType: false,
+//                                success: function (data) {
+//                                    // handle success
+//                                    toastr.success(messageSuccess, {timeOut: 3000})
+//                                    paginateMedia(currentPage, 5, currentSearch);
+//                                },
+//                                error: function (xhr, status, error) {
+//                                    console.log(xhr.responseJSON);
+//                                    if (xhr.responseJSON === "File already exists") {
+//                                        toastr.error(messageFileExist, {timeOut: 3000})
+//                                    } else {
+//                                        toastr.error(messageError, {timeOut: 3000})
+//                                    }
+//                                    // handle error
+//                                }
+//                            });
+//                        });
+                        
 
                         function checkData() {
                             var password = document.getElementById('password');
