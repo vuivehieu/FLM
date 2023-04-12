@@ -26,15 +26,36 @@
         <!-- RESPONSIVE.CSS ONLY FOR MOBILE AND TABLET VIEWS -->
         <link href="css/style-mob.css" rel="stylesheet" />
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-                <script type="text/javascript">
+        <script type="text/javascript">
             $(document).ready(function () {
                 var table = $('#example').DataTable({
-                    lengthChange: false,
-                    buttons: ['copy', 'excel', 'pdf', 'colvis']
+                    dom: 'lr<"table-filter-container">itp',
+                    initComplete: function (settings) {
+                        var api = new $.fn.dataTable.Api(settings);
+                        $('.table-filter-container', api.table().container()).append(
+                                $('#filterDiv').detach().show(),
+                                );
+                        $('#nameOrderSelect').on('change', function () {
+                            table.order([2, this.value]).draw();
+                            if (this.value === '') {
+                                table.order().draw();
+                            }
+                        });
+                        $('#userSearchTxt').on('keyup', function () {
+                            table.search(this.value).draw();
+                        });
+                        $('#roleFilter').on('change', function () {
+                            table.columns(4).search(this.value).draw();
+                        });
+                        $('#statusFilter').on('change', function () {
+                            table.columns(5).search(this.value).draw();
+                        });
+                    },
+                    "lengthChange": false
+//                    buttons: ['copy', 'excel', 'pdf', 'colvis'],
                 });
                 table.buttons().container()
                         .appendTo('#example_wrapper .col-md-6:eq(0)');
-
                 $('#editModal').on('show.bs.modal', function (event) {
                     var button = $(event.relatedTarget); // Button that triggered the modal
                     var status = button.data('status'); // Extract value from data-* attributes
@@ -50,18 +71,46 @@
                     } else {
                         $('#inactiveStatus').prop('checked', 'checked');
                     }
-                    $('#studentName').attr('value',name);
-                    $('#studentUsername').attr('value',username);
-                    $('#studentEmail').attr('value',email);
+                    $('#studentName').attr('value', name);
+                    $('#studentUsername').attr('value', username);
+                    $('#studentEmail').attr('value', email);
                     // Set the selected value of the "roleEdit" select box based on the "data-role" attribute
                     $('#roleSelect').val(role);
                 });
                 // Set the selected value of the "roleEdit" select box based on the "data-role" attribute
             });
-            function submitForm(){
-                    $('#updateForm').submit();
-                }
+            function submitForm() {
+                $('#updateForm').submit();
+            }
         </script>
+        <style type="text/css">
+            .table-filter-container{
+                align-items: center
+            }
+            .filterDiv .row {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                margin-left: 20px;
+
+            }
+            .dataTables_paginate{
+                width: 100%;
+                text-align: center;
+            }
+            .dataTables_info{
+                width: 100%;
+                text-align: center;
+                padding: 18px;
+            }
+            .userSearchTxt{
+                width: 200px !important;
+                height: 50px !important;
+                font-size: 14px !important;
+                margin-left: 450px !important;
+                color: black !important;
+            }
+        </style>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -91,8 +140,11 @@
                         <div class="sb2-2-2">
                             <ul>
                                 <li><a href="dashboard"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-                                <li class="active-bre"><a> Users</a></li>
+                                <li class="active-bre"><a>Users</a></li>
                             </ul>
+                        </div>
+                        <div class="float-right">
+                            <a href="admin-adduser"><button class="btn btn-warning">Add User</button></a>
                         </div>
                     </div>
 
@@ -112,15 +164,50 @@
                                         <div class="table-responsive table-desi">
                                             <div class="row">
                                                 <div class="col-md-6 col-sm-6"></div>
-                                                <div class="col-md-6 col-sm-6 mob-hide">
-                                                    <form class="app-search">
-                                                        <input type="text" placeholder="Search..." class="form-control">
-                                                        <a href="#"><i class="fa fa-search"></i></a>
-                                                    </form>
+                                                <!--                                                <div class="col-md-6 col-sm-6 mob-hide">
+                                                                                                    <form class="app-search">
+                                                                                                        <input type="text" placeholder="Search..." class="form-control">
+                                                                                                        <a href="#"><i class="fa fa-search"></i></a>
+                                                                                                    </form>
+                                                                                                </div>-->
+                                                <div id="filterDiv" class="filterDiv" style="display: none">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <select name="roleFilter" class="browser-default" id="roleFilter">
+                                                                <option selected value="">All role</option>
+                                                                <c:forEach items="${roles}" var="role">
+                                                                    <option value="${role.rname}"><c:out value="${role.rname}"></c:out></option>
+                                                                </c:forEach>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col">
+                                                            <select name="statusFilter" class="browser-default" id="statusFilter">
+                                                                <option selected value="">All status</option>
+                                                                <option value="Block">Block</option>
+                                                                <option value="Active">Active</option>
+                                                                <option value="Not Verify Email">Not Verify Email</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col">
+                                                            <p id="nameOrder">
+                                                                Sort By Name: 
+                                                            </p>
+                                                        </div>
+                                                        <div class="col">
+                                                            <select name="nameOrderSelect" class="browser-default" id="nameOrderSelect">
+                                                                <option selected value="">None</option>
+                                                                <option value="asc">Ascending</option>
+                                                                <option value="desc">Descending</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col">
+                                                            <input type="text" name="userSearchTxt" class="userSearchTxt" id="userSearchTxt" value="" placeholder="Search for user..."/>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
-                                            <table id="" class="table table-hover" style="width:100%">
+                                            <table id="example" class="table table-hover" style="width:100%">
                                                 <thead>
                                                     <tr>
                                                         <th></th>
@@ -160,18 +247,18 @@
 
 
                                         </div>
-                                        <div class="pg-pagina">
-                                            <ul class="pagination">
-                                                <li class="disabled"><a href="#!">Pre</a></li>
-                                                <li class="active"><a href="#!">1</a></li>
-                                                <li class="waves-effect"><a href="#!">2</a></li>
-                                                <li class="waves-effect"><a href="#!">3</a></li>
-                                                <li class="waves-effect"><a href="#!">4</a></li>
-                                                <li class="waves-effect"><a href="#!">5</a></li>
-                                                <li class="waves-effect"><a href="#!">Next</a></li>
-                                            </ul>
-
-                                        </div>
+                                        <!--                                        <div class="pg-pagina">
+                                                                                    <ul class="pagination">
+                                                                                        <li class="disabled"><a href="#!">Pre</a></li>
+                                                                                        <li class="active"><a href="#!">1</a></li>
+                                                                                        <li class="waves-effect"><a href="#!">2</a></li>
+                                                                                        <li class="waves-effect"><a href="#!">3</a></li>
+                                                                                        <li class="waves-effect"><a href="#!">4</a></li>
+                                                                                        <li class="waves-effect"><a href="#!">5</a></li>
+                                                                                        <li class="waves-effect"><a href="#!">Next</a></li>
+                                                                                    </ul>
+                                        
+                                                                                </div>-->
                                     </div>
                                 </div>
                             </div>
