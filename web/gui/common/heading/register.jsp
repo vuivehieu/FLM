@@ -163,8 +163,8 @@
                   </div>
                     
                   <div class="form-outline mb-4">
-                    <input type="text" class="form-control validate" style="font-size: 15px;"
-                      placeholder="Email"  name="email" value="${email != null ? email : ''}" id="email" />
+                    <input type="text" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;"
+                      placeholder="Email" id="email" />
                     <label class="form-label" for="email">Email</label>
                   </div>
 
@@ -182,7 +182,7 @@
                   <div class="col-md-6 mb-4">
                     <div class="form-outline">
                          <input type="text" class="form-control validate"
-                          value="${verifyCode != null ? verifyCode : ''}" name="verifyCode" id="verifyCode" style="font-size: 15px;"/>
+                          value="${verifyCode != null ? verifyCode : ''}" name="verifyCode" id="verifyCode" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;"/>
                        <label class="form-label" for="verifyCode">Input Code</label>
                     </div>
                   </div>
@@ -266,7 +266,34 @@
                         }
                         
                         function verifyEnail(){
-//                            $.ajax({
+//                            let email = document.getElementById('email').value
+                           let email = $('#email').val();
+//                            let formData = {
+//                                emailUserRgister: email
+//                            };
+                            console.log("email", email);
+                            
+                            $.ajax({
+                                url: '/SWP391-G2/comfirmEmail',
+                                type: 'POST',
+                                data: {
+                                    emailUserRgister: email
+                                },
+                                processData: false,
+                                contentType: false,
+                                success: function (data) {
+                                    // handle success
+                                    console.log("formData", formData);
+                                    console.log("data", data);
+                                },
+                                error: function (xhr, status, error) {
+                                     // handle error
+                                    console.log("error: ", error);
+                                }
+                            });
+                        }
+                        
+                        //                            $.ajax({
 //                                url: "/api/gallery/galleryId/"  + id, // url where to submit the request
 //                                method: "GET", // type of action POST || GET
 //                                success: function (data) {
@@ -278,27 +305,6 @@
 //                                    return false;
 //                                }
 //                            });
-                            
-                            let formData = {a: document.getElementById('email').value};
-                            console.log("formData", formData);
-                            
-                            $.ajax({
-                                url: '/api/file/upload',
-                                type: 'POST',
-                                data: formData,
-                                processData: false,
-                                contentType: false,
-                                success: function (data) {
-                                    // handle success
-                                    
-                                },
-                                error: function (xhr, status, error) {
-                                    console.log("error: ", error);
-                                    
-                                    // handle error
-                                }
-                            });
-                        }
                         
 //                        $('#fileInput').on('change', function () {
 //                            var file = this.files[0];

@@ -14,6 +14,18 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
+import java.util.Properties;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import model.Account;
 
 /**
@@ -71,7 +83,12 @@ public class ComfirmEmailController extends HttpServlet {
 //        Account account = (Account) session.getAttribute("account");
 //        String code = new DAO().getCodeMailLast(account.getAccountID());
 
-        int AccountId = new DAO().getAccountIdByCodeSendMail(verificationCode);
+        int AccountId = 0;
+        try {
+            AccountId = new DAO().getAccountIdByCodeSendMail(verificationCode);
+        } catch (SQLException ex) {
+            Logger.getLogger(ComfirmEmailController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         PrintWriter out = response.getWriter();
         if (AccountId != 0) {
@@ -103,7 +120,61 @@ public class ComfirmEmailController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        // get email user register => send code
+        String emailUserRegister = request.getParameter("emailUserRgister");
+        this.sendMail(request, response, emailUserRegister);
+        
+        request.setAttribute("email", emailUserRegister);
+        request.getRequestDispatcher("gui/common/home.jsp").forward(request, response);
+    }
+    
+    private void sendMail(HttpServletRequest request, HttpServletResponse response, String userEmail) throws ServletException, IOException {
+
+        // Tạo mã xác thực duy nhất
+        Random rand = new Random();
+        String uuid = String.valueOf(rand.nextInt(90000) + 10000);
+
+        // Lưu mã xác thực trong cơ sở dữ liệu của bạn để sử dụng sau này
+        // Trong ví dụ này, chúng ta sẽ in mã xác thực ra màn hình để kiểm tra xem nó hoạt động như thế nào
+//        System.out.println("Verification code: " + uuid);
+        // Thiết lập thông tin email
+        final String from = "dinhvu091193@gmail.com";
+        final String password = "ymdngxlplsegrygp";
+        String host = "smtp.gmail.com";
+        int port = 587;
+        String to = userEmail;
+        String subject = "Email verification";
+        String content = "ma code cua ban la:" + uuid + " hay nhap vao o input de kich hoat";
+
+        // Thiết lập các thuộc tính email
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.port", port);
+
+        // Tạo phiên gửi email và thiết lập thông tin người gửi
+        Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(from, password);
+            }
+        });
+
+        try {
+            // Tạo đối tượng MimeMessage và thiết lập các thuộc tính email
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(from));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+            message.setSubject(subject);
+            message.setText(content);
+
+            // Gửi email
+            Transport.send(message);
+
+            // Chuyển hướng đến trang xác nhận email
+        } catch (MessagingException e) {
+            throw new RuntimeException("error: " + e);
+        }
     }
 
     /**
