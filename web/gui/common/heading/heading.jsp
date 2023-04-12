@@ -212,7 +212,7 @@
             src="${account.avatar}"
             class="rounded-circle"
             height="25"
-            alt="Black and White Portrait of a Man"
+            alt="No Avatar"
             loading="lazy"
           />
         </a>
@@ -259,3 +259,4 @@
 <jsp:include page="login.jsp"/>
 <jsp:include page="register.jsp"/>
 <jsp:include page="forgot.jsp"/>
+<jsp:include page="verifyCode.jsp"/>

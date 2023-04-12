@@ -93,13 +93,13 @@
                       <p>Please login to your account</p>
 
                       <div class="form-outline mb-4">
-                        <input type="text" id="form2Example11" class="form-control"
+                        <input type="text" id="form2Example11" class="form-control" style="font-size: 15px;"
                           placeholder="User Name" name="userName" />
                         <label class="form-label" for="form2Example11">Username</label>
                       </div>
 
                       <div class="form-outline mb-4">
-                        <input type="password" id="form2Example22" class="form-control" name="password" />
+                        <input type="password" id="form2Example22" class="form-control" style="font-size: 15px;" name="password" />
                         <label class="form-label" for="form2Example22">Password</label>
                       </div>
 

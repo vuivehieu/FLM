@@ -151,30 +151,30 @@
                   <!--<p>Please login to your account</p>-->
 
                   <div class="form-outline mb-4">
-                    <input type="text" class="form-control validate"
+                    <input type="text" class="form-control validate" style="font-size: 15px;"
                       placeholder="User Name"  name="userName" value="${userName != null ? userName : ''}" id="userName" />
                     <label class="form-label" for="userName">User Name</label>
                   </div>
                     
                   <div class="form-outline mb-4">
-                    <input type="text" class="form-control validate"
+                    <input type="text" class="form-control validate" style="font-size: 15px;"
                       placeholder="Full Name"  value="${fullName != null ? fullName : ''}" name="fullName" id="fullName" />
                     <label class="form-label" for="fullName">Full Name</label>
                   </div>
                     
                   <div class="form-outline mb-4">
-                    <input type="text" class="form-control validate"
+                    <input type="text" class="form-control validate" style="font-size: 15px;"
                       placeholder="Email"  name="email" value="${email != null ? email : ''}" id="email" />
                     <label class="form-label" for="email">Email</label>
                   </div>
 
                   <div class="form-outline mb-4">
-                    <input type="password" class="form-control validate" name="password" value="${password != null ? password : ''}" id="password" onchange="checkPassword()" />
+                    <input type="password" class="form-control validate" style="font-size: 15px;" name="password" value="${password != null ? password : ''}" id="password" onchange="checkPassword()" />
                     <label class="form-label" for="password">Password</label>
                   </div>
                     
                   <div class="form-outline mb-4">
-                    <input type="password" class="form-control validate" name="comfirm-password" value="${password != null ? password : ''}" id="comfirm-password" onchange="checkPassword()" />
+                    <input type="password" class="form-control validate" style="font-size: 15px;" name="comfirm-password" value="${password != null ? password : ''}" id="comfirm-password" onchange="checkPassword()" />
                     <label class="form-label" for="password">Confirm password</label>
                   </div>
 
@@ -229,16 +229,8 @@
                                 document.getElementById('modal2').style.display = 'none';
                                 document.getElementById('modal2').classList.remove('in');
                             });
-                        }else {
-                            document.getElementById('modal4').style.display = 'block';
-                            document.getElementById('modal4').classList.add('in');
-                            
-                            
-                            document.getElementById('btn-close-4').addEventListener('click', function () {
-                                document.getElementById('modal4').style.display = 'none';
-                                document.getElementById('modal4').classList.remove('in');
-                            });
                         }
+                       
                         
 //                        if (messageRegister.innerHTML === 'OK') {
 //                            document.getElementById('modal2').style.display = 'block';

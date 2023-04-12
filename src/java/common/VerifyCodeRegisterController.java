@@ -30,8 +30,8 @@ import model.Role;
  *
  * @author phanh
  */
-@WebServlet(name = "RegisterController", urlPatterns = {"/register"})
-public class RegisterController extends HttpServlet {
+@WebServlet(name = "VerifyCodeController", urlPatterns = {"/verifyCode"})
+public class VerifyCodeRegisterController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -85,36 +85,41 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String userName = request.getParameter("userName");
-        String fullName = request.getParameter("fullName");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-
-        AccountDAO ad = new AccountDAO();
-        // neu tk khong co return 'OK' => tao moi, tra ve ten + mail vi user + mail da ton tai => khong tao moi
-        if (ad.checkRegister(userName, email).equalsIgnoreCase("OK")) {
-            Role r = new Role(1, "Guest");
-            Account a = new Account(new DAO().getLastAccountID() + 1, userName, password, fullName, email, "", false, 2, Custom.Common.getCurrentDate(), r);
+        String verifyCode = request.getParameter("verifyCode");
+        AccountDAO dao = new AccountDAO();
+        
+        try{
+            int AccountId = new DAO().getAccountIdByCodeSendMail(verifyCode);
+            PrintWriter out = response.getWriter();
+        if (AccountId != 0) {
             
-            request.setAttribute("messageVerifyCode", ad.checkRegister(userName, email));
-//            request.setAttribute("messageRegister", ad.checkRegister(userName, email));
-            ad.register(a);
-            this.sendMail(request, response);
-            request.getRequestDispatcher("gui/common/home.jsp").forward(request, response);
+            Account account = dao.getAccountByAccountID1(AccountId);
+            if (account.getStatus() == 2) {
+                // Xác minh email thành công
+//                out.println("Email verified successfully!");
+                request.setAttribute("messageVerifyCode", "OK");
+                account.setStatus(1);
+                dao.updateStatus(account);
+                this.sendMail(request, response);
+                request.getRequestDispatcher("gui/common/home.jsp").forward(request, response);
+            } else {
+                // Xác minh email thất bại
+                out.println("Invalid verification code!");
+            }
         } else {
-
-            request.setAttribute("userName", userName);
-            request.setAttribute("fullName", fullName);
-            request.setAttribute("email", email);
-            request.setAttribute("password", password);
-            request.setAttribute("messageRegister", ad.checkRegister(userName, email));
-            request.getRequestDispatcher("gui/common/home.jsp").forward(request, response);
+            out.println("khong co code nao trong khoang 5p gan day");
         }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        
 
     }
 
     private void sendMail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String userEmail = request.getParameter("email");
+//        String userEmail = request.getParameter("acountEmail");
+        String emailAdmin = "thevu091193@gmail.com";
 
         // Tạo mã xác thực duy nhất
         String uuid = UUID.randomUUID().toString();
@@ -127,9 +132,9 @@ public class RegisterController extends HttpServlet {
         final String password = "ymdngxlplsegrygp";
         String host = "smtp.gmail.com";
         int port = 587;
-        String to = userEmail;
+        String to = emailAdmin;
         String subject = "Email verification";
-        String content = "ma code cua ban la:" + uuid + " hay nhap vao o input de kich hoat";
+        String content = "co user moi vua dang ky voi email  " ;
 
         // Thiết lập các thuộc tính email
         Properties properties = new Properties();
@@ -156,8 +161,8 @@ public class RegisterController extends HttpServlet {
             // Gửi email
             Transport.send(message);
 
-            DAO dao = new DAO();
-            dao.insertCodeMail("verifyEmail", uuid, 0);
+//            DAO dao = new DAO();
+//            dao.insertCodeMail("notification Admin", uuid, 0);
 
             // Chuyển hướng đến trang xác nhận email
         } catch (MessagingException e) {

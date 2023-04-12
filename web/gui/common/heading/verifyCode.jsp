@@ -13,7 +13,7 @@
                 <div class="text-center">
 <!--                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
                     style="width: 185px;" alt="logo">-->
-                  <h4 class="mt-1 mb-5 pb-1">Create an Account</h4>
+                  <h4 class="mt-1 mb-5 pb-1">Verify Code</h4>
                 </div>
 
                 <form action="verifyCode" method="post" >
@@ -21,7 +21,7 @@
 
                   <div class="form-outline mb-4">
                     <input type="text" class="form-control validate"
-                      placeholder="Full Name"  value="${verifyCode != null ? verifyCode : ''}" name="verifyCode" id="verifyCode" />
+                      placeholder="Full Name"  value="${verifyCode != null ? verifyCode : ''}" name="verifyCode" id="verifyCode" style="font-size: 15px;"/>
                     <label class="form-label" for="verifyCode">Input Code</label>
                   </div>
                     
@@ -29,13 +29,11 @@
 
                   <div class="text-center pt-1 mb-5 pb-1">
                     <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" >Verify Code</button>
-                    <div>
-                        <div class="input-field s12"> <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal1" onclick="closeModal4()">Are you a already member ? Login</a> </div>
-                    </div>
+                   
                   </div>
                    
                    <span id="messageVerifyCode" style="display: none">${messageVerifyCode != null ? messageVerifyCode : 'false'}</span>
-                   <span id="errorMessage" style="color: red"></span>
+                   <span id="successRegisterMessage" style="color: blue"></span>
                 </form>
                 <a href="#" id="btn-close-4" class="pop-close" data-dismiss="modal"><img src="images/cancel.png" alt="" />
                 </a>
@@ -59,25 +57,6 @@
                        
                         let messageVerifyCode = document.getElementById('messageVerifyCode');
 
-//                        if (messageRegister.innerHTML !== 'OK' && messageRegister.innerHTML !== 'false') {
-//
-//                            if (messageRegister.innerHTML === 'userNameemail') {
-//                                document.getElementById('userName').style.border = '1px solid red';
-//                                document.getElementById('email').style.border = '1px solid red';
-//                            } else if (messageRegister.innerHTML === 'userName') {
-//                                document.getElementById('userName').style.border = '1px solid red';
-//                                document.getElementById('userName').focus();
-//                            } else if (messageRegister.innerHTML === 'email') {
-//                                document.getElementById('email').style.border = '1px solid red';
-//                            }
-//                            
-//                            document.getElementById('modal2').style.display = 'block';
-//                            document.getElementById('modal2').classList.add('in');
-//                            document.getElementById('btn-close-2').addEventListener('click', function () {
-//                                document.getElementById('modal2').style.display = 'none';
-//                                document.getElementById('modal2').classList.remove('in');
-//                            });
-//                        }
                         console.log("value messageVerifyCode.innerHTML", messageVerifyCode.innerHTML.value );
                         console.log("messageVerifyCode.innerHTML", messageVerifyCode.innerHTML);
                         console.log("messageVerifyCode.innerHTML === 'OK'", messageVerifyCode.innerHTML === 'OK');
@@ -86,7 +65,7 @@
                             document.getElementById('modal4').style.display = 'block';
                             document.getElementById('modal4').classList.add('in');
                             
-                            
+                            document.getElementById("successRegisterMessage").innerHTML = "Dang ky thanh cong";
                             document.getElementById('btn-close-4').addEventListener('click', function () {
                                 document.getElementById('modal4').style.display = 'none';
                                 document.getElementById('modal4').classList.remove('in');

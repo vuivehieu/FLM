@@ -76,7 +76,7 @@
 
                 <div class="col-12" style="display: flex;align-items: center;">
                     <!-- start select -->
-                        <select id="sel" name="select" class="browser-default">
+                        <select id="sel" name="select" class="browser-default" style="font-size: 16px;width: 10rem;">
                           <option value='curCode' selected>Code</option>
                           <option value='curName'>Name</option>
                         </select>

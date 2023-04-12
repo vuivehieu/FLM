@@ -75,7 +75,31 @@ public class AccountDAO extends DBContext {
         }
 
         return null;
+    }
+    
+    public Account getAccountByAccountID1(int id) throws SQLException {
+        try {
+            String sql = "select * from account where accountID = ?";
 
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+
+            if (rs.next()) {
+                Role role = new Role(rs.getInt("rid"), "Guest");
+                Account account = new Account(rs.getInt("accountID"), rs.getString("userName"), rs.getString("password"),
+                            rs.getString("displayName"), rs.getString("email"), rs.getString("avatar"), rs.getBoolean("isBlock"),
+                            rs.getInt("status"), rs.getDate("createDate"), role);
+
+                return account;
+            }
+
+        } catch (SQLException e) {
+           e.printStackTrace();
+            throw e;
+        }
+
+        return null;
     }
 
     public List<Account> getAllAccount() {
@@ -278,7 +302,7 @@ public class AccountDAO extends DBContext {
             ResultSet rs = st.executeQuery();
 
             if (rs.next()) {
-                result += "userName";
+                result += rs.getString("userName");
             }
 
             String sql1 = "SELECT `account`.`email`\n"
@@ -289,7 +313,7 @@ public class AccountDAO extends DBContext {
             st1.setString(1, email);
             ResultSet rs1 = st1.executeQuery();
             if (rs1.next()) {
-                result += "email";
+                result += rs.getString("email");
             }
 
         } catch (SQLException e) {
