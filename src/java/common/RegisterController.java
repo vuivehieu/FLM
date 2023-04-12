@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.Account;
 import jakarta.servlet.http.HttpSession;
 import java.util.Properties;
+import java.util.Random;
 import java.util.UUID;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -117,7 +118,9 @@ public class RegisterController extends HttpServlet {
         String userEmail = request.getParameter("email");
 
         // Tạo mã xác thực duy nhất
-        String uuid = UUID.randomUUID().toString();
+//        String uuid = UUID.randomUUID().toString();
+        Random rand = new Random();
+        String uuid = String.valueOf(rand.nextInt(90000) + 10000);
 
         // Lưu mã xác thực trong cơ sở dữ liệu của bạn để sử dụng sau này
         // Trong ví dụ này, chúng ta sẽ in mã xác thực ra màn hình để kiểm tra xem nó hoạt động như thế nào

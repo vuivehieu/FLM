@@ -169,33 +169,50 @@
                   </div>
 
                   <div class="form-outline mb-4">
-                    <input type="password" class="form-control validate" style="font-size: 15px;" name="password" value="${password != null ? password : ''}" id="password" onchange="checkPassword()" />
+                    <input type="password" class="form-control validate" style="font-size: 15px;" name="password" value="${password != null ? password : ''}" id="password"  />
                     <label class="form-label" for="password">Password</label>
                   </div>
                     
                   <div class="form-outline mb-4">
-                    <input type="password" class="form-control validate" style="font-size: 15px;" name="comfirm-password" value="${password != null ? password : ''}" id="comfirm-password" onchange="checkPassword()" />
+                    <input type="password" class="form-control validate" style="font-size: 15px;" name="comfirm-password" value="${password != null ? password : ''}" id="comfirm-password"  />
                     <label class="form-label" for="password">Confirm password</label>
                   </div>
-
-                  <div class="text-center pt-1 mb-5 pb-1">
-                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" >Login</button>
-                    <div>
-                        <div class="input-field s12"> <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal1" onclick="closeModal2()">Are you a already member ? Login</a> </div>
-                    </div>
+                        
+                  <div class="text-center pt-1 pb-1">
+                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" style="font-size: 15px;" id="register">Register</button>
                   </div>
                    
                    <span id="messageRegister" style="display: none">${messageRegister != null ? messageRegister : 'false'}</span>
-                   <span id="errorMessage" style="color: red"></span>
+                   <p id="errorMessage" style="color: red; text-align: center; margin-bottom: 30px;"></p>
                 </form>
+                   
+                  <!--start form xac nhan ma code-->
+                 <form action="verifyCode" method="post" >
+                     <div class="form-outline mb-4">
+                       <input type="text" class="form-control validate"
+                         placeholder="Full Name"  value="${verifyCode != null ? verifyCode : ''}" name="verifyCode" id="verifyCode" style="font-size: 15px;"/>
+                       <label class="form-label" for="verifyCode">Input Code</label>
+                     </div>
+                     <div class="text-center pt-1 mb-5 pb-1">
+                       <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3 disabled" type="submit" style="font-size: 15px;" id="verifyCodeBtn">Verify Code</button>
+                     </div>
+                       <div>
+                    </div>
+                      <span id="messageVerifyCode" style="display: none">${messageVerifyCode != null ? messageVerifyCode : 'false'}</span>
+                      <span id="successRegisterMessage" style="display: none">${successRegisterMessage != null ? successRegisterMessage : 'false'}</span>
+                      <p id="successRegisterMessageShow" style="color: blue; text-align: center; margin-bottom: 30px;"></p>
+                 </form>
+                <div class="input-field s12" style="text-align: center;"> <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal1" onclick="closeModal2()">Are you a already member ? Login</a> </div>
+
+                  <!--end form xac nhan ma code-->  
                 <a href="#" id="btn-close-2" class="pop-close" data-dismiss="modal"><img src="images/cancel.png" alt="" />
                 </a>
               </div>
             </div>
             <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
               <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                <h4 class="mb-4">Welcome to FPT Learning Material</h4>
-                <p class="small mb-0">Don't have an account? Create your account. It's take less then a minutes</p>
+                <h4 class="mb-4" style="font-size: 15px;">Welcome to FPT Learning Material</h4>
+                <p class="small mb-0" style="font-size: 15px;">Don't have an account? Create your account. It's take less then a minutes</p>
               </div>
             </div>
           </div>
@@ -209,18 +226,10 @@
 <script>
                        
                         let messageRegister = document.getElementById('messageRegister');
+                        let messageVerifyCode = document.getElementById('messageVerifyCode');
+                        let successRegisterMessage = document.getElementById('successRegisterMessage');
 
                         if (messageRegister.innerHTML !== 'OK' && messageRegister.innerHTML !== 'false') {
-
-//                            if (messageRegister.innerHTML === 'userNameemail') {
-//                                document.getElementById('userName').style.border = '1px solid red';
-//                                document.getElementById('email').style.border = '1px solid red';
-//                            } else if (messageRegister.innerHTML === 'userName') {
-//                                document.getElementById('userName').style.border = '1px solid red';
-//                                document.getElementById('userName').focus();
-//                            } else if (messageRegister.innerHTML === 'email') {
-//                                document.getElementById('email').style.border = '1px solid red';
-//                            }
                             
                             document.getElementById('modal2').style.display = 'block';
                             document.getElementById('modal2').classList.add('in');
@@ -230,33 +239,32 @@
                                 document.getElementById('modal2').classList.remove('in');
                             });
                         }
-                       
                         
-//                        if (messageRegister.innerHTML === 'OK') {
-//                            document.getElementById('modal2').style.display = 'block';
-//                            document.getElementById('modal2').classList.add('in');
-//                            
-//                            // tao o input nhap ma code dang ky
-//                            
-//                            document.getElementById('btn-close-2').addEventListener('click', function () {
-//                                document.getElementById('modal2').style.display = 'none';
-//                                document.getElementById('modal2').classList.remove('in');
-//                            });
-//                            
-//                        }
-
-//                        function checkPassword() {
-//                            var password = document.getElementById('password');
-//                            var confirm_password = document.getElementById('comfirm-password');
-//                            
-//                            if (password.value !== confirm_password.value || password.length < 6 || password.length > 20) {
-//                                password.style.border = '1px solid red';
-//                                confirm_password.style.border = '1px solid red';
-//                            } else {
-//                                password.style.border = '1px solid green';
-//                                confirm_password.style.border = '1px solid green';
-//                            }
-//                        }
+                        if (messageVerifyCode.innerHTML === 'OK') {
+                            document.getElementById('modal2').style.display = 'block';
+                            document.getElementById('modal2').classList.add('in');
+                            document.getElementById('btn-close-2').addEventListener('click', function () {
+                                document.getElementById('modal2').style.display = 'none';
+                                document.getElementById('modal2').classList.remove('in');
+                            });
+                            
+                            //disable register
+                            document.getElementById('register').classList.add("disabled");
+                            // remove class disabled o nut gui ma code
+                            document.getElementById('verifyCodeBtn').classList.remove("disabled");
+                        }
+                        
+                        if(successRegisterMessage.innerHTML === 'OK'){
+                            document.getElementById('modal2').style.display = 'block';
+                            document.getElementById('modal2').classList.add('in');
+                            document.getElementById('btn-close-2').addEventListener('click', function () {
+                                document.getElementById('modal2').style.display = 'none';
+                                document.getElementById('modal2').classList.remove('in');
+                            });
+                            document.getElementById("successRegisterMessageShow").innerHTML = "Dang ky thanh cong";
+                            document.getElementById('register').classList.remove("disabled");
+                            document.getElementById('verifyCodeBtn').classList.remove("disabled");
+                        }
 
                         function checkData() {
                             var password = document.getElementById('password');

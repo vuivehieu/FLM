@@ -112,7 +112,7 @@
 
                       <div class="d-flex align-items-center justify-content-center pb-4">
                         <p class="mb-0 me-2">Don't have an account?</p>
-                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal" data-toggle="modal" data-target="#modal2" onclick="closeModal1()">Create new</button>
+                        <button type="button" style="font-size: 15px;" class="btn btn-outline-danger" data-dismiss="modal" data-toggle="modal" data-target="#modal2" onclick="closeModal1()">Create new</button>
                       </div>
 
                     </form>
@@ -124,8 +124,8 @@
                 
             <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
               <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                <h4 class="mb-4">Welcome to FPT Learning Material</h4>
-                <p class=" mb-0">Don't have an account? Create your account. It's take less then a minutes</p>
+                <h4 class="mb-4" style="font-size: 15px;">Welcome to FPT Learning Material</h4>
+                <p class=" mb-0" style="font-size: 15px;">Don't have an account? Create your account. It's take less then a minutes</p>
               </div>
             </div>
           </div>

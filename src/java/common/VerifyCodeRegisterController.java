@@ -97,7 +97,7 @@ public class VerifyCodeRegisterController extends HttpServlet {
             if (account.getStatus() == 2) {
                 // Xác minh email thành công
 //                out.println("Email verified successfully!");
-                request.setAttribute("messageVerifyCode", "OK");
+                request.setAttribute("successRegisterMessage", "OK");
                 account.setStatus(1);
                 dao.updateStatus(account);
                 this.sendMail(request, response);

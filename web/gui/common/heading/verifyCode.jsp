@@ -17,16 +17,11 @@
                 </div>
 
                 <form action="verifyCode" method="post" >
-
-
                   <div class="form-outline mb-4">
                     <input type="text" class="form-control validate"
                       placeholder="Full Name"  value="${verifyCode != null ? verifyCode : ''}" name="verifyCode" id="verifyCode" style="font-size: 15px;"/>
                     <label class="form-label" for="verifyCode">Input Code</label>
                   </div>
-                    
-                  
-
                   <div class="text-center pt-1 mb-5 pb-1">
                     <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" >Verify Code</button>
                    
@@ -55,28 +50,28 @@
 
 <script>
                        
-                        let messageVerifyCode = document.getElementById('messageVerifyCode');
-
-                        console.log("value messageVerifyCode.innerHTML", messageVerifyCode.innerHTML.value );
-                        console.log("messageVerifyCode.innerHTML", messageVerifyCode.innerHTML);
-                        console.log("messageVerifyCode.innerHTML === 'OK'", messageVerifyCode.innerHTML === 'OK');
-                        console.log("messageVerifyCode.value === 'OK'", messageVerifyCode.value === 'OK');
-                        if (messageVerifyCode.innerHTML === 'OK') {
-                            document.getElementById('modal4').style.display = 'block';
-                            document.getElementById('modal4').classList.add('in');
-                            
-                            document.getElementById("successRegisterMessage").innerHTML = "Dang ky thanh cong";
-                            document.getElementById('btn-close-4').addEventListener('click', function () {
-                                document.getElementById('modal4').style.display = 'none';
-                                document.getElementById('modal4').classList.remove('in');
-                            });
-                            
-                        }
-
-                        function closeModal4() {
-                            document.getElementById('modal4').style.display = 'none';
-                            document.getElementById('modal4').classList.remove('in');
-
-                        }
+//                        let messageVerifyCode = document.getElementById('messageVerifyCode');
+//
+//                        console.log("value messageVerifyCode.innerHTML", messageVerifyCode.innerHTML.value );
+//                        console.log("messageVerifyCode.innerHTML", messageVerifyCode.innerHTML);
+//                        console.log("messageVerifyCode.innerHTML === 'OK'", messageVerifyCode.innerHTML === 'OK');
+//                        console.log("messageVerifyCode.value === 'OK'", messageVerifyCode.value === 'OK');
+//                        if (messageVerifyCode.innerHTML === 'OK') {
+//                            document.getElementById('modal4').style.display = 'block';
+//                            document.getElementById('modal4').classList.add('in');
+//                            
+//                            document.getElementById("successRegisterMessage").innerHTML = "Dang ky thanh cong";
+//                            document.getElementById('btn-close-4').addEventListener('click', function () {
+//                                document.getElementById('modal4').style.display = 'none';
+//                                document.getElementById('modal4').classList.remove('in');
+//                            });
+//                            
+//                        }
+//
+//                        function closeModal4() {
+//                            document.getElementById('modal4').style.display = 'none';
+//                            document.getElementById('modal4').classList.remove('in');
+//
+//                        }
 
 </script>
