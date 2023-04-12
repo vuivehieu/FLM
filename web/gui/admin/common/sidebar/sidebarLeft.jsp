@@ -6,11 +6,12 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<c:set var="account" value="${cookie.userRole.value}" />
 <div class="sb2-1">
     <!--== LEFT MENU ==-->
     <div class="sb2-13">
         <ul class="collapsible" data-collapsible="accordion">
-            <c:if test="${account  != null && account.role.rid == 6}">
+            <c:if test="${account  != null && account eq '6'}">
                 <li><a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-users" aria-hidden="true"></i> Users</a>
                     <div class="collapsible-body left-sub-menu">
                         <ul>
@@ -33,7 +34,7 @@
                 </div>
             </li>
 
-            <c:if  test="${account != null && account.role.rid == 4 || account.role.rid == 5 || account.role.rid == 7}">
+            <c:if  test="${account != null && account eq '4' || account eq '5' || account eq '7' || account eq '6'}">
                 <li><a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-server" aria-hidden="true"></i>Syllabus</a>
                     <div class="collapsible-body left-sub-menu">
                         <ul>
@@ -92,7 +93,7 @@
 
             </c:if>
 
-            <c:if test="${account != null && account.role.rid == 5 || account.role.rid == 7}">
+            <c:if test="${account != null && account eq '5' || account eq '7' || account eq '6'}">
                 <li><a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Subject</a>
                     <div class="collapsible-body left-sub-menu">
                         <ul>

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -91,6 +92,12 @@ public class LoginController extends HttpServlet {
                 if (session.getAttribute("account") == null) {
                     session.setAttribute("account", a);
                 }
+                Cookie userIdCookie = new Cookie("userId", String.valueOf(a.getAccountID()));
+                userIdCookie.setMaxAge(604800);
+                Cookie roleCookie = new Cookie("userRole", String.valueOf(a.getRole().getRid()));
+                roleCookie.setMaxAge(604800);
+                response.addCookie(userIdCookie);
+                response.addCookie(roleCookie);
                 response.sendRedirect("home");
             }else if(a.getStatus() == 0 ){
                 request.setAttribute("error", "Tài Khoản Đã Bị Khóa !");
