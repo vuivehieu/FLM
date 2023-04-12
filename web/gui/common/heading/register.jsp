@@ -1,4 +1,98 @@
-<script type="text/javascript">
+           
+<section class="h-100 " style="background-color: #eee;">
+      <!-- REGISTER SECTION -->
+<div id="modal2" class="modal" role="dialog">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-10">
+        <div class="card rounded-3 text-black">
+          <div class="row g-0">
+            <div class="col-lg-6">
+              <div class="card-body p-md-5 mx-md-4">
+
+                <div class="text-center">
+<!--                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                    style="width: 185px;" alt="logo">-->
+                  <h4 class="mt-1 mb-5 pb-1">Create an Account</h4>
+                </div>
+
+                <!--<form action="register" method="post" onsubmit="checkData()">-->
+                  <!--<p>Please login to your account</p>-->
+
+                  <div class="form-outline mb-4">
+                    <input type="text" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;" disabled
+                      placeholder="User Name"  id="userName" onFocus="focusUserName()" />
+                    <label class="form-label" for="userName">User Name</label>
+                  </div>
+                    
+                  <div class="form-outline mb-4">
+                    <input type="text" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;" disabled
+                      placeholder="Full Name"  id="fullName" />
+                    <label class="form-label" for="fullName">Full Name</label>
+                  </div>
+                    
+                  <div class="form-outline mb-4">
+                    <input type="text" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;"
+                      placeholder="Email" id="email" onFocus="focusEmail()"/>
+                    <label class="form-label" for="email">Email</label>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <input type="password" onFocus="focusPass()" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;" disabled  id="password"  />
+                    <label class="form-label" for="password">Password</label>
+                  </div>
+                    
+                  <div class="form-outline mb-4">
+                     <input type="password" onFocus="focusConfirmPass()" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;" disabled id="comfirm-password"  />
+                      <label class="form-label" for="comfirm-password">Confirm password</label>
+                  </div>
+                       
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                         <input type="text" class="form-control validate" onFocus="focusInputCode()"
+                           id="verifyCode" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;"/>
+                       <label class="form-label" for="verifyCode">Input Code</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button" style="font-size: 15px;" 
+                                id="verifyCodeBtn" onclick="verifyEmail()">Verify Email</button>
+                    </div>
+                  </div>
+                </div>
+                       
+                        
+                <div class="text-center pt-1 pb-1">
+                  <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3 disabled" type="button" style="font-size: 15px;" id="register" onclick="register()">Register</button>
+                </div>
+                   
+                   <p id="messageRegister" style="color: blue; text-align: center;"></p>
+                   <p id="errorMessage" style="color: red; text-align: center; margin-bottom: 30px;"></p>
+
+                <div class="input-field s12" style="text-align: center;"> <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal1" onclick="closeModal2()">Are you a already member ? Login</a> </div>
+
+                  <!--end form xac nhan ma code-->  
+                <a href="#" id="btn-close-2" class="pop-close" data-dismiss="modal"><img src="images/cancel.png" alt="" />
+                </a>
+              </div>
+            </div>
+            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+              <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                <h4 class="mb-4" style="font-size: 15px;">Welcome to FPT Learning Material</h4>
+                <p class="small mb-0" style="font-size: 15px;">Don't have an account? Create your account. It's take less then a minutes</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<script>
     let codeSendMail= '';
 
     function verifyEmail(){
@@ -127,99 +221,4 @@
         document.getElementById("errorMessage").innerHTML = '';
     }
 
-</script>             
-
-<section class="h-100 " style="background-color: #eee;">
-      <!-- REGISTER SECTION -->
-<div id="modal2" class="modal" role="dialog">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-xl-10">
-        <div class="card rounded-3 text-black">
-          <div class="row g-0">
-            <div class="col-lg-6">
-              <div class="card-body p-md-5 mx-md-4">
-
-                <div class="text-center">
-<!--                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
-                    style="width: 185px;" alt="logo">-->
-                  <h4 class="mt-1 mb-5 pb-1">Create an Account</h4>
-                </div>
-
-                <!--<form action="register" method="post" onsubmit="checkData()">-->
-                  <!--<p>Please login to your account</p>-->
-
-                  <div class="form-outline mb-4">
-                    <input type="text" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;" disabled
-                      placeholder="User Name"  id="userName" onFocus="focusUserName()" />
-                    <label class="form-label" for="userName">User Name</label>
-                  </div>
-                    
-                  <div class="form-outline mb-4">
-                    <input type="text" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;" disabled
-                      placeholder="Full Name"  id="fullName" />
-                    <label class="form-label" for="fullName">Full Name</label>
-                  </div>
-                    
-                  <div class="form-outline mb-4">
-                    <input type="text" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;"
-                      placeholder="Email" id="email" onFocus="focusEmail()"/>
-                    <label class="form-label" for="email">Email</label>
-                  </div>
-
-                  <div class="form-outline mb-4">
-                    <input type="password" onFocus="focusPass()" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;" disabled  id="password"  />
-                    <label class="form-label" for="password">Password</label>
-                  </div>
-                    
-                  <div class="form-outline mb-4">
-                     <input type="password" onFocus="focusConfirmPass()" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;" disabled id="comfirm-password"  />
-                      <label class="form-label" for="comfirm-password">Confirm password</label>
-                  </div>
-                       
-                <div class="row">
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                         <input type="text" class="form-control validate" onFocus="focusInputCode()"
-                           id="verifyCode" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;"/>
-                       <label class="form-label" for="verifyCode">Input Code</label>
-                    </div>
-                  </div>
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button" style="font-size: 15px;" 
-                                id="verifyCodeBtn" onclick="verifyEmail()">Verify Email</button>
-                    </div>
-                  </div>
-                </div>
-                       
-                        
-                <div class="text-center pt-1 pb-1">
-                  <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3 disabled" type="button" style="font-size: 15px;" id="register" onclick="register()">Register</button>
-                </div>
-                   
-                   <p id="messageRegister" style="color: blue; text-align: center;"></p>
-                   <p id="errorMessage" style="color: red; text-align: center; margin-bottom: 30px;"></p>
-
-                <div class="input-field s12" style="text-align: center;"> <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal1" onclick="closeModal2()">Are you a already member ? Login</a> </div>
-
-                  <!--end form xac nhan ma code-->  
-                <a href="#" id="btn-close-2" class="pop-close" data-dismiss="modal"><img src="images/cancel.png" alt="" />
-                </a>
-              </div>
-            </div>
-            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
-              <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                <h4 class="mb-4" style="font-size: 15px;">Welcome to FPT Learning Material</h4>
-                <p class="small mb-0" style="font-size: 15px;">Don't have an account? Create your account. It's take less then a minutes</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</section>
-
-
+</script>  

@@ -199,47 +199,47 @@
     </c:if>
     <c:if test="${account != null}">
           <!--Avatar--> 
-      <div class="dropdown">
-        <a
-          class="dropdown-toggle d-flex align-items-center hidden-arrow"
-          href="#"
-          id="navbarDropdownMenuAvatar"
-          role="button"
-          data-mdb-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <img
-            src="${account.avatar}"
-            class="rounded-circle"
-            height="25"
-            alt="No Avatar"
-            loading="lazy"
-          />
-        </a>
-        <ul
-          class="dropdown-menu dropdown-menu-end"
-          aria-labelledby="navbarDropdownMenuAvatar"
-        >
-          <c:if test="${!(account.role.rid == 1) && !(account.role.rid == 2) && !(account.role.rid == 3)}">
-          <li>
-            <a class="dropdown-item" href="dashboard">Dashboard</a>
-          </li>
-          </c:if>
-          <li>
-            <a class="dropdown-item" href="profile">My profile</a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="changePassword">Change Password</a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="changeAvatar">Change Avatar</a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="logout">Logout</a>
-          </li>
-        </ul>
-      </div>
-    </div>
+        <div class="dropdown">
+            <a
+              class="dropdown-toggle d-flex align-items-center hidden-arrow"
+              href="#"
+              id="navbarDropdownMenuAvatar"
+              role="button"
+              data-mdb-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img
+                src="${account.avatar}"
+                class="rounded-circle"
+                height="25"
+                alt="No Avatar"
+                loading="lazy"
+              />
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="navbarDropdownMenuAvatar"
+            >
+              <c:if test="${!(account.role.rid == 1) && !(account.role.rid == 2) && !(account.role.rid == 3)}">
+              <li>
+                <a class="dropdown-item" href="dashboard">Dashboard</a>
+              </li>
+              </c:if>
+              <li>
+                <a class="dropdown-item" href="profile">My profile</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="changePassword">Change Password</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="changeAvatar">Change Avatar</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="logout">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </div>
     </c:if>
      <!--Right elements--> 
   </div>
@@ -259,4 +259,3 @@
 <jsp:include page="login.jsp"/>
 <jsp:include page="register.jsp"/>
 <jsp:include page="forgot.jsp"/>
-<%--<jsp:include page="verifyCode.jsp"/>--%>

@@ -35,9 +35,6 @@
             <script src="js/respond.min.js"></script>
             <![endif]-->
         
-        <!-- Thêm link tới các thư viện jQuery và Popper.js -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
         <!-- Font Awesome -->
         <link
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -226,8 +223,9 @@
         <!-- FOOTER -->
         <jsp:include page="footer/footer.jsp"/>
 
-
-        
+         <!-- Thêm link tới các thư viện jQuery và Popper.js -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
         <!--Import jQuery before materialize.js-->
         <script src="js/main.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
@@ -237,7 +235,7 @@
           src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
         ></script>
 
-        <script>
+<!--        <script>
             $(document).ready(function () {
                 if (document.getElementById('messageRegister').innerHTML !== "false") {
                     $('.toast').toast('show');
@@ -258,7 +256,7 @@
                 }
 
             });
-        </script>
+        </script>-->
         <script src="js/materialize.min.js"></script>
         <script src="js/custom.js"></script>
     </body>
