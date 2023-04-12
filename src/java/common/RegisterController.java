@@ -91,24 +91,23 @@ public class RegisterController extends HttpServlet {
         String password = request.getParameter("password");
 
         AccountDAO ad = new AccountDAO();
+        // neu tk khong co return 'OK' => tao moi, tra ve ten + mail vi user + mail da ton tai => khong tao moi
         if (ad.checkRegister(userName, email).equalsIgnoreCase("OK")) {
             Role r = new Role(1, "Guest");
             Account a = new Account(new DAO().getLastAccountID() + 1, userName, password, fullName, email, "", false, 2, Custom.Common.getCurrentDate(), r);
             ad.register(a);
-
-//            HttpSession session = request.getSession();
-//            session.setAttribute("account", a);
-
+            request.setAttribute("messageVerifyCode", ad.checkRegister(userName, email));
+//            request.setAttribute("messageRegister", ad.checkRegister(userName, email));
             this.sendMail(request, response);
-            request.getRequestDispatcher("gui/common/heading/home.jsp").forward(request, response);
+            request.getRequestDispatcher("gui/common/home.jsp").forward(request, response);
         } else {
 
-//            request.setAttribute("userName", userName);
-//            request.setAttribute("fullName", fullName);
-//            request.setAttribute("email", email);
-//            request.setAttribute("password", password);
-//            request.setAttribute("messageRegister", ad.checkRegister(userName, email)); // neu tk duoc tao return 'OK', con duoc tao thi tra ve ten + mail
-//            request.getRequestDispatcher("gui/common/heading/register.jsp").forward(request, response);
+            request.setAttribute("userName", userName);
+            request.setAttribute("fullName", fullName);
+            request.setAttribute("email", email);
+            request.setAttribute("password", password);
+            request.setAttribute("messageRegister", ad.checkRegister(userName, email));
+            request.getRequestDispatcher("gui/common/home.jsp").forward(request, response);
         }
 
     }
@@ -129,7 +128,7 @@ public class RegisterController extends HttpServlet {
         int port = 587;
         String to = userEmail;
         String subject = "Email verification";
-        String content = "Nhan Vao Link Ben Duoi De Xac Nhan Email:\nhttp://localhost:8080/SWP391-G2/comfirmEmail?code=" + uuid;
+        String content = "ma code cua ban la:" + uuid + " hay nhap vao o input de kich hoat";
 
         // Thiết lập các thuộc tính email
         Properties properties = new Properties();

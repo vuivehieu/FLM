@@ -49,6 +49,32 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
           rel="stylesheet"
         />
+        
+        <style>
+        .gradient-custom-2 {
+        /* fallback for old browsers */
+        background: #fccb90;
+
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+        }
+
+        @media (min-width: 768px) {
+        .gradient-form {
+        height: 100vh !important;
+        }
+        }
+        @media (min-width: 769px) {
+        .gradient-custom-2 {
+        border-top-right-radius: .3rem;
+        border-bottom-right-radius: .3rem;
+        }
+        }
+        </style>
+        
     </head>
 
     <body>
@@ -63,7 +89,6 @@
                         <img src="images/slider/1.jpg" alt="">
                         <div class="carousel-caption slider-con">
                             <h2>Welcome to <span> FPT University</span></h2>
-                            <p>:> đốt trường</p>
                             <a href="#" class="bann-btn-1">All Courses</a><a href="#" class="bann-btn-2">Read More</a>
                         </div>
                     </div>
@@ -71,7 +96,6 @@
                         <img src="images/slider/2.jpg" alt="">
                         <div class="carousel-caption slider-con">
                             <h2>Phan Hiếu <span>  2023</span></h2>
-                            <p>:> Đốt trường</p>
                             <a href="#" class="bann-btn-1">Curriculum</a><a href="#" class="bann-btn-2">Read More</a>
                         </div>
                     </div>
@@ -79,7 +103,6 @@
                         <img src="images/slider/3.jpg" alt="">
                         <div class="carousel-caption slider-con">
                             <h2>Syllabus <span>Master</span></h2>
-                            <p>:> đốt trường</p>
                             <a href="#" class="bann-btn-1">All Syllabus</a><a href="#" class="bann-btn-2">Read More</a>
                         </div>
                     </div>
@@ -125,7 +148,6 @@
                 <div class="row">
                     <div class="con-title">
                         <h2>Chuyên Ngành <span>FPT University</span></h2>
-                        <p>:> đốt trường</p>
                     </div>
                 </div>
                 <div class="row">
@@ -150,7 +172,6 @@
                 <div class="row">
                     <div class="con-title">
                         <h2>Khóa học <span>Nổi Bật</span></h2>
-                        <p>Đốt Trường :></p>
                     </div>
                 </div>
                 <div class="row">
