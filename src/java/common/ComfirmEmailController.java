@@ -6,6 +6,7 @@ package common;
 
 import DAL.AccountDAO;
 import DAL.DAO;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,8 +14,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import java.io.BufferedReader;
 import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 import java.util.logging.Level;
@@ -27,6 +30,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import model.Account;
+import org.json.JSONObject;
 
 /**
  *
@@ -35,15 +39,6 @@ import model.Account;
 @WebServlet(name = "ComfirmEmailController", urlPatterns = {"/comfirmEmail"})
 public class ComfirmEmailController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -61,83 +56,61 @@ public class ComfirmEmailController extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Lấy mã xác thực từ tham số trên URL
-        String verificationCode = request.getParameter("code");
-        AccountDAO dao = new AccountDAO();
-
-        // Kiểm tra mã xác thực có hợp lệ hay không
-        // Trong ví dụ này, chúng ta chỉ kiểm tra mã xác thực có bằng với một giá trị cứng hay không
-//        HttpSession session = request.getSession();
-//        Account account = (Account) session.getAttribute("account");
-//        String code = new DAO().getCodeMailLast(account.getAccountID());
-
-        int AccountId = 0;
-        try {
-            AccountId = new DAO().getAccountIdByCodeSendMail(verificationCode);
-        } catch (SQLException ex) {
-            Logger.getLogger(ComfirmEmailController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        PrintWriter out = response.getWriter();
-        if (AccountId != 0) {
-            
-            Account account = dao.getAccountByAccountID(AccountId);
-            if (account.getStatus() == 2) {
-                // Xác minh email thành công
-                out.println("Email verified successfully!");
-                account.setStatus(1);
-                dao.updateStatus(account);
-            } else {
-                // Xác minh email thất bại
-                out.println("Invalid verification code!");
-            }
-        } else {
-            out.println("khong co code nao trong khoang 5p gan day");
-        }
-
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // get email user register => send code
-        String emailUserRegister = request.getParameter("emailUserRgister");
-        this.sendMail(request, response, emailUserRegister);
         
-        request.setAttribute("email", emailUserRegister);
-        request.getRequestDispatcher("gui/common/home.jsp").forward(request, response);
+        AccountDAO dao = new AccountDAO();
+        
+        BufferedReader reader = request.getReader();
+        StringBuilder sb = new StringBuilder();
+        String line = null;
+        while ((line = reader.readLine()) != null) {
+            sb.append(line);
+        }
+        // Chuyển đổi chuỗi JSON thành đối tượng JSONObject
+        JSONObject jsonObj = new JSONObject(sb.toString());
+        // Lấy giá trị của thuộc tính "email"
+         String email = jsonObj.getString("email");
+         
+        // xac nhận email chưa được đăng ký lần nào
+        boolean checkEmail = dao.checkEmail(email);
+        if(checkEmail){
+            String codeSendMail = this.sendMail(request, response, email);
+        
+            // respon
+            Map<String, String> options = new LinkedHashMap<>();
+            options.put("code", codeSendMail);
+            String json = new Gson().toJson(options);
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+        }else {
+             // respon
+            Map<String, String> options = new LinkedHashMap<>();
+            options.put("error", "The Email was registered");
+            String json = new Gson().toJson(options);
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+        }
+         
+        
     }
     
-    private void sendMail(HttpServletRequest request, HttpServletResponse response, String userEmail) throws ServletException, IOException {
+    private String sendMail(HttpServletRequest request, HttpServletResponse response, String userEmail) throws ServletException, IOException {
 
         // Tạo mã xác thực duy nhất
         Random rand = new Random();
         String uuid = String.valueOf(rand.nextInt(90000) + 10000);
 
-        // Lưu mã xác thực trong cơ sở dữ liệu của bạn để sử dụng sau này
-        // Trong ví dụ này, chúng ta sẽ in mã xác thực ra màn hình để kiểm tra xem nó hoạt động như thế nào
-//        System.out.println("Verification code: " + uuid);
-        // Thiết lập thông tin email
         final String from = "dinhvu091193@gmail.com";
         final String password = "ymdngxlplsegrygp";
         String host = "smtp.gmail.com";
@@ -170,6 +143,8 @@ public class ComfirmEmailController extends HttpServlet {
 
             // Gửi email
             Transport.send(message);
+            
+            return uuid;
 
             // Chuyển hướng đến trang xác nhận email
         } catch (MessagingException e) {

@@ -313,7 +313,7 @@ public class AccountDAO extends DBContext {
             st1.setString(1, email);
             ResultSet rs1 = st1.executeQuery();
             if (rs1.next()) {
-                result += rs.getString("email");
+                result += rs1.getString("email");
             }
 
         } catch (SQLException e) {
@@ -322,8 +322,66 @@ public class AccountDAO extends DBContext {
 
         return result.equalsIgnoreCase("") ? "OK" : result;
     }
+    
+    public boolean checkRegisterEdit(String userName, String email) {
+        String result = "";
+        try {
 
-    public void register(Account a) {
+            String sql = "SELECT `account`.`userName`\n"
+                    + "FROM `swp391_se1632_g2`.`account`"
+                    + "WHERE `account`.`userName` = ? ;";
+
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, userName);
+            ResultSet rs = st.executeQuery();
+
+            if (rs.next()) {
+                result += rs.getString("userName");
+            }
+
+            String sql1 = "SELECT `account`.`email`\n"
+                    + "FROM `swp391_se1632_g2`.`account`"
+                    + "WHERE `account`.`email` = ?;";
+
+            PreparedStatement st1 = connection.prepareStatement(sql1);
+            st1.setString(1, email);
+            ResultSet rs1 = st1.executeQuery();
+            if (rs1.next()) {
+                result += rs1.getString("email");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("AccountDAO -> checkRegister(): " + e);
+        }
+
+        return result.equalsIgnoreCase("");
+    }
+    
+    public boolean checkEmail(String email) {
+        String result = "";
+        try {
+
+//            String sql1 = "SELECT `account`.`email`\n"
+//                    + "FROM `swp391_se1632_g2`.`account`"
+//                    + "WHERE `account`.`email` = ?;";
+
+            String sql1 = "select * from account where email = ? and (status = 1 or status = 0)";
+
+            PreparedStatement st1 = connection.prepareStatement(sql1);
+            st1.setString(1, email);
+            ResultSet rs1 = st1.executeQuery();
+            if (rs1.next()) {
+                result += rs1.getString("email");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("AccountDAO -> checkRegister(): " + e);
+        }
+
+        return result.equalsIgnoreCase("");
+    }
+
+    public int register(Account a) {
         try {
 
             String sql = "INSERT INTO `swp391_se1632_g2`.`account`\n"
@@ -340,12 +398,12 @@ public class AccountDAO extends DBContext {
             st.setInt(7, a.getStatus());
             st.setDate(8, a.getCreateDate());
             st.setInt(9, 1);   // role = 1 => guest
-            st.executeUpdate();
-
+            return st.executeUpdate();
         } catch (SQLException e) {
             System.out.println("AccountDAO -> register(): " + e);
 
         }
+        return 0;
     }
 
     public void changePassword(String newPassword, Account a) {

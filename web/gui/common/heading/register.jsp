@@ -1,135 +1,134 @@
-<!--<style>
-    .log-in-pop-right form label {
-        left: 10px;
-        top: -10px;
+<script type="text/javascript">
+    let codeSendMail= '';
+
+    function verifyEmail(){
+        codeSendMail = '';
+        let email = $('#email').val();
+        let data = {
+            email : email
+        };
+
+        $.ajax({
+            url: '/SWP391-G2/comfirmEmail',
+            type: "POST",
+            contentType: "application/json", // NOT dataType!
+            data: JSON.stringify(data),
+            success: function(response) {
+                // handle success
+
+                if(response.code != null){
+                    codeSendMail = response.code;
+                    console.log("response.code", response.code);
+                    $('#userName').prop('disabled', false);
+                    $('#fullName').prop('disabled', false);
+                    $('#password').prop('disabled', false);
+                    $('#comfirm-password').prop('disabled', false);
+                    $('#register').removeClass('disabled');
+                    $('#verifyCodeBtn').addClass('disabled');
+                }else {
+                    document.getElementById("errorMessage").innerHTML = response.error;
+                }
+
+            },
+            error: function (xhr, status, error) {
+                 // handle error
+                console.log("error: ", error);
+            }
+        });
     }
-</style>-->
 
-<!--<section>
-     REGISTER SECTION 
-    <div id="modal2" class="modal" role="dialog">
-        <div class="log-in-pop">
-            <div class="log-in-pop-left">
-                <h1>Hello...</h1>
-                <p>Don't have an account? Create your account. It's take less then a minutes</p>
-                <h4>Login with social media</h4>
-                <ul>
-                    <li><a href="#"><i class="fa fa-google"></i> Google+</a></li>
-                </ul>
-            </div>
-            <div class="log-in-pop-right">
-                <a href="#" id="btn-close-2" class="pop-close" data-dismiss="modal"><img src="images/cancel.png" alt="" />
-                </a>
-                <h4>Create an Account</h4>
-                <p>Don't have an account? Create your account. It's take less then a minutes</p>
-                <form class="s12" action="register" method="post" onsubmit="checkData()">
-                    <div id="data"></div>
-                    <div>
-                        <div class="input-field s12">
-                            <input type="text" data-ng-model="name1" class="validate" name="userName" value="${userName != null ? userName : ''}" id="userName">
-                            <label>User name</label>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="input-field s12">
-                            <input type="text" data-ng-model="name1" class="validate" value="${fullName != null ? fullName : ''}" name="fullName" id="fullName">
-                            <label>Full Name</label>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="input-field s12">
-                            <input type="email" class="validate" name="email" value="${email != null ? email : ''}" id="email">
-                            <label>Email</label>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="input-field s12">
-                            <input type="password" class="validate" name="password" value="${password != null ? password : ''}" id="password" onchange="checkPassword()">
-                            <label>Password</label>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="input-field s12">
-                            <input type="password" class="validate" name="comfirm-password" value="${password != null ? password : ''}" id="comfirm-password" onchange="checkPassword()">
-                            <label>Confirm password</label>
-                        </div>
-                    </div>
+    function register(){
+        console.log("codeSendMail", codeSendMail);
+        let userName = $('#userName').val();
+        let fullName = $('#fullName').val();
+        let email = $('#email').val();
+        let password = $('#password').val();
+//                            let confirmPass = $('#comfirm-password').val();
+        let verifyCode = $('#verifyCode').val();
+        let data = {
+            userName : userName,
+            fullName : fullName,
+            email : email,
+            password : password
+        };
 
-                    <div>
-                        <div class="input-field s4">
-                            <input type="submit" value="Register" class="waves-effect waves-light log-in-btn"> </div>
-                    </div>
-                    <div>
-                        <div class="input-field s12"> <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal1" onclick="closeModal2()">Are you a already member ? Login</a> </div>
-                    </div>
-                    <span id="messageRegister" style="display: none">${messageRegister != null ? messageRegister : 'false'}</span>
-                   <span id="errorMessage" style="color: red"></span>
-                    <script>
-                       
-                        let messageRegister = document.getElementById('messageRegister');
+        if(checkConfirmPass()){
+            if(verifyCode != codeSendMail){
+            document.getElementById("errorMessage").innerHTML = "The code is not correct";
+            }
 
-                        if (messageRegister.innerHTML !== 'OK' && messageRegister.innerHTML !== 'false') {
+            $.ajax({
+                url: '/SWP391-G2/register',
+                type: "POST",
+                contentType: "application/json", // NOT dataType!
+                data: JSON.stringify(data),
+                success: function(response) {
+                    // handle success
 
-                            if (messageRegister.innerHTML === 'userNameemail') {
-                                document.getElementById('userName').style.border = '1px solid red';
-                                document.getElementById('email').style.border = '1px solid red';
-                            } else if (messageRegister.innerHTML === 'userName') {
-                                document.getElementById('userName').style.border = '1px solid red';
-                                document.getElementById('userName').focus();
-                            } else if (messageRegister.innerHTML === 'email') {
-                                document.getElementById('email').style.border = '1px solid red';
-                            }
-                            document.getElementById('modal2').style.display = 'block';
-                            document.getElementById('modal2').classList.add('in');
-                            document.getElementById('btn-close-2').addEventListener('click', function () {
-                                document.getElementById('modal2').style.display = 'none';
-                                document.getElementById('modal2').classList.remove('in');
-                            });
-                        }
+                    if(response.messageRegister != null){
+                        console.log("response.messageRegister", response.messageRegister);
+                        document.getElementById("messageRegister").innerHTML = response.messageRegister;
 
-                        function checkPassword() {
-                            var password = document.getElementById('password');
-                            var confirm_password = document.getElementById('comfirm-password');
-                            
-                            if (password.value !== confirm_password.value || password.length < 6 || password.length > 20) {
-                                password.style.border = '1px solid red';
-                                confirm_password.style.border = '1px solid red';
-                            } else {
-                                password.style.border = '1px solid green';
-                                confirm_password.style.border = '1px solid green';
-                            }
-                        }
+                        setTimeout(function() {
+                            closeModal2();
+                        }, 3000);
 
-                        function checkData() {
-                            var password = document.getElementById('password');
-                            var confirm_password = document.getElementById('comfirm-password');
-                            
-                            if (password.value !== confirm_password.value || password.length < 6 || password.length > 20) {
-                                event.preventDefault();
-                                 document.getElementById("errorMessage").innerHTML = "Password don't match";
-                            }
-                            
-//                            if (checkPassword()) {
-//                                return true;
-//                            }
-//                            return false;
-                        }
 
-                        function closeModal2() {
-                            document.getElementById('modal2').style.display = 'none';
-                            document.getElementById('modal2').classList.remove('in');
+                    }else {
+                        console.log("response.error", response.error);
+                        document.getElementById("errorMessage").innerHTML = response.error;
+                    }
 
-                        }
+                },
+                error: function (xhr, status, error) {
+                     // handle error
+                    console.log("error: ", error);
+                }
+            });
+        }
 
-                    </script>
-                </form>
-            </div>
-        </div>
-    </div>
 
-</section>-->
-                   
-                   
+    }
+
+
+    function checkConfirmPass() {
+        var password = document.getElementById('password');
+        var confirm_password = document.getElementById('comfirm-password');
+
+        if (password.value !== confirm_password.value) {
+//                                event.preventDefault();
+            document.getElementById("errorMessage").innerHTML = "Password don't match";
+            return false;
+        }else {
+            return true;
+        }
+    }
+
+    function closeModal2() {
+        document.getElementById('modal2').style.display = 'none';
+        document.getElementById('modal2').classList.remove('in');
+
+    }
+
+
+    function focusUserName(){
+        document.getElementById("errorMessage").innerHTML = '';
+    }
+    function focusEmail(){
+        document.getElementById("errorMessage").innerHTML = '';
+    }
+    function focusPass(){
+        document.getElementById("errorMessage").innerHTML = '';
+    }
+    function focusConfirmPass(){
+        document.getElementById("errorMessage").innerHTML = '';
+    }
+    function focusInputCode(){
+        document.getElementById("errorMessage").innerHTML = '';
+    }
+
+</script>             
+
 <section class="h-100 " style="background-color: #eee;">
       <!-- REGISTER SECTION -->
 <div id="modal2" class="modal" role="dialog">
@@ -152,53 +151,54 @@
 
                   <div class="form-outline mb-4">
                     <input type="text" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;" disabled
-                      placeholder="User Name"  name="userName" value="${userName != null ? userName : ''}" id="userName" />
+                      placeholder="User Name"  id="userName" onFocus="focusUserName()" />
                     <label class="form-label" for="userName">User Name</label>
                   </div>
                     
                   <div class="form-outline mb-4">
                     <input type="text" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;" disabled
-                      placeholder="Full Name"  value="${fullName != null ? fullName : ''}" name="fullName" id="fullName" />
+                      placeholder="Full Name"  id="fullName" />
                     <label class="form-label" for="fullName">Full Name</label>
                   </div>
                     
                   <div class="form-outline mb-4">
                     <input type="text" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;"
-                      placeholder="Email" id="email" />
+                      placeholder="Email" id="email" onFocus="focusEmail()"/>
                     <label class="form-label" for="email">Email</label>
                   </div>
 
                   <div class="form-outline mb-4">
-                    <input type="password" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;" disabled name="password" value="${password != null ? password : ''}" id="password"  />
+                    <input type="password" onFocus="focusPass()" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;" disabled  id="password"  />
                     <label class="form-label" for="password">Password</label>
                   </div>
                     
                   <div class="form-outline mb-4">
-                     <input type="password" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;" disabled name="comfirm-password" value="${password != null ? password : ''}" id="comfirm-password"  />
-                      <label class="form-label" for="password">Confirm password</label>
+                     <input type="password" onFocus="focusConfirmPass()" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;" disabled id="comfirm-password"  />
+                      <label class="form-label" for="comfirm-password">Confirm password</label>
                   </div>
                        
                 <div class="row">
                   <div class="col-md-6 mb-4">
                     <div class="form-outline">
-                         <input type="text" class="form-control validate"
-                          value="${verifyCode != null ? verifyCode : ''}" name="verifyCode" id="verifyCode" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;"/>
+                         <input type="text" class="form-control validate" onFocus="focusInputCode()"
+                           id="verifyCode" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;"/>
                        <label class="form-label" for="verifyCode">Input Code</label>
                     </div>
                   </div>
                   <div class="col-md-6 mb-4">
                     <div class="form-outline">
-                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button" style="font-size: 15px;" id="verifyCodeBtn" onclick="verifyEnail()">Verify Email</button>
+                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button" style="font-size: 15px;" 
+                                id="verifyCodeBtn" onclick="verifyEmail()">Verify Email</button>
                     </div>
                   </div>
                 </div>
                        
                         
                 <div class="text-center pt-1 pb-1">
-                  <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3 disabled" type="button" style="font-size: 15px;" id="register">Register</button>
+                  <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3 disabled" type="button" style="font-size: 15px;" id="register" onclick="register()">Register</button>
                 </div>
                    
-                   <span id="messageRegister" style="display: none">${messageRegister != null ? messageRegister : 'false'}</span>
+                   <p id="messageRegister" style="color: blue; text-align: center;"></p>
                    <p id="errorMessage" style="color: red; text-align: center; margin-bottom: 30px;"></p>
 
                 <div class="input-field s12" style="text-align: center;"> <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal1" onclick="closeModal2()">Are you a already member ? Login</a> </div>
@@ -222,132 +222,4 @@
 </div>
 </section>
 
-<script>
-                       
-                        let messageRegister = document.getElementById('messageRegister');
-                        let messageVerifyCode = document.getElementById('messageVerifyCode');
-                        let successRegisterMessage = document.getElementById('successRegisterMessage');
 
-                        if (messageRegister.innerHTML !== 'OK' && messageRegister.innerHTML !== 'false') {
-                            
-                            document.getElementById('modal2').style.display = 'block';
-                            document.getElementById('modal2').classList.add('in');
-                            document.getElementById("errorMessage").innerHTML = "User Name hoac email da ton tai";
-                            document.getElementById('btn-close-2').addEventListener('click', function () {
-                                document.getElementById('modal2').style.display = 'none';
-                                document.getElementById('modal2').classList.remove('in');
-                            });
-                        }
-                        
-                        if (messageVerifyCode.innerHTML === 'OK') {
-                            document.getElementById('modal2').style.display = 'block';
-                            document.getElementById('modal2').classList.add('in');
-                            document.getElementById('btn-close-2').addEventListener('click', function () {
-                                document.getElementById('modal2').style.display = 'none';
-                                document.getElementById('modal2').classList.remove('in');
-                            });
-                            
-                            //disable register
-                            document.getElementById('register').classList.add("disabled");
-                            // remove class disabled o nut gui ma code
-                            document.getElementById('verifyCodeBtn').classList.remove("disabled");
-                        }
-                        
-                        if(successRegisterMessage.innerHTML === 'OK'){
-                            document.getElementById('modal2').style.display = 'block';
-                            document.getElementById('modal2').classList.add('in');
-                            document.getElementById('btn-close-2').addEventListener('click', function () {
-                                document.getElementById('modal2').style.display = 'none';
-                                document.getElementById('modal2').classList.remove('in');
-                            });
-                            document.getElementById("successRegisterMessageShow").innerHTML = "Dang ky thanh cong";
-                            document.getElementById('register').classList.remove("disabled");
-                            document.getElementById('verifyCodeBtn').classList.remove("disabled");
-                        }
-                        
-                        function verifyEnail(){
-//                            let email = document.getElementById('email').value
-                           let email = $('#email').val();
-//                            let formData = {
-//                                emailUserRgister: email
-//                            };
-                            console.log("email", email);
-                            
-                            $.ajax({
-                                url: '/SWP391-G2/comfirmEmail',
-                                type: 'POST',
-                                data: {
-                                    emailUserRgister: email
-                                },
-                                processData: false,
-                                contentType: false,
-                                success: function (data) {
-                                    // handle success
-                                    console.log("formData", formData);
-                                    console.log("data", data);
-                                },
-                                error: function (xhr, status, error) {
-                                     // handle error
-                                    console.log("error: ", error);
-                                }
-                            });
-                        }
-                        
-                        //                            $.ajax({
-//                                url: "/api/gallery/galleryId/"  + id, // url where to submit the request
-//                                method: "GET", // type of action POST || GET
-//                                success: function (data) {
-//                                    console.log("data", data);
-//
-//                                },
-//                                error: function (xhr, status, error) {
-//                                    console.log("error: ", error);
-//                                    return false;
-//                                }
-//                            });
-                        
-//                        $('#fileInput').on('change', function () {
-//                            var file = this.files[0];
-//                            var formData = new FormData();
-//                            formData.append('file', file);
-//                            $.ajax({
-//                                url: '/api/file/upload',
-//                                type: 'POST',
-//                                data: formData,
-//                                processData: false,
-//                                contentType: false,
-//                                success: function (data) {
-//                                    // handle success
-//                                    toastr.success(messageSuccess, {timeOut: 3000})
-//                                    paginateMedia(currentPage, 5, currentSearch);
-//                                },
-//                                error: function (xhr, status, error) {
-//                                    console.log(xhr.responseJSON);
-//                                    if (xhr.responseJSON === "File already exists") {
-//                                        toastr.error(messageFileExist, {timeOut: 3000})
-//                                    } else {
-//                                        toastr.error(messageError, {timeOut: 3000})
-//                                    }
-//                                    // handle error
-//                                }
-//                            });
-//                        });
-                        
-
-                        function checkData() {
-                            var password = document.getElementById('password');
-                            var confirm_password = document.getElementById('comfirm-password');
-                            
-                            if (password.value !== confirm_password.value || password.length < 6 || password.length > 20) {
-                                event.preventDefault();
-                                 document.getElementById("errorMessage").innerHTML = "Password don't match";
-                            }
-                        }
-
-                        function closeModal2() {
-                            document.getElementById('modal2').style.display = 'none';
-                            document.getElementById('modal2').classList.remove('in');
-
-                        }
-
-</script>

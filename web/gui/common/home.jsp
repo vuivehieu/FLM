@@ -34,6 +34,10 @@
             <script src="js/html5shiv.js"></script>
             <script src="js/respond.min.js"></script>
             <![endif]-->
+        
+        <!-- Thêm link tới các thư viện jQuery và Popper.js -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
         <!-- Font Awesome -->
         <link
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -223,9 +227,7 @@
         <jsp:include page="footer/footer.jsp"/>
 
 
-        <!-- Thêm link tới các thư viện jQuery và Popper.js -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        
         <!--Import jQuery before materialize.js-->
         <script src="js/main.min.js"></script>
         <script src="js/bootstrap.min.js"></script>

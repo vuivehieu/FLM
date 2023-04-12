@@ -19,7 +19,7 @@
                 <form action="verifyCode" method="post" >
                   <div class="form-outline mb-4">
                     <input type="text" class="form-control validate"
-                      placeholder="Full Name"  value="${verifyCode != null ? verifyCode : ''}" name="verifyCode" id="verifyCode" style="font-size: 15px;"/>
+                      placeholder="Full Name"  value="${verifyCode != null ? verifyCode : ''}" name="verifyCode" style="font-size: 15px;"/>
                     <label class="form-label" for="verifyCode">Input Code</label>
                   </div>
                   <div class="text-center pt-1 mb-5 pb-1">
