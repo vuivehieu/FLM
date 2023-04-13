@@ -122,11 +122,11 @@
                         <div class="sb2-2-2">
                             <ul>
                                 <li><a href="dashboard"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-                                <li class="active-bre"><a>Curriculum List</a></li>
+                                <li class="active-bre"><a>Subject List</a></li>
                             </ul>
                         </div>
                         <div class="float-right">
-                            <a href="admin-adduser"><button class="btn btn-warning">Add Curriculum</button></a>
+                            <a href="admin-adduser"><button class="btn btn-warning">Add Subject</button></a>
                         </div>
                     </div>
 
@@ -137,7 +137,7 @@
                             <div class="col-md-12">
                                 <div class="box-inn-sp">
                                     <div class="inn-title">
-                                        <h4>List Curriculum</h4>
+                                        <h4>List Subject</h4>
                                         <!--<p>All about students like name, student id, phone, email, country, city and more</p>-->    
                                     </div>
 
@@ -192,32 +192,33 @@
                                             <table id="example" class="table table-hover" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th></th>
-                                                        <th>Curriculum Code</th>
-                                                        <th>Curriculum Name(EN)</th>
-                                                        <th>Curriculum Name(VI)</th>
-                                                        <th>Description</th>
-                                                        <th>Approved</th>
+                                                        <th>Subject Code</th>
+                                                        <th>Subject Name(EN)</th>
+                                                        <th>Subject Name(VI)</th>
+                                                        <th>Semester</th>
+                                                        <th>Credits</th>
+                                                        <th>Combo</th>
+                                                        <th>Elective</th>
+                                                        <th>Note</th>
                                                         <th>Status</th>
                                                         <th></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <c:forEach items="${curriculums}" var="item">
+                                                    <c:forEach items="${subjects}" var="item">
                                                         <tr>
-                                                            <td><span class="list-img"><img src="${item.image}" alt=""></span></td>
                                                             <td>
                                                                 <a href="#">
-                                                                    <span class="list-enq-name">${item.curCode}</span>
+                                                                    <span class="list-enq-name">${item.subjectCode}</span>
                                                                 </a>
                                                             </td>
-                                                            <td>${item.curName_EN}</td>
-                                                            <td>${item.curName_VI}</td>
-                                                            <td>${item.description}</td>
-                                                            <td>
-                                                                <span class="label ${!item.isApproved ? 'label-danger' : 'label-success'}">
-                                                                    ${!item.isApproved ? 'Not Approved' :  'Approved'}</span>
-                                                            </td>
+                                                            <td>${item.subjectName_EN}</td>
+                                                            <td>${item.subjectName_VI}</td>
+                                                            <td>${item.semester}</td>
+                                                            <td>${item.noCredit}</td>
+                                                            <td>${item.comboName}</td>
+                                                            <td>${item.electiveName}</td>
+                                                            <td>${item.note}</td>
                                                             <td>
                                                                 <span class="label ${!item.isActive ? 'label-danger' : 'label-success'}">
                                                                     ${!item.isActive ? 'Inactive' : 'Active'}</span>

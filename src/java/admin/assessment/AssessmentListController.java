@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -67,13 +68,21 @@ public class AssessmentListController extends HttpServlet {
         String key = request.getParameter("keySearch");
 
         DAO dao = new DAO();
-
-        Account a = (Account) request.getSession().getAttribute("account");
-
-        List<Assessment> list = dao.getAssessmentByAccountID(a.getAccountID());
+        Cookie[] cookies = request.getCookies();
+        int uid = 0;
+               
+        if(cookies!=null){
+            for(Cookie cookie:cookies){
+                if(cookie.getName().equals("userId")){
+                    uid = Integer.parseInt(cookie.getValue());
+                }
+            }
+        }
+        
+        List<Assessment> list = dao.getAssessmentByAccountID(uid);
 
         if (key != null && !key.isEmpty()) {
-            list = dao.getAssessmentByAccountIDAndKey(a.getAccountID(), key);
+            list = dao.getAssessmentByAccountIDAndKey(uid, key);
         }
 
         String sortType = request.getParameter("sort");

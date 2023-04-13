@@ -122,11 +122,11 @@
                         <div class="sb2-2-2">
                             <ul>
                                 <li><a href="dashboard"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-                                <li class="active-bre"><a>Curriculum List</a></li>
+                                <li class="active-bre"><a>PreRequisite List</a></li>
                             </ul>
                         </div>
                         <div class="float-right">
-                            <a href="admin-adduser"><button class="btn btn-warning">Add Curriculum</button></a>
+                            <a href="admin-adduser"><button class="btn btn-warning">Add PreRequisite</button></a>
                         </div>
                     </div>
 
@@ -137,7 +137,7 @@
                             <div class="col-md-12">
                                 <div class="box-inn-sp">
                                     <div class="inn-title">
-                                        <h4>List Curriculum</h4>
+                                        <h4>List PreRequisite</h4>
                                         <!--<p>All about students like name, student id, phone, email, country, city and more</p>-->    
                                     </div>
 
@@ -192,36 +192,22 @@
                                             <table id="example" class="table table-hover" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th></th>
-                                                        <th>Curriculum Code</th>
-                                                        <th>Curriculum Name(EN)</th>
-                                                        <th>Curriculum Name(VI)</th>
-                                                        <th>Description</th>
-                                                        <th>Approved</th>
-                                                        <th>Status</th>
+                                                        <th style="width: 120px !important">Syllabus ID</th>
+                                                        <th style="width: 170px !important">Subject Code</th>
+                                                        <th>PreRequisite Code</th>
                                                         <th></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <c:forEach items="${curriculums}" var="item">
+                                                    <c:forEach items="${preRequisites}" var="item">
                                                         <tr>
-                                                            <td><span class="list-img"><img src="${item.image}" alt=""></span></td>
                                                             <td>
                                                                 <a href="#">
-                                                                    <span class="list-enq-name">${item.curCode}</span>
+                                                                    <span class="list-enq-name">${item.slbid}</span>
                                                                 </a>
                                                             </td>
-                                                            <td>${item.curName_EN}</td>
-                                                            <td>${item.curName_VI}</td>
-                                                            <td>${item.description}</td>
-                                                            <td>
-                                                                <span class="label ${!item.isApproved ? 'label-danger' : 'label-success'}">
-                                                                    ${!item.isApproved ? 'Not Approved' :  'Approved'}</span>
-                                                            </td>
-                                                            <td>
-                                                                <span class="label ${!item.isActive ? 'label-danger' : 'label-success'}">
-                                                                    ${!item.isActive ? 'Inactive' : 'Active'}</span>
-                                                            </td>
+                                                            <td>${item.subjectCode}</td>
+                                                            <td>${item.preReqCode}</td>
                                                             <td>
                                                                 <button type="button" class="ad-st-view" data-toggle="modal" data-target="#editModal">Edit</button>
                                                                 <!--<a href="admin-student-details.html" class="ad-">Block</a>-->

@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package admin.curriculum;
+package admin.prerequisite;
 
-import DAL.CurriculumDAO;
-import com.sun.corba.se.spi.presentation.rmi.StubAdapter;
+
+import DAL.PrerequisiteDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,14 +17,12 @@ import java.io.IOException;
  *
  * @author PCM
  */
-@WebServlet(name="CurriculumListController", urlPatterns={"/curriculumList"})
-public class CurriculumListController extends HttpServlet{
-
+@WebServlet(name="PreRequisiteListController", urlPatterns={"/preRequisiteList"})
+public class PreRequisiteListController extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CurriculumDAO curriculumDAO = new CurriculumDAO();
-        req.setAttribute("curriculums", curriculumDAO.findAllCurriculum());
-        req.getRequestDispatcher("gui/admin/curriculum/list.jsp").forward(req, resp);
+        PrerequisiteDAO prerequisiteDAO = new PrerequisiteDAO();
+        req.setAttribute("preRequisites", prerequisiteDAO.findAllPreRequisites());
+        req.getRequestDispatcher("gui/admin/prerequisite/list.jsp").forward(req, resp);
     }
-    
 }
