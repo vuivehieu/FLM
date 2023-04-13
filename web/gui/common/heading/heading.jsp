@@ -225,7 +225,7 @@
                     class="rounded-circle"
                     height="25"
                     alt="No Avatar"
-                    loading="lazy" style="width: 52px;height: 52px;"
+                    loading="lazy" style="width: 50px;height: 50px;"
                     />
                 </c:if>
                 <c:if test="${account.avatar == ''}">

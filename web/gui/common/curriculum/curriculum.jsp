@@ -30,6 +30,11 @@
             <script src="js/html5shiv.js"></script>
             <script src="js/respond.min.js"></script>
             <![endif]-->
+           <!-- MDB -->
+        <script
+          type="text/javascript"
+          src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
+        ></script>
 
         <!-- Font Awesome -->
         <link
@@ -241,11 +246,6 @@
                 }
             }
         </script>
-        <!-- MDB -->
-        <script
-          type="text/javascript"
-          src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
-        ></script>
 
         <!--Import jQuery before materialize.js-->
         <script src="js/main.min.js"></script>
