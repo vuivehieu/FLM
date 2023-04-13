@@ -29,7 +29,7 @@
         <div class="col-md-2 col-sm-3 col-xs-6 sb1-1 logo">
             <a href="#" class="btn-close-menu"><i class="fa fa-times" aria-hidden="true"></i></a>
             <a href="#" class="atab-menu"><i class="fa fa-bars tab-menu" aria-hidden="true"></i></a>
-            <a href="dashboard" class="logo"><img src="images/Logo_Đại_học_FPT.png" alt="" />
+            <a href="home" class="logo"><img src="images/Logo_Đại_học_FPT.png" alt="" />
             </a>
         </div>
         <!--== SEARCH ==-->

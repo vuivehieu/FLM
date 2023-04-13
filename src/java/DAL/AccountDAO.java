@@ -565,6 +565,25 @@ public class AccountDAO extends DBContext {
 
         }
     }
+        public void updateRole(int role, String username) {
+        try {
+
+            String sql = "UPDATE `swp391_se1632_g2`.`account`\n"
+                    + "SET\n"
+                    + "`rid` = ?\n"
+                    + "WHERE `userName` = ?;";
+
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, role);
+            st.setString(2, username);
+
+            st.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(" AccountDAO -> updateStatus(): " + e);
+
+        }
+    }
 
     public void changeAvatar(int accountID, String url) {
         try {

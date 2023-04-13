@@ -6,7 +6,7 @@
 
 
     <head>
-        <title>Education Master Template</title>
+        <title>FLM</title>
         <!-- META TAGS -->
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,24 +32,6 @@
                     dom: 'lr<"table-filter-container">itp',
                     initComplete: function (settings) {
                         var api = new $.fn.dataTable.Api(settings);
-                        $('.table-filter-container', api.table().container()).append(
-                                $('#filterDiv').detach().show(),
-                                );
-                        $('#nameOrderSelect').on('change', function () {
-                            table.order([2, this.value]).draw();
-                            if (this.value === '') {
-                                table.order().draw();
-                            }
-                        });
-                        $('#userSearchTxt').on('keyup', function () {
-                            table.search(this.value).draw();
-                        });
-                        $('#roleFilter').on('change', function () {
-                            table.columns(4).search(this.value).draw();
-                        });
-                        $('#statusFilter').on('change', function () {
-                            table.columns(5).search(this.value).draw();
-                        });
                     },
                     "lengthChange": false
 //                    buttons: ['copy', 'excel', 'pdf', 'colvis'],
@@ -140,11 +122,11 @@
                         <div class="sb2-2-2">
                             <ul>
                                 <li><a href="dashboard"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-                                <li class="active-bre"><a>Users</a></li>
+                                <li class="active-bre"><a>Subject List</a></li>
                             </ul>
                         </div>
                         <div class="float-right">
-                            <a href="admin-adduser"><button class="btn btn-warning">Add User</button></a>
+                            <a href="admin-adduser"><button class="btn btn-warning">Add Subject</button></a>
                         </div>
                     </div>
 
@@ -155,7 +137,7 @@
                             <div class="col-md-12">
                                 <div class="box-inn-sp">
                                     <div class="inn-title">
-                                        <h4>List User</h4>
+                                        <h4>List Subject</h4>
                                         <!--<p>All about students like name, student id, phone, email, country, city and more</p>-->    
                                     </div>
 
@@ -170,7 +152,7 @@
                                                                                                         <a href="#"><i class="fa fa-search"></i></a>
                                                                                                     </form>
                                                                                                 </div>-->
-                                                <div id="filterDiv" class="filterDiv" style="display: none">
+<!--                                                <div id="filterDiv" class="filterDiv" style="display: none">
                                                     <div class="row">
                                                         <div class="col">
                                                             <select name="roleFilter" class="browser-default" id="roleFilter">
@@ -204,39 +186,45 @@
                                                             <input type="text" name="userSearchTxt" class="userSearchTxt" id="userSearchTxt" value="" placeholder="Search for user..."/>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div>-->
                                             </div>
 
                                             <table id="example" class="table table-hover" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th></th>
-                                                        <th>Name</th>
-                                                        <th>UserName</th>
-                                                        <th>Email</th>
-                                                        <th>Role</th>
+                                                        <th>Subject Code</th>
+                                                        <th>Subject Name(EN)</th>
+                                                        <th>Subject Name(VI)</th>
+                                                        <th>Semester</th>
+                                                        <th>Credits</th>
+                                                        <th>Combo</th>
+                                                        <th>Elective</th>
+                                                        <th>Note</th>
                                                         <th>Status</th>
                                                         <th></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <c:forEach items="${list}" var="user">
+                                                    <c:forEach items="${subjects}" var="item">
                                                         <tr>
-                                                            <td><span class="list-img"><img src="${user.avatar}" alt=""></span></td>
                                                             <td>
                                                                 <a href="#">
-                                                                    <span class="list-enq-name">${user.displayName}</span>
+                                                                    <span class="list-enq-name">${item.subjectCode}</span>
                                                                 </a>
                                                             </td>
-                                                            <td>${user.userName}</td>
-                                                            <td>${user.email}</td>
-                                                            <td>${user.role.rname}</td>
+                                                            <td>${item.subjectName_EN}</td>
+                                                            <td>${item.subjectName_VI}</td>
+                                                            <td>${item.semester}</td>
+                                                            <td>${item.noCredit}</td>
+                                                            <td>${item.comboName}</td>
+                                                            <td>${item.electiveName}</td>
+                                                            <td>${item.note}</td>
                                                             <td>
-                                                                <span class="label ${user.status == 0 ? 'label-danger' : user.status == 1 ? 'label-success' : user.status ==2 ? 'label-warning' : ''}">
-                                                                    ${user.status == 0 ? 'Block' : user.status == 1 ? 'Active' : user.status == 2 ? 'Not Verify Email' : '' }</span>
+                                                                <span class="label ${!item.isActive ? 'label-danger' : 'label-success'}">
+                                                                    ${!item.isActive ? 'Inactive' : 'Active'}</span>
                                                             </td>
                                                             <td>
-                                                                <button type="button" class="ad-st-view" data-toggle="modal" data-target="#editModal" data-status="${user.status}" data-role="${user.role.rid}" data-name="${user.displayName}" data-username="${user.userName}" data-email="${user.email}">Edit</button>
+                                                                <button type="button" class="ad-st-view" data-toggle="modal" data-target="#editModal">Edit</button>
                                                                 <!--<a href="admin-student-details.html" class="ad-">Block</a>-->
                                                             </td>
                                                         </tr>
@@ -265,7 +253,7 @@
                         </div>
 
 
-                        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 100px;">
+<!--                        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 100px;">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -311,7 +299,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
 

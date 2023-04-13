@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -64,15 +65,23 @@ public class SyllabusListController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAO dao = new DAO();
+        Cookie[] cookies = request.getCookies();
+        int uid = 0;
+        if(cookies!=null){
+            for(Cookie cookie:cookies){
+                if(cookie.getName().equals("userId")){
+                    uid = Integer.parseInt(cookie.getValue());
+                }
+            }
+        }
+//        Account a = (Account) request.getSession().getAttribute("account");
 
-        Account a = (Account) request.getSession().getAttribute("account");
-
-        List<Syllabus> list = dao.getSyllabusByAccountID(a.getAccountID());
+        List<Syllabus> list = dao.getSyllabusByAccountID(uid);
 
         String key = request.getParameter("keySearch");
 
         if (key != null && !key.isEmpty()) {
-            list = dao.getSyllabusByKetAndAccountID(key, a.getAccountID());
+            list = dao.getSyllabusByKetAndAccountID(key, uid);
         }
 
         String sortType = request.getParameter("sort");
