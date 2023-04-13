@@ -12,6 +12,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.AccountGoogle;
+import org.json.JSONObject;
+import static xin.zhuyao.httputil.HttpUtils.get;
+import static xin.zhuyao.httputil.HttpUtils.post;
 
 /**
  *
@@ -19,6 +22,12 @@ import model.AccountGoogle;
  */
 @WebServlet(name = "LoginGoogleController", urlPatterns = {"/loginGoogle"})
 public class LoginGoogleController extends HttpServlet {
+    
+    private static final long serialVersionUID = 1L;
+    private static final String CLIENT_ID = "5268197056-r6agg8pmul30d9pjd6f1ug2vsregk1h5.apps.googleusercontent.com";
+    private static final String CLIENT_SECRET = "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";
+    private static final String REDIRECT_URI = "http://localhost:8080/SWP391-G2/home";
+    private static final String SCOPE = "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -58,26 +67,49 @@ public class LoginGoogleController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+//        String code = request.getParameter("code");
+//
+//        if (code == null || code.isEmpty()) {
+//            response.sendRedirect("home");
+//        } else {
+//            response.setContentType("text/html;charset=UTF-8");
+//
+//            String accessToken = GoogleUtils.getToken(code);
+//            AccountGoogle accountGoogle = GoogleUtils.getUserInfo(accessToken);
+//            PrintWriter out = response.getWriter();
+//
+//            out.println("id: " + accountGoogle.getId());
+//            out.println("name: " + accountGoogle.getName());
+//            out.println("email: " + accountGoogle.getEmail());
+//            out.println("verified_email: " + accountGoogle.isVerified_email());
+//            out.println("given_name: " + accountGoogle.getGiven_name());
+//            out.println("family_name: " + accountGoogle.getFamily_name());
+//            out.println("link: " + accountGoogle.getLink());
+//            out.println("picture: " + accountGoogle.getPicture());
+//
+//        }
+
+
         String code = request.getParameter("code");
-
         if (code == null || code.isEmpty()) {
-            response.sendRedirect("home");
+            String loginURL = "https://accounts.google.com/o/oauth2/auth?client_id=" + CLIENT_ID + "&redirect_uri=" + REDIRECT_URI
+                    + "&scope=" + SCOPE + "&response_type=code";
+            response.sendRedirect(loginURL);
         } else {
-            response.setContentType("text/html;charset=UTF-8");
-
-            String accessToken = GoogleUtils.getToken(code);
-            AccountGoogle accountGoogle = GoogleUtils.getUserInfo(accessToken);
-            PrintWriter out = response.getWriter();
-
-            out.println("id: " + accountGoogle.getId());
-            out.println("name: " + accountGoogle.getName());
-            out.println("email: " + accountGoogle.getEmail());
-            out.println("verified_email: " + accountGoogle.isVerified_email());
-            out.println("given_name: " + accountGoogle.getGiven_name());
-            out.println("family_name: " + accountGoogle.getFamily_name());
-            out.println("link: " + accountGoogle.getLink());
-            out.println("picture: " + accountGoogle.getPicture());
-
+            String tokenURL = "https://accounts.google.com/o/oauth2/token";
+            String payload = "client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET + "&redirect_uri="
+                    + REDIRECT_URI + "&grant_type=authorization_code" + "&code=" + code;
+            String json = post(tokenURL, payload);
+//             post("https://accounts.google.com/o/oauth2/token", params);
+            JSONObject jsonObject = new JSONObject(json);
+            String accessToken = jsonObject.getString("access_token");
+            String profileURL = "https://www.googleapis.com/oauth2/v1/userinfo?access_token=" + accessToken;
+            json = get(profileURL);
+            jsonObject = new JSONObject(json);
+            String email = jsonObject.getString("email");
+            String name = jsonObject.getString("name");
+            // Do something with email and name
+            response.sendRedirect("welcome.jsp");
         }
     }
 

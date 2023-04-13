@@ -39,6 +39,7 @@
                         <button type="button" style="font-size: 15px;" class="btn btn-outline-danger" data-dismiss="modal" data-toggle="modal" 
                                 data-target="#modal2" onclick="closeModal1()" id="createNewBtnLogin">Create new</button>
                       </div>
+                        <div class="g-signin2" data-onsuccess="onSignIn">Login Google</div> 
 
                     </form>
                 
@@ -75,5 +76,34 @@
     function closeModal1(){
             document.getElementById('modal1').style.display = 'none';
             document.getElementById('modal1').classList.remove('in');
+    }
+    
+    function onSignIn(googleUser) {
+        var id_token = googleUser.getAuthResponse().id_token;
+        // G?i id_token ??n máy ch? ?? xác th?c
+        // Sau khi xác th?c thành công, ?ng d?ng c?a b?n có th? s? d?ng id_token ?? yêu c?u tài nguyên c?a ng??i dùng t? Google
+        let data = {
+            code : id_token
+            };
+
+            $.ajax({
+                url: '/SWP391-G2/loginGoogle',
+                type: "GET",
+                contentType: "application/json", // NOT dataType!
+                data: JSON.stringify(data),
+                success: function(response) {
+                    // handle success
+
+                    console.log(response);
+                    }else {
+                        document.getElementById("errorMessage").innerHTML = response.error;
+                    }
+
+                },
+                error: function (xhr, status, error) {
+                     // handle error
+                    console.log("error: ", error);
+                }
+            });
     }
 </script>
