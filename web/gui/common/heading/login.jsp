@@ -93,8 +93,7 @@
                       <p>Please login to your account</p>
 
                       <div class="form-outline mb-4">
-                        <input type="text" id="form2Example11" class="form-control" style="font-size: 15px;"
-                          placeholder="User Name" name="userName" />
+                        <input type="text" id="form2Example11" class="form-control" style="font-size: 15px;" name="userName" />
                         <label class="form-label" for="form2Example11">Username</label>
                       </div>
 
@@ -105,14 +104,15 @@
 
                       <div class="text-center pt-1 mb-5 pb-1">
                           <p id="messageLogin">${error != null ? error : ''}</p>
-                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Log
+                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit" style="font-size: 15px;">Log
                           in</button>
-                        <a class="text-muted" href="#!" data-dismiss="modal" data-toggle="modal" data-target="#modal3">Forgot password?</a>
+                        <a class="text-muted" href="#!" data-dismiss="modal" data-toggle="modal" data-target="#modal3" onclick="closeModal1()">Forgot password?</a>
                       </div>
 
                       <div class="d-flex align-items-center justify-content-center pb-4">
                         <p class="mb-0 me-2">Don't have an account?</p>
-                        <button type="button" style="font-size: 15px;" class="btn btn-outline-danger" data-dismiss="modal" data-toggle="modal" data-target="#modal2" onclick="closeModal1()">Create new</button>
+                        <button type="button" style="font-size: 15px;" class="btn btn-outline-danger" data-dismiss="modal" data-toggle="modal" 
+                                data-target="#modal2" onclick="closeModal1()" id="createNewBtnLogin">Create new</button>
                       </div>
 
                     </form>
@@ -146,10 +146,20 @@
             document.getElementById('modal1').classList.remove('in');
         });
     }
+    
+//    // clear modal register
+//    let signUpBtn = document.getElementById("createNewBtnLogin");
+//    signUpBtn.addEventListener("click", function() {
+//        document.getElementById('email').value = '';
+//        document.getElementById('userName').value = '';
+//        document.getElementById('fullName').value = '';
+//        document.getElementById('password').value = '';
+//        document.getElementById('comfirm-password').value = '';
+//        document.getElementById('verifyCode').value = '';
+//    });
 
     function closeModal1(){
             document.getElementById('modal1').style.display = 'none';
             document.getElementById('modal1').classList.remove('in');
-
-        }
+    }
 </script>

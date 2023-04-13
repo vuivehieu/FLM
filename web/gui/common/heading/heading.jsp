@@ -30,14 +30,13 @@
                             <c:if test="${account == null}">
                                 <li><a href="#!" data-toggle="modal" data-target="#modal1">Sign In</a></li>
                                 <li><a href="#!" data-toggle="modal" data-target="#modal2">Register</a></li>
-                                </c:if>
-                                <c:if test="${account != null}">
+                            </c:if>
+                            <c:if test="${account != null}">
                                 <li><a href="profile">Profile</a></li>
                                 <li><a href="profile">Change Password</a></li>
                                 <li><a href="profile">Change Avatar</a></li>
-
                                 <li><a href="logout">Logout</a></li>
-                                </c:if>  
+                            </c:if>  
                         </ul>
                         <h4>All Pages</h4>
                         <ul>
@@ -190,10 +189,10 @@
     <c:if test="${account == null}">
     <div class="d-flex align-items-center">
         <button type="button" class="btn btn-dark me-3">
-          <a href="#!" data-toggle="modal" data-target="#modal1">Sign In</a>
+          <a href="#!" data-toggle="modal" data-target="#modal1" >Sign In</a>
         </button>
         <button type="button" class="btn btn-primary me-3">
-           <a href="#!" data-toggle="modal" data-target="#modal2">Sign Up</a>
+           <a href="#!" data-toggle="modal" data-target="#modal2" id="signUpBtn">Sign Up</a>
         </button>
     </div>
     </c:if>
@@ -259,3 +258,18 @@
 <jsp:include page="login.jsp"/>
 <jsp:include page="register.jsp"/>
 <jsp:include page="forgot.jsp"/>
+
+<script>
+    let signUpBtn = document.getElementById("signUpBtn");
+    signUpBtn.addEventListener("click", function() {
+        document.getElementById('email').value = '';
+        document.getElementById('userName').value = '';
+        document.getElementById('fullName').value = '';
+        document.getElementById('password').value = '';
+        document.getElementById('comfirm-password').value = '';
+        document.getElementById('verifyCode').value = '';
+        document.getElementById("errorMessage").innerHTML = '';
+        document.getElementById("messageRegister").innerHTML = '';
+    });
+
+</script>

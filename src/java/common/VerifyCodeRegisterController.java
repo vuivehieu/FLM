@@ -85,36 +85,33 @@ public class VerifyCodeRegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String verifyCode = request.getParameter("verifyCode");
-        AccountDAO dao = new AccountDAO();
-        
-        try{
-            int AccountId = new DAO().getAccountIdByCodeSendMail(verifyCode);
-            PrintWriter out = response.getWriter();
-        if (AccountId != 0) {
-            
-            Account account = dao.getAccountByAccountID1(AccountId);
-            if (account.getStatus() == 2) {
-                // Xác minh email thành công
-//                out.println("Email verified successfully!");
-                request.setAttribute("successRegisterMessage", "OK");
-                account.setStatus(1);
-                dao.updateStatus(account);
-                this.sendMail(request, response);
-                request.getRequestDispatcher("gui/common/home.jsp").forward(request, response);
-            } else {
-                // Xác minh email thất bại
-                out.println("Invalid verification code!");
-            }
-        } else {
-            out.println("khong co code nao trong khoang 5p gan day");
-        }
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-
-        
-
+//        String verifyCode = request.getParameter("verifyCode");
+//        AccountDAO dao = new AccountDAO();
+//        
+//        try{
+//            int AccountId = new DAO().getAccountIdByCodeSendMail(verifyCode);
+//            PrintWriter out = response.getWriter();
+//        if (AccountId != 0) {
+//            
+//            Account account = dao.getAccountByAccountID1(AccountId);
+//            if (account.getStatus() == 2) {
+//                // Xác minh email thành công
+////                out.println("Email verified successfully!");
+//                request.setAttribute("successRegisterMessage", "OK");
+//                account.setStatus(1);
+//                dao.updateStatus(account);
+//                this.sendMail(request, response);
+//                request.getRequestDispatcher("gui/common/home.jsp").forward(request, response);
+//            } else {
+//                // Xác minh email thất bại
+//                out.println("Invalid verification code!");
+//            }
+//        } else {
+//            out.println("khong co code nao trong khoang 5p gan day");
+//        }
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
     }
 
     private void sendMail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

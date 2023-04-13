@@ -4,6 +4,7 @@
  */
 package gui;
 
+import common.*;
 import DAL.AccountDAO;
 import DAL.DAO;
 import com.google.gson.Gson;
@@ -17,9 +18,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import model.Account;
 import java.util.Properties;
 import java.util.Random;
-import java.util.UUID;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -27,15 +28,15 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import model.Account;
+import model.Role;
 import org.json.JSONObject;
 
 /**
  *
  * @author phanh
  */
-@WebServlet(name = "ForgotPassword", urlPatterns = {"/forgotPassword"})
-public class ForgotPassword extends HttpServlet {
+@WebServlet(name = "RegisterController", urlPatterns = {"/update-pass-forgot"})
+public class UpdatePassForgotController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -54,42 +55,25 @@ public class ForgotPassword extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ForgotPassword</title>");
+            out.println("<title>Servlet RegisterController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ForgotPassword at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet RegisterController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        AccountDAO dao = new AccountDAO();
         
         BufferedReader reader = request.getReader();
         StringBuilder sb = new StringBuilder();
@@ -99,45 +83,92 @@ public class ForgotPassword extends HttpServlet {
         }
         // Chuyển đổi chuỗi JSON thành đối tượng JSONObject
         JSONObject jsonObj = new JSONObject(sb.toString());
-        // Lấy giá trị của thuộc tính "email"
-         String email = jsonObj.getString("emailForgot");
-         
-         // check email dang ton tai va khong bi khoa, da active (status = 1) => send mail xac nhan ma code
-         boolean checkEmail = dao.checkEmailForgot(email);
-        if(checkEmail){
-             String codeSendMailForgot = this.sendMail(request, response, email);
-            // response
+  
+         String email = jsonObj.getString("email");
+         String password = jsonObj.getString("password");
+        
+        AccountDAO ad = new AccountDAO();
+        // tim account qua email => set pass
+        Account account = ad.findAccountByEmail(email);
+        
+        if(ad.changePassword(password, account) != 0){
+            // change pass success
+            this.sendMail(request, response);
             Map<String, String> options = new LinkedHashMap<>();
-            options.put("code", codeSendMailForgot);
+            options.put("messageChangPassSuccess", "Change password success");
             String json = new Gson().toJson(options);
 
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(json);
+            
         }else {
+            // change pass false
             Map<String, String> options = new LinkedHashMap<>();
-            options.put("error", "This email is locked or not activated");
-            String json = new Gson().toJson(options);
+                options.put("error", "Change Password failed");
+                String json = new Gson().toJson(options);
 
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(json);
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(json);
         }
+        
+//        Role r = new Role(1, "Guest");
+//        Account a = new Account(new DAO().getLastAccountID() + 1, userName, password, fullName, email, "", false, 1, Custom.Common.getCurrentDate(), r);
+        
+//        if(ad.checkRegisterEdit(userName, email)){
+//            if(ad.register(a) != 0){
+//            // success
+//            this.sendMail(request, response);
+//            Map<String, String> options = new LinkedHashMap<>();
+//            options.put("messageRegister", "Registration success");
+//            String json = new Gson().toJson(options);
+//
+//            response.setContentType("application/json");
+//            response.setCharacterEncoding("UTF-8");
+//            response.getWriter().write(json);
+//            }else {
+//                // response
+//                Map<String, String> options = new LinkedHashMap<>();
+//                options.put("error", "Registration failed");
+//                String json = new Gson().toJson(options);
+//
+//                response.setContentType("application/json");
+//                response.setCharacterEncoding("UTF-8");
+//                response.getWriter().write(json);
+//            }
+//        }else 
+//        {
+//            // response
+//            Map<String, String> options = new LinkedHashMap<>();
+//            options.put("error", "Registration failed, User Name already exists, please enter another account");
+//            String json = new Gson().toJson(options);
+//
+//            response.setContentType("application/json");
+//            response.setCharacterEncoding("UTF-8");
+//            response.getWriter().write(json);
+//        }
+        
+
     }
-    
-    private String sendMail(HttpServletRequest request, HttpServletResponse response, String userEmail) throws ServletException, IOException {
+
+    private void sendMail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String adminEmail = "thevu091193@gmail.com";
 
         // Tạo mã xác thực duy nhất
+//        String uuid = UUID.randomUUID().toString();
         Random rand = new Random();
         String uuid = String.valueOf(rand.nextInt(90000) + 10000);
 
+        // Lưu mã xác thực trong cơ sở dữ liệu của bạn để sử dụng sau này
+        // Thiết lập thông tin email
         final String from = "dinhvu091193@gmail.com";
         final String password = "ymdngxlplsegrygp";
         String host = "smtp.gmail.com";
         int port = 587;
-        String to = userEmail;
-        String subject = "Email confirmation code forgot password";
-        String content = "ma code cua ban la: " + uuid + "  hay nhap vao o input de kich hoat";
+        String to = adminEmail;
+        String subject = "co nguoi vua doi password";
+        String content = "A new user has successfully registered";
 
         // Thiết lập các thuộc tính email
         Properties properties = new Properties();
@@ -163,8 +194,6 @@ public class ForgotPassword extends HttpServlet {
 
             // Gửi email
             Transport.send(message);
-            
-            return uuid;
 
             // Chuyển hướng đến trang xác nhận email
         } catch (MessagingException e) {

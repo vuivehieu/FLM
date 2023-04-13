@@ -96,39 +96,46 @@
     let codeSendMail= '';
 
     function verifyEmail(){
+        // mail phai co dang @gmail.com, @fpt.edu.vn
         codeSendMail = '';
         let email = $('#email').val();
-        let data = {
+        
+        if(email.includes("@gmail.com") || email.includes("@fpt.edu.vn")){
+            let data = {
             email : email
-        };
+            };
 
-        $.ajax({
-            url: '/SWP391-G2/comfirmEmail',
-            type: "POST",
-            contentType: "application/json", // NOT dataType!
-            data: JSON.stringify(data),
-            success: function(response) {
-                // handle success
+            $.ajax({
+                url: '/SWP391-G2/comfirmEmail',
+                type: "POST",
+                contentType: "application/json", // NOT dataType!
+                data: JSON.stringify(data),
+                success: function(response) {
+                    // handle success
 
-                if(response.code != null){
-                    codeSendMail = response.code;
-                    console.log("response.code", response.code);
-                    $('#userName').prop('disabled', false);
-                    $('#fullName').prop('disabled', false);
-                    $('#password').prop('disabled', false);
-                    $('#comfirm-password').prop('disabled', false);
-                    $('#register').removeClass('disabled');
-                    $('#verifyCodeBtn').addClass('disabled');
-                }else {
-                    document.getElementById("errorMessage").innerHTML = response.error;
+                    if(response.code != null){
+                        codeSendMail = response.code;
+                        console.log("response.code", response.code);
+                        $('#email').prop('disabled', true);
+                        $('#userName').prop('disabled', false);
+                        $('#fullName').prop('disabled', false);
+                        $('#password').prop('disabled', false);
+                        $('#comfirm-password').prop('disabled', false);
+                        $('#register').removeClass('disabled');
+                        $('#verifyCodeBtn').addClass('disabled');
+                    }else {
+                        document.getElementById("errorMessage").innerHTML = response.error;
+                    }
+
+                },
+                error: function (xhr, status, error) {
+                     // handle error
+                    console.log("error: ", error);
                 }
-
-            },
-            error: function (xhr, status, error) {
-                 // handle error
-                console.log("error: ", error);
-            }
-        });
+            });
+        }else {
+            document.getElementById("errorMessage").innerHTML = "Email must be in the form @gmail.com and @fpt.edu.vn";
+        }
     }
 
     function register(){
@@ -164,7 +171,8 @@
                         document.getElementById("messageRegister").innerHTML = response.messageRegister;
 
                         setTimeout(function() {
-                            closeModal2();
+                            let btnClose = document.getElementById("btn-close-2");
+                            btnClose.click();
                         }, 3000);
 
 
@@ -180,8 +188,6 @@
                 }
             });
         }
-
-
     }
 
 

@@ -360,11 +360,6 @@ public class AccountDAO extends DBContext {
     public boolean checkEmail(String email) {
         String result = "";
         try {
-
-//            String sql1 = "SELECT `account`.`email`\n"
-//                    + "FROM `swp391_se1632_g2`.`account`"
-//                    + "WHERE `account`.`email` = ?;";
-
             String sql1 = "select * from account where email = ? and (status = 1 or status = 0)";
 
             PreparedStatement st1 = connection.prepareStatement(sql1);
@@ -379,6 +374,71 @@ public class AccountDAO extends DBContext {
         }
 
         return result.equalsIgnoreCase("");
+    }
+    
+    public boolean checkEmailForgot(String email) {
+        String result = "";
+        try {
+            String sql1 = "select * from account where email = ? and status = 1";
+
+            PreparedStatement st1 = connection.prepareStatement(sql1);
+            st1.setString(1, email);
+            ResultSet rs1 = st1.executeQuery();
+            if (rs1.next()) {
+                result += rs1.getString("email");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("AccountDAO -> checkRegister(): " + e);
+        }
+        boolean check1 = result.equalsIgnoreCase("");
+        boolean check = !result.equalsIgnoreCase("");
+        return check;
+    }
+    
+    public Account findAccountByEmail(String email) {
+        Account account;
+        try {
+            String sql1 = "select * from account where email = ? and status = 1";
+
+            PreparedStatement st1 = connection.prepareStatement(sql1);
+            st1.setString(1, email);
+            ResultSet rs = st1.executeQuery();
+            while (rs.next()) {
+                int rid = rs.getInt("rid");
+                //find role by role id => gan vao account
+                Role role = this.findRoleByRoleId(rid);
+                
+                account = new Account(rs.getInt("accountID"), rs.getString("userName"), rs.getString("password"),
+                            rs.getString("displayName"), rs.getString("email"), rs.getString("avatar"), rs.getBoolean("isBlock"),
+                            rs.getInt("status"), rs.getDate("createDate"), role);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("AccountDAO -> checkRegister(): " + e);
+        }
+
+        return null;
+    }
+    
+    public Role findRoleByRoleId(int roleId) {
+        Role role;
+        try {
+            String sql = "select * from role where rid = ?";
+
+            PreparedStatement st1 = connection.prepareStatement(sql);
+            st1.setInt(1, roleId);
+            ResultSet rs = st1.executeQuery();
+            while (rs.next()) {
+                role = new Role(rs.getInt("rid"), rs.getString("rname"));
+                return role;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("AccountDAO -> checkRegister(): " + e);
+        }
+
+        return null;
     }
 
     public int register(Account a) {
@@ -406,7 +466,7 @@ public class AccountDAO extends DBContext {
         return 0;
     }
 
-    public void changePassword(String newPassword, Account a) {
+    public int changePassword(String newPassword, Account a) {
         try {
 
             String sql = "UPDATE `swp391_se1632_g2`.`account` SET `password` = ?\n"
@@ -416,12 +476,13 @@ public class AccountDAO extends DBContext {
             st.setString(1, Custom.ConvertMD5.convertPassToMD5(newPassword));
             st.setString(2, a.getUserName());
 
-            st.executeUpdate();
+            return st.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println("AccountDAO -> changePassword(): " + e);
 
         }
+        return 0;
     }
 
     public Account getLecturerByUserName(String userName, Role role) {
