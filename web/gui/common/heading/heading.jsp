@@ -182,7 +182,7 @@
         <li class="nav-item" style="font-weight: bold;">
           <a class="nav-link" href="search?type=preRequisite">All PreRequisite</a>
         </li>
-        <c:if test="${account != null}">
+        <c:if test="${account != null && account.role.rid != 1}">
         <li class="nav-item" style="font-weight: bold;">
           <a class="nav-link" href="search?type=syllabus">All Syllabus</a>
         </li>

@@ -50,8 +50,7 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
           rel="stylesheet"
         />
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
-        <meta name="google-signin-client_id" content="5268197056-r6agg8pmul30d9pjd6f1ug2vsregk1h5.apps.googleusercontent.com">
+        
         
         <style>
         .gradient-custom-2 {
