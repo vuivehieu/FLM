@@ -21,19 +21,19 @@
 
                   <div class="form-outline mb-4">
                     <input type="text" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;" disabled
-                      placeholder="User Name"  id="userName" onFocus="focusUserName()" />
+                       id="userName" onFocus="focusUserName()" />
                     <label class="form-label" for="userName">User Name</label>
                   </div>
                     
                   <div class="form-outline mb-4">
                     <input type="text" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;" disabled
-                      placeholder="Full Name"  id="fullName" />
+                        id="fullName" />
                     <label class="form-label" for="fullName">Full Name</label>
                   </div>
                     
                   <div class="form-outline mb-4">
                     <input type="text" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;"
-                      placeholder="Email" id="email" onFocus="focusEmail()"/>
+                      id="email" onFocus="focusEmail()"/>
                     <label class="form-label" for="email">Email</label>
                   </div>
 

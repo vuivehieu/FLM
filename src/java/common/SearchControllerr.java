@@ -81,7 +81,7 @@ public class SearchControllerr extends HttpServlet {
                     list = searchCurriculum(key, filter);
                     break;
                 case "syllabus":
-                    list = searchSyllabus(key);
+                    list = searchSyllabus(key, filter);
                     break;
                 case "preRequisite":
                     list = searchPreRequisite(key, filter);
@@ -156,7 +156,7 @@ public class SearchControllerr extends HttpServlet {
                 list = searchCurriculum(key, filter);
                 break;
             case "syllabus":
-                list = searchSyllabus(key);
+                list = searchSyllabus(key, filter);
                 break;
             case "preRequisite":
                 list = searchPreRequisite(key, filter);
@@ -433,14 +433,28 @@ public class SearchControllerr extends HttpServlet {
         return result;
     }
 
-    private List<Syllabus> searchSyllabus(String key) {
+    private List<Syllabus> searchSyllabus(String key, String filter) {
         List<Syllabus> result = new ArrayList<>();
         for (Syllabus item : listSyllabus) {
-            if (item.getSubjectCode().toLowerCase().contains(key.toLowerCase())
-                    || item.getSlbName_EN().toLowerCase().contains(key.toLowerCase())
-                    || item.getSlbName_VI().toLowerCase().contains(key.toLowerCase())) {
-                result.add(item);
+//            if (item.getSubjectCode().toLowerCase().contains(key.toLowerCase())
+//                    || item.getSlbName_EN().toLowerCase().contains(key.toLowerCase())
+//                    || item.getSlbName_VI().toLowerCase().contains(key.toLowerCase())) {
+//                result.add(item);
+//            }
+            
+            if(filter.toLowerCase().contains("subjectcode")){
+                if (item.getSubjectCode().toLowerCase().contains(key.toLowerCase())){
+                    result.add(item);
+                }
             }
+            
+            if(filter.toLowerCase().contains("syllabusname")){
+                if (item.getSlbName_EN().toLowerCase().contains(key.toLowerCase())
+                    || item.getSlbName_VI().toLowerCase().contains(key.toLowerCase())){
+                    result.add(item);
+                }
+            }
+            
         }
         return result;
     }

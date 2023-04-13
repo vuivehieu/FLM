@@ -116,7 +116,7 @@ public class VerifyCodeRegisterController extends HttpServlet {
 
     private void sendMail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        String userEmail = request.getParameter("acountEmail");
-        String emailAdmin = "thevu091193@gmail.com";
+        String emailAdmin = "dothang4477@gmail.com";
 
         // Tạo mã xác thực duy nhất
         String uuid = UUID.randomUUID().toString();
@@ -125,8 +125,8 @@ public class VerifyCodeRegisterController extends HttpServlet {
         // Trong ví dụ này, chúng ta sẽ in mã xác thực ra màn hình để kiểm tra xem nó hoạt động như thế nào
 //        System.out.println("Verification code: " + uuid);
         // Thiết lập thông tin email
-        final String from = "dinhvu091193@gmail.com";
-        final String password = "ymdngxlplsegrygp";
+        final String from = "dothang4477@gmail.com";
+        final String password = "gwmcckowmcnvazur";
         String host = "smtp.gmail.com";
         int port = 587;
         String to = emailAdmin;

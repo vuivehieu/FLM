@@ -100,12 +100,18 @@
 
 
                 </div>
-                <div class="col-12">
-                    <form class="form-inline">
+                <div class="col-12" style="display: flex;align-items: center;">
+                    <!-- start select -->
+                        <select id="sel" name="select" class="browser-default" style="font-size: 16px;width: 18rem;">
+                          <option value='subjectCode' selected>Subject Code</option>
+                          <option value='syllabusName'>Syllabus Name</option>
+                        </select>
+                    <!--end select-->
+                    <form class="form-inline" style="width: 100%;padding-left: 3rem;">
                         <div style="position: relative">
                             <input type="text" name="type" value="syllabus" hidden="">
-                            <input class="" name="keysearch" id="search" value="${key}" style="height: 5rem;font-size: unset" type="text" placeholder="Search" oninput="searchSyllabus()">
-                            <span style="position: absolute; top:20px; right:10px" class="fa fa-search"></span>
+                            <input class="" name="keysearch" id="search" value="${key}" style="height: 5rem;font-size: unset" type="text" placeholder="Search" >
+                            <span style="position: absolute; top:20px; right:10px" class="fa fa-search" onclick="searchSyllabus()"></span>
                         </div>
                     </form>
 
@@ -188,8 +194,15 @@
 
             let request;
             function searchSyllabus() {
+                //                start select
+                let select = document.getElementById('sel');
+                let selectValue = select.value;
+                select.addEventListener('change',function(){
+                    selectValue = select.value;
+                });
+//                end select
                 let key = document.getElementById("search").value;
-                let url = './search?type=syllabus&keysearch=' + key;
+                let url = './search?type=syllabus&keysearch=' + key + '&filter=' +selectValue;
 
 
                 if (window.XMLHttpRequest) {

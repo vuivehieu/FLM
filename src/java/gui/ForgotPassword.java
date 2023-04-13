@@ -131,8 +131,8 @@ public class ForgotPassword extends HttpServlet {
         Random rand = new Random();
         String uuid = String.valueOf(rand.nextInt(90000) + 10000);
 
-        final String from = "dinhvu091193@gmail.com";
-        final String password = "ymdngxlplsegrygp";
+        final String from = "dothang4477@gmail.com";
+        final String password = "gwmcckowmcnvazur";
         String host = "smtp.gmail.com";
         int port = 587;
         String to = userEmail;

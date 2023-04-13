@@ -139,8 +139,8 @@ public class RegisterController extends HttpServlet {
 
         // Lưu mã xác thực trong cơ sở dữ liệu của bạn để sử dụng sau này
         // Thiết lập thông tin email
-        final String from = "dinhvu091193@gmail.com";
-        final String password = "ymdngxlplsegrygp";
+        final String from = "dothang4477@gmail.com";
+        final String password = "gwmcckowmcnvazur";
         String host = "smtp.gmail.com";
         int port = 587;
         String to = adminEmail;

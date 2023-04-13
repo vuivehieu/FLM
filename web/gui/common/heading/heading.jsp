@@ -2,6 +2,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<style>
+    .dropdown #sub-dropdown {
+        display: none; /* Ẩn bảng menu ban đầu */
+    }
+
+    .dropdown:hover #sub-dropdown {
+        display: block; /* Hiển thị bảng menu khi hover vào */
+    }
+
+</style>
+
 <!-- MOBILE MENU -->
 <section>
     <div class="ed-mob-menu">
@@ -198,43 +209,51 @@
     </c:if>
     <c:if test="${account != null}">
           <!--Avatar--> 
-        <div class="dropdown">
+        <div class="dropdown" >
             <a
-              class="dropdown-toggle d-flex align-items-center hidden-arrow"
-              href="#"
-              id="navbarDropdownMenuAvatar"
-              role="button"
-              data-mdb-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <img
-                src="${account.avatar}"
-                class="rounded-circle"
-                height="25"
-                alt="No Avatar"
-                loading="lazy"
-              />
+                class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                href="#"
+                id="navbarDropdownMenuAvatar"
+                role="button"
+                data-mdb-toggle="dropdown"
+                aria-expanded="false"
+                style ="background-color: #f26838;border-radius: 50%;width: 50px;height: 50px;"
+                >
+                <c:if test="${account.avatar != ''}">
+                    <img
+                    src="${account.avatar}"
+                    class="rounded-circle"
+                    height="25"
+                    alt="No Avatar"
+                    loading="lazy" style="width: 52px;height: 52px;"
+                    />
+                </c:if>
+                <c:if test="${account.avatar == ''}">
+                    <p style="font-size: 3rem;color: #fff;margin: auto;">${account.displayName.charAt(0)}</p>
+                </c:if>
+                
             </a>
+            
             <ul
               class="dropdown-menu dropdown-menu-end"
-              aria-labelledby="navbarDropdownMenuAvatar"
+              aria-labelledby="navbarDropdownMenuAvatar" style="margin-top: 1rem;width: 27rem;"
             >
               <c:if test="${!(account.role.rid == 1) && !(account.role.rid == 2) && !(account.role.rid == 3)}">
-              <li>
-                <a class="dropdown-item" href="dashboard">Dashboard</a>
+              <li style="display: block;width: 100%; margin-bottom: 0.5rem;">
+                <a class="dropdown-item" href="dashboard" style="font-size: 15px;">Dashboard</a>
               </li>
               </c:if>
-              <li>
-                <a class="dropdown-item" href="profile">My profile</a>
+              <li style="display: block;width: 100%; margin-bottom: 0.5rem;">
+                  <a class="dropdown-item" href="profile" style="font-size: 15px;">Name: <span style="font-weight: bolder;color: black;">${account.displayName}</span></a>
               </li>
-              <li>
-                <a class="dropdown-item" href="changePassword">Change Password</a>
+              <li style="display: block;width: 100%; margin-bottom: 0.5rem;">
+                <a class="dropdown-item" href="changePassword" style="font-size: 15px;">Email: <span style="font-weight: bolder;color: black;">${account.email}</span></a>
               </li>
-              <li>
-                <a class="dropdown-item" href="changeAvatar">Change Avatar</a>
+              <li style="display: block;width: 100%; margin-bottom: 0.5rem;">
+                <a class="dropdown-item" href="changeAvatar" style="font-size: 15px;">User's role: <span style="font-weight: bolder;color: black;">${account.role.rname}</span></a>
               </li>
-              <li>
-                <a class="dropdown-item" href="logout">Logout</a>
+              <li style="display: block;width: 100%; margin-bottom: 0.5rem;">
+                <a class="dropdown-item" href="logout" style="font-size: 15px; color: #0388f9;">Sign out FLM</a>
               </li>
             </ul>
           </div>
@@ -260,6 +279,7 @@
 <jsp:include page="forgot.jsp"/>
 
 <script>
+    console.log("account", account);
     let signUpBtn = document.getElementById("signUpBtn");
     signUpBtn.addEventListener("click", function() {
         document.getElementById('email').value = '';

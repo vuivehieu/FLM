@@ -90,8 +90,8 @@ public class SendMailController extends HttpServlet {
 //        System.out.println("Verification code: " + uuid);
 
         // Thiết lập thông tin email
-        final String username = "phanhieu000lc@gmail.com";
-        final String password = "kenbyojmgcjglacz";
+        final String username = "dothang4477@gmail.com";
+        final String password = "gwmcckowmcnvazur";
         String host = "smtp.gmail.com";
         int port = 587;
         String from = userEmail;
