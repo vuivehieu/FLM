@@ -26,7 +26,7 @@
             <li><a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-book" aria-hidden="true"></i>Curriculum</a>
                 <div class="collapsible-body left-sub-menu">
                     <ul>
-                        <li><a href="#!"><i class="fa fa-list-ol" aria-hidden="true"></i>All Curriculuum</a></li>
+                        <li><a href="curriculumList"><i class="fa fa-list-ol" aria-hidden="true"></i>All Curriculuum</a></li>
                         <li><a href="#!"><i class="fa fa-plus" aria-hidden="true"></i>Add New Curriculum</a></li>
                         <li><a href="#!"><i class="fa fa-check" aria-hidden="true"></i>Approve / Disapprove</a>
                         </li>
