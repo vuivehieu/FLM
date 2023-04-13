@@ -47,10 +47,9 @@
         <div class="col-md-2 col-sm-3 col-xs-6" style="padding-right: 0;">
             <!-- Dropdown Trigger -->
             <a class='waves-effect dropdown-button top-user-pro' href='#' data-activates='top-menu'>
-                <img src="${account.avatar}"
-                    class="rounded-circle"
+                <img src="${account.avatar}" class="rounded-circle"
                     height="25"
-                    loading="lazy" style="width: 50px;height: 50px;"/>My Account <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    loading="lazy" alt=""/>My Account <i class="fa fa-angle-down" aria-hidden="true"></i>
             </a>
 
             <!-- Dropdown Structure -->
