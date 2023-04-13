@@ -31,6 +31,21 @@
         <link href="css/style.css" rel="stylesheet" />
         <!-- RESPONSIVE.CSS ONLY FOR MOBILE AND TABLET VIEWS -->
         <link href="css/style-mob.css" rel="stylesheet" />
+        <!-- Font Awesome -->
+        <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          rel="stylesheet"
+        />
+        <!-- Google Fonts -->
+        <link
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          rel="stylesheet"
+        />
+        <!-- MDB -->
+        <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
+          rel="stylesheet"
+        />
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -67,7 +82,28 @@
                 background-color: #ff9600;
             }
 
+            .gradient-custom-2 {
+        /* fallback for old browsers */
+        background: #fccb90;
 
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+        }
+
+        @media (min-width: 768px) {
+        .gradient-form {
+        height: 100vh !important;
+        }
+        }
+        @media (min-width: 769px) {
+        .gradient-custom-2 {
+        border-top-right-radius: .3rem;
+        border-bottom-right-radius: .3rem;
+        }
+        }
         </style>
 
 
@@ -282,6 +318,11 @@
         <!--SECTION END-->
 
         <jsp:include page="../footer/footer.jsp"/>  
+        <!-- MDB -->
+        <script
+          type="text/javascript"
+          src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
+        ></script>
 
         <!--Import jQuery before materialize.js-->
         <script src="js/main.min.js"></script>

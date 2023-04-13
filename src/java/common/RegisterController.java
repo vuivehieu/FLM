@@ -6,6 +6,7 @@ package common;
 
 import DAL.AccountDAO;
 import DAL.DAO;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,10 +14,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import model.Account;
-import jakarta.servlet.http.HttpSession;
 import java.util.Properties;
-import java.util.UUID;
+import java.util.Random;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -25,6 +28,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import model.Role;
+import org.json.JSONObject;
 
 /**
  *
@@ -59,77 +63,89 @@ public class RegisterController extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String userName = request.getParameter("userName");
-        String fullName = request.getParameter("fullName");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-
-        AccountDAO ad = new AccountDAO();
-        if (ad.checkRegister(userName, email).equalsIgnoreCase("OK")) {
-            Role r = new Role(1, "Guest");
-            Account a = new Account(new DAO().getLastAccountID() + 1, userName, password, fullName, email, "", false, 2, Custom.Common.getCurrentDate(), r);
-            ad.register(a);
-
-//            HttpSession session = request.getSession();
-//            session.setAttribute("account", a);
-
-            sendMail(request, response);
-            request.getRequestDispatcher("gui/common/home.jsp").forward(request, response);
-        } else {
-
-            request.setAttribute("userName", userName);
-            request.setAttribute("fullName", fullName);
-            request.setAttribute("email", email);
-            request.setAttribute("password", password);
-            request.setAttribute("messageRegister", ad.checkRegister(userName, email));
-            request.getRequestDispatcher("gui/common/home.jsp").forward(request, response);
+        
+        BufferedReader reader = request.getReader();
+        StringBuilder sb = new StringBuilder();
+        String line = null;
+        while ((line = reader.readLine()) != null) {
+            sb.append(line);
         }
+        // Chuyển đổi chuỗi JSON thành đối tượng JSONObject
+        JSONObject jsonObj = new JSONObject(sb.toString());
+        // Lấy giá trị của thuộc tính "email"
+         String userName = jsonObj.getString("userName");
+         String fullName = jsonObj.getString("fullName");
+         String email = jsonObj.getString("email");
+         String password = jsonObj.getString("password");
+        
+        AccountDAO ad = new AccountDAO();
+        
+        Role r = new Role(1, "Guest");
+        Account a = new Account(new DAO().getLastAccountID() + 1, userName, password, fullName, email, "", false, 1, Custom.Common.getCurrentDate(), r);
+        
+        if(ad.checkRegisterEdit(userName, email)){
+            if(ad.register(a) != 0){
+            // success
+            this.sendMail(request, response);
+            Map<String, String> options = new LinkedHashMap<>();
+            options.put("messageRegister", "Registration success");
+            String json = new Gson().toJson(options);
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+            }else {
+                // response
+                Map<String, String> options = new LinkedHashMap<>();
+                options.put("error", "Registration failed");
+                String json = new Gson().toJson(options);
+
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(json);
+            }
+        }else 
+        {
+            // response
+            Map<String, String> options = new LinkedHashMap<>();
+            options.put("error", "Registration failed, User Name already exists, please enter another account");
+            String json = new Gson().toJson(options);
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+        }
+        
 
     }
 
     private void sendMail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String userEmail = request.getParameter("email");
+        String adminEmail = "dothang4477@gmail.com";
 
         // Tạo mã xác thực duy nhất
-        String uuid = UUID.randomUUID().toString();
+//        String uuid = UUID.randomUUID().toString();
+        Random rand = new Random();
+        String uuid = String.valueOf(rand.nextInt(90000) + 10000);
 
         // Lưu mã xác thực trong cơ sở dữ liệu của bạn để sử dụng sau này
-        // Trong ví dụ này, chúng ta sẽ in mã xác thực ra màn hình để kiểm tra xem nó hoạt động như thế nào
-//        System.out.println("Verification code: " + uuid);
         // Thiết lập thông tin email
-        final String username = "phanhieu000lc@gmail.com";
-        final String password = "kenbyojmgcjglacz";
+        final String from = "dothang4477@gmail.com";
+        final String password = "gwmcckowmcnvazur";
         String host = "smtp.gmail.com";
         int port = 587;
-        String from = userEmail;
-        String subject = "Email verification";
-        String content = "Nhan Vao Link Ben Duoi De Xac Nhan Email:\nhttp://localhost:9999/SWP391-G2/comfirmEmail?code=" + uuid;
+        String to = adminEmail;
+        String subject = "Notification Register";
+        String content = "A new user has successfully registered";
 
         // Thiết lập các thuộc tính email
         Properties properties = new Properties();
@@ -141,7 +157,7 @@ public class RegisterController extends HttpServlet {
         // Tạo phiên gửi email và thiết lập thông tin người gửi
         Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
+                return new PasswordAuthentication(from, password);
             }
         });
 
@@ -149,19 +165,16 @@ public class RegisterController extends HttpServlet {
             // Tạo đối tượng MimeMessage và thiết lập các thuộc tính email
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(from));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userEmail));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
             message.setSubject(subject);
             message.setText(content);
 
             // Gửi email
             Transport.send(message);
 
-            DAO dao = new DAO();
-            dao.insertCodeMail("verifyEmail", uuid, 0);
-
             // Chuyển hướng đến trang xác nhận email
         } catch (MessagingException e) {
-            throw new RuntimeException("SendMail Controller -> doGet(): " + e);
+            throw new RuntimeException("error: " + e);
         }
     }
 

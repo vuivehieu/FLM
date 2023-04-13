@@ -31,6 +31,21 @@
             <script src="js/respond.min.js"></script>
             <![endif]-->
 
+        <!-- Font Awesome -->
+        <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          rel="stylesheet"
+        />
+        <!-- Google Fonts -->
+        <link
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          rel="stylesheet"
+        />
+        <!-- MDB -->
+        <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
+          rel="stylesheet"
+        />
         <style>
             pad-bot-70 {
                 padding-left: 5rem;
@@ -45,6 +60,28 @@
                 display: -webkit-box;
                 -webkit-box-orient: vertical;
             }
+            .gradient-custom-2 {
+        /* fallback for old browsers */
+        background: #fccb90;
+
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+        }
+
+        @media (min-width: 768px) {
+        .gradient-form {
+        height: 100vh !important;
+        }
+        }
+        @media (min-width: 769px) {
+        .gradient-custom-2 {
+        border-top-right-radius: .3rem;
+        border-bottom-right-radius: .3rem;
+        }
+        }
         </style>
     </head>
 
@@ -59,17 +96,23 @@
                     </div>
                 </div>
 
-                <div class="col-12">
-                    <form class="form-inline">
+                <div class="col-12" style="display: flex;align-items: center;">
+                    <!-- start select -->
+                        <select id="sel" name="select" class="browser-default" style="font-size: 16px;width: 18rem;">
+                          <option value='curCode' selected>Curriculum Code</option>
+                          <option value='curName'>Name</option>
+                        </select>
+                    <!--end select-->
+                    
+                    <form class="form-inline" style="width: 100%;padding-left: 3rem;">
                         <div style="position: relative">
                             <input type="text" name="type" value="curriculum" hidden="">
-                            <input class="" name="keysearch" id="search" value="${key}" style="height: 5rem;font-size: unset" type="text" placeholder="Search" oninput="searchCurriculum()">
-                            <span style="position: absolute; top:20px; right:10px" class="fa fa-search"></span>
+                            <!--neu muon go 1 chu thi search 1 chu thi them ham nay vao o input oninput="searchCurriculum()"-->
+                            <input class="" name="keysearch" id="search" value="${key}" style="height: 5rem;font-size: unset" type="text" placeholder="Search" >
+                            <span style="position: absolute; top:20px; right:10px" class="fa fa-search" onclick="searchCurriculum()"></span>
                         </div>
                     </form>
-
                 </div>
-
             </div>
 
             <div class="container-fluid pad-bot-70 p-custom" id="root">
@@ -144,8 +187,15 @@
         <script>
             let request;
             function searchCurriculum() {
+//                start select
+                let select = document.getElementById('sel');
+                let selectValue = select.value;
+                select.addEventListener('change',function(){
+                    selectValue = select.value;
+                });
+//                end select
                 let key = document.getElementById("search").value;
-                let url = './search?type=curriculum&keysearch=' + key;
+                let url = './search?type=curriculum&keysearch=' + key + '&filter=' +selectValue;
 
 
                 if (window.XMLHttpRequest) {
@@ -165,7 +215,8 @@
             
             function changePage(page) {
                 let key = document.getElementById("search").value;
-                let url = './search?type=curriculum&keysearch=' + key + '&page=' + page;
+                let selectValue = document.getElementById('sel').value;
+                let url = './search?type=curriculum&keysearch=' + key + '&filter=' +selectValue + '&page=' + page;
 
 
                 if (window.XMLHttpRequest) {
@@ -190,6 +241,11 @@
                 }
             }
         </script>
+        <!-- MDB -->
+        <script
+          type="text/javascript"
+          src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
+        ></script>
 
         <!--Import jQuery before materialize.js-->
         <script src="js/main.min.js"></script>

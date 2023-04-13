@@ -28,19 +28,61 @@
         <link href="css/style.css" rel="stylesheet" />
         <!-- RESPONSIVE.CSS ONLY FOR MOBILE AND TABLET VIEWS -->
         <link href="css/style-mob.css" rel="stylesheet" />
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="js/html5shiv.js"></script>
-            <script src="js/respond.min.js"></script>
-            <![endif]-->
+        
+        <!-- MDB -->
+        <script
+          type="text/javascript"
+          src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
+        ></script>
+       
+        <!-- Font Awesome -->
+        <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          rel="stylesheet"
+        />
+        <!-- Google Fonts -->
+        <link
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          rel="stylesheet"
+        />
+        <!-- MDB -->
+        <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
+          rel="stylesheet"
+        />
+        
+        <style>
+        .gradient-custom-2 {
+        /* fallback for old browsers */
+        background: #fccb90;
+
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+        }
+
+        @media (min-width: 768px) {
+        .gradient-form {
+        height: 100vh !important;
+        }
+        }
+        @media (min-width: 769px) {
+        .gradient-custom-2 {
+        border-top-right-radius: .3rem;
+        border-bottom-right-radius: .3rem;
+        }
+        }
+        </style>
+        
     </head>
 
     <body>
         <jsp:include page="heading/heading.jsp"/>
 
         <!-- SLIDER -->
-        <section>
+        <section class="hidden">
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
@@ -48,7 +90,6 @@
                         <img src="images/slider/1.jpg" alt="">
                         <div class="carousel-caption slider-con">
                             <h2>Welcome to <span> FPT University</span></h2>
-                            <p>:> đốt trường</p>
                             <a href="#" class="bann-btn-1">All Courses</a><a href="#" class="bann-btn-2">Read More</a>
                         </div>
                     </div>
@@ -56,7 +97,6 @@
                         <img src="images/slider/2.jpg" alt="">
                         <div class="carousel-caption slider-con">
                             <h2>Phan Hiếu <span>  2023</span></h2>
-                            <p>:> Đốt trường</p>
                             <a href="#" class="bann-btn-1">Curriculum</a><a href="#" class="bann-btn-2">Read More</a>
                         </div>
                     </div>
@@ -64,7 +104,6 @@
                         <img src="images/slider/3.jpg" alt="">
                         <div class="carousel-caption slider-con">
                             <h2>Syllabus <span>Master</span></h2>
-                            <p>:> đốt trường</p>
                             <a href="#" class="bann-btn-1">All Syllabus</a><a href="#" class="bann-btn-2">Read More</a>
                         </div>
                     </div>
@@ -81,7 +120,7 @@
         </section>
 
         <!-- QUICK LINKS -->
-        <section>
+        <section class="hidden">
             <div class="container">
                 <div class="row">
                     <div class="wed-hom-ser">
@@ -110,7 +149,6 @@
                 <div class="row">
                     <div class="con-title">
                         <h2>Chuyên Ngành <span>FPT University</span></h2>
-                        <p>:> đốt trường</p>
                     </div>
                 </div>
                 <div class="row">
@@ -135,7 +173,6 @@
                 <div class="row">
                     <div class="con-title">
                         <h2>Khóa học <span>Nổi Bật</span></h2>
-                        <p>Đốt Trường :></p>
                     </div>
                 </div>
                 <div class="row">
@@ -186,15 +223,14 @@
         <!-- FOOTER -->
         <jsp:include page="footer/footer.jsp"/>
 
-
-        <!-- Thêm link tới các thư viện jQuery và Popper.js -->
+         <!-- Thêm link tới các thư viện jQuery và Popper.js -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
         <!--Import jQuery before materialize.js-->
         <script src="js/main.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
 
-        <script>
+<!--        <script>
             $(document).ready(function () {
                 if (document.getElementById('messageRegister').innerHTML !== "false") {
                     $('.toast').toast('show');
@@ -215,7 +251,7 @@
                 }
 
             });
-        </script>
+        </script>-->
         <script src="js/materialize.min.js"></script>
         <script src="js/custom.js"></script>
     </body>

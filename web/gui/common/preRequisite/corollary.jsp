@@ -24,6 +24,21 @@
         <link href="css/style.css" rel="stylesheet" />
         <!-- RESPONSIVE.CSS ONLY FOR MOBILE AND TABLET VIEWS -->
         <link href="css/style-mob.css" rel="stylesheet" />
+        <!-- Font Awesome -->
+        <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          rel="stylesheet"
+        />
+        <!-- Google Fonts -->
+        <link
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          rel="stylesheet"
+        />
+        <!-- MDB -->
+        <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
+          rel="stylesheet"
+        />
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -45,6 +60,28 @@
             ul.ul-custom > li {
                 padding-left: 2rem;
             }
+            .gradient-custom-2 {
+        /* fallback for old browsers */
+        background: #fccb90;
+
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+        }
+
+        @media (min-width: 768px) {
+        .gradient-form {
+        height: 100vh !important;
+        }
+        }
+        @media (min-width: 769px) {
+        .gradient-custom-2 {
+        border-top-right-radius: .3rem;
+        border-bottom-right-radius: .3rem;
+        }
+        }
         </style>
     </head>
 
@@ -60,13 +97,19 @@
 
 
                 </div>
-                <div class="col-12">
-                    <form class="form-inline">
+                <div class="col-12" style="display: flex;align-items: center;">
+                    <!-- start select -->
+                        <select id="preRequisite" name="select" class="browser-default" style="font-size: 16px;width: 17rem;">
+                          <option value='subjectCode' selected>Subject Code</option>
+                          <option value='syllabusName'>Syllabus Name</option>
+                        </select>
+                    <!--end select-->
+                    <form class="form-inline" style="width: 100%;padding-left: 3rem;">
                         <div style="position: relative">
                             <input type="text" name="type" value="corollary" hidden="">
 
-                            <input class="" id="search" style="height: 5rem;font-size: unset" type="text" placeholder="Search" oninput="searchCorollary()">
-                            <span style="position: absolute; top:20px; right:10px" class="fa fa-search"></span>
+                            <input class="" id="search" style="height: 5rem;font-size: unset" type="text" placeholder="Search" >
+                            <span style="position: absolute; top:20px; right:10px" class="fa fa-search" onclick="searchCorollary()"></span>
                         </div>
                     </form>
                 </div>
@@ -80,8 +123,15 @@
         <script>
             let request;
             function searchCorollary() {
+                                //                start select
+                let select = document.getElementById('preRequisite');
+                let selectValue = select.value;
+                select.addEventListener('change',function(){
+                    selectValue = select.value;
+                });
+//                end select
                 let key = document.getElementById("search").value;
-                let url = './search?type=corollary&keysearch=' + key;
+                let url = './search?type=corollary&keysearch=' + key + '&filter=' +selectValue;
 
 
                 if (window.XMLHttpRequest) {
@@ -119,6 +169,11 @@
         </script>
         <script src="js/materialize.min.js"></script>
         <script src="js/custom.js"></script>
+        <!-- MDB -->
+        <script
+          type="text/javascript"
+          src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
+        ></script>
     </body>
 
 

@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package common;
+package gui;
 
+import common.*;
 import DAL.AccountDAO;
 import DAL.DAO;
 import com.google.gson.Gson;
@@ -15,13 +16,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
-import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import model.Account;
 import java.util.Properties;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -29,16 +28,25 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import model.Account;
+import model.Role;
 import org.json.JSONObject;
 
 /**
  *
  * @author phanh
  */
-@WebServlet(name = "ComfirmEmailController", urlPatterns = {"/comfirmEmail"})
-public class ComfirmEmailController extends HttpServlet {
+@WebServlet(name = "UpdatePassForgot", urlPatterns = {"/updatePassForgot"})
+public class UpdatePassForgotController extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -47,10 +55,10 @@ public class ComfirmEmailController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ComfirmEmailController</title>");
+            out.println("<title>Servlet RegisterController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ComfirmEmailController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet RegisterController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,13 +67,13 @@ public class ComfirmEmailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        processRequest(request, response);
     }
 
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        AccountDAO dao = new AccountDAO();
         
         BufferedReader reader = request.getReader();
         StringBuilder sb = new StringBuilder();
@@ -75,49 +83,54 @@ public class ComfirmEmailController extends HttpServlet {
         }
         // Chuyển đổi chuỗi JSON thành đối tượng JSONObject
         JSONObject jsonObj = new JSONObject(sb.toString());
-        // Lấy giá trị của thuộc tính "email"
+  
          String email = jsonObj.getString("email");
-         
-        // xac nhận email chưa được đăng ký lần nào
-        boolean checkEmail = dao.checkEmail(email);
-        if(checkEmail){
-            String codeSendMail = this.sendMail(request, response, email);
+         String password = jsonObj.getString("password");
         
-            // respon
+        AccountDAO ad = new AccountDAO();
+        // tim account qua email => set pass
+        Account account = ad.findAccountByEmail(email);
+        
+        if(ad.changePassword(password, account) != 0){
+            // change pass success
+//            this.sendMail(request, response);
             Map<String, String> options = new LinkedHashMap<>();
-            options.put("code", codeSendMail);
+            options.put("messageChangPassSuccess", "Change password success");
             String json = new Gson().toJson(options);
 
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(json);
+            
         }else {
-             // respon
+            // change pass false
             Map<String, String> options = new LinkedHashMap<>();
-            options.put("error", "The Email was registered");
-            String json = new Gson().toJson(options);
+                options.put("error", "Change Password failed");
+                String json = new Gson().toJson(options);
 
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(json);
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(json);
         }
-         
-        
     }
-    
-    private String sendMail(HttpServletRequest request, HttpServletResponse response, String userEmail) throws ServletException, IOException {
+
+    private void sendMail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String adminEmail = "thevu091193@gmail.com";
 
         // Tạo mã xác thực duy nhất
+//        String uuid = UUID.randomUUID().toString();
         Random rand = new Random();
         String uuid = String.valueOf(rand.nextInt(90000) + 10000);
 
+        // Lưu mã xác thực trong cơ sở dữ liệu của bạn để sử dụng sau này
+        // Thiết lập thông tin email
         final String from = "dothang4477@gmail.com";
         final String password = "gwmcckowmcnvazur";
         String host = "smtp.gmail.com";
         int port = 587;
-        String to = userEmail;
-        String subject = "Email verification";
-        String content = "ma code cua ban la:" + uuid + " hay nhap vao o input de kich hoat";
+        String to = adminEmail;
+        String subject = "co nguoi vua doi password";
+        String content = "A new user has successfully registered";
 
         // Thiết lập các thuộc tính email
         Properties properties = new Properties();
@@ -143,8 +156,6 @@ public class ComfirmEmailController extends HttpServlet {
 
             // Gửi email
             Transport.send(message);
-            
-            return uuid;
 
             // Chuyển hướng đến trang xác nhận email
         } catch (MessagingException e) {

@@ -6,6 +6,7 @@ package gui;
 
 import DAL.AccountDAO;
 import DAL.DAO;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,7 +14,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Properties;
+import java.util.Random;
 import java.util.UUID;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -23,6 +28,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import model.Account;
+import org.json.JSONObject;
 
 /**
  *
@@ -83,69 +89,87 @@ public class ForgotPassword extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Lấy địa chỉ email từ biến form
-        String userEmail = request.getParameter("email");
-
-        DAO dao = new DAO();
-        String userName = dao.getUserNameByGmail(userEmail);
-
-        if (userName != "") {
-            // Tạo mã xác thực duy nhất
-            String uuid = UUID.randomUUID().toString();
-
-            // Lưu mã xác thực trong cơ sở dữ liệu của bạn để sử dụng sau này
-            // Trong ví dụ này, chúng ta sẽ in mã xác thực ra màn hình để kiểm tra xem nó hoạt động như thế nào
-//        System.out.println("Verification code: " + uuid);
-            // Thiết lập thông tin email
-            final String username = "phanhieu000lc@gmail.com";
-            final String password = "kenbyojmgcjglacz";
-            String host = "smtp.gmail.com";
-            int port = 587;
-            String from = userEmail;
-            String subject = "Email Forgot Password";
-            String content = "Nhan Vao Link Ben Duoi Cap Nhat Lai Mat Khau Cua Ban:\nhttp://localhost:9999/SWP391-G2/resetPass?userName=" + userName;
-
-            // Thiết lập các thuộc tính email
-            Properties properties = new Properties();
-            properties.put("mail.smtp.auth", "true");
-            properties.put("mail.smtp.starttls.enable", "true");
-            properties.put("mail.smtp.host", host);
-            properties.put("mail.smtp.port", port);
-
-            // Tạo phiên gửi email và thiết lập thông tin người gửi
-            Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(username, password);
-                }
-            });
-
-            try {
-                // Tạo đối tượng MimeMessage và thiết lập các thuộc tính email
-                Message message = new MimeMessage(session);
-                message.setFrom(new InternetAddress(from));
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userEmail));
-                message.setSubject(subject);
-                message.setText(content);
-
-                // Gửi email
-                Transport.send(message);
-                
-                Account a = new AccountDAO().getAccountByUserName(userName);
-
-                
-                dao.insertCodeMail("Forgot Password", uuid, a.getAccountID());
-
-                // Chuyển hướng đến trang xác nhận email
-            } catch (MessagingException e) {
-                throw new RuntimeException("SendMail Controller -> doGet(): " + e);
-            }
-            request.setAttribute("errorForgot", "PLS Check Your Mail To ResetPass !");
-            request.getRequestDispatcher("gui/common/home.jsp").forward(request, response);
-        } else {
-            request.setAttribute("errorForgot", "Not Found Your Gmail. PLS Try Again !");
-            request.getRequestDispatcher("gui/common/home.jsp").forward(request, response);
+        AccountDAO dao = new AccountDAO();
+        
+        BufferedReader reader = request.getReader();
+        StringBuilder sb = new StringBuilder();
+        String line = null;
+        while ((line = reader.readLine()) != null) {
+            sb.append(line);
         }
+        // Chuyển đổi chuỗi JSON thành đối tượng JSONObject
+        JSONObject jsonObj = new JSONObject(sb.toString());
+        // Lấy giá trị của thuộc tính "email"
+         String email = jsonObj.getString("emailForgot");
+         
+         // check email dang ton tai va khong bi khoa, da active (status = 1) => send mail xac nhan ma code
+         boolean checkEmail = dao.checkEmailForgot(email);
+        if(checkEmail){
+             String codeSendMailForgot = this.sendMail(request, response, email);
+            // response
+            Map<String, String> options = new LinkedHashMap<>();
+            options.put("code", codeSendMailForgot);
+            String json = new Gson().toJson(options);
 
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+        }else {
+            Map<String, String> options = new LinkedHashMap<>();
+            options.put("error", "This email is locked or not activated");
+            String json = new Gson().toJson(options);
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+        }
+    }
+    
+    private String sendMail(HttpServletRequest request, HttpServletResponse response, String userEmail) throws ServletException, IOException {
+
+        // Tạo mã xác thực duy nhất
+        Random rand = new Random();
+        String uuid = String.valueOf(rand.nextInt(90000) + 10000);
+
+        final String from = "dothang4477@gmail.com";
+        final String password = "gwmcckowmcnvazur";
+        String host = "smtp.gmail.com";
+        int port = 587;
+        String to = userEmail;
+        String subject = "Email confirmation code forgot password";
+        String content = "ma code cua ban la: " + uuid + "  hay nhap vao o input de kich hoat";
+
+        // Thiết lập các thuộc tính email
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.port", port);
+
+        // Tạo phiên gửi email và thiết lập thông tin người gửi
+        Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(from, password);
+            }
+        });
+
+        try {
+            // Tạo đối tượng MimeMessage và thiết lập các thuộc tính email
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(from));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+            message.setSubject(subject);
+            message.setText(content);
+
+            // Gửi email
+            Transport.send(message);
+            
+            return uuid;
+
+            // Chuyển hướng đến trang xác nhận email
+        } catch (MessagingException e) {
+            throw new RuntimeException("error: " + e);
+        }
     }
 
     /**
