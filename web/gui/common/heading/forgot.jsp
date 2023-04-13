@@ -146,35 +146,39 @@
         if(checkConfirmPassForgot()){
             if(verifyCode != codeSendMailForgot){
                 document.getElementById("errorMessageForgot").innerHTML = "The code is not correct";
+            }else {
+                $.ajax({
+                    url: '/SWP391-G2/updatePassForgot',
+                    type: "POST",
+                    contentType: "application/json", // NOT dataType!
+                    data: JSON.stringify(data),
+                    success: function(response) {
+                        // handle success
+
+                        if(response.messageChangPassSuccess != null){
+                            document.getElementById("messageChangPassSuccess").innerHTML = response.messageChangPassSuccess;
+                            document.getElementById("errorMessageForgot").innerHTML = "";
+                           setTimeout(function() {
+                                let btnClose = document.getElementById("changeLoginPage");
+                                btnClose.click();
+                            }, 3000);
+
+
+                        }else {
+                            document.getElementById("errorMessageForgot").innerHTML = response.error;
+                        }
+
+                    },
+                    error: function (xhr, status, error) {
+                         // handle error
+                        console.log("error: ", error);
+                    }
+                });
             }
 
-            $.ajax({
-                url: '/SWP391-G2/updatePassForgot',
-                type: "POST",
-                contentType: "application/json", // NOT dataType!
-                data: JSON.stringify(data),
-                success: function(response) {
-                    // handle success
-
-                    if(response.messageChangPassSuccess != null){
-                        document.getElementById("messageChangPassSuccess").innerHTML = response.messageChangPassSuccess;
-                        document.getElementById("errorMessageForgot").innerHTML = "";
-                       setTimeout(function() {
-                            let btnClose = document.getElementById("changeLoginPage");
-                            btnClose.click();
-                        }, 3000);
-
-
-                    }else {
-                        document.getElementById("errorMessageForgot").innerHTML = response.error;
-                    }
-
-                },
-                error: function (xhr, status, error) {
-                     // handle error
-                    console.log("error: ", error);
-                }
-            });
+            
+        } else {
+            document.getElementById("errorMessageForgot").innerHTML = "Password don't match";
         }
     }
     
@@ -183,7 +187,7 @@
         var confirm_password = document.getElementById('comfirm-passwordForgot');
 
         if (password.value !== confirm_password.value) {
-            document.getElementById("errorMessageForgot").innerHTML = "Password don't match";
+            
             return false;
         }else {
             return true;

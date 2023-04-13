@@ -240,7 +240,7 @@
             >
               <c:if test="${!(account.role.rid == 1) && !(account.role.rid == 2) && !(account.role.rid == 3)}">
               <li style="display: block;width: 100%; margin-bottom: 0.5rem;">
-                <a class="dropdown-item" href="dashboard" style="font-size: 15px;">Dashboard</a>
+                <a class="dropdown-item" href="dashboard" style="font-size: 15px;"><span style="font-weight: bolder;color: black;">Dashboard</span></a>
               </li>
               </c:if>
               <li style="display: block;width: 100%; margin-bottom: 0.5rem;">

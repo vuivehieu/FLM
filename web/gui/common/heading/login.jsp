@@ -36,10 +36,18 @@
 
                       <div class="d-flex align-items-center justify-content-center pb-4">
                         <p class="mb-0 me-2">Don't have an account?</p>
-                        <button type="button" style="font-size: 15px;" class="btn btn-outline-danger" data-dismiss="modal" data-toggle="modal" 
-                                data-target="#modal2" onclick="closeModal1()" id="createNewBtnLogin">Create new</button>
+                        
+                        <a class="" href="#!" data-dismiss="modal" data-toggle="modal" data-target="#modal2" onclick="closeModal1()">Create new</a>
+                        
+<!--                        <button type="button" style="font-size: 15px;" class="btn btn-outline-danger" data-dismiss="modal" data-toggle="modal" 
+                                data-target="#modal2" onclick="closeModal1()" id="createNewBtnLogin">Create new</button>-->
+                        <span style="margin: 0px 1rem;"> Or </span> 
+                        <a 
+                            href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&openid.realm&include_granted_scopes=true&redirect_uri=http://localhost:8080/SWP391-G2/loginGoogle&response_type=code&client_id=85314650649-qt98rm1tth046spr9j93ka3qo1mjcuns.apps.googleusercontent.com&approval_prompt=force">
+                            Login Google
+                        </a> 
                       </div>
-                        <div class="g-signin2" data-onsuccess="onSignIn">Login Google</div> 
+                           
 
                     </form>
                 
@@ -76,34 +84,11 @@
     function closeModal1(){
             document.getElementById('modal1').style.display = 'none';
             document.getElementById('modal1').classList.remove('in');
+            
+            document.getElementById('emailForgot').value = '';
+            document.getElementById('passwordForgot').value = '';
+            document.getElementById('comfirm-passwordForgot').value = '';
+            document.getElementById('verifyCodeForgot').value = '';
     }
     
-    function onSignIn(googleUser) {
-        var id_token = googleUser.getAuthResponse().id_token;
-        // G?i id_token ??n máy ch? ?? xác th?c
-        // Sau khi xác th?c thành công, ?ng d?ng c?a b?n có th? s? d?ng id_token ?? yêu c?u tài nguyên c?a ng??i dùng t? Google
-        let data = {
-            code : id_token
-            };
-
-            $.ajax({
-                url: '/SWP391-G2/loginGoogle',
-                type: "GET",
-                contentType: "application/json", // NOT dataType!
-                data: JSON.stringify(data),
-                success: function(response) {
-                    // handle success
-
-                    console.log(response);
-                    }else {
-                        document.getElementById("errorMessage").innerHTML = response.error;
-                    }
-
-                },
-                error: function (xhr, status, error) {
-                     // handle error
-                    console.log("error: ", error);
-                }
-            });
-    }
 </script>

@@ -4,6 +4,9 @@
  */
 package common;
 
+import DAL.AccountDAO;
+import DAL.DAO;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -11,10 +14,22 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Random;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import model.Account;
 import model.AccountGoogle;
+import model.Role;
 import org.json.JSONObject;
-import static xin.zhuyao.httputil.HttpUtils.get;
-import static xin.zhuyao.httputil.HttpUtils.post;
 
 /**
  *
@@ -22,13 +37,6 @@ import static xin.zhuyao.httputil.HttpUtils.post;
  */
 @WebServlet(name = "LoginGoogleController", urlPatterns = {"/loginGoogle"})
 public class LoginGoogleController extends HttpServlet {
-    
-    private static final long serialVersionUID = 1L;
-    private static final String CLIENT_ID = "5268197056-r6agg8pmul30d9pjd6f1ug2vsregk1h5.apps.googleusercontent.com";
-    private static final String CLIENT_SECRET = "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";
-    private static final String REDIRECT_URI = "http://localhost:8080/SWP391-G2/home";
-    private static final String SCOPE = "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email";
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -67,15 +75,15 @@ public class LoginGoogleController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        String code = request.getParameter("code");
-//
-//        if (code == null || code.isEmpty()) {
-//            response.sendRedirect("home");
-//        } else {
-//            response.setContentType("text/html;charset=UTF-8");
-//
-//            String accessToken = GoogleUtils.getToken(code);
-//            AccountGoogle accountGoogle = GoogleUtils.getUserInfo(accessToken);
+        String code = request.getParameter("code");
+
+        if (code == null || code.isEmpty()) {
+            response.sendRedirect("home");
+        } else {
+            response.setContentType("text/html;charset=UTF-8");
+
+            String accessToken = GoogleUtils.getToken(code);
+            AccountGoogle accountGoogle = GoogleUtils.getUserInfo(accessToken);
 //            PrintWriter out = response.getWriter();
 //
 //            out.println("id: " + accountGoogle.getId());
@@ -86,30 +94,44 @@ public class LoginGoogleController extends HttpServlet {
 //            out.println("family_name: " + accountGoogle.getFamily_name());
 //            out.println("link: " + accountGoogle.getLink());
 //            out.println("picture: " + accountGoogle.getPicture());
-//
-//        }
+        String userName = "loginGoogle";
+        String fullName = accountGoogle.getName();
+        String email = accountGoogle.getEmail();
+        String password = "";
 
+        AccountDAO ad = new AccountDAO();
+        
+        Role r = new Role(1, "Guest");
+        
+        //true => khong co tk => tao moi, false => da co tk, cho login bang tk cu
+        if(ad.checkEmail(email)){
+            Account a = new Account(new DAO().getLastAccountID() + 1, userName, password, fullName, email, accountGoogle.getPicture(), false, 1, Custom.Common.getCurrentDate(), r);
+            if(ad.register(a) != 0){
+                // success
+                this.sendMail(request, response);
+                // cho login
+                HttpSession session = request.getSession();
+                if (session.getAttribute("account") == null) {
+                                session.setAttribute("account", a);
+                }
+                response.sendRedirect("home");
+            }else {
+                request.setAttribute("error", "Đăng nhập bằng google thất bại");
+                request.getRequestDispatcher("/gui/common/home.jsp").forward(request, response);
+            }
+        }else 
+        {
+            // cho login vơi tk cũ
+            // get account by email
+            Account b = ad.findAccountByEmail(email);
+            
+            HttpSession session = request.getSession();
+            if (session.getAttribute("account") == null) {
+                session.setAttribute("account", b);
+            }
+            response.sendRedirect("home");
+        }
 
-        String code = request.getParameter("code");
-        if (code == null || code.isEmpty()) {
-            String loginURL = "https://accounts.google.com/o/oauth2/auth?client_id=" + CLIENT_ID + "&redirect_uri=" + REDIRECT_URI
-                    + "&scope=" + SCOPE + "&response_type=code";
-            response.sendRedirect(loginURL);
-        } else {
-            String tokenURL = "https://accounts.google.com/o/oauth2/token";
-            String payload = "client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET + "&redirect_uri="
-                    + REDIRECT_URI + "&grant_type=authorization_code" + "&code=" + code;
-            String json = post(tokenURL, payload);
-//             post("https://accounts.google.com/o/oauth2/token", params);
-            JSONObject jsonObject = new JSONObject(json);
-            String accessToken = jsonObject.getString("access_token");
-            String profileURL = "https://www.googleapis.com/oauth2/v1/userinfo?access_token=" + accessToken;
-            json = get(profileURL);
-            jsonObject = new JSONObject(json);
-            String email = jsonObject.getString("email");
-            String name = jsonObject.getString("name");
-            // Do something with email and name
-            response.sendRedirect("welcome.jsp");
         }
     }
 
@@ -125,6 +147,49 @@ public class LoginGoogleController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+    }
+    
+    private void sendMail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String adminEmail = "dothang4477@gmail.com";
+
+        // Thiết lập thông tin email
+        final String from = "dothang4477@gmail.com";
+        final String password = "gwmcckowmcnvazur";
+        String host = "smtp.gmail.com";
+        int port = 587;
+        String to = adminEmail;
+        String subject = "Notification Register";
+        String content = "A new user login with google account successfully";
+
+        // Thiết lập các thuộc tính email
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.port", port);
+
+        // Tạo phiên gửi email và thiết lập thông tin người gửi
+        Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(from, password);
+            }
+        });
+
+        try {
+            // Tạo đối tượng MimeMessage và thiết lập các thuộc tính email
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(from));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+            message.setSubject(subject);
+            message.setText(content);
+
+            // Gửi email
+            Transport.send(message);
+
+            // Chuyển hướng đến trang xác nhận email
+        } catch (MessagingException e) {
+            throw new RuntimeException("error: " + e);
+        }
     }
 
     /**
