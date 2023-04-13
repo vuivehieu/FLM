@@ -98,8 +98,8 @@
 
                 <div class="col-12" style="display: flex;align-items: center;">
                     <!-- start select -->
-                        <select id="sel" name="select" class="browser-default" style="font-size: 16px;width: 10rem;">
-                          <option value='curCode' selected>Code</option>
+                        <select id="sel" name="select" class="browser-default" style="font-size: 16px;width: 18rem;">
+                          <option value='curCode' selected>Curriculum Code</option>
                           <option value='curName'>Name</option>
                         </select>
                     <!--end select-->
@@ -107,13 +107,12 @@
                     <form class="form-inline" style="width: 100%;padding-left: 3rem;">
                         <div style="position: relative">
                             <input type="text" name="type" value="curriculum" hidden="">
-                            <input class="" name="keysearch" id="search" value="${key}" style="height: 5rem;font-size: unset" type="text" placeholder="Search" oninput="searchCurriculum()">
-                            <span style="position: absolute; top:20px; right:10px" class="fa fa-search"></span>
+                            <!--neu muon go 1 chu thi search 1 chu thi them ham nay vao o input oninput="searchCurriculum()"-->
+                            <input class="" name="keysearch" id="search" value="${key}" style="height: 5rem;font-size: unset" type="text" placeholder="Search" >
+                            <span style="position: absolute; top:20px; right:10px" class="fa fa-search" onclick="searchCurriculum()"></span>
                         </div>
                     </form>
-
                 </div>
-
             </div>
 
             <div class="container-fluid pad-bot-70 p-custom" id="root">

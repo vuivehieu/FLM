@@ -84,10 +84,10 @@ public class SearchControllerr extends HttpServlet {
                     list = searchSyllabus(key);
                     break;
                 case "preRequisite":
-                    list = searchPreRequisite(key);
+                    list = searchPreRequisite(key, filter);
                     break;
                 case "corollary":
-                    list = searchCorollary(key);
+                    list = searchCorollary(key, filter);
                     break;
             }
 
@@ -159,10 +159,10 @@ public class SearchControllerr extends HttpServlet {
                 list = searchSyllabus(key);
                 break;
             case "preRequisite":
-                list = searchPreRequisite(key);
+                list = searchPreRequisite(key, filter);
                 break;
             case "corollary":
-                list = searchCorollary(key);
+                list = searchCorollary(key, filter);
                 break;
         }
 
@@ -445,25 +445,51 @@ public class SearchControllerr extends HttpServlet {
         return result;
     }
 
-    private List<Syllabus> searchPreRequisite(String key) {
+    private List<Syllabus> searchPreRequisite(String key, String filter) {
         List<Syllabus> result = new ArrayList<>();
         for (Syllabus item : listSyllabus) {
-            if (item.getSubjectCode().toLowerCase().equalsIgnoreCase(key.toLowerCase())
-                    || item.getSlbName_EN().toLowerCase().equalsIgnoreCase(key.toLowerCase())
-                    || item.getSlbName_VI().toLowerCase().equalsIgnoreCase(key.toLowerCase())) {
-                result.add(item);
+//            if (item.getSubjectCode().toLowerCase().equalsIgnoreCase(key.toLowerCase())
+//                    || item.getSlbName_EN().toLowerCase().equalsIgnoreCase(key.toLowerCase())
+//                    || item.getSlbName_VI().toLowerCase().equalsIgnoreCase(key.toLowerCase())) {
+//                result.add(item);
+//            }
+            
+            if(filter.toLowerCase().contains("subjectname")){
+                if (item.getSubjectCode().toLowerCase().contains(key.toLowerCase())){
+                    result.add(item);
+                }
+            }
+            
+            if(filter.toLowerCase().contains("syllabusname")){
+                if (item.getSlbName_EN().toLowerCase().contains(key.toLowerCase())
+                    || item.getSlbName_VI().toLowerCase().contains(key.toLowerCase())){
+                    result.add(item);
+                }
             }
         }
         return result;
     }
 
-    private List<Syllabus> searchCorollary(String key) {
+    private List<Syllabus> searchCorollary(String key,String filter) {
         List<Syllabus> result = new ArrayList<>();
         for (Syllabus item : listSyllabus) {
-            if (item.getSubjectCode().toLowerCase().equalsIgnoreCase(key.toLowerCase())
-                    || item.getSlbName_EN().toLowerCase().equalsIgnoreCase(key.toLowerCase())
-                    || item.getSlbName_VI().toLowerCase().equalsIgnoreCase(key.toLowerCase())) {
-                result.add(item);
+//            if (item.getSubjectCode().toLowerCase().equalsIgnoreCase(key.toLowerCase())
+//                    || item.getSlbName_EN().toLowerCase().equalsIgnoreCase(key.toLowerCase())
+//                    || item.getSlbName_VI().toLowerCase().equalsIgnoreCase(key.toLowerCase())) {
+//                result.add(item);
+//            }
+            
+            if(filter.toLowerCase().contains("subjectcode")){
+                if (item.getSubjectCode().toLowerCase().contains(key.toLowerCase())){
+                    result.add(item);
+                }
+            }
+            
+            if(filter.toLowerCase().contains("syllabusname")){
+                if (item.getSlbName_EN().toLowerCase().contains(key.toLowerCase())
+                    || item.getSlbName_VI().toLowerCase().contains(key.toLowerCase())){
+                    result.add(item);
+                }
             }
         }
         return result;

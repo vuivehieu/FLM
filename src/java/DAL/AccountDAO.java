@@ -391,7 +391,6 @@ public class AccountDAO extends DBContext {
         } catch (SQLException e) {
             System.out.println("AccountDAO -> checkRegister(): " + e);
         }
-        boolean check1 = result.equalsIgnoreCase("");
         boolean check = !result.equalsIgnoreCase("");
         return check;
     }
@@ -412,6 +411,7 @@ public class AccountDAO extends DBContext {
                 account = new Account(rs.getInt("accountID"), rs.getString("userName"), rs.getString("password"),
                             rs.getString("displayName"), rs.getString("email"), rs.getString("avatar"), rs.getBoolean("isBlock"),
                             rs.getInt("status"), rs.getDate("createDate"), role);
+                return account;
             }
 
         } catch (SQLException e) {

@@ -97,13 +97,19 @@
 
 
                 </div>
-                <div class="col-12">
-                    <form class="form-inline">
+                <div class="col-12" style="display: flex;align-items: center;">
+                    <!-- start select -->
+                        <select id="preRequisite" name="select" class="browser-default" style="font-size: 16px;width: 17rem;">
+                          <option value='subjectCode' selected>Subject Code</option>
+                          <option value='syllabusName'>Syllabus Name</option>
+                        </select>
+                    <!--end select-->
+                    <form class="form-inline" style="width: 100%;padding-left: 3rem;">
                         <div style="position: relative">
                             <input type="text" name="type" value="corollary" hidden="">
 
-                            <input class="" id="search" style="height: 5rem;font-size: unset" type="text" placeholder="Search" oninput="searchCorollary()">
-                            <span style="position: absolute; top:20px; right:10px" class="fa fa-search"></span>
+                            <input class="" id="search" style="height: 5rem;font-size: unset" type="text" placeholder="Search" >
+                            <span style="position: absolute; top:20px; right:10px" class="fa fa-search" onclick="searchCorollary()"></span>
                         </div>
                     </form>
                 </div>
@@ -117,8 +123,15 @@
         <script>
             let request;
             function searchCorollary() {
+                                //                start select
+                let select = document.getElementById('preRequisite');
+                let selectValue = select.value;
+                select.addEventListener('change',function(){
+                    selectValue = select.value;
+                });
+//                end select
                 let key = document.getElementById("search").value;
-                let url = './search?type=corollary&keysearch=' + key;
+                let url = './search?type=corollary&keysearch=' + key + '&filter=' +selectValue;
 
 
                 if (window.XMLHttpRequest) {

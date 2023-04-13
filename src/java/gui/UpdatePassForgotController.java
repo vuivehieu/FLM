@@ -35,7 +35,7 @@ import org.json.JSONObject;
  *
  * @author phanh
  */
-@WebServlet(name = "RegisterController", urlPatterns = {"/update-pass-forgot"})
+@WebServlet(name = "UpdatePassForgot", urlPatterns = {"/updatePassForgot"})
 public class UpdatePassForgotController extends HttpServlet {
 
     /**
@@ -93,7 +93,7 @@ public class UpdatePassForgotController extends HttpServlet {
         
         if(ad.changePassword(password, account) != 0){
             // change pass success
-            this.sendMail(request, response);
+//            this.sendMail(request, response);
             Map<String, String> options = new LinkedHashMap<>();
             options.put("messageChangPassSuccess", "Change password success");
             String json = new Gson().toJson(options);
@@ -112,44 +112,6 @@ public class UpdatePassForgotController extends HttpServlet {
                 response.setCharacterEncoding("UTF-8");
                 response.getWriter().write(json);
         }
-        
-//        Role r = new Role(1, "Guest");
-//        Account a = new Account(new DAO().getLastAccountID() + 1, userName, password, fullName, email, "", false, 1, Custom.Common.getCurrentDate(), r);
-        
-//        if(ad.checkRegisterEdit(userName, email)){
-//            if(ad.register(a) != 0){
-//            // success
-//            this.sendMail(request, response);
-//            Map<String, String> options = new LinkedHashMap<>();
-//            options.put("messageRegister", "Registration success");
-//            String json = new Gson().toJson(options);
-//
-//            response.setContentType("application/json");
-//            response.setCharacterEncoding("UTF-8");
-//            response.getWriter().write(json);
-//            }else {
-//                // response
-//                Map<String, String> options = new LinkedHashMap<>();
-//                options.put("error", "Registration failed");
-//                String json = new Gson().toJson(options);
-//
-//                response.setContentType("application/json");
-//                response.setCharacterEncoding("UTF-8");
-//                response.getWriter().write(json);
-//            }
-//        }else 
-//        {
-//            // response
-//            Map<String, String> options = new LinkedHashMap<>();
-//            options.put("error", "Registration failed, User Name already exists, please enter another account");
-//            String json = new Gson().toJson(options);
-//
-//            response.setContentType("application/json");
-//            response.setCharacterEncoding("UTF-8");
-//            response.getWriter().write(json);
-//        }
-        
-
     }
 
     private void sendMail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -130,7 +130,7 @@ public class RegisterController extends HttpServlet {
     }
 
     private void sendMail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String adminEmail = "thevu091193@gmail.com";
+        String adminEmail = "dothang4477@gmail.com";
 
         // Tạo mã xác thực duy nhất
 //        String uuid = UUID.randomUUID().toString();

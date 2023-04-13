@@ -115,7 +115,6 @@
 
                     if(response.code != null){
                         codeSendMail = response.code;
-                        console.log("response.code", response.code);
                         $('#email').prop('disabled', true);
                         $('#userName').prop('disabled', false);
                         $('#fullName').prop('disabled', false);
@@ -139,7 +138,6 @@
     }
 
     function register(){
-        console.log("codeSendMail", codeSendMail);
         let userName = $('#userName').val();
         let fullName = $('#fullName').val();
         let email = $('#email').val();
@@ -167,7 +165,6 @@
                     // handle success
 
                     if(response.messageRegister != null){
-                        console.log("response.messageRegister", response.messageRegister);
                         document.getElementById("messageRegister").innerHTML = response.messageRegister;
 
                         setTimeout(function() {
@@ -177,7 +174,6 @@
 
 
                     }else {
-                        console.log("response.error", response.error);
                         document.getElementById("errorMessage").innerHTML = response.error;
                     }
 
