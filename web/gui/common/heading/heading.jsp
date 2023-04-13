@@ -224,7 +224,6 @@
                     src="${account.avatar}"
                     class="rounded-circle"
                     height="25"
-                    alt="No Avatar"
                     loading="lazy" style="width: 50px;height: 50px;"
                     />
                 </c:if>
