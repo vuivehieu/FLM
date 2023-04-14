@@ -82,56 +82,56 @@
                         </ul>
                     </div>
                 </li>
-                <li><a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-pencil" aria-hidden="true"></i> CLO</a>
+<!--                <li><a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-pencil" aria-hidden="true"></i> CLO</a>
                     <div class="collapsible-body left-sub-menu">
                         <ul>
                             <li><a href="cloList">All CLO</a></li>
                         </ul>
                     </div>
-                </li>
+                </li>-->
 
 
             </c:if>
 
-            <c:if test="${account != null && account eq '5' || account eq '7' || account eq '6'}">
-                <li><a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Subject</a>
+            <%--<c:if test="${account != null && account eq '5' || account eq '7' || account eq '6'}">--%>
+<!--                <li><a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Subject</a>
                     <div class="collapsible-body left-sub-menu">
                         <ul>
                             <li><a href="subjectList">All Subject</a></li>
-<!--                            <li><a href="admin-about-menu.html">All Session</a></li>
-                            <li><a href="admin-admission-menu.html">All Material</a></li>-->
+                            <li><a href="admin-about-menu.html">All Session</a></li>
+                            <li><a href="admin-admission-menu.html">All Material</a></li>
                             <li><a href="admin-all-menu.html">Add New Subject</a></li>
                         </ul>
                     </div>
-                </li>
-            </c:if>
+                </li>-->
+            <%--</c:if>--%>
 
-            <li><a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-pencil" aria-hidden="true"></i> Assessment</a>
+<!--            <li><a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-pencil" aria-hidden="true"></i> Assessment</a>
                 <div class="collapsible-body left-sub-menu">
                     <ul>
                         <li><a href="assessmentList">All Assessment</a></li>
                         <li><a href="assessmentDetail?type=add">Add New Assessment</a></li>
                     </ul>
                 </div>
-            </li>
+            </li>-->
             
-            <li><a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-pencil" aria-hidden="true"></i> PreRequisite</a>
+<!--            <li><a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-pencil" aria-hidden="true"></i> PreRequisite</a>
                 <div class="collapsible-body left-sub-menu">
                     <ul>
                         <li><a href="preRequisiteList">All PreRequisite</a></li>
                         <li><a href="assessmentDetail?type=add">Add New PreRequisite</a></li>
                     </ul>
                 </div>
-            </li>
+            </li>-->
             
-            <li><a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-pencil" aria-hidden="true"></i> Decision</a>
+<!--            <li><a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-pencil" aria-hidden="true"></i> Decision</a>
                 <div class="collapsible-body left-sub-menu">
                     <ul>
                         <li><a href="decisionList">All Decision</a></li>
                         <li><a href="decisionDetail?type=add">Add New Decision</a></li>
                     </ul>
                 </div>
-            </li>
+            </li>-->
 
 
 
