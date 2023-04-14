@@ -211,7 +211,7 @@
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="py-0 ml-auto navbar-nav">
                         <a href="search?type=curriculum&keysearch=&filter=curCode" class="nav-item nav-link" id="curriculum" onclick="activeNav()">All Curriculum</a>
-                        <c:if test="${account != null}">
+                        <c:if test="${account != null && account.role.rid != 1}">
                             <a href="search?type=syllabus&keysearch=&filter=subjectcode" class="nav-item nav-link" id="syllabus" onclick="activeNav()">All Syllabus</a>
                         </c:if>
                         <a href="search?type=preRequisite&keysearch=&filter=subjectName" class="nav-item nav-link" id="preRequisite" onclick="activeNav()">All PreRequisite</a>
@@ -225,6 +225,56 @@
                         <c:if test="${account == null}">
                             <a href="#!" data-toggle="modal" data-target="#modal1" class="nav-item nav-link">Sign In</a>
                             <a href="#!" data-toggle="modal" data-target="#modal2" class="nav-item nav-link">Sign Up</a>
+                        </c:if>
+                        <c:if test="${account != null}">
+                              <div class="dropdown" style="display: flex; align-items: center; margin-left: 2rem;">
+                                  <a
+                                      class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                                      href="#"
+                                      id="navbarDropdownMenuAvatar"
+                                      role="button"
+                                      data-mdb-toggle="dropdown"
+                                      aria-expanded="false"
+                                      style ="background-color: #f26838;border-radius: 50%;width: 50px;height: 50px;"
+                                      >
+                                      <c:if test="${account.avatar != ''}">
+                                          <img
+                                          src="${account.avatar}"
+                                          class="rounded-circle"
+                                          height="25"
+                                          loading="lazy" style="width: 50px;height: 50px;"
+                                          />
+                                      </c:if>
+                                      <c:if test="${account.avatar == ''}">
+                                          <p style="font-size: 2rem;color: #fff;margin: auto;">${account.displayName.charAt(0)}</p>
+                                      </c:if>
+
+                                  </a>
+
+                                  <ul
+                                    class="dropdown-menu dropdown-menu-end"
+                                    aria-labelledby="navbarDropdownMenuAvatar" style="margin-top: 1rem;width: 17rem;"
+                                  >
+                                    <c:if test="${!(account.role.rid == 1) && !(account.role.rid == 2) && !(account.role.rid == 3)}">
+                                    <li style="display: block;width: 100%; margin-bottom: 0.5rem;">
+                                      <a class="dropdown-item" href="dashboard" style="font-size: 15px;"><span style="font-weight: bolder;color: black;">Dashboard</span></a>
+                                    </li>
+                                    </c:if>
+                                    <li style="display: block;width: 100%; margin-bottom: 0.5rem;">
+                                        <a class="dropdown-item" href="profile" style="font-size: 15px;">Name: <span style="font-weight: bolder;color: black;">${account.displayName}</span></a>
+                                    </li>
+                                    <li style="display: block;width: 100%; margin-bottom: 0.5rem;">
+                                      <a class="dropdown-item" href="changePassword" style="font-size: 15px;">Email: <span style="font-weight: bolder;color: black;">${account.email}</span></a>
+                                    </li>
+                                    <li style="display: block;width: 100%; margin-bottom: 0.5rem;">
+                                      <a class="dropdown-item" href="changeAvatar" style="font-size: 15px;">User's role: <span style="font-weight: bolder;color: black;">${account.role.rname}</span></a>
+                                    </li>
+                                    <li style="display: block;width: 100%; margin-bottom: 0.5rem;">
+                                      <a class="dropdown-item" href="logout" style="font-size: 15px; color: #0388f9;">Sign out FLM</a>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
                         </c:if>
                         
                     </div>
@@ -275,23 +325,6 @@
         });
     });
 
-
-
-    
-//   const navItems = document.querySelectorAll('.nav-item');
-//   navItems.forEach(navItem => {
-//        navItems.forEach(navItem => {
-//            navItem.addEventListener('click', () => {
-//              // Loại bỏ class active từ tất cả các nav item
-//              navItems.forEach(item => item.classList.remove('active'));
-//              // Thêm class active vào nav item được chọn
-//              navItem.classList.add('active');
-//            });
-//        });
-//
-//    });
-
-    
     console.log("account", account);
     let signUpBtn = document.getElementById("signUpBtn");
     signUpBtn.addEventListener("click", function() {

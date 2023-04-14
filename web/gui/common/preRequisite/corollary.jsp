@@ -80,36 +80,7 @@
     <body>
 
         <jsp:include page="../heading/heading.jsp"/>
-<!--        <section class="pop-cour">
-            <div class="container com-sp pad-bot-70">
-                <div class="row">
-                    <div class="con-title col-12">
-                        <h2>A subject is  <span>the pre-requisite of</span></h2>
-                    </div>
-
-
-                </div>
-                <div class="col-12" style="display: flex;align-items: center;">
-                     start select 
-                        <select id="preRequisite" name="select" class="browser-default" style="font-size: 16px;width: 17rem;">
-                          <option value='subjectCode' selected>Subject Code</option>
-                          <option value='syllabusName'>Syllabus Name</option>
-                        </select>
-                    end select
-                    <form class="form-inline" style="width: 100%;padding-left: 3rem;">
-                        <div style="position: relative">
-                            <input type="text" name="type" value="corollary" hidden="">
-
-                            <input class="" id="search" style="height: 5rem;font-size: unset" type="text" placeholder="Search" >
-                            <span style="position: absolute; top:20px; right:10px" class="fa fa-search" onclick="searchCorollary()"></span>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <div class="container pad-bot-70" id="root"></div>
-        </section> -->
-        
+    
         <!--        Start Content-->        
         <div class="container-fluid mb-5">
             <h1 style="text-align: center; margin-top: 2rem; ">A subject is the pre-requisite of</h1>
@@ -172,9 +143,6 @@
             }
         </script>
 
-        <!--Import jQuery before materialize.js-->
-        <script src="js/main.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
         <script>
             $('#search').keyup(function (e) {
                 if (e.keyCode === 13) {
