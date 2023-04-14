@@ -212,13 +212,13 @@ public class SearchControllerr extends HttpServlet {
                     + "<h5 style='margin-bottom: 2rem;'>" + size + " Curriculum(s) found</h5>"
                     + "<table class=\"table align-middle mb-0 bg-white\">"
                     + "     <thead class=\"bg-dark\">"
-                    + "         <tr>"
-                    + "             <th style=\" color: #fff; vertical-align: middle; text-align: center; \">No</th>"
-                    + "             <th style=\" color: #fff; vertical-align: middle; text-align: center; \">Curriculum Code</th>"
-                    + "             <th style=\" color: #fff; vertical-align: middle; text-align: center; \">Name</th>"
-                    + "             <th style=\" color: #fff; vertical-align: middle; text-align: center; \">Description</th>"
-                    + "             <th style=\" color: #fff; vertical-align: middle; text-align: center; \">Decision No MM/dd/yyyy</th>"
-                    + "             <th style=\" color: #fff; vertical-align: middle; text-align: center; \">Total Credit</th>"
+                    + "         <tr style=\" background-color: rgb(185, 182, 182); \">"
+                    + "             <th style=\"  vertical-align: middle; text-align: center; \">No</th>"
+                    + "             <th style=\"  vertical-align: middle; text-align: center; \">Curriculum Code</th>"
+                    + "             <th style=\"  vertical-align: middle; text-align: center; \">Name</th>"
+                    + "             <th style=\"  vertical-align: middle; text-align: center; \">Description</th>"
+                    + "             <th style=\"  vertical-align: middle; text-align: center; \">Decision No MM/dd/yyyy</th>"
+                    + "             <th style=\"  vertical-align: middle; text-align: center; \">Total Credit</th>"
                     + "         </tr>"
                     + "     </thead>"
                     + "<tbody>";
@@ -243,23 +243,25 @@ public class SearchControllerr extends HttpServlet {
 
             response += "</tbody></table></div>"
                     + "<div class='pg-pagina'>\n"
-                    + "                        <ul class='pagination'>\n"
-                    + "                            <li class='" + (page == 1 ? "disabled" : "waves-effect") + "'>\n"
-                    + "                                <a onclick=\"changePage('" + (page - 1) + "')\" style=\" margin-right: 1rem; \"><span aria-hidden=\"true\">&laquo;</span></a>\n"
+                    + "                        <ul class='pagination' style=\"display: flex; justify-content: center;\">\n"
+                    + "                            <li class='page-item " + (page == 1 ? "disabled" : "waves-effect") + "'>\n"
+                    + "                                <a onclick=\"changePage('" + (page - 1) + "')\" class=\"page-link\" style=\" margin-right: 1rem; \"><span aria-hidden=\"true\">&laquo;</span></a>\n"
                     + "                            </li>\n";
+            
             if (startPage > 1) {
                 response += "<li class='waves-effect'><a onclick=\"changePage('" + (page - 1) + "')\">...</a></li>\n";
             }
+            
             for (int i = startPage; i <= endPage; i++) {
-                response += "<li class='" + (page == i ? "active" : "waves-effect") + "'>\n"
-                        + "     <a onclick=\"changePage('" + (i) + "')\">" + i + "</a>\n"
+                response += "<li class='page-item " + (page == i ? "active" : "waves-effect") + "'>\n"
+                        + "     <a class=\"page-link\" onclick=\"changePage('" + (i) + "')\">" + i + "<span class=\"sr-only\">(current)</span></a>\n"
                         + "</li>\n";
             }
             if (endPage < numberOfPage) {
                 response += "<li class='waves-effect'><a onclick=\"changePage('" + (page + 1) + "')\">...</a></li>\n";
             }
-            response += "<li class='" + (page == numberOfPage ? "disabled" : "waves-effect") + "'>\n"
-                    + "     <a onclick=\"changePage('" + (page + 1) + "')\" style=\" margin-left: 1rem; \"><span aria-hidden=\"true\">&raquo;</span></a>\n"
+            response += "<li class='page-item " + (page == numberOfPage ? "disabled" : "waves-effect") + "'>\n"
+                    + "     <a class=\"page-link\" onclick=\"changePage('" + (page + 1) + "')\" style=\" margin-left: 1rem; \"><span aria-hidden=\"true\">&raquo;</span></a>\n"
                     + "</li>\n"
                     + "</ul>\n"
                     + "</div>";
@@ -276,14 +278,14 @@ public class SearchControllerr extends HttpServlet {
             response = "<div class='row'><h5 style='margin-bottom: 2rem;'>" + size + " Syllabus(es) found</h5>"
                     + "<table class=\"table align-middle mb-0 bg-white\">"
                     + "<thead class=\"bg-dark\">"
-                    + "<tr>"
-                    + "<th style=\" color: #fff; text-align: center; vertical-align: middle; \">Syllabus ID</th>"
-                    + "<th style=\" color: #fff; text-align: center; vertical-align: middle;\">Subject Code</th>"
-                    + "<th style=\" color: #fff; text-align: center; vertical-align: middle;\">Subject Name</th>"
-                    + "<th style=\" color: #fff; text-align: center; vertical-align: middle;\">Syllabus Name</th>"
-                    + "<th style=\" color: #fff; text-align: center; vertical-align: middle;\">IsActive</th>"
-                    + "<th style=\" color: #fff; text-align: center; vertical-align: middle;\">IsApproved</th"
-                    + "><th style=\" color: #fff; text-align: center; vertical-align: middle;\">DecisionNo MM/dd/yyyy</th>"
+                    + "<tr style=\" background-color: rgb(185, 182, 182); \">"
+                    + "<th style=\"  text-align: center; vertical-align: middle; \">Syllabus ID</th>"
+                    + "<th style=\"  text-align: center; vertical-align: middle;\">Subject Code</th>"
+                    + "<th style=\"  text-align: center; vertical-align: middle;\">Subject Name</th>"
+                    + "<th style=\"  text-align: center; vertical-align: middle;\">Syllabus Name</th>"
+                    + "<th style=\"  text-align: center; vertical-align: middle;\">IsActive</th>"
+                    + "<th style=\"  text-align: center; vertical-align: middle;\">IsApproved</th"
+                    + "><th style=\"  text-align: center; vertical-align: middle;\">DecisionNo MM/dd/yyyy</th>"
                     + "</tr></thead>"
                     + "<tbody>\n";
             for (int i = 0; i < list.size(); i++) {
@@ -308,23 +310,23 @@ public class SearchControllerr extends HttpServlet {
 
             response += "</tbody></table></div>"
                     + "<div class='pg-pagina'>\n"
-                    + "                        <ul class='pagination'>\n"
-                    + "                            <li class='" + (page == 1 ? "disabled" : "waves-effect") + "'>\n"
-                    + "                                <a onclick=\"changePage('" + (page - 1) + "')\" style=\" margin-right: 1rem;\"><span aria-hidden=\"true\">&laquo;</span></a>\n"
+                    + "                        <ul class='pagination' style=\"display: flex; justify-content: center;\">\n"
+                    + "                            <li class='page-item " + (page == 1 ? "disabled" : "waves-effect") + "'>\n"
+                    + "                                <a class=\"page-link\" onclick=\"changePage('" + (page - 1) + "')\" style=\" margin-right: 1rem;\"><span aria-hidden=\"true\">&laquo;</span></a>\n"
                     + "                            </li>\n";
             if (startPage > 1) {
                 response += "<li class='waves-effect'><a onclick=\"changePage('" + (page - 1) + "')\">...</a></li>\n";
             }
             for (int i = startPage; i <= endPage; i++) {
-                response += "<li class='" + (page == i ? "active" : "waves-effect") + "'>\n"
-                        + "     <a onclick=\"changePage('" + (i) + "')\">" + i + "</a>\n"
+                response += "<li class='page-item " + (page == i ? "active" : "waves-effect") + "'>\n"
+                        + "     <a class=\"page-link\" onclick=\"changePage('" + (i) + "')\">" + i + "</a>\n"
                         + "</li>\n";
             }
             if (endPage < numberOfPage) {
                 response += "<li class='waves-effect'><a onclick=\"changePage('" + (page + 1) + "')\">...</a></li>\n";
             }
-            response += "<li class='" + (page == numberOfPage ? "disabled" : "waves-effect") + "'>\n"
-                    + "     <a onclick=\"changePage('" + (page + 1) + "')\" style=\" margin-left: 1rem; \"><span aria-hidden=\"true\">&raquo;</span></a>\n"
+            response += "<li class='page-item " + (page == numberOfPage ? "disabled" : "waves-effect") + "'>\n"
+                    + "     <a class=\"page-link\" onclick=\"changePage('" + (page + 1) + "')\" style=\" margin-left: 1rem; \"><span aria-hidden=\"true\">&raquo;</span></a>\n"
                     + "</li>\n"
                     + "</ul>\n"
                     + "</div>";
@@ -344,13 +346,13 @@ public class SearchControllerr extends HttpServlet {
                     + "<h5 style='margin-bottom: 2rem;'> All " + size + " Syllabus(es)</h5>"
                     + "<table class=\"table align-middle mb-0 bg-white\">"
                     + "     <thead class=\"bg-dark\">"
-                    + "         <tr>"
-                    + "             <th style=\" color: #fff; vertical-align: middle; text-align: center; \">No</th>"
-                    + "             <th style=\" color: #fff; vertical-align: middle; text-align: center; \">Syllabus ID</th>"
-                    + "             <th style=\" color: #fff; vertical-align: middle; text-align: center; \">Subject Name</th>"
-                    + "             <th style=\" color: #fff; vertical-align: middle; text-align: center; \">Syllabus Name</th>"
-                    + "             <th style=\" color: #fff; vertical-align: middle; text-align: center; \">DecisionNo MM/dd/yyyy</th>"
-                    + "             <th style=\" color: #fff; vertical-align: middle; text-align: center; \">All subjects need to learn before</th>"
+                    + "         <tr style=\" background-color: rgb(185, 182, 182); \">"
+                    + "             <th style=\"  vertical-align: middle; text-align: center; \">No</th>"
+                    + "             <th style=\"  vertical-align: middle; text-align: center; \">Syllabus ID</th>"
+                    + "             <th style=\"  vertical-align: middle; text-align: center; \">Subject Name</th>"
+                    + "             <th style=\"  vertical-align: middle; text-align: center; \">Syllabus Name</th>"
+                    + "             <th style=\"  vertical-align: middle; text-align: center; \">DecisionNo MM/dd/yyyy</th>"
+                    + "             <th style=\"  vertical-align: middle; text-align: center; \">All subjects need to learn before</th>"
                     + "         </tr>"
                     + "     </thead>"
                     + "<tbody>\n";
@@ -389,13 +391,13 @@ public class SearchControllerr extends HttpServlet {
                     + "     <h5 style='margin-bottom: 2rem;'> All " + size + " Syllabus(es)</h5>"
                     + "<table class=\"table align-middle mb-0 bg-white\">"
                     + "     <thead class=\"bg-dark\">"
-                    + "             <tr>"
-                    + "                 <th style=\" color: #fff; vertical-align: middle; text-align: center; \">No</th>"
-                    + "                 <th style=\" color: #fff; vertical-align: middle; text-align: center; \">Syllabus ID</th>"
-                    + "                 <th style=\" color: #fff; vertical-align: middle; text-align: center; \">Subject Code</th>"
-                    + "                 <th style=\" color: #fff; vertical-align: middle; text-align: center; \">Syllabus Name</th>"
-                    + "                 <th style=\" color: #fff; vertical-align: middle; text-align: center; \">DecisionNo MM/dd/yyyy</th>"
-                    + "                 <th style=\" color: #fff; vertical-align: middle; text-align: center; \">All subjects learn after</th>"
+                    + "             <tr style=\" background-color: rgb(185, 182, 182); \">"
+                    + "                 <th style=\"  vertical-align: middle; text-align: center; \">No</th>"
+                    + "                 <th style=\"  vertical-align: middle; text-align: center; \">Syllabus ID</th>"
+                    + "                 <th style=\"  vertical-align: middle; text-align: center; \">Subject Code</th>"
+                    + "                 <th style=\"  vertical-align: middle; text-align: center; \">Syllabus Name</th>"
+                    + "                 <th style=\"  vertical-align: middle; text-align: center; \">DecisionNo MM/dd/yyyy</th>"
+                    + "                 <th style=\"  vertical-align: middle; text-align: center; \">All subjects learn after</th>"
                     + "             </tr>"
                     + "         </thead>"
                     + "         <tbody>\n";

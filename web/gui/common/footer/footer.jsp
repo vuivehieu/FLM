@@ -1,30 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<!--    <section class="wed-hom-footer">
-    <div class="container">
-        
-
-        <div class="row wed-foot-link-1" style="border-top: unset; padding-top: unset">
-            <div class="col-md-8 foot-tc-mar-t-o">
-                <h4>Get In Touch</h4>
-                <p>Address: Đất Thổ Cư Hòa Lạc, Km29 Đường Cao Tốc 08, Thạch Hoà, Thạch Thất, Hà Nội 10000</p>
-                <p>Phone: <a href="#!">024 7300 1866</a></p>
-                <p>Email: <a href="#!">daihocfpt@fpt.edu.vn</a></p>
-            </div>
-            <div class="col-md">
-                <h4>DOWNLOAD OUR FREE MOBILE APPS</h4>
-                <ul>
-                    <li><a href="#"><span class="sprite sprite-android"></span></a>
-                    </li>
-                    <li><a href="#"><span class="sprite sprite-ios"></span></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>-->
-
-
 <!-- Footer Start -->
     <footer id="colophon" style="background: #333333;border-top: 10px solid #f36f2b;">
         <div class="container">
@@ -32,13 +7,6 @@
                 <div class="col">
                     <img style="width: 237px;" src="https://hanoi.fpt.edu.vn/wp-content/uploads/2021/12/2021-FPTU-Long.jpg" alt="">
                     <p style="margin-top: 15px;font-size: 15px;color: white;">© 2017 Bản quyền thuộc về Trường đại học FPT.</p>
-<!--                    <div class="footer-icon">
-                        <a href="https://www.facebook.com/DaihocFPTHaNoi/"><i class="fa fa-facebook"
-                                aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-google-plus-official" aria-hidden="true"></i></a>
-                        <a href="https://www.youtube.com/channel/UCLfZhl8uJXAK2wtA4_IbEMA"><i class="fa fa-youtube"
-                                aria-hidden="true"></i></a>
-                    </div>-->
                 </div>
                 <div class="col">
                     <section id="text-6" class="widget-footer widget_text">

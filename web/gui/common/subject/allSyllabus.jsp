@@ -79,47 +79,43 @@
     <body>
 
         <jsp:include page="../heading/heading.jsp"/>
-        <section class="pop-cour">
-            <div class="container com-sp pad-bot-70">
-                <div class="row">
-                    <div class="con-title col-12">
-                        <h2>Syllabus <span>Management</span></h2>
+          
+        <!--Start Content-->
+        <div class="container-fluid" >
+            <h1 style="text-align: center; margin-top: 2rem;">Syllabus Management</h1>
+                <div class="row" style="margin-top: 30px;">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6">
+                        <form class="form-inline" style="position: relative;display: flex;">
+                            <select class="form-control" style="border-radius: unset;" id="sel">
+                                <option value="subjectCode" selected>Subject Code</option>
+                                <option value="syllabusName">Syllabus Name</option>
+                            </select>
+                            <div class="form-group" style="flex-grow: 1;">
+                                <input type="text" name="type" value="syllabus" hidden="">
+                                <input style="width: 100%; border-radius: unset;" type="text" class="form-control" id="search" value="${key}"
+                                    placeholder="Search">
+                            </div>
+                            <button style="position: absolute; right: 0; border-radius: unset;" type="button" onclick="searchSyllabus()"
+                                class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </form>
                     </div>
-
-
                 </div>
-                <div class="col-12" style="display: flex;align-items: center;">
-                    <!-- start select -->
-                        <select id="sel" name="select" class="browser-default" style="font-size: 16px;width: 18rem;">
-                          <option value='subjectCode' selected>Subject Code</option>
-                          <option value='syllabusName'>Syllabus Name</option>
-                        </select>
-                    <!--end select-->
-                    <form class="form-inline" style="width: 100%;padding-left: 3rem;">
-                        <div style="position: relative">
-                            <input type="text" name="type" value="syllabus" hidden="">
-                            <input class="" name="keysearch" id="search" value="${key}" style="height: 5rem;font-size: unset" type="text" placeholder="Search" >
-                            <span style="position: absolute; top:20px; right:10px" class="fa fa-search" onclick="searchSyllabus()"></span>
-                        </div>
-                    </form>
-
-                </div>
-            </div>
-
-            <div class="container pad-bot-70" id="root">
+                                    
                 <c:if test="${!list.isEmpty() && list != null}">
-                    <div class='row'>
-                        <h5>${size} Syllabus(es) found</h5>
-                        <table class='table table-hover'>
+                    <div class="table-responsive" style="margin-top: 30px;" id="root">
+                        <table class="table table-bordered cart_summary">
                             <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th width="10%">Subject Code</th>
-                                    <th>Subject Name</th>
-                                    <th>Syllabus Name</th>
-                                    <th>IsActive</th>
-                                    <th>IsApproved</th>
-                                    <th>DecisionNo MM/dd/yyyy</th>
+                                <tr style="background-color: rgb(185, 182, 182);">
+                                    <th style="vertical-align: middle;">ID</th>
+                                    <th style="vertical-align: middle;">Subject Code</th>
+                                    <th style="vertical-align: middle;">Subject Name</th>
+                                    <th style="vertical-align: middle;">Syllabus Name</th>
+                                    <th style="vertical-align: middle;">Is Active</th>
+                                    <th style="vertical-align: middle;">Is Approved</th>
+                                    <th style="vertical-align: middle;">
+                                        Decision No MM/dd/yyy
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -128,53 +124,50 @@
                                 <c:forEach items="${list}" var="item">
                                     <tr>
                                         <td>${item.slbid}</td>
-                                        <td>${item.subjectCode}</td>
+                                        <td>
+                                            <span>${item.subjectCode}</span>
+                                        </td>
                                         <td>${dao.getSubjectNameENBySubjectCode(item.subjectCode)}</td>
                                         <td>
-                                            <a href="syllabusDetails?subjectCode=${item.subjectCode}&slbid=${item.slbid}" >
-                                                <span class='list-enq-name'>${item.slbName_EN}</span>
-                                                <span class="list-enq-city">${item.slbName_VI}</span>
+                                            <a href="syllabusDetails?subjectCode=${item.subjectCode}&slbid=${item.slbid}">
+                                                <p style="font-size: 18px; font-weight: 500; color: #ff6634" class="product-name">
+                                                    ${item.slbName_EN}
+                                                </p>
+                                                <small class="cart_ref">${item.slbName_VI}</small>
                                             </a>
                                         </td>
                                         <td class="text-center "><i class="fa ${item.isActive ? 'fa-check text-success' : 'fa-times text-danger'}"></i></td>
                                         <td class="text-center"><i class="fa ${item.isApproved ? 'fa-check text-success' : 'fa-times text-danger'}"></i></td>
-                                        <td>
+                                        <td class="qty">
                                             <a href="decision?decisionNo=${item.decision.decisionNo}" >
-                                                <span class="list-enq-name">${item.decision.decisionNo}</span>
-                                                <span class="list-enq-city">${custom.getDateFormat('MM/dd/yyyy', item.decision.approvedDate)}</span>
-
+                                                <p style="font-size: 18px; font-weight: 500; color: #ff6634" class="product-name">
+                                                    ${item.decision.decisionNo}
+                                                </p>
+                                                <small class="cart_ref">${custom.getDateFormat('MM/dd/yyyy', item.decision.approvedDate)}</small>
                                             </a>
                                         </td>
-                                    </tr>
+                                    </tr>     
                                 </c:forEach>
                             </tbody>
                         </table>
-                    </div>
+                        <ul class="pagination" style="display: flex; justify-content: center;">
+                          <li class="page-item  ${(page == 1 ? 'disabled' : 'waves-effect')}">
+                            <a class="page-link" href="#" tabindex="-1" onclick="changePage('${page - 1}')"><i class='fa fa-angle-left' aria-hidden='true'></i></a>
+                          </li>
 
-                    <div class='pg-pagina'>
-                        <ul class='pagination'>
-                            <li class="${(page == 1 ? 'disabled' : 'waves-effect')}"> 
-                                <a onclick="changePage('${page - 1}')">
-                                    <i class='fa fa-angle-left' aria-hidden='true'></i>
-                                </a>
+                          <c:forEach begin="1" end="${numberOfPage}" var="i">
+                            <li class="page-item ${page == i ? 'active' : 'waves-effect'}" >
+                                <a class="page-link" href="#" onclick="changePage('${i}')">${i}<span class="sr-only">(current)</span></a>
                             </li>
-                            <c:forEach begin="1" end="${numberOfPage}" var="i">
-                                <li class=" ${page == i ? 'active' : 'waves-effect'}">
-                                    <a onclick="changePage('${i}')">${i} </a>
-                                </li>
-                            </c:forEach>
-                            <li class="${(page == numberOfPage ? 'disabled' : 'waves-effect')}">
-                                <a onclick="changePage('${page + 1}')">
-                                    <i class='fa fa-angle-right' aria-hidden='true'></i>
-                                </a>
-                            </li>
+                          </c:forEach>
+                          <li class="page-item ${(page == numberOfPage ? 'disabled' : 'waves-effect')}">
+                            <a class="page-link" onclick="changePage('${page + 1}')" href="#"><i class='fa fa-angle-right' aria-hidden='true'></i></a>
+                          </li>
                         </ul>
                     </div>
-
-
                 </c:if>
             </div>
-        </section> 
+        <!--End Content-->
 
         <jsp:include page="../footer/footer.jsp"/>
 
@@ -210,7 +203,8 @@
 
             function changePage(page) {
                 let key = document.getElementById("search").value;
-                let url = './search?type=syllabus&keysearch=' + key + '&page=' + page;
+                let selectValue = document.getElementById('sel').value;
+                let url = './search?type=syllabus&keysearch=' + key + '&filter=' +selectValue + '&page=' + page;
 
 
                 if (window.XMLHttpRequest) {
@@ -236,9 +230,6 @@
             }
         </script>
 
-        <!--Import jQuery before materialize.js-->
-        <script src="js/main.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
         <script>
             $('#search').keyup(function (e) {
                 if (e.keyCode === 13) {

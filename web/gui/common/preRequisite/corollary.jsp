@@ -74,12 +74,13 @@
                 }
             }
         </style>
+
     </head>
 
     <body>
 
         <jsp:include page="../heading/heading.jsp"/>
-        <section class="pop-cour">
+<!--        <section class="pop-cour">
             <div class="container com-sp pad-bot-70">
                 <div class="row">
                     <div class="con-title col-12">
@@ -89,12 +90,12 @@
 
                 </div>
                 <div class="col-12" style="display: flex;align-items: center;">
-                    <!-- start select -->
+                     start select 
                         <select id="preRequisite" name="select" class="browser-default" style="font-size: 16px;width: 17rem;">
                           <option value='subjectCode' selected>Subject Code</option>
                           <option value='syllabusName'>Syllabus Name</option>
                         </select>
-                    <!--end select-->
+                    end select
                     <form class="form-inline" style="width: 100%;padding-left: 3rem;">
                         <div style="position: relative">
                             <input type="text" name="type" value="corollary" hidden="">
@@ -107,7 +108,30 @@
             </div>
 
             <div class="container pad-bot-70" id="root"></div>
-        </section> 
+        </section> -->
+        
+        <!--        Start Content-->        
+        <div class="container-fluid mb-5">
+            <h1 style="text-align: center; margin-top: 2rem; ">A subject is the pre-requisite of</h1>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                    <form class="form-inline" style="position: relative;display: flex;">
+
+                        <div class="form-group" style="flex-grow: 1;">
+                            <input id="search" style="width: 100%; border-radius: unset;" type="text" class="form-control"
+                                placeholder="Search for Subject Code">
+                        </div>
+                        <button style="position: absolute; right: 0; border-radius: unset;" type="button" onclick="searchCorollary()"
+                            class="btn btn-default"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+            </div>
+             <div class="container-fluid" id="root">
+                
+            </div>
+        </div>
+        <!--End Content-->
 
         <jsp:include page="../footer/footer.jsp"/>
 
@@ -115,14 +139,14 @@
             let request;
             function searchCorollary() {
                                 //                start select
-                let select = document.getElementById('preRequisite');
-                let selectValue = select.value;
-                select.addEventListener('change',function(){
-                    selectValue = select.value;
-                });
+//                let select = document.getElementById('preRequisite');
+//                let selectValue = select.value;
+//                select.addEventListener('change',function(){
+//                    selectValue = select.value;
+//                });
 //                end select
                 let key = document.getElementById("search").value;
-                let url = './search?type=corollary&keysearch=' + key + '&filter=' +selectValue;
+                let url = './search?type=corollary&keysearch=' + key + '&filter=subjectCode';
 
 
                 if (window.XMLHttpRequest) {

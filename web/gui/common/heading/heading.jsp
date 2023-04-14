@@ -210,18 +210,18 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="py-0 ml-auto navbar-nav">
-                        <a href="search?type=curriculum&keysearch=&filter=curCode" class="nav-item nav-link active">All Curriculum</a>
+                        <a href="search?type=curriculum&keysearch=&filter=curCode" class="nav-item nav-link" id="curriculum" onclick="activeNav()">All Curriculum</a>
                         <c:if test="${account != null}">
-                            <a href="search?type=syllabus&keysearch=&filter=subjectcode" class="nav-item nav-link">All Syllabus</a>
+                            <a href="search?type=syllabus&keysearch=&filter=subjectcode" class="nav-item nav-link" id="syllabus" onclick="activeNav()">All Syllabus</a>
                         </c:if>
-                        <a href="search?type=preRequisite&keysearch=&filter=subjectName" class="nav-item nav-link">All PreRequisite</a>
+                        <a href="search?type=preRequisite&keysearch=&filter=subjectName" class="nav-item nav-link" id="preRequisite" onclick="activeNav()">All PreRequisite</a>
                     </div>
                     <a href="home" class="mx-5 navbar-brand d-none d-lg-block"
                         style="width:100px; height: 100%; overflow: hidden;">
                         <img style="width: 100%; height: 100%;" src="./fe/img/Logo_Đại_học_FPT.png" alt="">
                     </a>
                     <div class="py-0 mr-auto navbar-nav">
-                        <a href="search?type=corollary&keysearch=&filter=subjectcode" class="nav-item nav-link">All Corollary</a>
+                        <a href="search?type=corollary&keysearch=&filter=subjectcode" class="nav-item nav-link" id="corollary" onclick="activeNav()">All Corollary</a>
                         <c:if test="${account == null}">
                             <a href="#!" data-toggle="modal" data-target="#modal1" class="nav-item nav-link">Sign In</a>
                             <a href="#!" data-toggle="modal" data-target="#modal2" class="nav-item nav-link">Sign Up</a>
@@ -241,6 +241,57 @@
 <jsp:include page="forgot.jsp"/>
 
 <script>
+    
+    function activeNav() {
+        let type = new URLSearchParams(window.location.search).get('type');
+        console.log("type", type);
+        if (type === 'curriculum') {
+          document.getElementById("curriculum").classList.add("active");
+        } else if (type === 'syllabus') {
+          document.getElementById("syllabus").classList.add("active");
+        } else if (type === 'preRequisite') {
+          document.getElementById("preRequisite").classList.add("active");
+        } else if (type === 'corollary') {
+          document.getElementById("corollary").classList.add("active");
+        }
+
+        // Thay đổi đường dẫn URL
+        let url = new URL(window.location.href);
+        url.searchParams.set('type', type);
+        window.history.pushState({ path: url.href }, '', url.href);
+      }
+
+      // Gọi hàm activeNav() khi tải trang
+      activeNav();
+
+      // Gọi hàm activeNav() khi click vào nav item
+      let navItems = document.querySelectorAll('ul li a');
+      navItems.forEach(navItem => {
+        navItem.addEventListener('click', function(event) {
+          event.preventDefault();
+          let href = navItem.getAttribute('href');
+          window.location.href = href;
+          activeNav();
+        });
+    });
+
+
+
+    
+//   const navItems = document.querySelectorAll('.nav-item');
+//   navItems.forEach(navItem => {
+//        navItems.forEach(navItem => {
+//            navItem.addEventListener('click', () => {
+//              // Loại bỏ class active từ tất cả các nav item
+//              navItems.forEach(item => item.classList.remove('active'));
+//              // Thêm class active vào nav item được chọn
+//              navItem.classList.add('active');
+//            });
+//        });
+//
+//    });
+
+    
     console.log("account", account);
     let signUpBtn = document.getElementById("signUpBtn");
     signUpBtn.addEventListener("click", function() {
@@ -253,5 +304,4 @@
         document.getElementById("errorMessage").innerHTML = '';
         document.getElementById("messageRegister").innerHTML = '';
     });
-
 </script>

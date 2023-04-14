@@ -81,50 +81,51 @@
     <body>
 
         <jsp:include page="../heading/heading.jsp"/>
-        <section class="pop-cour">
-            <div class="container com-sp pad-bot-70">
-                <div class="row">
-                    <div class="con-title col-12">
-                        <h2>Show Learning Path <span>of a Subject</span></h2>
-                    </div>
 
-                </div>
-                <div class="col-12" style="display: flex;align-items: center;">
-                    <!-- start select -->
-                        <select id="preRequisite" name="select" class="browser-default" style="font-size: 16px;width: 17rem;">
-                          <option value='subjectName' selected>Subject Name</option>
-                          <option value='syllabusName'>Syllabus Name</option>
-                        </select>
-                    <!--end select-->
-                    <form class="form-inline" style="width: 100%;padding-left: 3rem;">
-                        <div style="position: relative">
-                            <input type="text" name="type" value="preRequisite" hidden="">
-                            <input class="" id="search" style="height: 5rem;font-size: unset" type="text" placeholder="Search">
-                            <span style="position: absolute; top:20px; right:10px" class="fa fa-search" onclick="searchPreRequisite()"></span>
+<!--        Start Content-->        
+        <div class="container-fluid mb-5">
+            <h1 style="text-align: center; margin-top: 2rem; ">Show Learning Path of a Subject</h1>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                    <form class="form-inline" style="position: relative;display: flex;">
+
+                        <div class="form-group" style="flex-grow: 1;">
+                            <input id="search" style="width: 100%; border-radius: unset;" type="text" class="form-control"
+                                placeholder="Search for Subject Name">
                         </div>
+                        <button style="position: absolute; right: 0; border-radius: unset;" type="button" onclick="searchPreRequisite()"
+                            class="btn btn-default"><i class="fa fa-search"></i></button>
                     </form>
                 </div>
             </div>
-
-            <div class="container pad-bot-70" id="root">
+             <div class="container-fluid" id="root">
                 
             </div>
-        </section> 
+        </div>
+<!--End Content-->
 
         <jsp:include page="../footer/footer.jsp"/>
 
         <script>
             let request;
+            
+            $('#search').keyup(function (e) {
+                if (e.keyCode === 13) {
+                    searchPreRequisite();
+                }
+            });
+            
             function searchPreRequisite() {
                 //                start select
-                let select = document.getElementById('preRequisite');
-                let selectValue = select.value;
-                select.addEventListener('change',function(){
-                    selectValue = select.value;
-                });
+//                let select = document.getElementById('preRequisite');
+//                let selectValue = select.value;
+//                select.addEventListener('change',function(){
+//                    selectValue = select.value;
+//                });
 //                end select
                 let key = document.getElementById("search").value;
-                let url = './search?type=preRequisite&keysearch=' + key + '&filter=' +selectValue;
+                let url = './search?type=preRequisite&keysearch=' + key + '&filter=subjectname' ;
 
 
                 if (window.XMLHttpRequest) {
@@ -138,7 +139,7 @@
                     request.open("POST", url, true);
                     request.send("POST");
                 } catch (e) {
-                    alert("Unable to connect server")
+                    alert("Unable to connect server");
                 }
             }
 
@@ -148,15 +149,6 @@
                     document.getElementById("root").innerHTML = val;
                 }
             }
-        </script>
-
-        
-        <script>
-             $('#search').keyup(function (e) {
-                if (e.keyCode === 13) {
-                    searchPreRequisite();
-                }
-            });
         </script>
         
          <!-- JavaScript Libraries -->

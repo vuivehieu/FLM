@@ -33,9 +33,9 @@
                           in</button>
                         <a class="text-muted" href="#!" data-dismiss="modal" data-toggle="modal" data-target="#modal3" onclick="closeModal1()">Forgot password?</a>
                       </div>
-
+                            <p class="mb-2 me-2" style="text-align: center;">Don't have an account?</p>
                       <div class="d-flex align-items-center justify-content-center pb-4">
-                        <p class="mb-0 me-2">Don't have an account?</p>
+<!--                        <p class="mb-0 me-2">Don't have an account?</p>-->
                         
                         <a class="" href="#!" data-dismiss="modal" data-toggle="modal" data-target="#modal2" onclick="closeModal1()">Create new</a>
                         

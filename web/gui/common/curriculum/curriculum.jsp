@@ -92,10 +92,11 @@
                                 <option value="curName">Name</option>
                             </select>
                             <div class="form-group" style="flex-grow: 1;">
+                                <input type="text" name="type" value="syllabus" hidden>
                                 <input style="width: 100%; border-radius: unset;" type="text" class="form-control" id="search" value="${key}"
                                     placeholder="Search">
                             </div>
-                            <button style="position: absolute; right: 0; border-radius: unset;" type="submit" onclick="searchCurriculum()"
+                            <button style="position: absolute; right: 0; border-radius: unset;" type="button" onclick="searchCurriculum()"
                                 class="btn btn-default"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
@@ -156,29 +157,20 @@
                                 </c:forEach>
                             </tbody>
                         </table>
+
                         <ul class="pagination" style="display: flex; justify-content: center;">
-<!--                            <li style="border: 1px solid #dee2e6; margin-right: 5px;padding:5px; width: 30px;text-align: center;"><a style="color: #ff6634;" href="#">1</a></li>
-                            <li style="border: 1px solid #dee2e6; margin-right: 5px;padding:5px; width: 30px;text-align: center;" onclick="changePage(2)">2</li>
-                            <li style="border: 1px solid #dee2e6; margin-right: 5px;padding:5px; width: 30px;text-align: center;"><a style="color: #ff6634;" href="#">3</a></li>
-                            <li style="border: 1px solid #dee2e6; margin-right: 5px;padding:5px; width: 30px;text-align: center;"><a style="color: #ff6634;" href="#">4</a></li>
-                            <li style="border: 1px solid #dee2e6; margin-right: 5px;padding:5px; width: 30px;text-align: center;"><a style="color: #ff6634;" href="#">5</a></li>-->
-                            
-                            <li class="${(page == 1 ? 'disabled' : 'waves-effect')}"> 
-                                <a onclick="changePage('${page - 1}')">
-                                    <i class='fa fa-angle-left' aria-hidden='true'></i>
-                                </a>
+                          <li class="page-item  ${(page == 1 ? 'disabled' : 'waves-effect')}">
+                            <a class="page-link" href="#" tabindex="-1" onclick="changePage('${page - 1}')"><i class='fa fa-angle-left' aria-hidden='true'></i></a>
+                          </li>
+
+                          <c:forEach begin="1" end="${numberOfPage}" var="i">
+                            <li class="page-item ${page == i ? 'active' : 'waves-effect'}" >
+                                <a class="page-link" href="#" onclick="changePage('${i}')">${i}<span class="sr-only">(current)</span></a>
                             </li>
-                            <c:forEach begin="1" end="${numberOfPage}" var="i">
-                                <li class=" ${page == i ? 'active' : 'waves-effect'}">
-                                    <a onclick="changePage('${i}')">${i} </a>
-                                </li>
-                            </c:forEach>
-                            <li class="${(page == numberOfPage ? 'disabled' : 'waves-effect')}">
-                                <a onclick="changePage('${page + 1}')">
-                                    <i class='fa fa-angle-right' aria-hidden='true'></i>
-                                </a>
-                            </li>
-                            
+                          </c:forEach>
+                          <li class="page-item ${(page == numberOfPage ? 'disabled' : 'waves-effect')}">
+                            <a class="page-link" onclick="changePage('${page + 1}')" href="#"><i class='fa fa-angle-right' aria-hidden='true'></i></a>
+                          </li>
                         </ul>
                     </div>
                 </c:if>
@@ -220,7 +212,6 @@
                 let key = document.getElementById("search").value;
                 let selectValue = document.getElementById('sel').value;
                 let url = './search?type=curriculum&keysearch=' + key + '&filter=' +selectValue + '&page=' + page;
-//                let url = './search?type=curriculum&keysearch=&filter=&page=' + page;
 
 
                 if (window.XMLHttpRequest) {
