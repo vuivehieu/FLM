@@ -65,7 +65,7 @@ public class ChangeAvatarController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        request.getRequestDispatcher("gui/common/changeAvatar.jsp").forward(request, response);
+        request.getRequestDispatcher("/gui/common/changeAvatar.jsp").forward(request, response);
     }
 
     /**

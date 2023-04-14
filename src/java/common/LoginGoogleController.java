@@ -94,7 +94,7 @@ public class LoginGoogleController extends HttpServlet {
 //            out.println("family_name: " + accountGoogle.getFamily_name());
 //            out.println("link: " + accountGoogle.getLink());
 //            out.println("picture: " + accountGoogle.getPicture());
-        String userName = "loginGoogle";
+        String userName = accountGoogle.getId();
         String fullName = accountGoogle.getName();
         String email = accountGoogle.getEmail();
         String password = "";

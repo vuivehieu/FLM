@@ -149,7 +149,6 @@
                                         </c:if>
                                     </div>
                                     <h5>1.3. Job positions after graduation:<br>Graduates of Software Engineering can choose for themselves the following jobs:</h5>
-                                    <p>Lười :></p>
 
                                     <div>
                                         <a class="btn btn-warning color-warning-custom" href="poDetailView?id=${cur.curid}" role="button">View PO</a>
@@ -159,7 +158,7 @@
                                     </div>
                                 </div>
                                 <div class="cor-p5">
-                                    <h3>Chưa Nghĩ Ra Nó Là Gì :></h3>
+                                    <h3>Subject - PLO - Mapping</h3>
                                     <ul class="nav nav-tabs">
                                         <li class="active">
                                             <a data-toggle="tab" href="#subject"><img src="images/icon/cor4.png" alt=""> <span>Subject</span></a>

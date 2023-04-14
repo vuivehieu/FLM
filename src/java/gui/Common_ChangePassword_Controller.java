@@ -58,7 +58,8 @@ public class Common_ChangePassword_Controller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("gui/common/changePassword.jsp").forward(request, response);
+        
+        request.getRequestDispatcher("/gui/common/changePassword.jsp").forward(request, response);
    } 
 
     /** 
@@ -81,7 +82,7 @@ public class Common_ChangePassword_Controller extends HttpServlet {
             ad.changePassword(newPassword, a);
         }
         request.setAttribute("message", "Change Password Success !");
-        request.getRequestDispatcher("gui/common/changePassword.jsp").forward(request, response);
+        request.getRequestDispatcher("/gui/common/changePassword.jsp").forward(request, response);
     }
 
     /** 

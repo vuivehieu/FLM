@@ -52,7 +52,7 @@
             <![endif]-->
 
         <style>
-            .descripCur {
+/*            .descripCur {
                 overflow: hidden;
                 text-overflow: ellipsis;
                 line-height: 25px;
@@ -60,8 +60,13 @@
                 height: 75px;
                 display: -webkit-box;
                 -webkit-box-orient: vertical;
+            }*/
+
+            .pad-bot-70 {
+                padding-left: 5rem;
+                padding-right: 5rem;
             }
-            
+
             ul.ul-custom > li { 
                 padding-left: 2rem;
             }

@@ -52,11 +52,11 @@
           rel="stylesheet"
         />
         <style>
-            pad-bot-70 {
+            .pad-bot-70 {
                 padding-left: 5rem;
                 padding-right: 5rem;
             }
-            .descripCur {
+/*            .descripCur {
                 overflow: hidden;
                 text-overflow: ellipsis;
                 line-height: 25px;
@@ -64,7 +64,7 @@
                 height: 90px;
                 display: -webkit-box;
                 -webkit-box-orient: vertical;
-            }
+            }*/
             .gradient-custom-2 {
         /* fallback for old browsers */
         background: #fccb90;
