@@ -125,22 +125,22 @@
                                                     <th>Status</th>
                                                     <th></th>
                                                 </tr>
-                                               <c:forEach items="${list}" var="combo">
-                                                            <tr>
-                                                                <td>${combo.cid}</td>
-                                                                <td>${custom.getCurriculumCodeByComboID(combo.cid)}</td>
-                                                                <td>${combo.tag}</td>
-                                                                <td>
-                                                                    <a href="#">
-                                                                        <span class="list-enq-name">${combo.comboName_EN}</span>
-                                                                        <span class="list-enq-city">${combo.comboName_VI}</span>
-                                                                    </a>
-                                                                </td>
-                                                                <td>${custom.getDateFormat('dd/MM/yyyy', combo.createDate) }</td>
-                                                                <td>
-                                                                    <span class="badge ${combo.isActive ? 'badge-success' : 'badge-danger'}">${combo.isActive ? 'Active': 'Inactive'}</span>
-                                                                </td>
-                                                                <td>
+                                                <c:forEach items="${list}" var="combo">
+                                                    <tr>
+                                                        <td>${combo.cid}</td>
+                                                        <td>${custom.getCurriculumCodeByComboID(combo.cid)}</td>
+                                                        <td>${combo.tag}</td>
+                                                        <td>
+                                                            <a href="#">
+                                                                <span class="list-enq-name">${combo.comboName_EN}</span>
+                                                                <span class="list-enq-city">${combo.comboName_VI}</span>
+                                                            </a>
+                                                        </td>
+                                                        <td>${custom.getDateFormat('dd/MM/yyyy', combo.createDate) }</td>
+                                                        <td>
+                                                            <span class="badge ${combo.isActive ? 'badge-success' : 'badge-danger'}">${combo.isActive ? 'Active': 'Inactive'}</span>
+                                                        </td>
+                                                        <td>
                                                             <button id="btnDetail" onclick="handleUpdate(${combo.cid})"
                                                                     class="btn text-primary rounded-circle m-0 btn-sm btn-icon"
                                                                     style="height: 0px !important;"><i
@@ -152,8 +152,8 @@
                                                                     style="height: 0px !important;"><i
                                                                     class="material-icons">delete</i></button>
                                                         </td>
-                                                            </tr>
-                                                        </c:forEach>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>
