@@ -48,108 +48,40 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
           rel="stylesheet"
         />
+        
+        <style>
+            .gradient-custom-2 {
+                /* fallback for old browsers */
+                background: #fccb90;
+
+                /* Chrome 10-25, Safari 5.1-6 */
+                background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+
+                /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+                }
+
+                @media (min-width: 768px) {
+                .gradient-form {
+                height: 100vh !important;
+                }
+                }
+                @media (min-width: 769px) {
+                .gradient-custom-2 {
+                border-top-right-radius: .3rem;
+                border-bottom-right-radius: .3rem;
+                }
+            }
+        </style>
 
     </head>
 
     <body>
 
         <jsp:include page="../heading/heading.jsp"/>
-<!--        <section class="pop-cour">
-            <div class="container com-sp pad-bot-70">
-                <div class="row">
-                    <div class="con-title col-12">
-                        <h2>Curriculum <span>Management</span></h2>
-                    </div>
-                </div>
-
-                <div class="col-12" style="display: flex;align-items: center;">
-                     start select 
-                        <select id="sel" name="select" class="browser-default" style="font-size: 16px;width: 18rem;">
-                          <option value='curCode' selected>Curriculum Code</option>
-                          <option value='curName'>Name</option>
-                        </select>
-                    end select
-                    
-                    <form class="form-inline" style="width: 100%;padding-left: 3rem;">
-                        <div style="position: relative">
-                            <input type="text" name="type" value="curriculum" hidden="">
-                            neu muon go 1 chu thi search 1 chu thi them ham nay vao o input oninput="searchCurriculum()"
-                            <input class="" name="keysearch" id="search" value="${key}" style="height: 5rem;font-size: unset" type="text" placeholder="Search" >
-                            <span style="position: absolute; top:20px; right:10px" class="fa fa-search" onclick="searchCurriculum()"></span>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <div class="container-fluid pad-bot-70 p-custom" id="root">
-                <c:if test="${!list.isEmpty() && list != null}">
-                    <div class='row'>
-                        <h5 style='margin-left: 5rem;'>${size} Curriculum(es) found</h5>
-                        <table class='table table-hover'>
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th width="10%">CurriculumCode</th>
-                                    <th>Name</th>
-                                    <th>Description</th>
-                                    <th>DecisionNo<br>MM/dd/yyyy</th>
-                                    <th>Total Credit</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <jsp:useBean class="DAL.DAO" id="dao"/>
-                                <jsp:useBean class="Custom.ForJSP" id="custom"/>
-                                <c:set var="index" value="${start + 1}"/>
-                                <c:forEach items="${list}" var="item">
-                                    <tr>
-                                        <td>${index}</td>
-                                        <td>${item.curCode}</td>
-                                        <td>
-                                            <a href="curriculumDetails?curid=${item.curid}">
-                                                <span class='list-enq-name'>${item.curName_EN} ( ${item.curName_VI} )</span>
-                                            </a>
-                                        </td>
-                                        <td class="descripCur">${item.description}</td>
-                                        <td>
-                                            <a href="decision?decisionNo=${item.decision.decisionNo}" >
-                                                <span class="list-enq-name">${item.decision.decisionNo}</span>
-                                                <span class="list-enq-city">${custom.getDateFormat('MM/dd/yyyy', item.decision.approvedDate)}</span>
-                                            </a>
-                                        </td>
-                                        <td>${item.totalCredit}</td>
-                                    </tr>
-                                    <c:set var="index" value="${index + 1}"/>
-
-                                </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class='pg-pagina'>
-                        <ul class='pagination'>
-                            <li class="${(page == 1 ? 'disabled' : 'waves-effect')}"> 
-                                <a onclick="changePage('${page - 1}')">
-                                    <i class='fa fa-angle-left' aria-hidden='true'></i>
-                                </a>
-                            </li>
-                            <c:forEach begin="1" end="${numberOfPage}" var="i">
-                                <li class=" ${page == i ? 'active' : 'waves-effect'}">
-                                    <a onclick="changePage('${i}')">${i} </a>
-                                </li>
-                            </c:forEach>
-                            <li class="${(page == numberOfPage ? 'disabled' : 'waves-effect')}">
-                                <a onclick="changePage('${page + 1}')">
-                                    <i class='fa fa-angle-right' aria-hidden='true'></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </c:if>
-            </div>
-        </section> -->
-                            
+        
         <!--Start Content-->
-        <div class="container-fluid" id="root">
+        <div class="container-fluid" >
             <h1 style="text-align: center; margin-top: 2rem;">Curriculum Management</h1>
                 <div class="row" style="margin-top: 30px;">
                     <div class="col-md-6"></div>
@@ -169,8 +101,8 @@
                     </div>
                 </div>
                                     
-                <%--<c:if test="${!list.isEmpty() && list != null}">--%>
-                    <div class="table-responsive" style="margin-top: 30px;">
+                <c:if test="${!list.isEmpty() && list != null}">
+                    <div class="table-responsive" style="margin-top: 30px;" id="root">
                         <table class="table table-bordered cart_summary">
                             <thead>
                                 <tr style="background-color: rgb(185, 182, 182);">
@@ -196,7 +128,6 @@
                                         </td>
                                         <td>
                                             <a href="curriculumDetails?curid=${item.curid}">
-<!--                                                <span class='list-enq-name'>${item.curName_EN} ( ${item.curName_VI} )</span>-->
                                                 <p style="font-size: 18px; font-weight: 500; color: #ff6634" class="product-name">
                                                     ${item.curName_EN}
                                                 </p>
@@ -210,7 +141,6 @@
                                             </p>
                                         </td>
                                         <td class="qty">
-                                            
                                             <a href="decision?decisionNo=${item.decision.decisionNo}" >
                                                 <p style="font-size: 18px; font-weight: 500; color: #ff6634" class="product-name">
                                                     ${item.decision.decisionNo}
@@ -227,31 +157,31 @@
                             </tbody>
                         </table>
                         <ul class="pagination" style="display: flex; justify-content: center;">
-                            <li style="border: 1px solid #dee2e6; margin-right: 5px;padding:5px; width: 30px;text-align: center;"><a style="color: #ff6634;" href="#">1</a></li>
+<!--                            <li style="border: 1px solid #dee2e6; margin-right: 5px;padding:5px; width: 30px;text-align: center;"><a style="color: #ff6634;" href="#">1</a></li>
                             <li style="border: 1px solid #dee2e6; margin-right: 5px;padding:5px; width: 30px;text-align: center;" onclick="changePage(2)">2</li>
                             <li style="border: 1px solid #dee2e6; margin-right: 5px;padding:5px; width: 30px;text-align: center;"><a style="color: #ff6634;" href="#">3</a></li>
                             <li style="border: 1px solid #dee2e6; margin-right: 5px;padding:5px; width: 30px;text-align: center;"><a style="color: #ff6634;" href="#">4</a></li>
-                            <li style="border: 1px solid #dee2e6; margin-right: 5px;padding:5px; width: 30px;text-align: center;"><a style="color: #ff6634;" href="#">5</a></li>
+                            <li style="border: 1px solid #dee2e6; margin-right: 5px;padding:5px; width: 30px;text-align: center;"><a style="color: #ff6634;" href="#">5</a></li>-->
                             
-<!--                            <li class="${(page == 1 ? 'disabled' : 'waves-effect')}"> 
+                            <li class="${(page == 1 ? 'disabled' : 'waves-effect')}"> 
                                 <a onclick="changePage('${page - 1}')">
                                     <i class='fa fa-angle-left' aria-hidden='true'></i>
-                                </a>s
+                                </a>
                             </li>
                             <c:forEach begin="1" end="${numberOfPage}" var="i">
-                                <li class=" ${page == i ? 'active' : 'waves-effect'}" style="border: 1px solid #dee2e6; margin-right: 5px;padding:5px; width: 30px;text-align: center;">
-                                    <a style="color: #ff6634;" onclick="changePage('${i}')">${i} </a>
+                                <li class=" ${page == i ? 'active' : 'waves-effect'}">
+                                    <a onclick="changePage('${i}')">${i} </a>
                                 </li>
                             </c:forEach>
                             <li class="${(page == numberOfPage ? 'disabled' : 'waves-effect')}">
                                 <a onclick="changePage('${page + 1}')">
                                     <i class='fa fa-angle-right' aria-hidden='true'></i>
                                 </a>
-                            </li>-->
+                            </li>
                             
                         </ul>
                     </div>
-                <%--</c:if>--%>
+                </c:if>
             </div>
         <!--End Content-->
         
@@ -289,8 +219,8 @@
             function changePage(page) {
                 let key = document.getElementById("search").value;
                 let selectValue = document.getElementById('sel').value;
-//                let url = './search?type=curriculum&keysearch=' + key + '&filter=' +selectValue + '&page=' + page;
-                let url = './search?type=curriculum&keysearch=&filter=&page=' + page;
+                let url = './search?type=curriculum&keysearch=' + key + '&filter=' +selectValue + '&page=' + page;
+//                let url = './search?type=curriculum&keysearch=&filter=&page=' + page;
 
 
                 if (window.XMLHttpRequest) {
