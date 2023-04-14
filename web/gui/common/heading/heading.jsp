@@ -2,91 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<style>
-    .dropdown #sub-dropdown {
-        display: none; /* Ẩn bảng menu ban đầu */
-    }
-
-    .dropdown:hover #sub-dropdown {
-        display: block; /* Hiển thị bảng menu khi hover vào */
-    }
-
-</style>
-
-<!-- MOBILE MENU -->
-<section>
-    <div class="ed-mob-menu">
-        <div class="ed-mob-menu-con">
-            <div class="ed-mm-left">
-                <div class="wed-logo">
-                    <a href="http://localhost:9999/SWP391-G2/home">
-                        <img style="height: calc(100px-12px)" src="images/Logo_Đại_học_FPT.png" alt="" />
-                    </a>
-                </div>
-            </div>
-            <div class="ed-mm-right">
-                <div class="ed-mm-menu">
-                    <a href="#!" class="ed-micon"><i class="fa fa-bars"></i></a>
-                    <div class="ed-mm-inn">
-                        <a href="#!" class="ed-mi-close"><i class="fa fa-times"></i></a>
-                        <h4>Search</h4>
-                        <ul>
-                            <li><a href="search?type=curriculum">All Curriculum</a></li>
-                            <li><a href="search?type=syllabus">All Syllabus</a></li>
-                            <li><a href="search?type=preRequisite">All PreRequisite</a></li>
-                            <li><a href="search?type=corollary">All CorollarySubject</a></li>
-                        </ul>
-                        <h4>User Account</h4>
-                        <ul>
-                            <c:if test="${account == null}">
-                                <li><a href="#!" data-toggle="modal" data-target="#modal1">Sign In</a></li>
-                                <li><a href="#!" data-toggle="modal" data-target="#modal2">Register</a></li>
-                            </c:if>
-                            <c:if test="${account != null}">
-                                <li><a href="profile">Profile</a></li>
-                                <li><a href="profile">Change Password</a></li>
-                                <li><a href="profile">Change Avatar</a></li>
-                                <li><a href="logout">Logout</a></li>
-                            </c:if>  
-                        </ul>
-                        <h4>All Pages</h4>
-                        <ul>
-                            <li><a href="index-2.html">Home</a></li>
-                            <li><a href="about.html">About us</a></li>
-                            <li><a href="admission.html">Admission</a></li>
-                            <li><a href="all-courses.html">All courses</a></li>
-                            <li><a href="course-details.html">Course details</a></li>
-                            <li><a href="awards.html">Awards</a></li>
-                            <li><a href="seminar.html">Seminar</a></li>
-                            <li><a href="events.html">Events</a></li>
-                            <li><a href="event-details.html">Event details</a></li>
-                            <li><a href="event-register.html">Event register</a></li>
-                            <li><a href="contact-us.html">Contact us</a></li>
-                        </ul>
-                        <h4>User Profile</h4>
-                        <ul>
-                            <li><a href="dashboard.html">User profile</a></li>
-                            <li><a href="db-courses.html">Courses</a></li>
-                            <li><a href="db-exams.html">Exams</a></li>
-                            <li><a href="db-profile.html">Prfile</a></li>
-                            <li><a href="db-time-line.html">Time line</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!--HEADER SECTION-->
-<section>
-    <!-- TOP BAR -->
+<!--<section>
+     TOP BAR 
     <style>
         .chip {
             margin-top: 0.5rem;
         }
 
-    </style>
+    </style>-->
 <!--    <div class="ed-top">
         <div class="container-fluid">
             <div class="row">
@@ -146,11 +70,11 @@
 
 
 <!-- Navbar -->
-<div class="ed-top">
+<!--<div class="ed-top">
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
-   <!--Container wrapper--> 
+   Container wrapper 
   <div class="container-fluid">
-     <!--Toggle button--> 
+     Toggle button 
     <button
       class="navbar-toggler"
       type="button"
@@ -163,9 +87,9 @@
       <i class="fas fa-bars"></i>
     </button>
 
-     <!--Collapsible wrapper--> 
+     Collapsible wrapper 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-       <!--Navbar brand--> 
+       Navbar brand 
       <a class="navbar-brand mt-2 mt-lg-0" href="home">
         <img
           src="images/Logo_Đại_học_FPT.png"
@@ -174,7 +98,7 @@
           loading="lazy"
         />
       </a>
-       <!--Left links--> 
+       Left links 
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item" style="font-weight: bold;">
           <a class="nav-link" href="search?type=curriculum">All Curriculum</a>
@@ -192,11 +116,11 @@
         </li>
       </ul>
   
-       <!--Left links--> 
+       Left links 
     </div>
-     <!--Collapsible wrapper--> 
+     Collapsible wrapper 
 
-     <!--Right elements--> 
+     Right elements 
     <c:if test="${account == null}">
     <div class="d-flex align-items-center">
         <button type="button" class="btn btn-dark me-3">
@@ -208,7 +132,7 @@
     </div>
     </c:if>
     <c:if test="${account != null}">
-          <!--Avatar--> 
+          Avatar 
         <div class="dropdown" >
             <a
                 class="dropdown-toggle d-flex align-items-center hidden-arrow"
@@ -258,19 +182,58 @@
           </div>
         </div>
     </c:if>
-     <!--Right elements--> 
+     Right elements 
   </div>
-   <!--Container wrapper--> 
+   Container wrapper 
 </nav>
 </div>
-<!-- Navbar -->
+ Navbar 
 
-</section>
-<div style="position: fixed; top: 0; right: 0;" id="toastMessage">
-
-
-</div>
+</section>-->
 <!--END HEADER SECTION-->
+
+
+<!-- Topbar Start -->
+    <div class="py-3 container-fluid d-none d-md-block" style="background: #ff6634;">
+    </div>
+    <!-- Topbar End -->
+
+    <!-- Navbar Start -->
+    <div class="p-0 container-fluid position-relative nav-bar">
+        <div class="p-0 container-lg position-relative px-lg-3" style="z-index: 9;">
+            <nav class="bg-white shadow navbar navbar-expand-lg navbar-light p-lg-0">
+                <a href="#" class="navbar-brand d-block d-lg-none">
+                    <!--<h1 class="m-0 display-4 text-primary"><span class="text-secondary">i</span>CREAM</h1>-->
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="py-0 ml-auto navbar-nav">
+                        <a href="search?type=curriculum&keysearch=&filter=curCode" class="nav-item nav-link active">All Curriculum</a>
+                        <c:if test="${account != null}">
+                            <a href="search?type=syllabus&keysearch=&filter=subjectcode" class="nav-item nav-link">All Syllabus</a>
+                        </c:if>
+                        <a href="search?type=preRequisite&keysearch=&filter=subjectName" class="nav-item nav-link">All PreRequisite</a>
+                    </div>
+                    <a href="home" class="mx-5 navbar-brand d-none d-lg-block"
+                        style="width:100px; height: 100%; overflow: hidden;">
+                        <img style="width: 100%; height: 100%;" src="./fe/img/Logo_Đại_học_FPT.png" alt="">
+                    </a>
+                    <div class="py-0 mr-auto navbar-nav">
+                        <a href="search?type=corollary&keysearch=&filter=subjectcode" class="nav-item nav-link">All Corollary</a>
+                        <c:if test="${account == null}">
+                            <a href="#!" data-toggle="modal" data-target="#modal1" class="nav-item nav-link">Sign In</a>
+                            <a href="#!" data-toggle="modal" data-target="#modal2" class="nav-item nav-link">Sign Up</a>
+                        </c:if>
+                        
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
 
 <!--SECTION LOGIN, REGISTER AND FORGOT PASSWORD-->
 <jsp:include page="login.jsp"/>

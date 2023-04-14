@@ -9,10 +9,9 @@
           <div class="row g-0">
             <div class="col-lg-6">
               <div class="card-body p-md-5 mx-md-4">
-
+                  
+                <a href="#" id="btn-close" class="pop-close" data-dismiss="modal"><img src="images/cancel.png" alt="" /></a>
                 <div class="text-center">
-<!--                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
-                    style="width: 185px;" alt="logo">-->
                   <h4 class="mt-1 mb-5 pb-1">Create an Account</h4>
                 </div>
 
@@ -74,8 +73,6 @@
                 <div class="input-field s12" style="text-align: center;"> <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal1" onclick="closeModal2()">Are you a already member ? Login</a> </div>
 
                   <!--end form xac nhan ma code-->  
-                <a href="#" id="btn-close-2" class="pop-close" data-dismiss="modal"><img src="images/cancel.png" alt="" />
-                </a>
               </div>
             </div>
             <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
