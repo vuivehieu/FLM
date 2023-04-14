@@ -1,113 +1,130 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<!DOCTYPE html>
-<html lang="en">
-
-
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c"      uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head>
-        <title>ADMIN - Combo List</title>
-        <!-- META TAGS -->
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="EEducation master is one of the best eEducational html template, it's suitable for all eEducation websites like university,college,school,online eEducation,tution center,distance eEducation,computer eEducation">
-        <meta name="keyword" content="eEducation html template, university template, college template, school template, online eEducation template, tution center template">
-        <!-- FAV ICON(BROWSER TAB ICON) -->
-        <link rel="shortcut icon" href="images/fav.ico" type="image/x-icon">
-        <!-- GOOGLE FONT -->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700%7CJosefin+Sans:600,700" rel="stylesheet">
-        <!-- FONTAWESOME ICONS -->
-        <link rel="stylesheet" href="css/font-awesome.min.css">
-        <!-- ALL CSS FILES -->
-        <link href="css/materialize.css" rel="stylesheet">
-        <link href="css/bootstrap.css" rel="stylesheet" />
-        <link href="css/style.css" rel="stylesheet" />
-        <!-- RESPONSIVE.CSS ONLY FOR MOBILE AND TABLET VIEWS -->
-        <link href="css/style-mob.css" rel="stylesheet" />
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="js/html5shiv.js"></script>
-            <script src="js/respond.min.js"></script>
-            <![endif]-->
-        <!--        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css"/>
-                <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap4.min.css"/>
-                <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.bootstrap4.min.css"/>-->
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
+        <link rel="stylesheet" href="<c:url value="/admin-template/css/vendors.bundle.min.css"/>"/>
+        <link rel="stylesheet" href="admin-template/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css"/>
+        <link rel="stylesheet" href="admin-template/css/main.bundle.min.css"/>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js" defer="defer"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+            <title>Syllabus Management</title>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+            <script type="text/javascript">
+            </script>
+            <style type="text/css">
+                .table-filter-container{
+                    align-items: center
+                }
+                .filterDiv .row {
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    margin-left: 20px;
 
-        <style>
-            .app-search a {
-                top: 4px;
-                right: 4px
-            }
-            .app-search input {
-                color: unset;
-            }
-        </style>
+                }
+                .dataTables_paginate{
+                    width: 100%;
+                    text-align: center;
+                }
+                .dataTables_info{
+                    width: 100%;
+                    text-align: center;
+                    padding: 18px;
+                }
+                .userSearchTxt{
+                    width: 200px !important;
+                    height: 50px !important;
+                    font-size: 14px !important;
+                    margin-left: 450px !important;
+                    color: black !important;
+                }
+            </style>
     </head>
 
     <body>
-        <!--== MAIN CONTRAINER ==-->
-        <jsp:include page="../common/heading/heading.jsp"/>
+        <div class="app-admin-wrap-layout-1 sidebar-full sidebar-theme-slate">
+            <!--== MAIN CONTRAINER ==-->
+            <jsp:include page="../common/heading/heading.jsp"/>
 
-        <!--== BODY CONTNAINER ==-->
-        <div class="container-fluid sb2">
-            <div class="row">
-                <jsp:include page="../common/sidebar/sidebarLeft.jsp"/>
-
-                <!--== BODY INNER CONTAINER ==-->
-                <div class="sb2-2">
-                    <!--== breadcrumbs ==-->
-                    <div class="d-flex">
-                        <div class="sb2-2-2">
-                            <ul>
-                                <li><a href="dashboard"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-                                <li class="active-bre"><a> Syllabus List</a></li>
-                            </ul>
-                        </div>
-                        <div class="float-right">
-                            <a href="syllabusAdd"><button class="btn btn-warning">Add Syllabus</button></a>
+            <!--== BODY CONTNAINER ==-->
+            <div class="main-content-wrap">
+                <!-- Start::Main header  -->
+                <header class="main-header bg-card d-flex flex-row justify-content-between align-items-center px-lg">
+                    <!-- Start::Header menu-->
+                    <!-- End::Header menu-->
+                </header>
+                <div class="main-content-body">
+                    <!-- Start:: content (Your custom content)  -->
+                    <div class="subheader px-lg" style="padding: 0">
+                        <div class="subheader-container">
+                            <div class="subheader-main">
+                                <nav aria-label="breadcrumb" class="ul-breadcrumb">
+                                    <ol class="ul-breadcrumb-items">
+                                        <li class="breadcrumb-home"><a href="#"> <i class="material-icons"
+                                                                                    >home</i></a></li>
+                                        <li class="breadcrumb-item"><a href="#">FLM</a></li>
+                                        <li class="breadcrumb-item active"><a href="#">Syllabus Management</a></li>
+                                    </ol>
+                                </nav>
+                            </div>
                         </div>
                     </div>
-
-
-                    <!--== User Details ==-->
-                    <div class="sb2-2-3">
+                    <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="box-inn-sp">
-                                    <div class="inn-title">
-                                        <h4>Syllabus List</h4>   
-                                    </div>
-                                    <div class="tab-inn" >
-                                        <div class="table-responsive table-desi">
-                                            <div class="row">
-                                                <div class="col-md-6 col-sm-6"></div>
-                                                <div class="col-md-6 col-sm-6 mob-hide" style="padding-right: 3rem">
-                                                    <form class="app-search">
-                                                        <input type="text" placeholder="Search..." id="search" name="keySearch" value="${key}" oninput="searchSyllabus()">
-                                                        <a href="#"><i class="fa fa-search"></i></a>
-                                                    </form>
-                                                </div>
+                            <div class="col-lg-12">
+                                <div class="row align-items-center">
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="input-group" style="position: relative;width: 25%;margin-left: auto;margin-bottom: 15px;float: left">
+                                            <!--                                    <select class="form-control js-basic-example2" id="filterType" style="margin-left:-2%;background: #cfcfcf;border-radius: 20px;padding: 10px 20px;" onchange="filter()">-->
+                                            <!--                                        <option value="application" ${filter == 'application' ? 'selected' : ''}><spring:message code="file.media"/></option>-->
+                                            <!--                                        <option value="image" ${filter == 'image' ? 'selected' : ''}><spring:message code="file.file"/></option>-->
+                                            <!--                                    </select>-->
+                                            <div class="input-group-append" style="position: absolute;right: 0;z-index: 10;">
                                             </div>
-                                            <jsp:useBean class="Custom.ForJSP" id="custom" />
-                                            <div id="root">
-                                                <table id="" class="table table-hover" style="width:100%">
-                                                    <thead>
-                                                        <tr>
-                                                            <th onclick="sortByType('${sort == "" ? 'id_down' : sort eq 'id_up' ? 'id_down': 'id_up'}')" width="5%" >ID <span class="fa ${sort == "" ? 'fa-angle-up' : sort eq 'id_up' ? 'fa-angle-up' : 'fa-angle-down'}"></span></th>
-                                                            <th onclick="sortByType('${sort == "" ? 'code_down' : sort eq 'code_up' ? 'code_down': 'code_up'}')">SubjectCode <span class="fa ${sort == "" ? 'fa-angle-up' : sort eq 'code_up' ? 'fa-angle-up' : 'fa-angle-down'}"></span></th>
-                                                            <th onclick="sortByType('${sort == "" ? 'name_down' : sort eq 'name_up' ? 'name_down': 'name_up'}')">Syllabus Name <span class="fa ${sort == "" ? 'fa-angle-up' : sort eq 'name_up' ? 'fa-angle-up' : 'fa-angle-down'}"></span></th>
-                                                            <!--<th onclick="sortByType('${sort == "" ? 'date_down' : sort eq 'date_up' ? 'date_down': 'date_up'}')" width="10%" > <span class="fa ${sort == "" ? 'fa-angle-up' : sort eq 'date_up' ? 'fa-angle-up' : 'fa-angle-down'}"></span></th>-->
-                                                            <th >DecisionNo</th>
-                                                            <th>Active</th>
-                                                            <th>Approved</th>
-                                                            <th></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <c:forEach items="${list}" var="item">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="input-group" style="position: relative;width: 75%;margin-left: auto;margin-bottom: 15px;">
+                                            <input class="form-control" id="textSearch" value="" type="text" placeholder="Search for result" style="margin-left:-2%;background: #cfcfcf;border-radius: 20px;padding: 10px 20px;">
+                                                <div class="input-group-append" style="position: absolute;right: 0;z-index: 10;">
+                                                    <button class="btn btn-secondary"  type="button">
+                                                        <i class="fa fa-search"></i>
+                                                    </button>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-header" style="background: #242939 ;display: flex;justify-content: space-between;">
+                                    <h2 class="p-1 m-0 text-16 font-weight-semi " style="color: white">Syllabus Management</h2>
+                                    <div style="color: white" class="p-1 m-0 text-16">
+                                        <i class="fa fa-plus" aria-hidden="true" data-toggle="modal" data-target="#ModalAdd" style="cursor: pointer"></i>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-body table-responsive">
+                                        <table id="example" style="text-align: center" class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Subject Code</th>
+                                                    <th>Syllabus Name(EN)</th>
+                                                    <th>Decision No</th>
+                                                    <th>Approved</th>
+                                                    <th>Status</th>
+                                                    <th></th>
+                                                </tr>
+                                               <c:forEach items="${list}" var="item">
                                                             <tr>
                                                                 <td>${item.slbid}</td>
                                                                 <td>${item.subjectCode}</td>
@@ -118,150 +135,35 @@
                                                                     </a>
                                                                 </td>
                                                                 <td>${item.decision.decisionNo}</td>
-                                                                <td><span class="fa ${item.isActive ? 'fa-check text-success' : 'fa-times text-danger'}"></span></td>
-                                                                <td><span class="fa ${item.isApproved ? 'fa-check text-success' : 'fa-times text-danger'}"></span></td>
-                                                                <td><a href="syllabusDetail?slbid=${item.slbid}">Edit</a></td>
+                                                                <td><span class="badge ${item.isActive ? 'badge-success' : 'badge-danger'}"></span></td>
+                                                                <td><span class="badge ${item.isApproved ? 'badge-success' : 'badge-danger'}"></span></td>
+                                                                <td>
+                                                            <button id="btnDetail" onclick="handleUpdate(${item.slbid})"
+                                                                    class="btn text-primary rounded-circle m-0 btn-sm btn-icon"
+                                                                    style="height: 0px !important;"><i
+                                                                    class="material-icons">edit</i>
+                                                                <div class="ripple-container"></div>
+                                                            </button>
+                                                            <button onclick="handleDelete(${item.slbid})"
+                                                                    class="btn text-danger rounded-circle m-0 btn-sm btn-icon"
+                                                                    style="height: 0px !important;"><i
+                                                                    class="material-icons">delete</i></button>
+                                                        </td>
                                                             </tr>
                                                         </c:forEach>
-                                                    </tbody>
-                                                </table>                                                
-
-                                                <div class="pg-pagina">
-                                                    <ul class="pagination">
-                                                        <li class="${page == 1 ? 'disabled' : 'waves-effect'}">
-                                                            <a onclick="changePage('${page - 1}', '${sort}')">Pre</a>
-                                                        </li>
-                                                        <c:forEach begin="1" end="${numberOfPage}" var="i">
-                                                            <li class=" ${page == i ? 'active' : 'waves-effect'}">
-                                                                <a onclick="changePage('${i}', '${sort}')">${i}</a>
-                                                            </li>
-                                                        </c:forEach>
-                                                        <li class="${page == numberOfPage ? 'disabled' : 'waves-effect'}">
-                                                            <a onclick="changePage('${page + 1}', '${sort}')">Next</a>
-                                                        </li>
-                                                    </ul>
-
-                                                </div>
-                                            </div>
-                                        </div>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!---->
+                    <!-- End:: Footer-->
                 </div>
-
+                <!-- End::Main header-->
             </div>
         </div>
-
-        <div id="message" hidden="">${sessionScope.message}</div>
-        <%
-              session.removeAttribute("message");
-        %>
-
-        <!--Import jQuery before materialize.js-->
-        <script src="js/main.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script>
-                                                                let request;
-                                                                function searchSyllabus() {
-                                                                    let key = document.getElementById("search").value;
-                                                                    let url = './syllabusList?keySearch=' + key;
-
-
-                                                                    if (window.XMLHttpRequest) {
-                                                                        request = new XMLHttpRequest();
-                                                                    } else if (window.ActiveXObject) {
-                                                                        request = new ActiveXObject("Microsoft.XMLHTTP");
-                                                                    }
-
-                                                                    try {
-                                                                        request.onreadystatechange = getInfo;
-                                                                        request.open("POST", url, true);
-                                                                        request.send("POST");
-                                                                    } catch (e) {
-                                                                        alert("Unable to connect server");
-                                                                    }
-                                                                }
-
-                                                                function changePage(page, sort) {
-                                                                    let key = document.getElementById("search").value;
-                                                                    let url = './syllabusList?keySearch=' + key + "&sort=" + sort + "&page=" + page;
-
-                                                                    if (window.XMLHttpRequest) {
-                                                                        request = new XMLHttpRequest();
-                                                                    } else if (window.ActiveXObject) {
-                                                                        request = new ActiveXObject("Microsoft.XMLHTTP");
-                                                                    }
-
-                                                                    try {
-                                                                        request.onreadystatechange = getInfo;
-                                                                        request.open("POST", url, true);
-                                                                        request.send("POST");
-                                                                    } catch (e) {
-                                                                        alert("Unable to connect server");
-                                                                    }
-                                                                }
-
-
-                                                                function sortByType(type) {
-                                                                    let key = document.getElementById("search").value;
-                                                                    let url = './syllabusList?keySearch=' + key + "&sort=" + type;
-
-
-                                                                    if (window.XMLHttpRequest) {
-                                                                        request = new XMLHttpRequest();
-                                                                    } else if (window.ActiveXObject) {
-                                                                        request = new ActiveXObject("Microsoft.XMLHTTP");
-                                                                    }
-
-                                                                    try {
-                                                                        request.onreadystatechange = getInfo;
-                                                                        request.open("POST", url, true);
-                                                                        request.send("POST");
-                                                                    } catch (e) {
-                                                                        alert("Unable to connect server");
-                                                                    }
-                                                                }
-
-                                                                function getInfo() {
-                                                                    if (request.readyState === 4) {
-                                                                        var val = request.responseText;
-                                                                        document.getElementById("root").innerHTML = val;
-                                                                    }
-                                                                }
-
-
-                                                                $(document).ready(function () {
-                                                                    if (document.getElementById('message').innerHTML !== '') {
-                                                                        $('.toast').toast('show');
-                                                                        $('.toast').addClass('in');
-
-                                                                        setTimeout(function () {
-                                                                            $('.toast').removeClass('in');
-
-                                                                        }, 2900);
-                                                                    }
-
-                                                                });
-
-
-                                                                $('#search').keyup(function (e) {
-                                                                    if (e.keyCode === 13) {
-                                                                        console.log("enter");
-                                                                        e.preventDefault();
-                                                                        searchCombo();
-                                                                    }
-                                                                });
-        </script>
-
-        <script src="js/materialize.min.js"></script>
-        <script src="js/custom.js"></script>
-
     </body>
-
 
 </html>

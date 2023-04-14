@@ -11,7 +11,6 @@ import java.util.List;
  * @author phanh
  */
 public class Curriculum {
-
     private int curid;
     private String curCode;
     private String curName_EN;
