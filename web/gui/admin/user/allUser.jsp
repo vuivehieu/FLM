@@ -11,110 +11,15 @@
         <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
-        <link rel="stylesheet" href="<c:url value="/admin-template/css/vendors.bundle.min.css"/>"/>
-        <link rel="stylesheet" href="admin-template/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css"/>
+        <link rel="stylesheet" href="admin-template/css/vendors.bundle.min.css" />
+        <link rel="stylesheet" href="admin-template/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css" />
         <link rel="stylesheet" href="admin-template/css/main.bundle.min.css"/>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js" defer="defer"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-            <title>User Management</title>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    var table = $('#example').DataTable({
-                        dom: 'lr<"table-filter-container">itp',
-                        initComplete: function (settings) {
-                            var api = new $.fn.dataTable.Api(settings);
-                            $('.table-filter-container', api.table().container()).append(
-                                    $('#filterDiv').detach().show(),
-                                    );
-                            $('#nameOrderSelect').on('change', function () {
-                                table.order([2, this.value]).draw();
-                                if (this.value === '') {
-                                    table.order().draw();
-                                }
-                            });
-                            $('#userSearchTxt').on('keyup', function () {
-                                table.search(this.value).draw();
-                            });
-                            $('#roleFilter').on('change', function () {
-                                table.columns(4).search(this.value).draw();
-                            });
-                            $('#statusFilter').on('change', function () {
-                                table.columns(5).search(this.value).draw();
-                            });
-                        },
-                        "lengthChange": false
-    //                    buttons: ['copy', 'excel', 'pdf', 'colvis'],
-                    });
-                    table.buttons().container()
-                            .appendTo('#example_wrapper .col-md-6:eq(0)');
-                    $('#editModal').on('show.bs.modal', function (event) {
-                        var button = $(event.relatedTarget); // Button that triggered the modal
-                        var status = button.data('status'); // Extract value from data-* attributes
-                        var role = button.data('role');
-                        var name = button.data('name');
-                        var username = button.data('username');
-                        var email = button.data('email');
-                        console.log(status);
-                        console.log(role);
-                        // Set the selected value of the "statusRadio" radio buttons based on the "data-status" attribute
-                        if (status === 1) {
-                            $('#activeStatus').prop('checked', 'checked');
-                        } else {
-                            $('#inactiveStatus').prop('checked', 'checked');
-                        }
-                        $('#studentName').attr('value', name);
-                        $('#studentUsername').attr('value', username);
-                        $('#studentEmail').attr('value', email);
-                        // Set the selected value of the "roleEdit" select box based on the "data-role" attribute
-                        $('#roleSelect').val(role);
-                    });
-                    // Set the selected value of the "roleEdit" select box based on the "data-role" attribute
-                });
-                function submitForm() {
-                    $('#updateForm').submit();
-                }
-            </script>
-            <style type="text/css">
-                .table-filter-container{
-                    align-items: center
-                }
-                .filterDiv .row {
-                    display: flex;
-                    align-items: center;
-                    justify-content: flex-start;
-                    margin-left: 20px;
-
-                }
-                .dataTables_paginate{
-                    width: 100%;
-                    text-align: center;
-                }
-                .dataTables_info{
-                    width: 100%;
-                    text-align: center;
-                    padding: 18px;
-                }
-                .userSearchTxt{
-                    width: 200px !important;
-                    height: 50px !important;
-                    font-size: 14px !important;
-                    margin-left: 450px !important;
-                    color: black !important;
-                }
-            </style>
-            <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-            <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-            <!--[if lt IE 9]>
-                <script src="js/html5shiv.js"></script>
-                <script src="js/respond.min.js"></script>
-                <![endif]-->
-            <!--        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
-                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css"/>
-                    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap4.min.css"/>
-                    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.bootstrap4.min.css"/>-->
+            <title>User Management</title>
 
     </head>
 
@@ -152,19 +57,31 @@
                                 <div class="row align-items-center">
                                     <div class="col-sm-12 col-md-6">
                                         <div class="input-group" style="position: relative;width: 25%;margin-left: auto;margin-bottom: 15px;float: left">
-                                            <!--                                    <select class="form-control js-basic-example2" id="filterType" style="margin-left:-2%;background: #cfcfcf;border-radius: 20px;padding: 10px 20px;" onchange="filter()">-->
-                                            <!--                                        <option value="application" ${filter == 'application' ? 'selected' : ''}><spring:message code="file.media"/></option>-->
-                                            <!--                                        <option value="image" ${filter == 'image' ? 'selected' : ''}><spring:message code="file.file"/></option>-->
-                                            <!--                                    </select>-->
+                                            <select class="form-control js-basic-example2" id="filterRole" style="margin-left:-2%;background: #cfcfcf;border-radius: 20px;padding: 10px 20px;" onchange="filter()">
+                                                <option value="0">All</option>
+                                                <c:forEach items="${roles}" var="role">
+                                                    <option value="${role.rid}" ${filterRole == role.rid? 'selected' : ''}><c:out value="${role.rname}"/></option>
+                                                </c:forEach>
+                                            </select>
+                                            <div class="input-group-append" style="position: absolute;right: 0;z-index: 10;">
+                                            </div>
+                                        </div>
+                                        <div class="input-group" style="position: relative;width: 30%;margin-left: 25px;margin-bottom: 15px;float: left">
+                                            <select class="form-control js-basic-example2" id="filterStatus" style="margin-left:-2%;background: #cfcfcf;border-radius: 20px;padding: 10px 20px;" onchange="filter()">
+                                                <option value="3">All</option>
+                                                <option value="0" ${filterStatus == 0? 'selected' : ''}>Inactive</option>
+                                                <option value="1" ${filterStatus == 1? 'selected' : ''}>Active</option>
+                                                <option value="2" ${filterStatus == 2? 'selected' : ''}>Not Verify Email</option>
+                                            </select>
                                             <div class="input-group-append" style="position: absolute;right: 0;z-index: 10;">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6">
                                         <div class="input-group" style="position: relative;width: 75%;margin-left: auto;margin-bottom: 15px;">
-                                            <input class="form-control" id="textSearch" value="" type="text" placeholder="Search for result" style="margin-left:-2%;background: #cfcfcf;border-radius: 20px;padding: 10px 20px;">
+                                            <input class="form-control" id="textSearch" value="${search eq ''? '' : search}" type="text" placeholder="Search for result" style="margin-left:-2%;background: #cfcfcf;border-radius: 20px;padding: 10px 20px;">
                                                 <div class="input-group-append" style="position: absolute;right: 0;z-index: 10;">
-                                                    <button class="btn btn-secondary"  type="button">
+                                                    <button class="btn btn-secondary"  type="button" onclick="search()">
                                                         <i class="fa fa-search"></i>
                                                     </button>
                                                 </div>
@@ -174,7 +91,7 @@
                                 <div class="card-header" style="background: #242939 ;display: flex;justify-content: space-between;">
                                     <h2 class="p-1 m-0 text-16 font-weight-semi " style="color: white">User Management</h2>
                                     <div style="color: white" class="p-1 m-0 text-16">
-                                                                        <i class="fa fa-plus" aria-hidden="true" data-toggle="modal" data-target="#ModalAdd" style="cursor: pointer"></i>
+                                        <i class="fa fa-plus" aria-hidden="true" data-toggle="modal" data-target="#ModalAdd" style="cursor: pointer"></i>
                                     </div>
                                 </div>
                                 <div class="card">
@@ -219,17 +136,169 @@
                                                                     class="material-icons">edit</i>
                                                                 <div class="ripple-container"></div>
                                                             </button>
-                                                            <button onclick="handleDelete(${item.id})"
+                                                            <button
                                                                     class="btn text-danger rounded-circle m-0 btn-sm btn-icon"
-                                                                    style="height: 0px !important;"><i
+                                                                    style="height: 0px !important;" onclick="document.getElementById('deleteLink').href = 'delete-user?id=${result.id}&pageNo=${pagination.pageNo}&search=${search}&filter=${filter}';
+                                                                            openModal(${result.id})"><i
                                                                     class="material-icons">delete</i></button>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>
                                         </table>
+                                        <c:if test="${totalPages == 0}">
+                                            <h4 style="text-align: center"> Record not found !</h4>
+                                        </c:if>
+                                        <ul class="pagination justify-content-center font-weight-bold">
+                                            <li class="page-item">
+                                                <c:if test="${pagination.pageNo > 1}">
+                                                    <button class="page-link" ><i class="material-icons " onclick="onPage(1,${pagination.pageSize}, '${search}', '${filterRole}', '${filterStatus}')">keyboard_double_arrow_left</i>
+                                                    </c:if>
+                                            </li>
+                                            <li class="page-item">
+                                                <c:if test="${pagination.pageNo > 1}">
+                                                    <button class="page-link" ><i class="material-icons " onclick="onPage(${pagination.pageNo - 1},${pagination.pageSize}, '${search}', '${filterRole}', '${filterStatus}')">keyboard_arrow_left</i>
+                                                    </c:if>
+                                            </li>
+                                            <c:forEach var="page" begin="1" end="${totalPages}">
+                                                <li aria-current="page" class="page-item ${pagination.pageNo == page? 'active' :''}">
+                                                    <c:choose>
+                                                        <c:when test="${page == pagination.pageNo}">
+                                                            <button class="page-link page-number">${page}</button>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <button class="page-link page-number" onclick="onPage(${page},${pagination.pageSize}, '${search}', '${filterRole}', '${filterStatus}')">${page}</button>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </li>
+                                            </c:forEach>
+                                            <li class="page-item">
+                                                <c:if test="${not empty list && pagination.pageNo != totalPages}">
+                                                    <button class="page-link" onclick="onPage(${pagination.pageNo+1},${pagination.pageSize}, '${search}', '${filterRole}', '${filterStatus}')"><i class="material-icons">keyboard_arrow_right</i>
+                                                    </button>
+                                                </c:if>
+                                            </li>
+                                            <li class="page-item">
+                                                <c:if test="${not empty list && pagination.pageNo != totalPages}">
+                                                    <button class="page-link" onclick="onPage(${totalPages},${pagination.pageSize}, '${search}', '${filterRole}', '${filterStatus}')"><i class="material-icons">keyboard_double_arrow_right</i>
+                                                    </c:if>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="ModalDelete" role="dialog"
+                         tabindex="-1">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header" style="background: #304156;padding: 10px;">
+                                    <h5 class="modal-title" id="exampleModalLabel" style="color: white">
+                                        Delete User</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true" style="color: white">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <h4>Are you sure want to delete?</h4>
+                                </div>
+                                <div class="modal-footer" style="margin: 0 auto; display: flex ; justify-content: space-between">
+                                    <a id="deleteLink" class="btn btn-opacity-danger" href="#">
+                                        <%--              <button class="btn btn-opacity-danger " style="margin-left: 12px;" type="button">--%>
+                                        Delete
+                                        <%--              </button>--%>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <form id="formAdd" class="needs-validation" method="POST" action="user-add">
+                                    <div class="modal-header" style="background: #304156;padding: 10px;">
+                                        <h5 class="modal-title" id="exampleModalAdd" style="color: white">Add User</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" style="color: white">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="form-group col-md-12">
+                                                <label for="inputUsername" class="ml-2" style="font-size: 15px">Username</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control mt-2" id="inputUsername" placeholder="Input Username" name="inputUsername" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                        <div class="invalid-feedback">
+                                                            Please Input Name
+                                                        </div>
+                                                        <div class="valid-feedback">
+                                                            OK
+                                                        </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label for="inputFullName" class="ml-2" style="font-size: 15px">Fullname</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control mt-2" id="inputFullName" placeholder="Input Fullname" name="inputFullName" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                        <div class="invalid-feedback">
+                                                            Please Input Full Name
+                                                        </div>
+                                                        <div class="valid-feedback">
+                                                            OK
+                                                        </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label for="inputEmail" class="ml-2" style="font-size: 15px">Email</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control mt-2" id="inputEmail" placeholder="Input Fullname" name="inputEmail" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                        <div class="invalid-feedback">
+                                                            Please Input Email
+                                                        </div>
+                                                        <div class="valid-feedback">
+                                                            OK
+                                                        </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label for="inputAvatar" class="ml-2" style="font-size: 15px">Avatar</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control mt-2" id="inputAvatar" placeholder="Input Fullname" name="inputAvatar" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                        <div class="invalid-feedback">
+                                                            Please Input Avatar
+                                                        </div>
+                                                        <div class="valid-feedback">
+                                                            OK
+                                                        </div>
+                                                </div>
+                                            </div>
+                                            <label class="ml-2" style="font-size: 15px;margin-left:.5rem!important;">Role</label>
+                                            <div class="form-group col-md-12">
+                                                <select class="form-control js-basic-example2" id="inputRole" style="width: 100%" required>
+                                                <c:forEach items="${roles}" var="role">
+                                                    <c:if test="${role.rid != 6}">
+                                                        <option value="${role.rid}" ${filterRole == role.rid? 'selected' : ''}><c:out value="${role.rname}"/></option>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </select>
+                                            </div>
+                                            <label class="ml-2" style="font-size: 15px;margin-left:.5rem!important;">Status</label>
+                                            <div class="form-group col-md-6">                              
+                                                <div class="input-group">
+                                                    <label for="inputStatus1" class="ml-2" style="font-size: 15px">Active</label>
+                                                    <input type="radio" value="1" class="form-control mt-2" id="inputStatus1" name="inputStatus" style="font-size: 2px;" aria-describedby="inputGroupPrepend">
+                                                <label for="inputStatus2" class="ml-2" style="font-size: 15px">Inactive</label>
+                                                <input type="radio" value="0" class="form-control mt-2" id="inputStatus2" name="inputStatus" style="font-size: 2px;" aria-describedby="inputGroupPrepend">
+                                                </div>                                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer" style="margin: 0 auto; display: flex; justify-content: center" >
+                                        <button class="btn btn-opacity-success" type="submit">Save</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -239,6 +308,71 @@
                 <!-- End::Main header-->
             </div>
         </div>
+
+        <script src="admin-template/js/vendors.bundle.min.js"></script>
+        <script src="admin-template/js/main.bundle.min.js"></script>
+        <script src="admin-template/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="admin-template/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+        <script src="admin-template/js/pages/datatables/basicDatatable.min.js"></script>
+        <script type="text/javascript">
+                                                        $(document).ready(function () {
+                                                            $(".js-basic-example2").select2({
+                                                                theme: "classic"
+                                                            });
+                                                        });
+                                                        function onPage(pageNo, pageSie, search, filterRole, filterStatus) {
+                                                            if (search === '') {
+                                                                if (filterRole === 0) {
+                                                                    window.location.href = `admin-alluser?pageNo=` + pageNo + `&filterStatus=` + filterStatus;
+                                                                }
+                                                                if (filterStatus === 0) {
+                                                                    window.location.href = `admin-alluser?pageNo=` + pageNo + `&filterRole=` + filterRole;
+                                                                }
+                                                                if (filterRole === 0 && filterStatus === 0) {
+                                                                    window.location.href = `admin-alluser?pageNo=` + pageNo;
+                                                                }
+                                                                window.location.href = `admin-alluser?pageNo=` + pageNo + `&filterRole=` + filterRole + `&filterStatus=` + filterStatus;
+                                                            } else {
+                                                                window.location.href = `admin-alluser?pageNo=` + pageNo + `&filterRole=` + filterRole + `&filterStatus=` + filterStatus + `&search=` + search;
+                                                            }
+                                                        }
+                                                        function filter() {
+                                                            const searchValue = "${search}";
+                                                            const filterRole = document.getElementById("filterRole").value;
+                                                            const filterStatus = document.getElementById("filterStatus").value;
+                                                            if (searchValue === '') {
+                                                                if (filterRole !== 0 && filterStatus !== 3) {
+                                                                    window.location.href = `admin-alluser?pageNo=1&filterRole=` + filterRole + `&filterStatus=` + filterStatus;
+                                                                } else if (filterRole !== 0) {
+                                                                    window.location.href = `admin-alluser?pageNo=1&filterRole=` + filterRole;
+                                                                } else if (filterStatus !== 3) {
+                                                                    window.location.href = `admin-alluser?pageNo=1&filterStatus=` + filterStatus;
+                                                                }
+                                                            } else {
+                                                                if (filterRole !== 0 && filterStatus !== 3) {
+                                                                    window.location.href = `admin-alluser?pageNo=1&filterRole=` + filterRole + `&filterStatus=` + filterStatus + '&search=' + searchValue;
+                                                                } else if (filterRole !== 0) {
+                                                                    window.location.href = `admin-alluser?pageNo=1&filterRole=` + filterRole + '&search=' + searchValue;
+                                                                } else if (filterStatus !== 3) {
+                                                                    window.location.href = `admin-alluser?pageNo=1&filterStatus=` + filterStatus + '&search=' + searchValue;
+                                                                }
+                                                            }
+                                                        }
+                                                        function search() {
+                                                            const filterStatus = "${filterStatus}";
+                                                            const filterRole = "${filterRole}";
+                                                            const searchValue = document.getElementById("textSearch").value;
+                                                            if (searchValue === '') {
+                                                                window.location.href = `admin-alluser?filterStatus=` + filterStatus + `&filterRole=` + filterRole;
+                                                            } else
+                                                                window.location.href = `admin-alluser?filterStatus=` + filterStatus + `&filterRole=` + filterRole + `&search=` + searchValue;
+                                                        }
+
+                                                        function openModal(id) {
+                                                            $("#ModalDelete").modal('show');
+
+                                                        }
+        </script>
     </body>
     <!--        <div class="container-fluid sb2">
                 <div class="row">

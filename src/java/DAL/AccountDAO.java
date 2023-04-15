@@ -10,6 +10,7 @@ import model.Role;
 import model.Student;
 import model.Curriculum;
 import model.Lecturer;
+import model.PaginationModel;
 
 public class AccountDAO extends DBContext {
 
@@ -76,7 +77,7 @@ public class AccountDAO extends DBContext {
 
         return null;
     }
-    
+
     public Account getAccountByAccountID1(int id) throws SQLException {
         try {
             String sql = "select * from account where accountID = ?";
@@ -88,14 +89,14 @@ public class AccountDAO extends DBContext {
             if (rs.next()) {
                 Role role = new Role(rs.getInt("rid"), "Guest");
                 Account account = new Account(rs.getInt("accountID"), rs.getString("userName"), rs.getString("password"),
-                            rs.getString("displayName"), rs.getString("email"), rs.getString("avatar"), rs.getBoolean("isBlock"),
-                            rs.getInt("status"), rs.getDate("createDate"), role);
+                        rs.getString("displayName"), rs.getString("email"), rs.getString("avatar"), rs.getBoolean("isBlock"),
+                        rs.getInt("status"), rs.getDate("createDate"), role);
 
                 return account;
             }
 
         } catch (SQLException e) {
-           e.printStackTrace();
+            e.printStackTrace();
             throw e;
         }
 
@@ -147,6 +148,131 @@ public class AccountDAO extends DBContext {
 
         }
         return list;
+    }
+
+    public List<Account> getAllAccountByPageAndFilter(PaginationModel pagination) {
+
+        List<Account> list = new ArrayList<>();
+        try {
+            String sql = "SELECT `account`.`accountID`,\n"
+                    + "    `account`.`userName`,\n"
+                    + "    `account`.`password`,\n"
+                    + "    `account`.`displayName`,\n"
+                    + "    `account`.`email`,\n"
+                    + "    `account`.`avatar`,\n"
+                    + "    `account`.`isBlock`,\n"
+                    + "    `account`.`status`,\n"
+                    + "    `account`.`createDate`,\n"
+                    + "    `account`.`rid`,\n"
+                    + "    `role`.`rname`\n"
+                    + "FROM `swp391_se1632_g2`.`account` inner join `swp391_se1632_g2`.`role`\n"
+                    + "ON `account`.`rid` = `role`.`rid`";
+            if (pagination.getFilterRole() != 0 || pagination.getFilterStatus() != 3 || !pagination.getSearch().equals("")) {
+                sql += " WHERE";
+                if (pagination.getFilterRole() != 0) {
+                    sql += " role.rid = ?";
+                }
+                if (pagination.getFilterStatus() != 3) {
+                    if (pagination.getFilterRole() != 0) {
+                        sql += " AND";
+                    }
+                    sql += " account.status = ?";
+                }
+                if (!pagination.getSearch().equals("")) {
+                    if (pagination.getFilterRole() != 0 || pagination.getFilterStatus() != 3) {
+                        sql += " AND";
+                    }
+                    sql += " (account.userName LIKE ? OR account.email LIKE ? OR account.displayName LIKE ?)";
+                }
+            }
+            sql += " LIMIT "+ (pagination.getPageNo()-1) * pagination.getPageSize() +","+ pagination.getPageSize() +";";
+            PreparedStatement st = connection.prepareStatement(sql);
+            int i = 1;
+            if (pagination.getFilterRole() != 0) {
+                st.setInt(i++, pagination.getFilterRole());
+            }
+            if (pagination.getFilterStatus() != 3) {
+                st.setInt(i++, pagination.getFilterStatus());
+            }
+            if (!pagination.getSearch().equals("")) {
+                st.setString(i++, "%" + pagination.getSearch() + "%");
+                st.setString(i++, "%" + pagination.getSearch() + "%");
+                st.setString(i++, "%" + pagination.getSearch() + "%");
+            }
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                Account account;
+                String userName = rs.getString("userName");
+
+                Role role = new Role(rs.getInt("rid"), rs.getString("rname"));
+
+                if (role.getRname().equalsIgnoreCase("student")) {
+                    account = getStudentByUserName(userName, role);
+                } else if (role.getRname().equalsIgnoreCase("teacher")) {
+                    account = getLecturerByUserName(userName, role);
+                } else {
+                    account = new Account(rs.getInt("accountID"), rs.getString("userName"), rs.getString("password"),
+                            rs.getString("displayName"), rs.getString("email"), rs.getString("avatar"), rs.getBoolean("isBlock"),
+                            rs.getInt("status"), rs.getDate("createDate"), role);
+                }
+
+                list.add(account);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("AccountDAO -> getAllAccountByPageAndFilter(): " + e);
+
+        }
+        return list;
+    }
+
+    public int countAllAccountByPageAndFilter(PaginationModel pagination) {
+
+        int count = 0;
+        try {
+            String sql = "SELECT COUNT(*) as count FROM `swp391_se1632_g2`.`account` INNER JOIN `swp391_se1632_g2`.`role`\n"
+                    + "ON `account`.`rid` = `role`.`rid`";
+            if (pagination.getFilterRole() != 0 || pagination.getFilterStatus() != 3 || !pagination.getSearch().equals("")) {
+                sql += " WHERE";
+                if (pagination.getFilterRole() != 0) {
+                    sql += " `role`.`rid` = ?";
+                }
+                if (pagination.getFilterStatus() != 3) {
+                    if (pagination.getFilterRole() != 0) {
+                        sql += " AND";
+                    }
+                    sql += " `account`.`status` = ?";
+                }
+                if (!pagination.getSearch().equals("")) {
+                    if (pagination.getFilterRole() != 0 || pagination.getFilterStatus() != 3) {
+                        sql += " AND";
+                    }
+                    sql += " (`account`.`userName` LIKE ? OR `account`.`email` LIKE ? OR `account`.`displayName` LIKE ?)";
+                }
+            }
+            sql += ";";
+            PreparedStatement st = connection.prepareStatement(sql);
+            int i = 1;
+            if (pagination.getFilterRole() != 0) {
+                st.setInt(i++, pagination.getFilterRole());
+            }
+            if (pagination.getFilterStatus() != 3) {
+                st.setInt(i++, pagination.getFilterStatus());
+            }
+            if (!pagination.getSearch().equals("")) {
+                st.setString(i++, "%" + pagination.getSearch() + "%");
+                st.setString(i++, "%" + pagination.getSearch() + "%");
+                st.setString(i++, "%" + pagination.getSearch() + "%");
+            }
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            System.out.println("AccountDAO -> countAllAccount(): " + e);
+        }
+        return (int) Math.ceil((double) count / pagination.getPageSize());
     }
 
     public Account getAccountByUserName(String userName) {
@@ -322,7 +448,7 @@ public class AccountDAO extends DBContext {
 
         return result.equalsIgnoreCase("") ? "OK" : result;
     }
-    
+
     public boolean checkRegisterEdit(String userName, String email) {
         String result = "";
         try {
@@ -356,7 +482,7 @@ public class AccountDAO extends DBContext {
 
         return result.equalsIgnoreCase("");
     }
-    
+
     public boolean checkEmail(String email) {
         String result = "";
         try {
@@ -375,7 +501,7 @@ public class AccountDAO extends DBContext {
 
         return result.equalsIgnoreCase("");
     }
-    
+
     public boolean checkEmailForgot(String email) {
         String result = "";
         try {
@@ -394,7 +520,7 @@ public class AccountDAO extends DBContext {
         boolean check = !result.equalsIgnoreCase("");
         return check;
     }
-    
+
     public Account findAccountByEmail(String email) {
         Account account;
         try {
@@ -407,10 +533,10 @@ public class AccountDAO extends DBContext {
                 int rid = rs.getInt("rid");
                 //find role by role id => gan vao account
                 Role role = this.findRoleByRoleId(rid);
-                
+
                 account = new Account(rs.getInt("accountID"), rs.getString("userName"), rs.getString("password"),
-                            rs.getString("displayName"), rs.getString("email"), rs.getString("avatar"), rs.getBoolean("isBlock"),
-                            rs.getInt("status"), rs.getDate("createDate"), role);
+                        rs.getString("displayName"), rs.getString("email"), rs.getString("avatar"), rs.getBoolean("isBlock"),
+                        rs.getInt("status"), rs.getDate("createDate"), role);
                 return account;
             }
 
@@ -420,7 +546,7 @@ public class AccountDAO extends DBContext {
 
         return null;
     }
-    
+
     public Role findRoleByRoleId(int roleId) {
         Role role;
         try {
@@ -565,7 +691,8 @@ public class AccountDAO extends DBContext {
 
         }
     }
-        public void updateRole(int role, String username) {
+
+    public void updateRole(int role, String username) {
         try {
 
             String sql = "UPDATE `swp391_se1632_g2`.`account`\n"
