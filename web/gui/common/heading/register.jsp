@@ -76,7 +76,7 @@
                    <p id="messageRegister" style="color: blue; text-align: center;"></p>
                    <p id="errorMessage" style="color: red; text-align: center; margin-bottom: 30px;"></p>
 
-                <div class="input-field s12" style="text-align: center;"> <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal1" onclick="closeModal2()">Are you a already member ? Login</a> </div>
+                <div class="input-field s12" style="text-align: center;"> <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal1" onclick="closeModal2()" id="btn-close-2">Are you a already member ? Login</a> </div>
 
                   <!--end form xac nhan ma code-->  
               </div>
