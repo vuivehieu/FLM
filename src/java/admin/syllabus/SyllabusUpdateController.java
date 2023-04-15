@@ -18,12 +18,8 @@ import model.Account;
 import model.Decision;
 import model.Syllabus;
 
-/**
- *
- * @author phanh
- */
-@WebServlet(name = "SyllabusDetailController", urlPatterns = {"/syllabusDetail"})
-public class SyllabusDetailController extends HttpServlet {
+@WebServlet(name = "SyllabusUpdateController", urlPatterns = {"/syllabusUpdate"})
+public class SyllabusUpdateController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -83,7 +79,7 @@ public class SyllabusDetailController extends HttpServlet {
             request.setAttribute("syllabus", syllabus);
         }
 
-        request.getRequestDispatcher("gui/admin/syllabus/detail.jsp").forward(request, response);
+        request.getRequestDispatcher("gui/admin/syllabus/edit.jsp").forward(request, response);
     }
 
     /**
@@ -123,31 +119,77 @@ public class SyllabusDetailController extends HttpServlet {
         DAO dao = new DAO();
         SyllabusDAO syllabusDAO = new SyllabusDAO();
         
-        String message = "";
-        Account a = (Account)request.getSession().getAttribute("account");
-        Decision decicion = dao.getDecisionByDecisionNo(decisionNo);
-        Syllabus newSyllabus = new Syllabus(0, code, slbName_EN, slbName_VI, degreeLevel, timeAllocation, description, studentTask, tool, isApproved, isActive
-                , Custom.Common.getCurrentDate(), note, minToPass, decicion
-                , new ArrayList<>(), new ArrayList<>(), new ArrayList<>()
-                , new ArrayList<>(), new ArrayList<>(), a.getAccountID());
+        if(type == null){
+            // start
+            String message = "";
+            String slbid_raw = request.getParameter("slbid");
+            int slbid = 0;
 
-        syllabusDAO.add(newSyllabus);
+            try {
+                slbid = Integer.parseInt(slbid_raw);
+            } catch (NumberFormatException e) {
+                System.out.println("SyllabusDetailController -> doPost(): " + e);
+            }
 
-         message = "<div class='toast fade' style='background-color: green; color: white' role='alert' aria-live='assertive' aria-atomic='true' data-delay='3000'>"
-                + "                <div class='toast-header'>"
-                + "                    <strong class='mr-auto'>Add Syllabus Success</strong>"
-                + "                    <button type='button' class='ml-2 mb-1 close' data-dismiss='toast' aria-label='Close'>"
-                + "                        <span aria-hidden='true'>&times;</span>"
-                + "                    </button>"
-                + "                </div>"
-                + "                <div class='toast-body'>"
-                + "                    Success !"
-                + "                </div>"
-                + "            </div>";
+            Syllabus syl = dao.getSyllabusBySlbID(slbid);
+            syl.setSubjectCode(code);
+            syl.setSlbName_EN(slbName_EN);
+            syl.setSlbName_VI(slbName_VI);
+            syl.setDegreeLevel(degreeLevel);
+            syl.setTimeAllocation(timeAllocation);
+            syl.setIsActive(isActive);
+            syl.setIsApproved(isApproved);
+            syl.setStudentTask(studentTask);
+            syl.setTool(tool);
+            syl.setNote(note);
+            syl.setDescription(description);
+            syl.getDecision().setDecisionNo(decisionNo);
+            syl.setMinAvgMarkToPass(minToPass);
+            syllabusDAO.update(syl);
 
-        request.getSession().setAttribute("message", message);
+            message = "<div class='toast fade' style='background-color: green; color: white' role='alert' aria-live='assertive' aria-atomic='true' data-delay='3000'>"
+                    + "                <div class='toast-header'>"
+                    + "                    <strong class='mr-auto'>Update Syllabus Success</strong>"
+                    + "                    <button type='button' class='ml-2 mb-1 close' data-dismiss='toast' aria-label='Close'>"
+                    + "                        <span aria-hidden='true'>&times;</span>"
+                    + "                    </button>"
+                    + "                </div>"
+                    + "                <div class='toast-body'>"
+                    + "                    Success !"
+                    + "                </div>"
+                    + "            </div>";
 
-        response.sendRedirect("syllabusList");
+            request.getSession().setAttribute("message", message);
+
+            //        response.sendRedirect("syllabusDetail?slbid=" + slbid);
+            response.sendRedirect("syllabusList");
+        }else {
+            String message = "";
+            Account a = (Account)request.getSession().getAttribute("account");
+                    Decision decicion = dao.getDecisionByDecisionNo(decisionNo);
+                    Syllabus newSyllabus = new Syllabus(0, code, slbName_EN, slbName_VI, degreeLevel, timeAllocation, description, studentTask, tool, isApproved, isActive
+                            , Custom.Common.getCurrentDate(), note, minToPass, decicion
+                            , new ArrayList<>(), new ArrayList<>(), new ArrayList<>()
+                            , new ArrayList<>(), new ArrayList<>(), a.getAccountID());
+                    
+                    syllabusDAO.add(newSyllabus);
+                    
+                     message = "<div class='toast fade' style='background-color: green; color: white' role='alert' aria-live='assertive' aria-atomic='true' data-delay='3000'>"
+                            + "                <div class='toast-header'>"
+                            + "                    <strong class='mr-auto'>Add Syllabus Success</strong>"
+                            + "                    <button type='button' class='ml-2 mb-1 close' data-dismiss='toast' aria-label='Close'>"
+                            + "                        <span aria-hidden='true'>&times;</span>"
+                            + "                    </button>"
+                            + "                </div>"
+                            + "                <div class='toast-body'>"
+                            + "                    Success !"
+                            + "                </div>"
+                            + "            </div>";
+
+                    request.getSession().setAttribute("message", message);
+
+                    response.sendRedirect("syllabusList");
+        }
         
 
 //        if (type != null) {

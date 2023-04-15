@@ -55,28 +55,28 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="row align-items-center">
-<!--                                    <div class="col-sm-12 col-md-6">
-                                        <div class="input-group" style="position: relative;width: 25%;margin-left: auto;margin-bottom: 15px;float: left">
-                                            <select class="form-control js-basic-example2" id="filterRole" style="margin-left:-2%;background: #cfcfcf;border-radius: 20px;padding: 10px 20px;" onchange="filter()">
-                                                <option value="0">All</option>
-                                                <c:forEach items="${roles}" var="role">
-                                                    <option value="${role.rid}" ${filterRole == role.rid? 'selected' : ''}><c:out value="${role.rname}"/></option>
-                                                </c:forEach>
-                                            </select>
-                                            <div class="input-group-append" style="position: absolute;right: 0;z-index: 10;">
-                                            </div>
-                                        </div>
-                                        <div class="input-group" style="position: relative;width: 30%;margin-left: 25px;margin-bottom: 15px;float: left">
-                                            <select class="form-control js-basic-example2" id="filterStatus" style="margin-left:-2%;background: #cfcfcf;border-radius: 20px;padding: 10px 20px;" onchange="filter()">
-                                                <option value="3">All</option>
-                                                <option value="0" ${filterStatus == 0? 'selected' : ''}>Inactive</option>
-                                                <option value="1" ${filterStatus == 1? 'selected' : ''}>Active</option>
-                                                <option value="2" ${filterStatus == 2? 'selected' : ''}>Not Verify Email</option>
-                                            </select>
-                                            <div class="input-group-append" style="position: absolute;right: 0;z-index: 10;">
-                                            </div>
-                                        </div>
-                                    </div>-->
+                                    <!--                                    <div class="col-sm-12 col-md-6">
+                                                                            <div class="input-group" style="position: relative;width: 25%;margin-left: auto;margin-bottom: 15px;float: left">
+                                                                                <select class="form-control js-basic-example2" id="filterRole" style="margin-left:-2%;background: #cfcfcf;border-radius: 20px;padding: 10px 20px;" onchange="filter()">
+                                                                                    <option value="0">All</option>
+                                    <c:forEach items="${roles}" var="role">
+                                        <option value="${role.rid}" ${filterRole == role.rid? 'selected' : ''}><c:out value="${role.rname}"/></option>
+                                    </c:forEach>
+                                </select>
+                                <div class="input-group-append" style="position: absolute;right: 0;z-index: 10;">
+                                </div>
+                            </div>
+                            <div class="input-group" style="position: relative;width: 30%;margin-left: 25px;margin-bottom: 15px;float: left">
+                                <select class="form-control js-basic-example2" id="filterStatus" style="margin-left:-2%;background: #cfcfcf;border-radius: 20px;padding: 10px 20px;" onchange="filter()">
+                                    <option value="3">All</option>
+                                    <option value="0" ${filterStatus == 0? 'selected' : ''}>Inactive</option>
+                                    <option value="1" ${filterStatus == 1? 'selected' : ''}>Active</option>
+                                    <option value="2" ${filterStatus == 2? 'selected' : ''}>Not Verify Email</option>
+                                </select>
+                                <div class="input-group-append" style="position: absolute;right: 0;z-index: 10;">
+                                </div>
+                            </div>
+                        </div>-->
                                     <div class="col-sm-12 col-md-12">
                                         <div class="input-group" style="position: relative;width: 75%;margin-left: auto;margin-bottom: 15px;">
                                             <input class="form-control" id="textSearch" value="${search eq ''? '' : search}" type="text" placeholder="Search for result" style="margin-left:50%;background: #cfcfcf;border-radius: 20px;padding: 10px 20px;">
@@ -89,9 +89,10 @@
                                     </div>
                                 </div>
                                 <div class="card-header" style="background: #242939 ;display: flex;justify-content: space-between;">
-                                    <h2 class="p-1 m-0 text-16 font-weight-semi " style="color: white">User Management</h2>
+                                    <h2 class="p-1 m-0 text-16 font-weight-semi " style="color: white">Syllabus Management</h2>
                                     <div style="color: white" class="p-1 m-0 text-16">
-                                        <i class="fa fa-plus" aria-hidden="true" data-toggle="modal" data-target="#ModalAdd" style="cursor: pointer"></i>
+                                        <!--<i class="fa fa-plus" aria-hidden="true" data-toggle="modal" data-target="#ModalAdd" style="cursor: pointer"></i>-->
+                                        <a href="syllabusDetail?type=add"><i class="fa fa-plus" aria-hidden="true"  style="cursor: pointer"></i></a>
                                     </div>
                                 </div>
                                 <div class="card">
@@ -109,7 +110,7 @@
                                                 </tr>
                                                 <c:forEach items="${list}" var="item">
                                                     <tr>
-                                                         <td>${item.slbid}</td>
+                                                        <td>${item.slbid}</td>
                                                         <td>${item.subjectCode}</td>
                                                         <td>
                                                             <a href="#">
@@ -135,21 +136,17 @@
                                                             </c:if>
                                                         </td>
                                                         <td>
-                                                            <button id="btnDetail"
-                                                                    data-status="${user.status}" data-role="${user.role.rid}" data-name="${user.displayName}" data-username="${user.userName}" data-email="${user.email}" data-avatar="${user.avatar}" data-userid="${user.accountID}"
-                                                                    data-target="#editModal"
-                                                                    data-toggle="modal"
-                                                                    aria-hidden="true"
+                                                            <a href="syllabusUpdate?slbid=${item.slbid}" id="btnDetail"
                                                                     class="btn text-primary rounded-circle m-0 btn-sm btn-icon"
                                                                     style="height: 0px !important;"><i
                                                                     class="material-icons">edit</i>
                                                                 <div class="ripple-container"></div>
-                                                            </button>
-<!--                                                            <button
-                                                                class="btn text-danger rounded-circle m-0 btn-sm btn-icon"
-                                                                style="height: 0px !important;" onclick="document.getElementById('deleteLink').href = 'SyllabusDeleteCotroller?id=${item.slbid}&pageNo=${pagination.pageNo}&search=${search}&filter=${filter}';
-                                                                        openModal(${result.id})"><i
-                                                                    class="material-icons">delete</i></button>-->
+                                                            </a>
+                                                            <!--                                                            <button
+                                                                                                                            class="btn text-danger rounded-circle m-0 btn-sm btn-icon"
+                                                                                                                            style="height: 0px !important;" onclick="document.getElementById('deleteLink').href = 'SyllabusDeleteCotroller?id=${item.slbid}&pageNo=${pagination.pageNo}&search=${search}&filter=${filter}';
+                                                                                                                                    openModal(${result.id})"><i
+                                                                                                                                class="material-icons">delete</i></button>-->
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
@@ -198,6 +195,7 @@
                             </div>
                         </div>
                     </div>
+                    <!--modal delete-->
                     <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="ModalDelete" role="dialog"
                          tabindex="-1">
                         <div class="modal-dialog" role="document">
@@ -222,31 +220,100 @@
                             </div>
                         </div>
                     </div>
+                    <!--modal add-->
                     <div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <form id="formAdd" class="needs-validation" method="POST" action="admin-adduser">
                                     <div class="modal-header" style="background: #304156;padding: 10px;">
-                                        <h5 class="modal-title" id="exampleModalAdd" style="color: white">Add User</h5>
+                                        <h5 class="modal-title" id="exampleModalAdd" style="color: white">Add Syllabus</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true" style="color: white">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="row">
-                                            <div class="form-group col-md-12">
-                                                <label for="inputUsername" class="ml-2" style="font-size: 15px; color:black">Username</label>
+                                            <input type="text" name="slbid" value="${syllabus.slbid}" hidden/>
+
+                                            <label class="ml-2" style="font-size: 15px;margin-left:.5rem!important;">Subject Code: ${syllabus.subjectCode}<span class="text-danger">*</span></label>
+                                            <div class="form-group col-md-6">
+                                                <select class="form-control js-basic-example2" id="inputRole" name="inputRole" style="width: 100%" required>
+                                                    <c:forEach items="${allSubject}" var="item">
+                                                        <option value="${item.subjectCode}" ${item.subjectCode==syllabus.subjectCode ? 'selected' : '' }>
+                                                            ${item.subjectCode}
+                                                        </option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+
+                                            <label class="ml-2" style="font-size: 15px;margin-left:.5rem!important;">Decision No: ${syllabus.decision.decisionNo}<span
+                                                    class="text-danger">*</span></label>
+                                            <div class="form-group col-md-6">
+                                                <select class="form-control js-basic-example2" id="inputRole" name="inputRole" style="width: 100%" required>
+                                                    <c:forEach items="${allDecision}" var="item">
+                                                        <option value="${item.decisionNo}" ${item.decisionNo==syllabus.decision.decisionNo ? 'selected' : ''
+                                                                }>
+                                                            ${item.decisionNo}
+                                                        </option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+
+                                            <!--Start-->
+                                            <div class="form-group col-md-6">
+                                                <label for="inputFullName" class="ml-2" style="font-size: 15px; color:black">Syllabus Name EN</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control mt-2" id="inputUsername" placeholder="Input Username" name="inputUsername" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                    <input value="${syllabus.slbName_EN}" name="slbName_EN" type="text" class="form-control mt-2" id="tag"  aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
                                                 </div>
                                             </div>
-                                            <div class="form-group col-md-12">
-                                                <label for="inputPassword" class="ml-2" style="font-size: 15px; color:black">Password</label>
+                                            <!------->
+                                            <div class="form-group col-md-6">
+                                                <label for="inputEmail" class="ml-2" style="font-size: 15px; color:black">Syllabus Name VI</label>
                                                 <div class="input-group">
-                                                    <input type="password" class="form-control mt-2" id="inputPassword" placeholder="Input Username" name="inputPassword" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                    <input value="${syllabus.slbName_VI}" name="slbName_VI" type="text" class="form-control mt-2" id="name"  aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
                                                 </div>
                                             </div>
+                                            <!--end-->
+
+                                             <!--Start-->
+                                            <div class="form-group col-md-6">
+                                                <label for="inputFullName" class="ml-2" style="font-size: 15px; color:black">Degree Level</label>
+                                                <div class="input-group">
+                                                    <input id="subjectNameEN" name="degreeLevel" type="text" value="${syllabus.degreeLevel}" class="form-control mt-2"  aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                </div>
+                                            </div>
+                                            <!------->
+                                            <div class="form-group col-md-6">
+                                                <label for="inputEmail" class="ml-2" style="font-size: 15px; color:black">Time Allocation</label>
+                                                <div class="input-group">
+                                                    <input id="subjectNameVI" type="text" name="timeAllocation" value="${syllabus.timeAllocation}" class="form-control mt-2"  aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                </div>
+                                            </div>
+                                            <!--end-->
+                                                    
+                                            
+                                            <div class="input-field col s6">
+                                                <input type="radio" id="isActive" name="isActive" ${syllabus.isActive ? 'checked' : '' } value="true"
+                                                    class="validate">
+                                                <label for="isActive">Active</label>
+                                                <input type="radio" id="unActive" name="isActive" ${syllabus.isActive ? '' : 'checked' } value="false"
+                                                    class="validate">
+                                                <label for="unActive">unActive</label>
+                                            </div>
+                                            <div class="input-field col s6">
+                                                <input type="radio" id="isApproved" name="isApproved" ${syllabus.isApproved ? 'checked' : '' } value="true"
+                                                    class="validate">
+                                                <label for="isApproved">Approved</label>
+                                                <input type="radio" id="unApproved" name="isApproved" ${syllabus.isApproved ? '' : 'checked' } value="false"
+                                                    class="validate">
+                                                <label for="unApproved">unApproved</label>
+                                            </div>
+                                             
+                                                    
+                                                    
+                                            
+
                                             <div class="form-group col-md-12">
                                                 <label for="inputFullName" class="ml-2" style="font-size: 15px; color:black">Fullname</label>
                                                 <div class="input-group">
@@ -254,19 +321,8 @@
 
                                                 </div>
                                             </div>
-                                            <div class="form-group col-md-12">
-                                                <label for="inputEmail" class="ml-2" style="font-size: 15px; color:black">Email</label>
-                                                <div class="input-group">
-                                                    <input type="email" class="form-control mt-2" id="inputEmail" placeholder="Input Email" name="inputEmail" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
 
-                                                </div>
-                                            </div>
-                                            <div class="form-group col-md-12">
-                                                <label for="inputAvatar" class="ml-2" style="font-size: 15px; color:black">Avatar</label>
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control mt-2" id="inputAvatar" placeholder="Input Avatar" name="inputAvatar" aria-describedby="inputGroupPrepend" style="font-size: 14px;">
-                                                </div>
-                                            </div>
+
                                             <label class="ml-2" style="font-size: 15px;margin-left:.5rem!important;">Role</label>
                                             <div class="form-group col-md-12">
                                                 <select class="form-control js-basic-example2" id="inputRole" name="inputRole" style="width: 100%" required>
@@ -298,6 +354,8 @@
                                                             </div>
                                                             </div>
                                                             </div>
+                                                
+                                                
                                                             <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
                                                                 <div class="modal-dialog" role="document">
@@ -425,7 +483,7 @@
                                                                 window.location.href = `syllabusList`;
                                                             } else
                                                                 window.location.href = `syllabusList?search=` + searchValue;
-                                                            
+
                                                         }
                                                         $('#editModal').on('show.bs.modal', function (event) {
                                                             var button = $(event.relatedTarget); // Button that triggered the modal
