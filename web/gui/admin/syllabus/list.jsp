@@ -77,9 +77,9 @@
                                             </div>
                                         </div>
                                     </div>-->
-                                    <div class="col-sm-12 col-md-6">
+                                    <div class="col-sm-12 col-md-12">
                                         <div class="input-group" style="position: relative;width: 75%;margin-left: auto;margin-bottom: 15px;">
-                                            <input class="form-control" id="textSearch" value="${search eq ''? '' : search}" type="text" placeholder="Search for result" style="margin-left:-2%;background: #cfcfcf;border-radius: 20px;padding: 10px 20px;">
+                                            <input class="form-control" id="textSearch" value="${search eq ''? '' : search}" type="text" placeholder="Search for result" style="margin-left:50%;background: #cfcfcf;border-radius: 20px;padding: 10px 20px;">
                                                 <div class="input-group-append" style="position: absolute;right: 0;z-index: 10;">
                                                     <button class="btn btn-secondary"  type="button" onclick="search()">
                                                         <i class="fa fa-search"></i>
@@ -103,8 +103,8 @@
                                                     <th>Subject Code</th>
                                                     <th>Syllabus Name(EN)</th>
                                                     <th>Decision No</th>
-                                                    <th>Approved</th>
                                                     <th>Status</th>
+                                                    <th>Approved</th>
                                                     <th></th>
                                                 </tr>
                                                 <c:forEach items="${list}" var="item">
@@ -118,8 +118,22 @@
                                                             </a>
                                                         </td>
                                                         <td>${item.decision.decisionNo}</td>
-                                                        <td><span class="badge ${item.isActive ? 'badge-success' : 'badge-danger'}"></span></td>
-                                                        <td><span class="badge ${item.isApproved ? 'badge-success' : 'badge-danger'}"></span></td>
+                                                        <td>
+                                                            <c:if test="${item.isActive}">
+                                                                <span class="badge badge-success">Active</span>
+                                                            </c:if>
+                                                            <c:if test="${!item.isActive}">
+                                                                <span class="badge badge-danger">Inactive</span>
+                                                            </c:if>
+                                                        </td>
+                                                        <td>
+                                                            <c:if test="${item.isApproved}">
+                                                                <span class="badge badge-success">Active</span>
+                                                            </c:if>
+                                                            <c:if test="${!item.isApproved}">
+                                                                <span class="badge badge-danger">Inactive</span>
+                                                            </c:if>
+                                                        </td>
                                                         <td>
                                                             <button id="btnDetail"
                                                                     data-status="${user.status}" data-role="${user.role.rid}" data-name="${user.displayName}" data-username="${user.userName}" data-email="${user.email}" data-avatar="${user.avatar}" data-userid="${user.accountID}"
@@ -131,11 +145,11 @@
                                                                     class="material-icons">edit</i>
                                                                 <div class="ripple-container"></div>
                                                             </button>
-                                                            <button
+<!--                                                            <button
                                                                 class="btn text-danger rounded-circle m-0 btn-sm btn-icon"
-                                                                style="height: 0px !important;" onclick="document.getElementById('deleteLink').href = 'admin-deleteuser?id=${user.accountID}&pageNo=${pagination.pageNo}&search=${search}&filter=${filter}';
+                                                                style="height: 0px !important;" onclick="document.getElementById('deleteLink').href = 'SyllabusDeleteCotroller?id=${item.slbid}&pageNo=${pagination.pageNo}&search=${search}&filter=${filter}';
                                                                         openModal(${result.id})"><i
-                                                                    class="material-icons">delete</i></button>
+                                                                    class="material-icons">delete</i></button>-->
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
@@ -147,12 +161,12 @@
                                         <ul class="pagination justify-content-center font-weight-bold">
                                             <li class="page-item">
                                                 <c:if test="${pagination.pageNo > 1}">
-                                                    <button class="page-link" ><i class="material-icons " onclick="onPage(1,${pagination.pageSize}, '${search}', '${filterRole}', '${filterStatus}')">keyboard_double_arrow_left</i>
+                                                    <button class="page-link" ><i class="material-icons " onclick="onPage(1,${pagination.pageSize}, '${search}')">keyboard_double_arrow_left</i>
                                                     </c:if>
                                             </li>
                                             <li class="page-item">
                                                 <c:if test="${pagination.pageNo > 1}">
-                                                    <button class="page-link" ><i class="material-icons " onclick="onPage(${pagination.pageNo - 1},${pagination.pageSize}, '${search}', '${filterRole}', '${filterStatus}')">keyboard_arrow_left</i>
+                                                    <button class="page-link" ><i class="material-icons " onclick="onPage(${pagination.pageNo - 1},${pagination.pageSize}, '${search}')">keyboard_arrow_left</i>
                                                     </c:if>
                                             </li>
                                             <c:forEach var="page" begin="1" end="${totalPages}">
@@ -162,20 +176,20 @@
                                                             <button class="page-link page-number">${page}</button>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <button class="page-link page-number" onclick="onPage(${page},${pagination.pageSize}, '${search}', '${filterRole}', '${filterStatus}')">${page}</button>
+                                                            <button class="page-link page-number" onclick="onPage(${page},${pagination.pageSize}, '${search}')">${page}</button>
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </li>
                                             </c:forEach>
                                             <li class="page-item">
                                                 <c:if test="${not empty list && pagination.pageNo != totalPages}">
-                                                    <button class="page-link" onclick="onPage(${pagination.pageNo+1},${pagination.pageSize}, '${search}', '${filterRole}', '${filterStatus}')"><i class="material-icons">keyboard_arrow_right</i>
+                                                    <button class="page-link" onclick="onPage(${pagination.pageNo+1},${pagination.pageSize}, '${search}')"><i class="material-icons">keyboard_arrow_right</i>
                                                     </button>
                                                 </c:if>
                                             </li>
                                             <li class="page-item">
                                                 <c:if test="${not empty list && pagination.pageNo != totalPages}">
-                                                    <button class="page-link" onclick="onPage(${totalPages},${pagination.pageSize}, '${search}', '${filterRole}', '${filterStatus}')"><i class="material-icons">keyboard_double_arrow_right</i>
+                                                    <button class="page-link" onclick="onPage(${totalPages},${pagination.pageSize}, '${search}')"><i class="material-icons">keyboard_double_arrow_right</i>
                                                     </c:if>
                                             </li>
                                         </ul>
@@ -190,7 +204,7 @@
                             <div class="modal-content">
                                 <div class="modal-header" style="background: #304156;padding: 10px;">
                                     <h5 class="modal-title" id="exampleModalLabel" style="color: white">
-                                        Delete User</h5>
+                                        Delete Syllabus</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true" style="color: white">&times;</span>
                                     </button>
@@ -376,20 +390,11 @@
                                                                 theme: "classic"
                                                             });
                                                         });
-                                                        function onPage(pageNo, pageSie, search, filterRole, filterStatus) {
+                                                        function onPage(pageNo, pageSie, search) {
                                                             if (search === '') {
-                                                                if (filterRole === 0) {
-                                                                    window.location.href = `admin-alluser?pageNo=` + pageNo + `&filterStatus=` + filterStatus;
-                                                                }
-                                                                if (filterStatus === 0) {
-                                                                    window.location.href = `admin-alluser?pageNo=` + pageNo + `&filterRole=` + filterRole;
-                                                                }
-                                                                if (filterRole === 0 && filterStatus === 0) {
-                                                                    window.location.href = `admin-alluser?pageNo=` + pageNo;
-                                                                }
-                                                                window.location.href = `admin-alluser?pageNo=` + pageNo + `&filterRole=` + filterRole + `&filterStatus=` + filterStatus;
+                                                                window.location.href = `syllabusList?pageNo=` + pageNo;
                                                             } else {
-                                                                window.location.href = `admin-alluser?pageNo=` + pageNo + `&filterRole=` + filterRole + `&filterStatus=` + filterStatus + `&search=` + search;
+                                                                window.location.href = `syllabusList?pageNo=` + pageNo + `&search=` + search;
                                                             }
                                                         }
                                                         function filter() {
@@ -415,13 +420,12 @@
                                                             }
                                                         }
                                                         function search() {
-                                                            const filterStatus = "${filterStatus}";
-                                                            const filterRole = "${filterRole}";
                                                             const searchValue = document.getElementById("textSearch").value;
                                                             if (searchValue === '') {
-                                                                window.location.href = `admin-alluser?filterStatus=` + filterStatus + `&filterRole=` + filterRole;
+                                                                window.location.href = `syllabusList`;
                                                             } else
-                                                                window.location.href = `admin-alluser?filterStatus=` + filterStatus + `&filterRole=` + filterRole + `&search=` + searchValue;
+                                                                window.location.href = `syllabusList?search=` + searchValue;
+                                                            
                                                         }
                                                         $('#editModal').on('show.bs.modal', function (event) {
                                                             var button = $(event.relatedTarget); // Button that triggered the modal

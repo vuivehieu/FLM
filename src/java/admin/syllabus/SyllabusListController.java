@@ -22,10 +22,7 @@ import model.Account;
 import model.PaginationModel;
 import model.Syllabus;
 
-/**
- *
- * @author phanh
- */
+
 @WebServlet(name = "SyllabusListController", urlPatterns = {"/syllabusList"})
 public class SyllabusListController extends HttpServlet {
 
@@ -68,8 +65,8 @@ public class SyllabusListController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String key = request.getParameter("keySearch");
-        String xpage = request.getParameter("page");
+        String key = request.getParameter("search");
+        String xpage = request.getParameter("pageNo");
         
         DAO dao = new DAO();
         Cookie[] cookies = request.getCookies();
@@ -83,10 +80,16 @@ public class SyllabusListController extends HttpServlet {
         }
 //        Account a = (Account) request.getSession().getAttribute("account");
 
-        List<Syllabus> list = dao.getSyllabusByAccountID(uid);
+//        List<Syllabus> list = dao.getSyllabusByAccountID(uid);
+//
+//        if (key != null && !key.isEmpty()) {
+//            list = dao.getSyllabusByKetAndAccountID(key, uid);
+//        }
+        
+        List<Syllabus> list = dao.getAllSyllabus();
 
         if (key != null && !key.isEmpty()) {
-            list = dao.getSyllabusByKetAndAccountID(key, uid);
+            list = dao.getSyllabusByKey(key);
         }
 
         

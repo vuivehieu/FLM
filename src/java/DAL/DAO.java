@@ -309,7 +309,7 @@ public class DAO extends DBContext {
                     + "    `syllabus`.`MinAvgMarkToPass`,"
                     + "    `syllabus`.`accountID`\n"
                     + "FROM `syllabus`\n"
-                    + "WHERE `syllabus`.`subjectCode` like ? or `syllabus`.`slbName_EN` like ? or `syllabus`.`slbName_VI` = ?;";
+                    + "WHERE `syllabus`.`subjectCode` like ? or `syllabus`.`slbName_EN` like ? or `syllabus`.`slbName_VI` Like ?;";
 
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, "%" + key + "%");

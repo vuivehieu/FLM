@@ -104,5 +104,19 @@ public class SyllabusDAO extends DBContext {
             System.out.println("SyllabusDAO -> add(): " + e);
         }
     }
+    
+     public void deleteSyllabus(int id) {
+        try {
+
+            String sql = "DELETE from syllabus where slbid = ?";
+
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.execute();
+        } catch (SQLException e) {
+            System.out.println(" AccountDAO -> deleteUser(): " + e);
+
+        }
+    }
 
 }
