@@ -92,7 +92,7 @@
                                 <option value="curName">Name</option>
                             </select>
                             <div class="form-group" style="flex-grow: 1;">
-                                <input type="text" name="type" value="syllabus" hidden>
+                                <input type="text" name="type" value="curiculum" hidden>
                                 <input style="width: 100%; border-radius: unset;" type="text" class="form-control" id="search" value="${key}"
                                     placeholder="Search">
                             </div>

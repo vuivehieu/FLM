@@ -206,38 +206,38 @@ public class SearchControllerr extends HttpServlet {
     private String getResponseCurriculum(List<?> list, String key, String type,String filter, int size, int page, int numberOfPage, int start, int startPage, int endPage) {
         String response = "";
         if (list.isEmpty()) {
-            response += "<div class='row'><h5 class='text-center' style='color: red'>Not Found</h3></div>";
+            response += "<div class='row'><h5 class='text-center' style='color: red; margin-top: 2rem; margin-bottom: 2rem;'>Data Not Found</h3></div>";
         } else {
             response = "<div class='row'>"
                     + "<h5 style='margin-bottom: 2rem;'>" + size + " Curriculum(s) found</h5>"
-                    + "<table class=\"table align-middle mb-0 bg-white\">"
-                    + "     <thead class=\"bg-dark\">"
+                    + "<table class=\"table table-bordered cart_summary\">"
+                    + "     <thead class=\"\">"
                     + "         <tr style=\" background-color: rgb(185, 182, 182); \">"
-                    + "             <th style=\"  vertical-align: middle; text-align: center; \">No</th>"
-                    + "             <th style=\"  vertical-align: middle; text-align: center; \">Curriculum Code</th>"
-                    + "             <th style=\"  vertical-align: middle; text-align: center; \">Name</th>"
-                    + "             <th style=\"  vertical-align: middle; text-align: center; \">Description</th>"
-                    + "             <th style=\"  vertical-align: middle; text-align: center; \">Decision No MM/dd/yyyy</th>"
-                    + "             <th style=\"  vertical-align: middle; text-align: center; \">Total Credit</th>"
+                    + "             <th style=\"  vertical-align: middle;  \">No</th>"
+                    + "             <th style=\"  vertical-align: middle;  \">Curriculum Code</th>"
+                    + "             <th style=\"  vertical-align: middle;  \">Name</th>"
+                    + "             <th style=\"  vertical-align: middle;  \">Description</th>"
+                    + "             <th style=\"  vertical-align: middle;  \">Decision No MM/dd/yyyy</th>"
+                    + "             <th style=\"  vertical-align: middle;  \">Total Credit</th>"
                     + "         </tr>"
                     + "     </thead>"
                     + "<tbody>";
             for (int i = 0; i < list.size(); i++) {
                 response += "<tr>"
-                        + "     <td style=\" vertical-align: middle;\">" + (start + i + 1) + "</td>"
-                        + "     <td style=\" vertical-align: middle;\">" + ((Curriculum) list.get(i)).getCurCode() + "</td>"
-                        + "     <td style=\" vertical-align: middle;\"><a href='curriculumDetails?curid=" + ((Curriculum) list.get(i)).getCurid() + "'>"
-                        + "             <p class=\"fw-normal mb-1 fw-bold mb-1\">" + ((Curriculum) list.get(i)).getCurName_EN() + "</p>"
-                        + "             <p class=\"fw-normal mb-1 text-muted mb-0\">" + ((Curriculum) list.get(i)).getCurName_VI() + "</p>"   
+                        + "     <td style=\" \">" + (start + i + 1) + "</td>"
+                        + "     <td style=\" \">" + ((Curriculum) list.get(i)).getCurCode() + "</td>"
+                        + "     <td style=\" \"><a href='curriculumDetails?curid=" + ((Curriculum) list.get(i)).getCurid() + "'>"
+                        + "             <p style=\"font-size: 18px; font-weight: 500; color: #ff6634\" class=\"product-name\">" + ((Curriculum) list.get(i)).getCurName_EN() + "</p>"
+                        + "             <small class=\"cart_ref \">" + ((Curriculum) list.get(i)).getCurName_VI() + "</small>"   
                         + "         </a>"
                         + "     </td>"
                         + "     <td class='descripCur'>" + ((Curriculum) list.get(i)).getDescription() + "</td>"
-                        + "     <td style=\" vertical-align: middle; text-align: center; \"><a href='decision?decisionNo=" + ((Curriculum) list.get(i)).getDecision().getDecisionNo() + "'>"
-                        + "             <p class=\"fw-normal mb-1 fw-bold mb-1 \">" + ((Curriculum) list.get(i)).getDecision().getDecisionNo() + "</p>"
-                        + "             <p class=\"fw-normal mb-1 text-muted mb-0 \">" + ((Curriculum) list.get(i)).getDecision().getApprovedDate() + "</p>" 
+                        + "     <td class=\"qty\" style=\"  \"><a href='decision?decisionNo=" + ((Curriculum) list.get(i)).getDecision().getDecisionNo() + "'>"
+                        + "             <p style=\"font-size: 18px; font-weight: 500; color: #ff6634\" class=\"product-name\">" + ((Curriculum) list.get(i)).getDecision().getDecisionNo() + "</p>"
+                        + "             <small class=\"cart_ref \">" + ((Curriculum) list.get(i)).getDecision().getApprovedDate() + "</small>" 
                         + "         </a>"
                         + "     </td>"
-                        + "     <td style=\" vertical-align: middle; text-align: center; \">" + ((Curriculum) list.get(i)).getTotalCredit() + "</td>"
+                        + "     <td class=\"price\" style=\"  \">" + ((Curriculum) list.get(i)).getTotalCredit() + "</td>"
                         + "</tr>";
             }
 
@@ -273,36 +273,36 @@ public class SearchControllerr extends HttpServlet {
 
         String response = "";
         if (list.isEmpty()) {
-            response += "<div class='row'><h3 class='text-center' style='color: red'>Not Found</h3></div>";
+            response += "<div class='row'><h5 class='text-center' style='color: red; margin-top: 2rem; margin-bottom: 2rem;'>Data Not Found</h3></div>";
         } else {
             response = "<div class='row'><h5 style='margin-bottom: 2rem;'>" + size + " Syllabus(es) found</h5>"
-                    + "<table class=\"table align-middle mb-0 bg-white\">"
-                    + "<thead class=\"bg-dark\">"
+                    + "<table class=\"table table-bordered cart_summary\">"
+                    + "<thead class=\"\">"
                     + "<tr style=\" background-color: rgb(185, 182, 182); \">"
-                    + "<th style=\"  text-align: center; vertical-align: middle; \">Syllabus ID</th>"
-                    + "<th style=\"  text-align: center; vertical-align: middle;\">Subject Code</th>"
-                    + "<th style=\"  text-align: center; vertical-align: middle;\">Subject Name</th>"
-                    + "<th style=\"  text-align: center; vertical-align: middle;\">Syllabus Name</th>"
-                    + "<th style=\"  text-align: center; vertical-align: middle;\">IsActive</th>"
-                    + "<th style=\"  text-align: center; vertical-align: middle;\">IsApproved</th"
-                    + "><th style=\"  text-align: center; vertical-align: middle;\">DecisionNo MM/dd/yyyy</th>"
+                    + "<th style=\"   vertical-align: middle; \">Syllabus ID</th>"
+                    + "<th style=\"  vertical-align: middle;\">Subject Code</th>"
+                    + "<th style=\"   vertical-align: middle;\">Subject Name</th>"
+                    + "<th style=\"   vertical-align: middle;\">Syllabus Name</th>"
+                    + "<th style=\"   vertical-align: middle;\">IsActive</th>"
+                    + "<th style=\"   vertical-align: middle;\">IsApproved</th"
+                    + "><th style=\"   vertical-align: middle;\">DecisionNo MM/dd/yyyy</th>"
                     + "</tr></thead>"
                     + "<tbody>\n";
             for (int i = 0; i < list.size(); i++) {
                 response += "<tr>"
-                        + "<td style=\" text-align: center; vertical-align: middle; \">" + ((Syllabus) list.get(i)).getSlbid() + "</td>"
-                        + "<td style=\" text-align: center; vertical-align: middle; \">" + ((Syllabus) list.get(i)).getSubjectCode() + "</td>"
-                        + "<td style=\" text-align: center; vertical-align: middle; \">" + new DAO().getSubjectNameENBySubjectCode(((Syllabus) list.get(i)).getSubjectCode()) + "</td>"
-                        + "<td style=\" text-align: center; vertical-align: middle; \"><a href='syllabusDetails?subjectCode=" + ((Syllabus) list.get(i)).getSubjectCode() + "&slbid=" + ((Syllabus) list.get(i)).getSlbid() + "'>"
-                        + "     <span class='list-enq-name'>" + ((Syllabus) list.get(i)).getSlbName_EN() + "</span>\n"
-                        + "     <span class='list-enq-city'>" + ((Syllabus) list.get(i)).getSlbName_VI() + "</span>"
+                        + "<td style=\" \">" + ((Syllabus) list.get(i)).getSlbid() + "</td>"
+                        + "<td style=\" \">" + ((Syllabus) list.get(i)).getSubjectCode() + "</td>"
+                        + "<td style=\"  \">" + new DAO().getSubjectNameENBySubjectCode(((Syllabus) list.get(i)).getSubjectCode()) + "</td>"
+                        + "<td style=\"  \"><a href='syllabusDetails?subjectCode=" + ((Syllabus) list.get(i)).getSubjectCode() + "&slbid=" + ((Syllabus) list.get(i)).getSlbid() + "'>"
+                        + "     <p style=\"font-size: 18px; font-weight: 500; color: #ff6634\" class=\"product-name\">" + ((Syllabus) list.get(i)).getSlbName_EN() + "</p>\n"
+                        + "     <small class='cart_ref'>" + ((Syllabus) list.get(i)).getSlbName_VI() + "</small>"
                         + "     </a>"
                         + "</td>"
-                        + "<td class='text-center' style=\" text-align: center; vertical-align: middle; \"><i class='fa " + (((Syllabus) list.get(i)).isIsActive() ? "fa-check text-success" : "fa-times text-danger") + "'></i></td>"
-                        + "<td class='text-center' style=\" text-align: center; vertical-align: middle; \"><i class='fa " + (((Syllabus) list.get(i)).isIsApproved() ? "fa-check text-success" : "fa-times text-danger") + "'></i></td>"
-                        + "<td style=\" text-align: center; vertical-align: middle; \"><a href='decision?decisionNo=" + ((Syllabus) list.get(i)).getDecision().getDecisionNo() + "'>"
-                        + "     <span class='list-enq-name'>" + ((Syllabus) list.get(i)).getDecision().getDecisionNo() + "</span>\n"
-                        + "     <span class='list-enq-city'>" + Custom.Common.getDateFormat("MM/dd/yyyy", ((Syllabus) list.get(i)).getDecision().getApprovedDate()) + "</span>\n"
+                        + "<td class='text-center' style=\"  \"><i class='fa " + (((Syllabus) list.get(i)).isIsActive() ? "fa-check text-success" : "fa-times text-danger") + "'></i></td>"
+                        + "<td class='text-center' style=\"  \"><i class='fa " + (((Syllabus) list.get(i)).isIsApproved() ? "fa-check text-success" : "fa-times text-danger") + "'></i></td>"
+                        + "<td style=\"  \" class=\"qty\"><a href='decision?decisionNo=" + ((Syllabus) list.get(i)).getDecision().getDecisionNo() + "'>"
+                        + "     <p style=\"font-size: 18px; font-weight: 500; color: #ff6634\" class=\"product-name\">" + ((Syllabus) list.get(i)).getDecision().getDecisionNo() + "</p>\n"
+                        + "     <small class='cart_ref'>" + Custom.Common.getDateFormat("MM/dd/yyyy", ((Syllabus) list.get(i)).getDecision().getApprovedDate()) + "</small>\n"
                         + "     </a>"
                         + "</td>"
                         + "</tr>";
@@ -338,14 +338,12 @@ public class SearchControllerr extends HttpServlet {
     private String getResponsePreRequisite(List<?> list, String key, int size) {
         String response = "";
         if (list.isEmpty()) {
-            response = "<div class='row text-center' style='color: red'>"
-                    + "<h3>Subject code <span style='color: black; font-size: unset; font-weight: bold'>" + key + "</span> does not exist or has no syllabus</h3>"
-                    + "</div>";
+            response += "<div class='row'><h5 class='text-center' style='color: red; margin-top: 2rem; margin-bottom: 0rem;'>Data Not Found</h3></div>";
         } else {
             response = "<div class='row'>"
                     + "<h5 style='margin-bottom: 2rem;'> All " + size + " Syllabus(es)</h5>"
-                    + "<table class=\"table align-middle mb-0 bg-white\">"
-                    + "     <thead class=\"bg-dark\">"
+                    + "<table class=\"table table-bordered cart_summary\">"
+                    + "     <thead class=\" \">"
                     + "         <tr style=\" background-color: rgb(185, 182, 182); \">"
                     + "             <th style=\"  vertical-align: middle; text-align: center; \">No</th>"
                     + "             <th style=\"  vertical-align: middle; text-align: center; \">Syllabus ID</th>"
@@ -362,15 +360,13 @@ public class SearchControllerr extends HttpServlet {
                         + "     <td style=\" text-align: center;\">" + ((Syllabus) list.get(i)).getSlbid() + "</td>"
                         + "     <td style=\" text-align: center;\">" + ((Syllabus) list.get(i)).getSubjectCode() + "</td>"
                         + "     <td style=\"text-align: center; \"><a href='syllabusDetails?subjectCode=" + ((Syllabus) list.get(i)).getSubjectCode() + "&slbid=" + ((Syllabus) list.get(i)).getSlbid() + "'>"
-//                        + "             <span class='list-enq-name'>" + ((Syllabus) list.get(i)).getSlbName_EN() + "</span>"
-//                        + "             <span class='list-enq-city'>" + ((Syllabus) list.get(i)).getSlbName_VI() + "</span>"
-                         + "             <p class=\"fw-normal mb-1 fw-bold mb-1\">" + ((Syllabus) list.get(i)).getSlbName_EN() + "</p>"
-                        + "             <p class=\"fw-normal mb-1 text-muted mb-0\">" + ((Syllabus) list.get(i)).getSlbName_VI() + "</p>"  
+                         + "             <p style=\"font-size: 18px; font-weight: 500; color: #ff6634\" class=\"product-name\">" + ((Syllabus) list.get(i)).getSlbName_EN() + "</p>"
+                        + "             <small class=\"cart_ref\">" + ((Syllabus) list.get(i)).getSlbName_VI() + "</small>"  
                         + "         </a>"
                         + "     </td>"
                         + "     <td style=\" text-align: center; \"><a href='decision?decisionNo=" + ((Syllabus) list.get(i)).getDecision().getDecisionNo() + "'>"
-                        + "             <p class=\"fw-normal mb-1 fw-bold mb-1 \">" + ((Syllabus) list.get(i)).getDecision().getDecisionNo() + "</p>"
-                        + "             <p class=\"fw-normal mb-1 text-muted mb-0 \">" + Custom.Common.getDateFormat("MM/dd/yyyy", ((Syllabus) list.get(i)).getDecision().getApprovedDate()) + "</p>" 
+                        + "             <p style=\"font-size: 18px; font-weight: 500; color: #ff6634\" class=\"product-name\">" + ((Syllabus) list.get(i)).getDecision().getDecisionNo() + "</p>"
+                        + "             <small class=\"cart_ref \">" + Custom.Common.getDateFormat("MM/dd/yyyy", ((Syllabus) list.get(i)).getDecision().getApprovedDate()) + "</small>" 
                         + "         </a>"
                         + "     </td>" + getPreRequisite(list, ((Syllabus) list.get(i)).getSubjectCode()) + ""
                         + "</tr>";
@@ -383,14 +379,12 @@ public class SearchControllerr extends HttpServlet {
     private String getResponseCorollary(List<?> list, String key, int size) {
         String response = "";
         if (list.isEmpty()) {
-            response = "<div class='row text-center' style='color: red'>"
-                    + "     <h3>Subject code <span style='color: black; font-size: unset; font-weight: bold'>" + key + "</span> does not exist or has no syllabus</h3>"
-                    + "</div>";
+            response += "<div class='row'><h5 class='text-center' style='color: red; margin-top: 2rem; margin-bottom: 0rem;'>Data Not Found</h3></div>";
         } else {
             response = "<div class='row'>"
                     + "     <h5 style='margin-bottom: 2rem;'> All " + size + " Syllabus(es)</h5>"
-                    + "<table class=\"table align-middle mb-0 bg-white\">"
-                    + "     <thead class=\"bg-dark\">"
+                    + "<table class=\"table table-bordered cart_summary\">"
+                    + "     <thead class=\"\">"
                     + "             <tr style=\" background-color: rgb(185, 182, 182); \">"
                     + "                 <th style=\"  vertical-align: middle; text-align: center; \">No</th>"
                     + "                 <th style=\"  vertical-align: middle; text-align: center; \">Syllabus ID</th>"
@@ -407,14 +401,14 @@ public class SearchControllerr extends HttpServlet {
                         + "<td style=\" text-align: center; vertical-align: middle; \">" + ((Syllabus) list.get(i)).getSlbid() + "</td>"
                         + "<td style=\" text-align: center; vertical-align: middle; \">" + ((Syllabus) list.get(i)).getSubjectCode() + "</td>"
                         + "     <td style=\" text-align: center; vertical-align: middle; \"><a href='syllabusDetails?subjectCode=" + ((Syllabus) list.get(i)).getSubjectCode() + "&slbid=" + ((Syllabus) list.get(i)).getSlbid() + "'>"
-                        + "             <span class='list-enq-name'>" + ((Syllabus) list.get(i)).getSlbName_EN() + " " + ((Syllabus) list.get(i)).getSlbName_VI() + "</span>"
-                        + "             <span class='list-enq-city'>" + ((Syllabus) list.get(i)).getSlbName_VI() + "</span>"
+                        + "             <p style=\"font-size: 18px; font-weight: 500; color: #ff6634\" class=\"product-name\">" + ((Syllabus) list.get(i)).getSlbName_EN() + " " + ((Syllabus) list.get(i)).getSlbName_VI() + "</p>"
+                        + "             <small class=\"cart_ref\">" + ((Syllabus) list.get(i)).getSlbName_VI() + "</small>"
                         + "         </a>"
                         + "         <a href='syllabusDetails?subjectCode=" + ((Syllabus) list.get(i)).getSubjectCode() + "&slbid=" + ((Syllabus) list.get(i)).getSlbid() + "'></a>"
                         + "     </td>"
                         + "     <td style=\" text-align: center; vertical-align: middle; \"><a href='decision?decisionNo=" + ((Syllabus) list.get(i)).getDecision().getDecisionNo() + "'>"
-                        + "             <span class='list-enq-name'>" + ((Syllabus) list.get(i)).getDecision().getDecisionNo() + "</span>"
-                        + "             <span class='list-enq-city'>" + Custom.Common.getDateFormat("MM/dd/yyyy", ((Syllabus) list.get(i)).getDecision().getApprovedDate()) + "</span>"
+                        + "             <p style=\"font-size: 18px; font-weight: 500; color: #ff6634\" class=\"product-name\">" + ((Syllabus) list.get(i)).getDecision().getDecisionNo() + "</p>"
+                        + "             <small class=\"cart_ref\">" + Custom.Common.getDateFormat("MM/dd/yyyy", ((Syllabus) list.get(i)).getDecision().getApprovedDate()) + "</small>"
                         + "         </a>"
                         + "     </td>"
                         + getCorollary(((Syllabus) list.get(i)).getSubjectCode())

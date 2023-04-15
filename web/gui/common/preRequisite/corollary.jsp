@@ -90,6 +90,7 @@
                     <form class="form-inline" style="position: relative;display: flex;">
 
                         <div class="form-group" style="flex-grow: 1;">
+                            <input type="text" name="type" value="preRequisite" hidden>
                             <input id="search" style="width: 100%; border-radius: unset;" type="text" class="form-control"
                                 placeholder="Search for Subject Code">
                         </div>
