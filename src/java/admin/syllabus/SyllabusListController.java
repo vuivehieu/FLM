@@ -4,7 +4,9 @@
  */
 package admin.syllabus;
 
+import DAL.AccountDAO;
 import DAL.DAO;
+import DAL.RoleDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,12 +19,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import model.Account;
+import model.PaginationModel;
 import model.Syllabus;
 
-/**
- *
- * @author phanh
- */
+
 @WebServlet(name = "SyllabusListController", urlPatterns = {"/syllabusList"})
 public class SyllabusListController extends HttpServlet {
 
@@ -64,6 +64,10 @@ public class SyllabusListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        String key = request.getParameter("search");
+        String xpage = request.getParameter("pageNo");
+        
         DAO dao = new DAO();
 
 //        Account a = (Account) request.getSession().getAttribute("account");
@@ -83,88 +87,24 @@ public class SyllabusListController extends HttpServlet {
                 }
             }
         }
-        List<Syllabus> list = dao.getSyllabusByAccountID(uid);
+//        Account a = (Account) request.getSession().getAttribute("account");
 
-        String key = request.getParameter("keySearch");
+//        List<Syllabus> list = dao.getSyllabusByAccountID(uid);
+//
+//        if (key != null && !key.isEmpty()) {
+//            list = dao.getSyllabusByKetAndAccountID(key, uid);
+//        }
+        
+        List<Syllabus> list = dao.getAllSyllabus();
 
         if (key != null && !key.isEmpty()) {
-            list = dao.getSyllabusByKetAndAccountID(key, uid);
+            list = dao.getSyllabusByKey(key);
         }
 
-        String sortType = request.getParameter("sort");
-
-        sortType = (sortType != null ? sortType : "");
-        if (sortType != null && !sortType.isEmpty()) {
-            String[] sort = sortType.split("_");
-            switch (sort[0]) {
-                case "id":
-                    Collections.sort(list, (Syllabus o1, Syllabus o2) -> {
-                        if (sort[1].equalsIgnoreCase("up")) {
-                            if (o1.getSlbid() > o2.getSlbid()) {
-                                return 1;
-                            }
-                            return -1;
-                        }
-
-                        if (o1.getSlbid() > o2.getSlbid()) {
-                            return -1;
-                        }
-                        return 1;
-                    });
-                    break;
-                case "code":
-                    Collections.sort(list, (Syllabus o1, Syllabus o2) -> {
-                        if (sort[1].equalsIgnoreCase("up")) {
-                            if (o1.getSubjectCode().compareToIgnoreCase(o2.getSubjectCode()) > 0) {
-                                return 1;
-                            }
-                            return -1;
-                        }
-                        if (o1.getSubjectCode().compareToIgnoreCase(o2.getSubjectCode()) > 0) {
-                            return -1;
-                        }
-                        return 1;
-                    });
-                    break;
-                case "name":
-                    Collections.sort(list, (Syllabus o1, Syllabus o2) -> {
-                        if (sort[1].equalsIgnoreCase("up")) {
-                            if (o1.getSlbName_EN().compareToIgnoreCase(o2.getSlbName_EN()) > 0) {
-                                return 1;
-                            }
-                            return -1;
-                        }
-                        if (o1.getSlbName_EN().compareToIgnoreCase(o2.getSlbName_EN()) > 0) {
-                            return -1;
-                        }
-                        return 1;
-                    });
-                    break;
-//                case "date":
-//                    Collections.sort(list, (Syllabus o1, Syllabus o2) -> {
-//                        if (sort[1].equalsIgnoreCase("up")) {
-//                            if (o1.getCreateDate().compareTo(o2.getCreateDate()) > 0) {
-//                                return 1;
-//                            }
-//                            return -1;
-//                        }
-//
-//                        if (o1.getCreateDate().compareTo(o2.getCreateDate()) > 0) {
-//                            return -1;
-//                        }
-//                        return 1;
-//                    });
-//                    break;
-
-                default:
-                    throw new AssertionError();
-            }
-        }
-
-        String xpage = request.getParameter("page");
+        
         List<?> listByPage = new ArrayList<>();
 
-        int page, numberPerPage = 10;
+        int page, numberPerPage = 5;
         int size;
         if (list.isEmpty()) {
             size = 0;
@@ -182,15 +122,25 @@ public class SyllabusListController extends HttpServlet {
         end = Math.min(page * numberPerPage, size);
         listByPage = new DAO().listByPage(list, start, end);
 
-        request.setAttribute("numberOfPage", numberOfPage);
-        request.setAttribute("key", key);
-        request.setAttribute("size", size);
-        request.setAttribute("page", page);
-        request.setAttribute("list", listByPage);
-        request.setAttribute("start", start);
-        request.setAttribute("sort", sortType);
+//        request.setAttribute("numberOfPage", numberOfPage);
+//        request.setAttribute("key", key);
+//        request.setAttribute("size", size);
+//        request.setAttribute("page", page);
+//        request.setAttribute("list", listByPage);
+//        request.setAttribute("start", start);
+//
+//        
+        
+        
+        
+        PaginationModel paginationModel = new PaginationModel(page,size, key);
 
+        request.setAttribute("totalPages", numberOfPage);
+        request.setAttribute("pagination", paginationModel);
+        request.setAttribute("search", paginationModel.getSearch());
+        request.setAttribute("list", listByPage);
         request.getRequestDispatcher("gui/admin/syllabus/list.jsp").forward(request, response);
+        
     }
 
     /**

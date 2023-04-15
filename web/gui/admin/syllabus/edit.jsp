@@ -82,7 +82,7 @@
                     <div class="sb2-2-2">
                         <ul>
                             <li><a href="syllabusList"><i class="fa fa-home" aria-hidden="true"></i> Syllabus List</a></li>
-                            <li class="active-bre"><a > Syllabus Details</a></li>
+                            <li class="active-bre"><a > Syllabus Update</a></li>
                         </ul>
                     </div>
 
@@ -92,7 +92,7 @@
                             <div class="col-md-12">
                                 <div class="box-inn-sp admin-form">
                                     <div class="sb2-2-add-blog sb2-2-1">
-                                        <h2>Syllabus ${type != null ? type eq 'add' ? 'Add' : 'Detail' : 'Detail' }</h2>
+                                        <h2>Syllabus Update</h2>
 
                                         <ul class="nav nav-tabs tab-list">
                                             <li class="active"><a data-toggle="tab" href="#detail" aria-expanded="true"><i class="fa fa-info" aria-hidden="true"></i> <span>Detail</span></a></li>
@@ -108,7 +108,7 @@
                                                 <div class="box-inn-sp">
 
                                                     <div class="bor">
-                                                        <form action="syllabusDetail" method="post">               
+                                                        <form action="syllabusUpdate" method="post">               
                                                             <input type="text" name="slbid" value="${syllabus.slbid}" hidden>
                                                             <input type="text" name="type" value="${type eq 'add' ? 'add' : 'update'}" hidden>
 
