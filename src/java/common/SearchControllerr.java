@@ -245,23 +245,23 @@ public class SearchControllerr extends HttpServlet {
                     + "<div class='pg-pagina'>\n"
                     + "                        <ul class='pagination' style=\"display: flex; justify-content: center;\">\n"
                     + "                            <li class='page-item " + (page == 1 ? "disabled" : "waves-effect") + "'>\n"
-                    + "                                <a onclick=\"changePage('" + (page - 1) + "')\" class=\"page-link\" style=\" margin-right: 1rem; \"><span aria-hidden=\"true\">&laquo;</span></a>\n"
+                    + "                                <a onclick=\"changePage('" + (page - 1) + "')\" class=\"page-link\" style=\"cursor: pointer; \"><span aria-hidden=\"true\">&laquo;</span></a>\n"
                     + "                            </li>\n";
             
             if (startPage > 1) {
-                response += "<li class='waves-effect'><a onclick=\"changePage('" + (page - 1) + "')\">...</a></li>\n";
+                response += "<li class='waves-effect'><a style=\"cursor: pointer; \" onclick=\"changePage('" + (page - 1) + "') \">...</a></li>\n";
             }
             
             for (int i = startPage; i <= endPage; i++) {
                 response += "<li class='page-item " + (page == i ? "active" : "waves-effect") + "'>\n"
-                        + "     <a class=\"page-link\" onclick=\"changePage('" + (i) + "')\">" + i + "<span class=\"sr-only\">(current)</span></a>\n"
+                        + "     <a style=\"cursor: pointer; \" class=\"page-link\" onclick=\"changePage('" + (i) + "')\">" + i + "<span class=\"sr-only\">(current)</span></a>\n"
                         + "</li>\n";
             }
             if (endPage < numberOfPage) {
-                response += "<li class='waves-effect'><a onclick=\"changePage('" + (page + 1) + "')\">...</a></li>\n";
+                response += "<li class='waves-effect'><a style=\"cursor: pointer; \" onclick=\"changePage('" + (page + 1) + "')\">...</a></li>\n";
             }
             response += "<li class='page-item " + (page == numberOfPage ? "disabled" : "waves-effect") + "'>\n"
-                    + "     <a class=\"page-link\" onclick=\"changePage('" + (page + 1) + "')\" style=\" margin-left: 1rem; \"><span aria-hidden=\"true\">&raquo;</span></a>\n"
+                    + "     <a style=\"cursor: pointer; \" class=\"page-link\" onclick=\"changePage('" + (page + 1) + "')\" style=\" margin-left: 1rem; \"><span aria-hidden=\"true\">&raquo;</span></a>\n"
                     + "</li>\n"
                     + "</ul>\n"
                     + "</div>";
@@ -312,21 +312,21 @@ public class SearchControllerr extends HttpServlet {
                     + "<div class='pg-pagina'>\n"
                     + "                        <ul class='pagination' style=\"display: flex; justify-content: center;\">\n"
                     + "                            <li class='page-item " + (page == 1 ? "disabled" : "waves-effect") + "'>\n"
-                    + "                                <a class=\"page-link\" onclick=\"changePage('" + (page - 1) + "')\" style=\" margin-right: 1rem;\"><span aria-hidden=\"true\">&laquo;</span></a>\n"
+                    + "                                <a style=\"cursor: pointer; \" class=\"page-link\" onclick=\"changePage('" + (page - 1) + "')\" style=\" margin-right: 1rem;\"><span aria-hidden=\"true\">&laquo;</span></a>\n"
                     + "                            </li>\n";
             if (startPage > 1) {
-                response += "<li class='waves-effect'><a onclick=\"changePage('" + (page - 1) + "')\">...</a></li>\n";
+                response += "<li class='waves-effect'><a style=\"cursor: pointer; \" onclick=\"changePage('" + (page - 1) + "')\">...</a></li>\n";
             }
             for (int i = startPage; i <= endPage; i++) {
                 response += "<li class='page-item " + (page == i ? "active" : "waves-effect") + "'>\n"
-                        + "     <a class=\"page-link\" onclick=\"changePage('" + (i) + "')\">" + i + "</a>\n"
+                        + "     <a style=\"cursor: pointer; \" class=\"page-link\" onclick=\"changePage('" + (i) + "')\">" + i + "</a>\n"
                         + "</li>\n";
             }
             if (endPage < numberOfPage) {
-                response += "<li class='waves-effect'><a onclick=\"changePage('" + (page + 1) + "')\">...</a></li>\n";
+                response += "<li class='waves-effect'><a style=\"cursor: pointer; \" onclick=\"changePage('" + (page + 1) + "')\">...</a></li>\n";
             }
             response += "<li class='page-item " + (page == numberOfPage ? "disabled" : "waves-effect") + "'>\n"
-                    + "     <a class=\"page-link\" onclick=\"changePage('" + (page + 1) + "')\" style=\" margin-left: 1rem; \"><span aria-hidden=\"true\">&raquo;</span></a>\n"
+                    + "     <a style=\"cursor: pointer; \" class=\"page-link\" onclick=\"changePage('" + (page + 1) + "')\" style=\" margin-left: 1rem; \"><span aria-hidden=\"true\">&raquo;</span></a>\n"
                     + "</li>\n"
                     + "</ul>\n"
                     + "</div>";

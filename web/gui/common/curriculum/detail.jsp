@@ -1,8 +1,3 @@
-<%-- 
-    Document   : detail
-    Created on : 18-01-2023, 11:16:09
-    Author     : phanh
---%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="ckeditor" uri="http://ckeditor.com"%>
@@ -88,7 +83,7 @@
 
         <jsp:include page="../heading/heading.jsp"/>
         <!--SECTION START-->
-        <section>
+        <section style=" margin-top: 2rem; ">
             <div class="container com-sp pad-bot-70 pg-inn">
                 <div class="row">
                     <div class="cor">

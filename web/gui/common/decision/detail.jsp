@@ -89,7 +89,7 @@
 
         <jsp:useBean class="Custom.ForJSP" id="custom"/>
         <!--SECTION START-->
-        <section>
+        <section style=" margin-top: 2rem; ">
             <div class="container com-sp">
                 <div class="row">
                     <div class="cor ">

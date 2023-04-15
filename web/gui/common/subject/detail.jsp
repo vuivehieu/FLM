@@ -1,8 +1,3 @@
-<%-- 
-    Document   : detail
-    Created on : 20-01-2023, 10:16:50
-    Author     : phanh
---%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -90,7 +85,7 @@
         <jsp:include page="../heading/heading.jsp"/>
 
         <!--SECTION START-->
-        <section>
+        <section style=" margin-top: 2rem; ">
             <div class="container com-sp">
                 <div class="row">
                     <div class="cor ">
@@ -169,11 +164,21 @@
 
         <jsp:include page="../footer/footer.jsp"/>
 
-        <!--Import jQuery before materialize.js-->
-        <script src="js/main.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/materialize.min.js"></script>
-        <script src="js/custom.js"></script>
+      <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="fe/lib/easing/easing.min.js"></script>
+        <script src="fe/lib/waypoints/waypoints.min.js"></script>
+        <script src="fe/lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="fe/lib/isotope/isotope.pkgd.min.js"></script>
+        <script src="fe/lib/lightbox/js/lightbox.min.js"></script>
+
+        <!-- Contact Javascript File -->
+        <script src="fe/mail/jqBootstrapValidation.min.js"></script>
+        <script src="fe/mail/contact.js"></script>
+
+        <!-- Template Javascript -->
+        <script src="fe/js/main.js"></script>
     </body>
 
 

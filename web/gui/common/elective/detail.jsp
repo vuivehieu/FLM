@@ -10,69 +10,84 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Education Master Template</title>
-        <!-- META TAGS -->
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Education master is one of the best educational html template, it's suitable for all education websites like university,college,school,online education,tution center,distance education,computer education">
-        <meta name="keyword" content="education html template, university template, college template, school template, online education template, tution center template">
-        <!-- FAV ICON(BROWSER TAB ICON) -->
-        <link rel="shortcut icon" href="images/fav.ico" type="image/x-icon">
-        <!-- GOOGLE FONT -->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700%7CJosefin+Sans:600,700" rel="stylesheet">
-        <!-- FONTAWESOME ICONS -->
-        <link rel="stylesheet" href="css/font-awesome.min.css">
-        <!-- ALL CSS FILES -->
-        <link href="css/materialize.css" rel="stylesheet">
-        <link href="css/bootstrap.css" rel="stylesheet" />
-        <link href="css/style.css" rel="stylesheet" />
-        <!-- RESPONSIVE.CSS ONLY FOR MOBILE AND TABLET VIEWS -->
-        <link href="css/style-mob.css" rel="stylesheet" />
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="js/html5shiv.js"></script>
-            <script src="js/respond.min.js"></script>
-            <![endif]-->
-           <!-- MDB -->
+        <title>Education Master Template</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Free HTML Templates" name="keywords">
+        <meta content="Free HTML Templates" name="description">
+
+        <!-- Favicon -->
+        <link href="fe/img/favicon.ico" rel="icon">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+        <!-- Font Awesome -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="fe/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="fe/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="fe/css/style.css" rel="stylesheet">
+        
+        
+         <!--MDB--> 
         <script
           type="text/javascript"
           src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
         ></script>
-
-        <!-- Font Awesome -->
+       
+         <!--Font Awesome--> 
         <link
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
           rel="stylesheet"
         />
-        <!-- Google Fonts -->
+         <!--Google Fonts--> 
         <link
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           rel="stylesheet"
         />
-        <!-- MDB -->
+         <!--MDB--> 
         <link
           href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
           rel="stylesheet"
         />
+        
         <style>
-            .table-custom {
-                margin-top: 1.5rem;
-            }
+            .gradient-custom-2 {
+                /* fallback for old browsers */
+                background: #fccb90;
 
-            .table-custom th {
-                background-color: #fd642d;
-                color: white;
+                /* Chrome 10-25, Safari 5.1-6 */
+                background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+
+                /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+                }
+
+                @media (min-width: 768px) {
+                .gradient-form {
+                height: 100vh !important;
+                }
+                }
+                @media (min-width: 769px) {
+                .gradient-custom-2 {
+                border-top-right-radius: .3rem;
+                border-bottom-right-radius: .3rem;
+                }
             }
         </style>
+
     </head>
 
     <body>
         <jsp:include page="../heading/heading.jsp"/>
 
         <!--SECTION START-->
-        <section>
+        <section style=" margin-top: 2rem; ">
             <div class="container com-sp">
                 <div class="row">
                     <div class="cor ">
@@ -147,11 +162,21 @@
 
         <jsp:include page="../footer/footer.jsp"/>
 
-        <!--Import jQuery before materialize.js-->
-        <script src="js/main.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/materialize.min.js"></script>
-        <script src="js/custom.js"></script>
+       <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="fe/lib/easing/easing.min.js"></script>
+        <script src="fe/lib/waypoints/waypoints.min.js"></script>
+        <script src="fe/lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="fe/lib/isotope/isotope.pkgd.min.js"></script>
+        <script src="fe/lib/lightbox/js/lightbox.min.js"></script>
+
+        <!-- Contact Javascript File -->
+        <script src="fe/mail/jqBootstrapValidation.min.js"></script>
+        <script src="fe/mail/contact.js"></script>
+
+        <!-- Template Javascript -->
+        <script src="fe/js/main.js"></script>
     </body>
 
 
