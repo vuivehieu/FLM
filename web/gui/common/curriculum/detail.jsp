@@ -1,8 +1,3 @@
-<%-- 
-    Document   : detail
-    Created on : 18-01-2023, 11:16:09
-    Author     : phanh
---%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="ckeditor" uri="http://ckeditor.com"%>
@@ -10,111 +5,85 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
     <head>
-        <title>Education Master Template</title>
-        <!-- META TAGS -->
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Education master is one of the best educational html template, it's suitable for all education websites like university,college,school,online education,tution center,distance education,computer education">
-        <meta name="keyword" content="education html template, university template, college template, school template, online education template, tution center template">
-        <!-- FAV ICON(BROWSER TAB ICON) -->
-        <link rel="shortcut icon" href="images/fav.ico" type="image/x-icon">
-        <!-- GOOGLE FONT -->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700%7CJosefin+Sans:600,700" rel="stylesheet">
-        <!-- FONTAWESOME ICONS -->
-        <link rel="stylesheet" href="css/font-awesome.min.css">
-        <!-- ALL CSS FILES -->
-        <link href="css/materialize.css" rel="stylesheet">
-        <link href="css/bootstrap.css" rel="stylesheet" />
-        <link href="css/style.css" rel="stylesheet" />
-        <!-- RESPONSIVE.CSS ONLY FOR MOBILE AND TABLET VIEWS -->
-        <link href="css/style-mob.css" rel="stylesheet" />
+        <title>Education Master Template</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Free HTML Templates" name="keywords">
+        <meta content="Free HTML Templates" name="description">
+
+        <!-- Favicon -->
+        <link href="fe/img/favicon.ico" rel="icon">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
         <!-- Font Awesome -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="fe/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="fe/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="fe/css/style.css" rel="stylesheet">
+        
+        
+         <!--MDB--> 
+        <script
+          type="text/javascript"
+          src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
+        ></script>
+       
+         <!--Font Awesome--> 
         <link
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
           rel="stylesheet"
         />
-        <!-- Google Fonts -->
+         <!--Google Fonts--> 
         <link
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           rel="stylesheet"
         />
-        <!-- MDB -->
+         <!--MDB--> 
         <link
           href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
           rel="stylesheet"
         />
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="js/html5shiv.js"></script>
-            <script src="js/respond.min.js"></script>
-            <![endif]-->
-
+        
         <style>
-            .table-custom th {
-                background-color: #fd642d;
-                color: white;
-            }
-
-            .curriculum-review {
-                width: 10%;
-                float: left;
-            }
-
-            .curriculum-review img{
-                padding-left: auto;
-                width: 80px;
-                height: 80px;
-                border-radius: 50px;
-            }
-
-            .curriculum-review-right i{
-                float: right;
-                top: -9rem;
-                position: relative;
-                padding-right: 5rem;
-            }
-
-            .color-warning-custom {
-                background-color: #ff9600;
-            }
-
             .gradient-custom-2 {
-        /* fallback for old browsers */
-        background: #fccb90;
+                /* fallback for old browsers */
+                background: #fccb90;
 
-        /* Chrome 10-25, Safari 5.1-6 */
-        background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+                /* Chrome 10-25, Safari 5.1-6 */
+                background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
 
-        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
-        }
+                /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+                }
 
-        @media (min-width: 768px) {
-        .gradient-form {
-        height: 100vh !important;
-        }
-        }
-        @media (min-width: 769px) {
-        .gradient-custom-2 {
-        border-top-right-radius: .3rem;
-        border-bottom-right-radius: .3rem;
-        }
-        }
+                @media (min-width: 768px) {
+                .gradient-form {
+                height: 100vh !important;
+                }
+                }
+                @media (min-width: 769px) {
+                .gradient-custom-2 {
+                border-top-right-radius: .3rem;
+                border-bottom-right-radius: .3rem;
+                }
+            }
         </style>
 
-
-        <script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
     </head>
 
     <body>
 
         <jsp:include page="../heading/heading.jsp"/>
         <!--SECTION START-->
-        <section>
+        <section style=" margin-top: 2rem; ">
             <div class="container com-sp pad-bot-70 pg-inn">
                 <div class="row">
                     <div class="cor">
@@ -144,7 +113,6 @@
                                         </c:if>
                                     </div>
                                     <h5>1.3. Job positions after graduation:<br>Graduates of Software Engineering can choose for themselves the following jobs:</h5>
-                                    <p>Lười :></p>
 
                                     <div>
                                         <a class="btn btn-warning color-warning-custom" href="poDetailView?id=${cur.curid}" role="button">View PO</a>
@@ -154,7 +122,7 @@
                                     </div>
                                 </div>
                                 <div class="cor-p5">
-                                    <h3>Chưa Nghĩ Ra Nó Là Gì :></h3>
+                                    <h3>Subject - PLO - Mapping</h3>
                                     <ul class="nav nav-tabs">
                                         <li class="active">
                                             <a data-toggle="tab" href="#subject"><img src="images/icon/cor4.png" alt=""> <span>Subject</span></a>
@@ -318,17 +286,23 @@
         <!--SECTION END-->
 
         <jsp:include page="../footer/footer.jsp"/>  
-        <!-- MDB -->
-        <script
-          type="text/javascript"
-          src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
-        ></script>
 
-        <!--Import jQuery before materialize.js-->
-        <script src="js/main.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/materialize.min.js"></script>
-        <script src="js/custom.js"></script>
+
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="fe/lib/easing/easing.min.js"></script>
+        <script src="fe/lib/waypoints/waypoints.min.js"></script>
+        <script src="fe/lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="fe/lib/isotope/isotope.pkgd.min.js"></script>
+        <script src="fe/lib/lightbox/js/lightbox.min.js"></script>
+
+        <!-- Contact Javascript File -->
+        <script src="fe/mail/jqBootstrapValidation.min.js"></script>
+        <script src="fe/mail/contact.js"></script>
+
+        <!-- Template Javascript -->
+        <script src="fe/js/main.js"></script>
     </body>
 
 

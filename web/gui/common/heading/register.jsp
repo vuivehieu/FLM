@@ -8,56 +8,61 @@
         <div class="card rounded-3 text-black">
           <div class="row g-0">
             <div class="col-lg-6">
-              <div class="card-body p-md-5 mx-md-4">
-
+              <div class="card-body p-md-5 mx-md-4" style="position: relative;">
+                <a href="#" id="btn-close" style="position: absolute; top:10px; right:10px;" class="pop-close" data-dismiss="modal"><img style="width: 12px;height: 12px;" src="images/cancel.png" alt="" /></a>
                 <div class="text-center">
-<!--                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
-                    style="width: 185px;" alt="logo">-->
                   <h4 class="mt-1 mb-5 pb-1">Create an Account</h4>
                 </div>
 
                 <!--<form action="register" method="post" onsubmit="checkData()">-->
                   <!--<p>Please login to your account</p>-->
 
-                  <div class="form-outline mb-4">
-                    <input type="text" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;" disabled
+                  <div class="form-group mb-4">
+                       <label class="form-label" for="userName">User Name</label>
+                    <input type="text" class="form-control validate" style="font-size: 15px;" disabled
                        id="userName" onFocus="focusUserName()" />
-                    <label class="form-label" for="userName">User Name</label>
+                   
                   </div>
                     
-                  <div class="form-outline mb-4">
-                    <input type="text" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;" disabled
+                  <div class="form-group mb-4">
+                      <label class="form-label" for="fullName">Full Name</label>
+                    <input type="text" class="form-control validate" style="font-size: 15px;" disabled
                         id="fullName" />
-                    <label class="form-label" for="fullName">Full Name</label>
+                    
                   </div>
                     
-                  <div class="form-outline mb-4">
-                    <input type="text" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;"
+                  <div class="form-group mb-4">
+                      <label class="form-label" for="email">Email</label>
+                    <input type="text" class="form-control validate" style="font-size: 15px; "
                       id="email" onFocus="focusEmail()"/>
-                    <label class="form-label" for="email">Email</label>
+                    
                   </div>
 
-                  <div class="form-outline mb-4">
-                    <input type="password" onFocus="focusPass()" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;" disabled  id="password"  />
-                    <label class="form-label" for="password">Password</label>
+                  <div class="form-group mb-4">
+                       <label class="form-label" for="password">Password</label>
+                    <input type="password" onFocus="focusPass()" class="form-control validate" style="font-size: 15px; " disabled  id="password"  />
+                   
                   </div>
                     
-                  <div class="form-outline mb-4">
-                     <input type="password" onFocus="focusConfirmPass()" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;" disabled id="comfirm-password"  />
+                  <div class="form-group mb-4">
                       <label class="form-label" for="comfirm-password">Confirm password</label>
+                     <input type="password" onFocus="focusConfirmPass()" class="form-control validate" style="font-size: 15px; " disabled id="comfirm-password"  />
+                      
                   </div>
                        
                 <div class="row">
                   <div class="col-md-6 mb-4">
-                    <div class="form-outline">
+                    <div class="form-group">
+                        <label class="form-label" for="verifyCode">Input Code</label>
                          <input type="text" class="form-control validate" onFocus="focusInputCode()"
-                           id="verifyCode" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;"/>
-                       <label class="form-label" for="verifyCode">Input Code</label>
+                           id="verifyCode" style="font-size: 15px; "/>
+                       
                     </div>
                   </div>
                   <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button" style="font-size: 15px;" 
+                    <div class="form-group">
+                        <label class="form-label" for="verifyCodeBtn"></label>
+                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button" style="font-size: 15px; margin-top: 5px;" 
                                 id="verifyCodeBtn" onclick="verifyEmail()">Verify Email</button>
                     </div>
                   </div>
@@ -71,11 +76,9 @@
                    <p id="messageRegister" style="color: blue; text-align: center;"></p>
                    <p id="errorMessage" style="color: red; text-align: center; margin-bottom: 30px;"></p>
 
-                <div class="input-field s12" style="text-align: center;"> <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal1" onclick="closeModal2()">Are you a already member ? Login</a> </div>
+                <div class="input-field s12" style="text-align: center;"> <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal1" onclick="closeModal2()" id="btn-close-2">Are you a already member ? Login</a> </div>
 
                   <!--end form xac nhan ma code-->  
-                <a href="#" id="btn-close-2" class="pop-close" data-dismiss="modal"><img src="images/cancel.png" alt="" />
-                </a>
               </div>
             </div>
             <div class="col-lg-6 d-flex align-items-center gradient-custom-2">

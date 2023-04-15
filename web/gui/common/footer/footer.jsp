@@ -1,67 +1,48 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<section class="wed-hom-footer">
-    <div class="container">
-        
-<!--        <div class="row wed-foot-link" style="border-top: unset; padding-top: unset">
-            <div class="col-md-4 foot-tc-mar-t-o">
-                <h4>Top Courses</h4>
-                <ul>
-                    <li><a href="course-details.html">Accounting/Finance</a></li>
-                    <li><a href="course-details.html">civil engineering</a></li>
-                    <li><a href="course-details.html">Art/Design</a></li>
-                    <li><a href="course-details.html">Marine Engineering</a></li>
-                    <li><a href="course-details.html">Business Management</a></li>
-                    <li><a href="course-details.html">Journalism/Writing</a></li>
-                    <li><a href="course-details.html">Physical Education</a></li>
-                    <li><a href="course-details.html">Political Science</a></li>
-                </ul>
-            </div>
-            <div class="col-md-4">
-                <h4>New Courses</h4>
-                <ul>
-                    <li><a href="course-details.html">Sciences</a></li>
-                    <li><a href="course-details.html">Statistics</a></li>
-                    <li><a href="course-details.html">Web Design/Development</a></li>
-                    <li><a href="course-details.html">SEO</a></li>
-                    <li><a href="course-details.html">Google Business</a></li>
-                    <li><a href="course-details.html">Graphics Design</a></li>
-                    <li><a href="course-details.html">Networking Courses</a></li>
-                    <li><a href="course-details.html">Information technology</a></li>
-                </ul>
-            </div>
-            <div class="col-md-4">
-                <h4>HELP & SUPPORT</h4>
-                <ul>
-                    <li><a href="#">24x7 Live help</a>
-                    </li>
-                    <li><a href="#">Contact us</a>
-                    </li>
-                    <li><a href="#">Feedback</a>
-                    </li>
-                    <li><a href="#">FAQs</a>
-                    </li>
-                    <li><a href="#">Safety Tips</a>
-                    </li>
-                </ul>
-            </div>
-        </div>-->
-        <div class="row wed-foot-link-1" style="border-top: unset; padding-top: unset">
-            <div class="col-md-8 foot-tc-mar-t-o">
-                <h4>Get In Touch</h4>
-                <p>Address: Đất Thổ Cư Hòa Lạc, Km29 Đường Cao Tốc 08, Thạch Hoà, Thạch Thất, Hà Nội 10000</p>
-                <p>Phone: <a href="#!">024 7300 1866</a></p>
-                <p>Email: <a href="#!">daihocfpt@fpt.edu.vn</a></p>
-            </div>
-            <div class="col-md">
-                <h4>DOWNLOAD OUR FREE MOBILE APPS</h4>
-                <ul>
-                    <li><a href="#"><span class="sprite sprite-android"></span></a>
-                    </li>
-                    <li><a href="#"><span class="sprite sprite-ios"></span></a>
-                    </li>
-                </ul>
+<!-- Footer Start -->
+    <footer id="colophon" style="background: #333333;border-top: 10px solid #f36f2b;">
+        <div class="container">
+            <div class="row" style="padding: 74px 0 110px 0;">
+                <div class="col">
+                    <img style="width: 237px;" src="https://hanoi.fpt.edu.vn/wp-content/uploads/2021/12/2021-FPTU-Long.jpg" alt="">
+                    <p style="margin-top: 15px;font-size: 15px;color: white;">© 2017 Bản quyền thuộc về Trường đại học FPT.</p>
+                </div>
+                <div class="col">
+                    <section id="text-6" class="widget-footer widget_text">
+                        <div class="textwidget">
+                            <div class="footer-box">
+                                <h2 style="font-size: 18px;color: #f36f2b;">HÀ NỘI</h2>
+                                <p style="font-size: 15px;color: white;">Khu Giáo dục và Đào tạo – Khu Công nghệ cao Hòa Lạc – Km29 Đại lộ Thăng Long, Thạch
+                                    Thất, TP. Hà Nội</p>
+                                <p style="font-size: 15px;color: white;">Điện thoại: (024) 73001866/ (024) 73005588</p>
+                                <div class="footer-box">
+                                    <h2 style="font-size: 18px;color: #f36f2b;">TP. HỒ CHÍ MINH</h2>
+                                    <p style="font-size: 15px;color: white;">Lô E2a-7, Đường D1 Khu Công nghệ cao, P.Long Thạnh Mỹ, Q.9, TP.HCM</p>
+                                    <p style="font-size: 15px;color: white;">Điện thoại: (028) 73001866/ (028) 73005588</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col">
+                    <section id="text-7" class="widget-footer widget_text">
+                        <div class="textwidget">
+                            <div class="footer-box">
+                                <h2 style="font-size: 18px;color: #f36f2b;">ĐÀ NẴNG</h2>
+                                <p style="font-size: 15px;color: white;">Khu Đô thị Công nghệ FPT, P. Hòa Hải, Q. Ngũ Hành Sơn, Tp. Đà Nẵng.</p>
+                                <p style="font-size: 15px;color: white;">Điện thoại: (0236) 7300999</p>
+                                <p>&nbsp;</p>
+                            </div>
+                            <div class="footer-box">
+                                <h2 style="font-size: 18px;color: #f36f2b;">CẦN THƠ</h2>
+                                <p style="font-size: 15px;color: white;">Số 600 đường Nguyễn Văn Cừ nối dài, Khu vực 6, phường An Bình, quận Ninh Kiều, TP.
+                                    Cần Thơ</p>
+                                <p style="font-size: 15px;color: white;">Điện thoại: (0292) 7303636</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </footer>

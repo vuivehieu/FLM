@@ -1,259 +1,115 @@
-<%-- 
-    Document   : index
-    Created on : 14-01-2023, 06:15:40
-    Author     : phanh
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Education Master Template</title>
-        <!-- META TAGS -->
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Education master is one of the best educational html template, it's suitable for all education websites like university,college,school,online education,tution center,distance education,computer education">
-        <meta name="keyword" content="education html template, university template, college template, school template, online education template, tution center template">
-        <!-- FAV ICON(BROWSER TAB ICON) -->
-        <link rel="shortcut icon" href="images/fav.ico" type="image/x-icon">
-        <!-- GOOGLE FONT -->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700%7CJosefin+Sans:600,700" rel="stylesheet">
-        <!-- FONTAWESOME ICONS -->
-        <link rel="stylesheet" href="css/font-awesome.min.css">
-        <!-- ALL CSS FILES -->
-        <link href="css/materialize.css" rel="stylesheet">
-        <link href="css/bootstrap.css" rel="stylesheet" />
-        <link href="css/style.css" rel="stylesheet" />
-        <!-- RESPONSIVE.CSS ONLY FOR MOBILE AND TABLET VIEWS -->
-        <link href="css/style-mob.css" rel="stylesheet" />
+        <title>Education Master Template</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Free HTML Templates" name="keywords">
+        <meta content="Free HTML Templates" name="description">
+
+        <!-- Favicon -->
+        <link href="fe/img/favicon.ico" rel="icon">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+        <!-- Font Awesome -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="fe/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="fe/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="fe/css/style.css" rel="stylesheet">
         
-        <!-- MDB -->
+        
+         <!--MDB--> 
         <script
           type="text/javascript"
           src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
         ></script>
        
-        <!-- Font Awesome -->
+         <!--Font Awesome--> 
         <link
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
           rel="stylesheet"
         />
-        <!-- Google Fonts -->
+         <!--Google Fonts--> 
         <link
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           rel="stylesheet"
         />
-        <!-- MDB -->
+         <!--MDB--> 
         <link
           href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
           rel="stylesheet"
         />
         
         <style>
-        .gradient-custom-2 {
-        /* fallback for old browsers */
-        background: #fccb90;
+            .gradient-custom-2 {
+                /* fallback for old browsers */
+                background: #fccb90;
 
-        /* Chrome 10-25, Safari 5.1-6 */
-        background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+                /* Chrome 10-25, Safari 5.1-6 */
+                background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
 
-        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
-        }
+                /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+                }
 
-        @media (min-width: 768px) {
-        .gradient-form {
-        height: 100vh !important;
-        }
-        }
-        @media (min-width: 769px) {
-        .gradient-custom-2 {
-        border-top-right-radius: .3rem;
-        border-bottom-right-radius: .3rem;
-        }
-        }
+                @media (min-width: 768px) {
+                .gradient-form {
+                height: 100vh !important;
+                }
+                }
+                @media (min-width: 769px) {
+                .gradient-custom-2 {
+                border-top-right-radius: .3rem;
+                border-bottom-right-radius: .3rem;
+                }
+            }
         </style>
-        
+
     </head>
 
     <body>
         <jsp:include page="heading/heading.jsp"/>
-
-        <!-- SLIDER -->
-        <section class="hidden">
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner">
-                    <div class="item slider1 active">
-                        <img src="images/slider/1.jpg" alt="">
-                        <div class="carousel-caption slider-con">
-                            <h2>Welcome to <span> FPT University</span></h2>
-                            <a href="#" class="bann-btn-1">All Courses</a><a href="#" class="bann-btn-2">Read More</a>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="images/slider/2.jpg" alt="">
-                        <div class="carousel-caption slider-con">
-                            <h2>Phan Hiếu <span>  2023</span></h2>
-                            <a href="#" class="bann-btn-1">Curriculum</a><a href="#" class="bann-btn-2">Read More</a>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="images/slider/3.jpg" alt="">
-                        <div class="carousel-caption slider-con">
-                            <h2>Syllabus <span>Master</span></h2>
-                            <a href="#" class="bann-btn-1">All Syllabus</a><a href="#" class="bann-btn-2">Read More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Left and right controls -->
-                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                    <i class="fa fa-chevron-left slider-arr"></i>
-                </a>
-                <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                    <i class="fa fa-chevron-right slider-arr"></i>
-                </a>
-            </div>
-        </section>
-
-        <!-- QUICK LINKS -->
-        <section class="hidden">
-            <div class="container">
-                <div class="row">
-                    <div class="wed-hom-ser">
-                        <ul>
-                            <li>
-                                <a href="#" class="waves-effect waves-light btn-large wed-pop-ser-btn"><img src="images/icon/h-ic1.png" alt=""> Academy</a>
-                            </li>
-                            <li>
-                                <a href="#" class="waves-effect waves-light btn-large wed-pop-ser-btn"><img src="images/icon/h-ic2.png" alt=""> Admission</a>
-                            </li>
-                            <li>
-                                <a href="#" class="waves-effect waves-light btn-large wed-pop-ser-btn"><img src="images/icon/h-ic4.png" alt=""> Courses</a>
-                            </li>
-                            <li>
-                                <a href="#" class="waves-effect waves-light btn-large wed-pop-ser-btn"><img src="images/icon/h-ic3.png" alt=""> Seminar</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- DISCOVER MORE -->
-        <section>
-            <div class="container com-sp pad-bot-70">
-                <div class="row">
-                    <div class="con-title">
-                        <h2>Chuyên Ngành <span>FPT University</span></h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="ed-course">
-                        <c:forEach items="${listMajor}" var="major">
-                            <div class="col-md-3 col-sm-4 col-xs-12">
-                                <div class="ed-course-in">
-                                    <a class="course-overlay" href="curriculum?majorID=${major.majorID}">
-                                        <img src="${major.image}" alt="ảnh major">
-                                        <span>${major.majorName_EN}</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </c:forEach>
-                    </div>
-                </div>
+        
+        <!-- About Start -->
+        <div style="position: relative;">
+            <div class="py-5" style="width: 100vw; height: 90vh; overflow: hidden;">
+                <img style="object-fit: fill; width: 100%; height: 100%;" src="./fe/img/DH-FPT-4359-1612093890.jpg" alt="">
             </div>
-        </section>
-        <!-- POPULAR COURSES -->
-        <section class="pop-cour">
-            <div class="container com-sp pad-bot-70">
-                <div class="row">
-                    <div class="con-title">
-                        <h2>Khóa học <span>Nổi Bật</span></h2>
-                    </div>
-                </div>
-                <div class="row">
-
-                    <c:forEach begin="0" end="5" var="i">
-                        <div class="col-md-6">
-                            <!--POPULAR COURSES-->
-                            <div class="home-top-cour">
-                                <!--POPULAR COURSES IMAGE-->
-                                <div class="col-md-3"> <img src="images/course/sm-4.jpg" alt=""> </div>
-                                <!--POPULAR COURSES: CONTENT-->
-                                <div class="col-md-9 home-top-cour-desc">
-                                    <a href="subjectDetails?subjectCode=${subject.get(i).subjectCode}">
-                                        <h3>${subject.get(i).subjectCode}</h3>
-                                    </a>
-                                    <h4>${subject.get(i)} / Construction / Building</h4>
-                                    <p>Classes started from coming friday(21 jun 2017),total seats 72 and available seats 10</p> <span class="home-top-cour-rat">4.2</span>
-                                    <div class="hom-list-share">
-                                        <ul>
-                                            <li><a href="course-details.html"><i class="fa fa-bar-chart" aria-hidden="true"></i> Book Now</a> </li>
-                                            <li><a href="course-details.html"><i class="fa fa-eye" aria-hidden="true"></i>32 Aavailable</a> </li>
-                                            <li><a href="course-details.html"><i class="fa fa-share-alt" aria-hidden="true"></i> 124</a> </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </c:forEach>
-                </div>
-            </div>
-        </section>
-        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <strong class="mr-auto">Thông báo</strong>
-                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Đóng">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="toast-body">
-                Đăng ký thành công!
+            <div style="position: absolute; top: 50% ;left: 50%; transform: translate(-50%,-50%);">
+                <p style="font-size: 56px; font-weight: 700; color: #ff6634;;">FPT University</p>
             </div>
         </div>
-        <div id="message" hidden="">${sessionScope.message}</div>
-        <%
-              session.removeAttribute("message");
-        %>
+        <!-- About End -->
 
         <!-- FOOTER -->
         <jsp:include page="footer/footer.jsp"/>
 
-         <!-- Thêm link tới các thư viện jQuery và Popper.js -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-        <!--Import jQuery before materialize.js-->
-        <script src="js/main.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="fe/lib/easing/easing.min.js"></script>
+        <script src="fe/lib/waypoints/waypoints.min.js"></script>
+        <script src="fe/lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="fe/lib/isotope/isotope.pkgd.min.js"></script>
+        <script src="fe/lib/lightbox/js/lightbox.min.js"></script>
 
-<!--        <script>
-            $(document).ready(function () {
-                if (document.getElementById('messageRegister').innerHTML !== "false") {
-                    $('.toast').toast('show');
-                }
+        <!-- Contact Javascript File -->
+        <script src="fe/mail/jqBootstrapValidation.min.js"></script>
+        <script src="fe/mail/contact.js"></script>
 
-            });
-        </script>
-        <script>
-            $(document).ready(function () {
-                if (document.getElementById('message').innerHTML !== '') {
-                    $('.toast').toast('show');
-                    $('.toast').addClass('in');
-
-                    setTimeout(function () {
-                        $('.toast').removeClass('in');
-
-                    }, 2900);
-                }
-
-            });
-        </script>-->
-        <script src="js/materialize.min.js"></script>
-        <script src="js/custom.js"></script>
+        <!-- Template Javascript -->
+        <script src="fe/js/main.js"></script>
+        
     </body>
 
 </html>

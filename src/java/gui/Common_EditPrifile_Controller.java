@@ -59,7 +59,7 @@ public class Common_EditPrifile_Controller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("gui/common/editProfile.jsp").forward(request, response);
+        request.getRequestDispatcher("/gui/common/editProfile.jsp").forward(request, response);
     } 
 
     /** 

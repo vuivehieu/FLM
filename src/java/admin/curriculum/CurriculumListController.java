@@ -5,7 +5,6 @@
 package admin.curriculum;
 
 import DAL.CurriculumDAO;
-import com.sun.corba.se.spi.presentation.rmi.StubAdapter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

@@ -3,135 +3,119 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
     <head>
-        <title>Education Master Template</title>
-        <!-- META TAGS -->
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Education master is one of the best educational html template, it's suitable for all education websites like university,college,school,online education,tution center,distance education,computer education">
-        <meta name="keyword" content="education html template, university template, college template, school template, online education template, tution center template">
-        <!-- FAV ICON(BROWSER TAB ICON) -->
-        <link rel="shortcut icon" href="images/fav.ico" type="image/x-icon">
-        <!-- GOOGLE FONT -->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700%7CJosefin+Sans:600,700" rel="stylesheet">
-        <!-- FONTAWESOME ICONS -->
-        <link rel="stylesheet" href="css/font-awesome.min.css">
-        <!-- ALL CSS FILES -->
-        <link href="css/materialize.css" rel="stylesheet">
-        <link href="css/bootstrap.css" rel="stylesheet" />
-        <link href="css/style.css" rel="stylesheet" />
-        <!-- RESPONSIVE.CSS ONLY FOR MOBILE AND TABLET VIEWS -->
-        <link href="css/style-mob.css" rel="stylesheet" />
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="js/html5shiv.js"></script>
-            <script src="js/respond.min.js"></script>
-            <![endif]-->
+        <title>Education Master Template</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Free HTML Templates" name="keywords">
+        <meta content="Free HTML Templates" name="description">
+
+        <!-- Favicon -->
+        <link href="fe/img/favicon.ico" rel="icon">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+        <!-- Font Awesome -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="fe/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="fe/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="fe/css/style.css" rel="stylesheet">
         
-        <!-- MDB -->
+        
+         <!--MDB--> 
         <script
           type="text/javascript"
           src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
         ></script>
        
-        <!-- Font Awesome -->
+         <!--Font Awesome--> 
         <link
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
           rel="stylesheet"
         />
-        <!-- Google Fonts -->
+         <!--Google Fonts--> 
         <link
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           rel="stylesheet"
         />
-        <!-- MDB -->
+         <!--MDB--> 
         <link
           href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
           rel="stylesheet"
         />
-
+        
         <style>
-            .descripCur {
-                overflow: hidden;
-                text-overflow: ellipsis;
-                line-height: 25px;
-                -webkit-line-clamp: 3;
-                height: 75px;
-                display: -webkit-box;
-                -webkit-box-orient: vertical;
-            }
             .gradient-custom-2 {
-        /* fallback for old browsers */
-        background: #fccb90;
+                /* fallback for old browsers */
+                background: #fccb90;
 
-        /* Chrome 10-25, Safari 5.1-6 */
-        background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+                /* Chrome 10-25, Safari 5.1-6 */
+                background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
 
-        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
-        }
+                /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+                }
 
-        @media (min-width: 768px) {
-        .gradient-form {
-        height: 100vh !important;
-        }
-        }
-        @media (min-width: 769px) {
-        .gradient-custom-2 {
-        border-top-right-radius: .3rem;
-        border-bottom-right-radius: .3rem;
-        }
-        }
+                @media (min-width: 768px) {
+                .gradient-form {
+                height: 100vh !important;
+                }
+                }
+                @media (min-width: 769px) {
+                .gradient-custom-2 {
+                border-top-right-radius: .3rem;
+                border-bottom-right-radius: .3rem;
+                }
+            }
         </style>
     </head>
 
     <body>
 
         <jsp:include page="../heading/heading.jsp"/>
-        <section class="pop-cour">
-            <div class="container com-sp pad-bot-70">
-                <div class="row">
-                    <div class="con-title col-12">
-                        <h2>Syllabus <span>Management</span></h2>
+          
+        <!--Start Content-->
+        <div class="container-fluid" >
+            <h1 style="text-align: center; margin-top: 2rem;">Syllabus Management</h1>
+                <div class="row" style="margin-top: 30px;">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6">
+                        <form class="form-inline" style="position: relative;display: flex;">
+                            <select class="form-control" style="border-radius: unset;" id="sel">
+                                <option value="subjectCode" selected>Subject Code</option>
+                                <option value="syllabusName">Syllabus Name</option>
+                            </select>
+                            <div class="form-group" style="flex-grow: 1;">
+                                <input type="text" name="type" value="syllabus" hidden="">
+                                <input style="width: 100%; border-radius: unset;" type="text" class="form-control" id="search" value="${key}"
+                                    placeholder="Search">
+                            </div>
+                            <button style="position: absolute; right: 0; border-radius: unset;" type="button" onclick="searchSyllabus()"
+                                class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </form>
                     </div>
-
-
                 </div>
-                <div class="col-12" style="display: flex;align-items: center;">
-                    <!-- start select -->
-                        <select id="sel" name="select" class="browser-default" style="font-size: 16px;width: 18rem;">
-                          <option value='subjectCode' selected>Subject Code</option>
-                          <option value='syllabusName'>Syllabus Name</option>
-                        </select>
-                    <!--end select-->
-                    <form class="form-inline" style="width: 100%;padding-left: 3rem;">
-                        <div style="position: relative">
-                            <input type="text" name="type" value="syllabus" hidden="">
-                            <input class="" name="keysearch" id="search" value="${key}" style="height: 5rem;font-size: unset" type="text" placeholder="Search" >
-                            <span style="position: absolute; top:20px; right:10px" class="fa fa-search" onclick="searchSyllabus()"></span>
-                        </div>
-                    </form>
-
-                </div>
-            </div>
-
-            <div class="container pad-bot-70" id="root">
+                                    
                 <c:if test="${!list.isEmpty() && list != null}">
-                    <div class='row'>
-                        <h5>${size} Syllabus(es) found</h5>
-                        <table class='table table-hover'>
+                    <div class="table-responsive" style="margin-top: 30px;" id="root">
+                        <table class="table table-bordered cart_summary">
                             <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th width="10%">Subject Code</th>
-                                    <th>Subject Name</th>
-                                    <th>Syllabus Name</th>
-                                    <th>IsActive</th>
-                                    <th>IsApproved</th>
-                                    <th>DecisionNo MM/dd/yyyy</th>
+                                <tr style="background-color: rgb(185, 182, 182);">
+                                    <th style="vertical-align: middle;">ID</th>
+                                    <th style="vertical-align: middle;">Subject Code</th>
+                                    <th style="vertical-align: middle;">Subject Name</th>
+                                    <th style="vertical-align: middle;">Syllabus Name</th>
+                                    <th style="vertical-align: middle;">Is Active</th>
+                                    <th style="vertical-align: middle;">Is Approved</th>
+                                    <th style="vertical-align: middle;">
+                                        Decision No MM/dd/yyy
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -140,53 +124,50 @@
                                 <c:forEach items="${list}" var="item">
                                     <tr>
                                         <td>${item.slbid}</td>
-                                        <td>${item.subjectCode}</td>
+                                        <td>
+                                            <span>${item.subjectCode}</span>
+                                        </td>
                                         <td>${dao.getSubjectNameENBySubjectCode(item.subjectCode)}</td>
                                         <td>
-                                            <a href="syllabusDetails?subjectCode=${item.subjectCode}&slbid=${item.slbid}" >
-                                                <span class='list-enq-name'>${item.slbName_EN}</span>
-                                                <span class="list-enq-city">${item.slbName_VI}</span>
+                                            <a href="syllabusDetails?subjectCode=${item.subjectCode}&slbid=${item.slbid}">
+                                                <p style="font-size: 18px; font-weight: 500; color: #ff6634" class="product-name">
+                                                    ${item.slbName_EN}
+                                                </p>
+                                                <small class="cart_ref">${item.slbName_VI}</small>
                                             </a>
                                         </td>
                                         <td class="text-center "><i class="fa ${item.isActive ? 'fa-check text-success' : 'fa-times text-danger'}"></i></td>
                                         <td class="text-center"><i class="fa ${item.isApproved ? 'fa-check text-success' : 'fa-times text-danger'}"></i></td>
-                                        <td>
+                                        <td class="qty">
                                             <a href="decision?decisionNo=${item.decision.decisionNo}" >
-                                                <span class="list-enq-name">${item.decision.decisionNo}</span>
-                                                <span class="list-enq-city">${custom.getDateFormat('MM/dd/yyyy', item.decision.approvedDate)}</span>
-
+                                                <p style="font-size: 18px; font-weight: 500; color: #ff6634" class="product-name">
+                                                    ${item.decision.decisionNo}
+                                                </p>
+                                                <small class="cart_ref">${custom.getDateFormat('MM/dd/yyyy', item.decision.approvedDate)}</small>
                                             </a>
                                         </td>
-                                    </tr>
+                                    </tr>     
                                 </c:forEach>
                             </tbody>
                         </table>
-                    </div>
+                        <ul class="pagination" style="display: flex; justify-content: center;">
+                          <li class="page-item  ${(page == 1 ? 'disabled' : 'waves-effect')}">
+                            <a class="page-link" href="#" tabindex="-1" onclick="changePage('${page - 1}')"><i class='fa fa-angle-left' aria-hidden='true'></i></a>
+                          </li>
 
-                    <div class='pg-pagina'>
-                        <ul class='pagination'>
-                            <li class="${(page == 1 ? 'disabled' : 'waves-effect')}"> 
-                                <a onclick="changePage('${page - 1}')">
-                                    <i class='fa fa-angle-left' aria-hidden='true'></i>
-                                </a>
+                          <c:forEach begin="1" end="${numberOfPage}" var="i">
+                            <li class="page-item ${page == i ? 'active' : 'waves-effect'}" >
+                                <a class="page-link" href="#" onclick="changePage('${i}')">${i}<span class="sr-only">(current)</span></a>
                             </li>
-                            <c:forEach begin="1" end="${numberOfPage}" var="i">
-                                <li class=" ${page == i ? 'active' : 'waves-effect'}">
-                                    <a onclick="changePage('${i}')">${i} </a>
-                                </li>
-                            </c:forEach>
-                            <li class="${(page == numberOfPage ? 'disabled' : 'waves-effect')}">
-                                <a onclick="changePage('${page + 1}')">
-                                    <i class='fa fa-angle-right' aria-hidden='true'></i>
-                                </a>
-                            </li>
+                          </c:forEach>
+                          <li class="page-item ${(page == numberOfPage ? 'disabled' : 'waves-effect')}">
+                            <a class="page-link" onclick="changePage('${page + 1}')" href="#"><i class='fa fa-angle-right' aria-hidden='true'></i></a>
+                          </li>
                         </ul>
                     </div>
-
-
                 </c:if>
             </div>
-        </section> 
+        <!--End Content-->
 
         <jsp:include page="../footer/footer.jsp"/>
 
@@ -222,7 +203,8 @@
 
             function changePage(page) {
                 let key = document.getElementById("search").value;
-                let url = './search?type=syllabus&keysearch=' + key + '&page=' + page;
+                let selectValue = document.getElementById('sel').value;
+                let url = './search?type=syllabus&keysearch=' + key + '&filter=' +selectValue + '&page=' + page;
 
 
                 if (window.XMLHttpRequest) {
@@ -248,9 +230,6 @@
             }
         </script>
 
-        <!--Import jQuery before materialize.js-->
-        <script src="js/main.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
         <script>
             $('#search').keyup(function (e) {
                 if (e.keyCode === 13) {
@@ -258,8 +237,22 @@
                 }
             });
         </script>
-        <script src="js/materialize.min.js"></script>
-        <script src="js/custom.js"></script>
+        
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="fe/lib/easing/easing.min.js"></script>
+        <script src="fe/lib/waypoints/waypoints.min.js"></script>
+        <script src="fe/lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="fe/lib/isotope/isotope.pkgd.min.js"></script>
+        <script src="fe/lib/lightbox/js/lightbox.min.js"></script>
+
+        <!-- Contact Javascript File -->
+        <script src="fe/mail/jqBootstrapValidation.min.js"></script>
+        <script src="fe/mail/contact.js"></script>
+
+        <!-- Template Javascript -->
+        <script src="fe/js/main.js"></script>
     </body>
 
 

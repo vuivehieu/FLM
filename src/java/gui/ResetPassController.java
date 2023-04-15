@@ -72,7 +72,7 @@ public class ResetPassController extends HttpServlet {
             request.setAttribute("userName", a.getUserName());
         }
 
-        request.getRequestDispatcher("gui/common/resetPass.jsp").forward(request, response);
+        request.getRequestDispatcher("/gui/common/resetPass.jsp").forward(request, response);
     }
 
     /**
