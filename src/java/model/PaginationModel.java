@@ -25,8 +25,12 @@ public class PaginationModel {
         this.filterRole = filterRole;
         this.filterStatus = filterStatus;
     }
-    
-    
+
+    public PaginationModel(int pageNo, int pageSize, String search) {
+        this.pageNo = pageNo;
+        this.pageSize = pageSize;
+        this.search = search;
+    }
 
     public int getPageNo() {
         return pageNo;
