@@ -14,10 +14,21 @@ public class PaginationModel {
     private String search;
     private int filterRole;
     private int filterStatus;
+    
+    private String filterType;
 
     public PaginationModel() {
     }
 
+    public PaginationModel(int pageNo, int pageSize, String search, int filterStatus, String filterType, boolean s) {
+        this.pageNo = pageNo;
+        this.pageSize = pageSize;
+        this.search = search;
+        this.filterStatus = filterStatus;
+        this.filterType = filterType;
+    }
+    
+    
     public PaginationModel(int pageNo, int pageSize, String search, int filterRole, int filterStatus) {
         this.pageNo = pageNo;
         this.pageSize = pageSize;
@@ -25,9 +36,20 @@ public class PaginationModel {
         this.filterRole = filterRole;
         this.filterStatus = filterStatus;
     }
-    
-    
 
+    public PaginationModel(int pageNo, int pageSize, String search) {
+                this.pageNo = pageNo;
+        this.pageSize = pageSize;
+        this.search = search;
+    }
+
+    public String getFilterType() {
+        return filterType;
+    }
+
+    public void setFilterType(String filterType) {
+        this.filterType = filterType;
+    }
     public int getPageNo() {
         return pageNo;
     }

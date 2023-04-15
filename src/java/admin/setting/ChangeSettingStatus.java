@@ -1,28 +1,27 @@
-package common.elective;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package admin.setting;
+
+/**
+ *
+ * @author ADMIN
  */
 
-
-import DAL.DAO;
-import java.io.IOException;
-import java.io.PrintWriter;
+import DAL.RoleDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Curriculum;
+import java.io.IOException;
+import java.io.PrintWriter;
+import model.PaginationModel;
 
-/**
- *
- * @author phanh
- */
-@WebServlet(urlPatterns={"/viewElective"})
-public class ViewElectiveController extends HttpServlet {
+@WebServlet(name="ChangeSettingStatus", urlPatterns={"/admin-change-setting-status"})
+public class ChangeSettingStatus extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -39,10 +38,10 @@ public class ViewElectiveController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ViewElectiveController</title>");  
+            out.println("<title>Servlet AdminAllUserController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ViewElectiveController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet AdminAllUserController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,34 +58,28 @@ public class ViewElectiveController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String id_raw = request.getParameter("id");
+        RoleDAO roleDAO = new RoleDAO();
+        int id = Integer.parseInt(request.getParameter("id"));
+        int status = Integer.parseInt(request.getParameter("status"));
+        roleDAO.ChangeRoleStatus(id, status);
+        int roleId = 0;
+        String page ="";
         Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("userRole")) {
-                    if (Integer.parseInt(cookie.getValue()) != 6 && Integer.parseInt(cookie.getValue()) != 5 && Integer.parseInt(cookie.getValue()) != 7) {
-                        response.sendRedirect("home");
-                        return;
-                    }
-
+                if(cookies!=null){
+            for(Cookie cookie:cookies){
+                if(cookie.getName().equals("userRole")){
+                    roleId = Integer.parseInt(cookie.getValue());
                 }
             }
         }
-        try {
-            
-            int id = Integer.parseInt(id_raw);
-            
-            DAO dao = new DAO();
-            
-            Curriculum cur = dao.getCurriculumByCurid(id);
-            
-            request.setAttribute("cur", cur);
-            
-        } catch (NumberFormatException e) {
-            System.out.println("ViewElectiveController -> doGet(): " + e);
-        }
-        
-        request.getRequestDispatcher("gui/common/elective/viewElective.jsp").forward(request, response);
+                if(roleId == id){
+                    if(status == 0){
+                        page = "/logout";
+                    }
+                }else{
+                        page = "/admin-settings";
+                    }
+        response.sendRedirect(request.getContextPath() + page);
     } 
 
     /** 

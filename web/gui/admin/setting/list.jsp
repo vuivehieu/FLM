@@ -19,7 +19,7 @@
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js" defer="defer"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
             <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-            <title>User Management</title>
+            <title>Settings</title>
 
     </head>
 
@@ -45,7 +45,7 @@
                                         <li class="breadcrumb-home"><a href="#"> <i class="material-icons"
                                                                                     >home</i></a></li>
                                         <li class="breadcrumb-item"><a href="#">FLM</a></li>
-                                        <li class="breadcrumb-item active"><a href="#">User Management</a></li>
+                                        <li class="breadcrumb-item active"><a href="#">Settings</a></li>
                                     </ol>
                                 </nav>
                             </div>
@@ -57,11 +57,8 @@
                                 <div class="row align-items-center">
                                     <div class="col-sm-12 col-md-6">
                                         <div class="input-group" style="position: relative;width: 25%;margin-left: auto;margin-bottom: 15px;float: left">
-                                            <select class="form-control js-basic-example2" id="filterRole" style="margin-left:-2%;background: #cfcfcf;border-radius: 20px;padding: 10px 20px;" onchange="filter()">
-                                                <option value="0">All</option>
-                                                <c:forEach items="${roles}" var="role">
-                                                    <option value="${role.rid}" ${filterRole == role.rid? 'selected' : ''}><c:out value="${role.rname}"/></option>
-                                                </c:forEach>
+                                            <select class="form-control js-basic-example2" id="filterType" style="margin-left:-2%;background: #cfcfcf;border-radius: 20px;padding: 10px 20px;">
+                                                <option value="User Role" selected>User Role</option>
                                             </select>
                                             <div class="input-group-append" style="position: absolute;right: 0;z-index: 10;">
                                             </div>
@@ -71,7 +68,6 @@
                                                 <option value="3">All</option>
                                                 <option value="0" ${filterStatus == 0? 'selected' : ''}>Inactive</option>
                                                 <option value="1" ${filterStatus == 1? 'selected' : ''}>Active</option>
-                                                <option value="2" ${filterStatus == 2? 'selected' : ''}>Not Verify Email</option>
                                             </select>
                                             <div class="input-group-append" style="position: absolute;right: 0;z-index: 10;">
                                             </div>
@@ -89,7 +85,7 @@
                                     </div>
                                 </div>
                                 <div class="card-header" style="background: #242939 ;display: flex;justify-content: space-between;">
-                                    <h2 class="p-1 m-0 text-16 font-weight-semi " style="color: white">User Management</h2>
+                                    <h2 class="p-1 m-0 text-16 font-weight-semi " style="color: white">Settings</h2>
                                     <div style="color: white" class="p-1 m-0 text-16">
                                         <i class="fa fa-plus" aria-hidden="true" data-toggle="modal" data-target="#ModalAdd" style="cursor: pointer"></i>
                                     </div>
@@ -99,39 +95,32 @@
                                         <table id="example" style="text-align: center" class="table">
                                             <tbody>
                                                 <tr>
-                                                    <th style="width:10%;height: auto;">Avatar</th>
+                                                    <th class="sort-handler cursor-pointer">ID</th>
                                                     <th class="sort-handler cursor-pointer">Name</th>
-                                                    <th class="sort-handler cursor-pointer">UserName</th>
-                                                    <th class="sort-handler cursor-pointer">Email</th>
-                                                    <th class="sort-handler cursor-pointer">Role</th>
-                                                    <th >Status</th>
+                                                    <th class="sort-handler cursor-pointer">Type</th>
+                                                    <th class="sort-handler cursor-pointer">Display Order</th>
+                                                    <th>Status</th>
                                                     <th></th>
                                                 </tr>
-                                                <c:forEach items="${list}" var="user">
+                                                <c:forEach items="${list}" var="item">
                                                     <tr>
-                                                        <td><span class="list-img"><img src="${user.avatar}"></span></td>
+                                                        <td>${item.rid}</td>
                                                         <td>
-                                                            <a href="#">
-                                                                <span class="list-enq-name">${user.displayName}</span>
-                                                            </a>
+                                                            ${item.rname}
                                                         </td>
-                                                        <td>${user.userName}</td>
-                                                        <td>${user.email}</td>
-                                                        <td>${user.role.rname}</td>
+                                                        <td>${item.type}</td>
+                                                        <td>${item.displayOrder}</td>
                                                         <td>
-                                                            <c:if test="${user.status == 1}">
+                                                            <c:if test="${item.status == 1}">
                                                                 <span class="badge badge-success">Active</span>
                                                             </c:if>
-                                                            <c:if test="${user.status == 0}">
+                                                            <c:if test="${item.status == 0}">
                                                                 <span class="badge badge-danger">Inactive</span>
-                                                            </c:if>
-                                                            <c:if test="${user.status == 2}">
-                                                                <span class="badge badge-info">Not Verify Email</span>
                                                             </c:if>
                                                         </td>
                                                         <td>
                                                             <button id="btnDetail"
-                                                                    data-status="${user.status}" data-role="${user.role.rid}" data-name="${user.displayName}" data-username="${user.userName}" data-email="${user.email}" data-avatar="${user.avatar}" data-userid="${user.accountID}"
+                                                                    data-status="${item.status}" data-type="${item.type}" data-name="${item.rname}" data-display="${item.displayOrder}" data-itemid="${item.rid}"
                                                                     data-target="#editModal"
                                                                     data-toggle="modal"
                                                                     aria-hidden="true"
@@ -142,9 +131,16 @@
                                                             </button>
                                                             <button
                                                                 class="btn text-danger rounded-circle m-0 btn-sm btn-icon"
-                                                                style="height: 0px !important;" onclick="document.getElementById('deleteLink').href = 'admin-deleteuser?id=${user.accountID}&pageNo=${pagination.pageNo}&search=${search}&filter=${filter}';
-                                                                        openModal(${result.id})"><i
-                                                                    class="material-icons">delete</i></button>
+                                                                style="height: 0px !important;" onclick="document.getElementById('deleteLink').href = 'admin-change-setting-status?id=${item.rid}&status=${item.status==0? 1 : 0}';
+                                                                        openModal(${result.id})">
+                                                                <c:if test="${item.status== 1}">
+                                                                    <i class="material-icons">toggle_off</i>
+                                                                </c:if>
+                                                                <c:if test="${item.status== 0}">
+                                                                    <i class="material-icons">toggle_on</i>
+                                                                </c:if>
+                                                            </button>
+
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
@@ -156,12 +152,12 @@
                                         <ul class="pagination justify-content-center font-weight-bold">
                                             <li class="page-item">
                                                 <c:if test="${pagination.pageNo > 1}">
-                                                    <button class="page-link" ><i class="material-icons " onclick="onPage(1,${pagination.pageSize}, '${search}', '${filterRole}', '${filterStatus}')">keyboard_double_arrow_left</i>
+                                                    <button class="page-link" ><i class="material-icons " onclick="onPage(1,${pagination.pageSize}, '${search}', '${filterType}', '${filterStatus}')">keyboard_double_arrow_left</i>
                                                     </c:if>
                                             </li>
                                             <li class="page-item">
                                                 <c:if test="${pagination.pageNo > 1}">
-                                                    <button class="page-link" ><i class="material-icons " onclick="onPage(${pagination.pageNo - 1},${pagination.pageSize}, '${search}', '${filterRole}', '${filterStatus}')">keyboard_arrow_left</i>
+                                                    <button class="page-link" ><i class="material-icons " onclick="onPage(${pagination.pageNo - 1},${pagination.pageSize}, '${search}', '${filterType}', '${filterStatus}')">keyboard_arrow_left</i>
                                                     </c:if>
                                             </li>
                                             <c:forEach var="page" begin="1" end="${totalPages}">
@@ -171,20 +167,20 @@
                                                             <button class="page-link page-number">${page}</button>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <button class="page-link page-number" onclick="onPage(${page},${pagination.pageSize}, '${search}', '${filterRole}', '${filterStatus}')">${page}</button>
+                                                            <button class="page-link page-number" onclick="onPage(${page},${pagination.pageSize}, '${search}', '${filterType}', '${filterStatus}')">${page}</button>
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </li>
                                             </c:forEach>
                                             <li class="page-item">
                                                 <c:if test="${not empty list && pagination.pageNo != totalPages}">
-                                                    <button class="page-link" onclick="onPage(${pagination.pageNo+1},${pagination.pageSize}, '${search}', '${filterRole}', '${filterStatus}')"><i class="material-icons">keyboard_arrow_right</i>
+                                                    <button class="page-link" onclick="onPage(${pagination.pageNo+1},${pagination.pageSize}, '${search}', '${filterType}', '${filterStatus}')"><i class="material-icons">keyboard_arrow_right</i>
                                                     </button>
                                                 </c:if>
                                             </li>
                                             <li class="page-item">
                                                 <c:if test="${not empty list && pagination.pageNo != totalPages}">
-                                                    <button class="page-link" onclick="onPage(${totalPages},${pagination.pageSize}, '${search}', '${filterRole}', '${filterStatus}')"><i class="material-icons">keyboard_double_arrow_right</i>
+                                                    <button class="page-link" onclick="onPage(${totalPages},${pagination.pageSize}, '${search}', '${filterType}', '${filterStatus}')"><i class="material-icons">keyboard_double_arrow_right</i>
                                                     </c:if>
                                             </li>
                                         </ul>
@@ -205,12 +201,12 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <h4>Are you sure want to delete?</h4>
+                                    <h4>Are you sure want to change status?</h4>
                                 </div>
                                 <div class="modal-footer" style="margin: 0 auto; display: flex ; justify-content: space-between">
                                     <a id="deleteLink" class="btn btn-opacity-danger" href="#">
                                         <%--              <button class="btn btn-opacity-danger " style="margin-left: 12px;" type="button">--%>
-                                        Delete
+                                        Change Status
                                         <%--              </button>--%>
                                     </a>
                                 </div>
@@ -223,7 +219,7 @@
                             <div class="modal-content">
                                 <form id="formAdd" class="needs-validation" method="POST" action="admin-adduser">
                                     <div class="modal-header" style="background: #304156;padding: 10px;">
-                                        <h5 class="modal-title" id="exampleModalAdd" style="color: white">Add User</h5>
+                                        <h5 class="modal-title" id="exampleModalAdd" style="color: white">Add Setting</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true" style="color: white">&times;</span>
                                         </button>
@@ -231,45 +227,28 @@
                                     <div class="modal-body">
                                         <div class="row">
                                             <div class="form-group col-md-12">
-                                                <label for="inputUsername" class="ml-2" style="font-size: 15px; color:black">Username</label>
+                                                <label for="inputName" class="ml-2" style="font-size: 15px; color:black">Name</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control mt-2" id="inputUsername" placeholder="Input Username" name="inputUsername" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                    <input type="text" class="form-control mt-2" id="inputName" placeholder="Input Username" name="inputName" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
                                                 </div>
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <label for="inputPassword" class="ml-2" style="font-size: 15px; color:black">Password</label>
+                                                <label for="inputDisplay" class="ml-2" style="font-size: 15px; color:black">Display Order</label>
                                                 <div class="input-group">
-                                                    <input type="password" class="form-control mt-2" id="inputPassword" placeholder="Input Username" name="inputPassword" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                    <input type="password" class="form-control mt-2" id="inputDisplay" placeholder="Input Username" name="inputDisplay" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
                                                 </div>
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <label for="inputFullName" class="ml-2" style="font-size: 15px; color:black">Fullname</label>
+                                                <label for="inputDescription" class="ml-2" style="font-size: 15px; color:black">Description</label>
                                                 <div class="input-group">
                                                     <input type="text" class="form-control mt-2" id="inputFullName" placeholder="Input Fullname" name="inputFullName" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
 
                                                 </div>
                                             </div>
-                                            <div class="form-group col-md-12">
-                                                <label for="inputEmail" class="ml-2" style="font-size: 15px; color:black">Email</label>
-                                                <div class="input-group">
-                                                    <input type="email" class="form-control mt-2" id="inputEmail" placeholder="Input Email" name="inputEmail" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
-
-                                                </div>
-                                            </div>
-                                            <div class="form-group col-md-12">
-                                                <label for="inputAvatar" class="ml-2" style="font-size: 15px; color:black">Avatar</label>
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control mt-2" id="inputAvatar" placeholder="Input Avatar" name="inputAvatar" aria-describedby="inputGroupPrepend" style="font-size: 14px;">
-                                                </div>
-                                            </div>
-                                            <label class="ml-2" style="font-size: 15px;margin-left:.5rem!important;">Role</label>
+                                            <label class="ml-2" style="font-size: 15px;margin-left:.5rem!important;">Type</label>
                                             <div class="form-group col-md-12">
                                                 <select class="form-control js-basic-example2" id="inputRole" name="inputRole" style="width: 100%" required>
-                                                    <c:forEach items="${roles}" var="role">
-                                                        <c:if test="${role.rid != 6}">
-                                                            <option value="${role.rid}"><c:out value="${role.rname}"/></option>
-                                                        </c:if>
-                                                    </c:forEach>
+                                                    <option value="0">User Role</option>
                                                 </select>
                                             </div>
 
@@ -299,7 +278,7 @@
                                                                     <div class="modal-content">
                                                                         <form id="formEdit" class="needs-validation" method="POST" action="admin-updateuser">
                                                                             <div class="modal-header" style="background: #304156;padding: 10px;">
-                                                                                <h5 class="modal-title" id="exampleModalAdd" style="color: white">Edit User</h5>
+                                                                                <h5 class="modal-title" id="exampleModalAdd" style="color: white">Edit Setting</h5>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                     <span aria-hidden="true" style="color: white">&times;</span>
                                                                                 </button>
@@ -307,41 +286,31 @@
                                                                             <div class="modal-body">
                                                                                 <div class="row">
                                                                                     <div class="form-group col-md-12">
-                                                                                        <label for="updateUsername" class="ml-2" style="font-size: 15px; color:black">Username</label>
+                                                                                        <label for="updateName" class="ml-2" style="font-size: 15px; color:black">Name</label>
                                                                                         <div class="input-group">
-                                                                                            <input type="text" class="form-control mt-2" id="updateUsername" disabled placeholder="Input Username" value="" name="updateUsername4" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
-                                                                                                <input type="text" class="form-control mt-2" id="updateUsername3" placeholder="Input Username" value="" name="updateUsername" aria-describedby="inputGroupPrepend" style="font-size: 14px;display: none">
+                                                                                            <input type="text" class="form-control mt-2" id="updateName" disabled placeholder="Input Username" value="" name="updateName" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                                                                <input type="text" class="form-control mt-2" id="updateName2" placeholder="Input Username" value="" name="updateName2" aria-describedby="inputGroupPrepend" style="font-size: 14px;display: none">
                                                                                                     <input type="text" class="form-control mt-2" id="updateId" placeholder="Input Username" value="" name="updateId" aria-describedby="inputGroupPrepend" style="font-size: 14px;display: none">
                                                                                                         </div>
                                                                                                         </div>
                                                                                                         <div class="form-group col-md-12">
-                                                                                                            <label for="updateFullName" class="ml-2" style="font-size: 15px; color:black">Fullname</label>
+                                                                                                            <label for="updateDisplay" class="ml-2" style="font-size: 15px; color:black">Display Order</label>
                                                                                                             <div class="input-group">
-                                                                                                                <input type="text" class="form-control mt-2" id="updateFullName" disabled placeholder="Input Fullname" value="" name="updateFullName" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                                                                                <input type="text" class="form-control mt-2" id="updateDisplay" disabled placeholder="Input Fullname" value="" name="updateDisplay" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
 
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <div class="form-group col-md-12">
-                                                                                                            <label for="updateEmail" class="ml-2" style="font-size: 15px; color:black">Email</label>
+                                                                                                            <label for="updateDescription" class="ml-2" style="font-size: 15px; color:black">Description</label>
                                                                                                             <div class="input-group">
-                                                                                                                <input type="text" class="form-control mt-2" id="updateEmail" disabled placeholder="Input Fullname" value="" name="updateEmail" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                                                                                <input type="text" class="form-control mt-2" id="updateDescription" disabled placeholder="Input Fullname" value="" name="updateDescription" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
 
                                                                                                             </div>
                                                                                                         </div>
-                                                                                                        <div class="form-group col-md-12">
-                                                                                                            <label for="updateAvatar" class="ml-2" style="font-size: 15px; color:black">Avatar</label>  
-                                                                                                            <div class="input-group">
-                                                                                                                <input type="text" class="form-control mt-2" id="updateAvatar" disabled placeholder="Input Fullname" value="" name="updateAvatar" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                        <label class="ml-2" style="font-size: 15px;margin-left:.5rem!important;">Role</label>
+                                                                                                        <label class="ml-2" style="font-size: 15px;margin-left:.5rem!important;">Type</label>
                                                                                                         <div class="form-group col-md-12">
                                                                                                             <select class="form-control js-basic-example2" id="updateRole" name="updateRole" style="width: 100%" required>
-                                                                                                                <c:forEach items="${roles}" var="role">
-                                                                                                                    <c:if test="${role.rid != 6}">
-                                                                                                                        <option value="${role.rid}"><c:out value="${role.rname}"/></option>
-                                                                                                                    </c:if>
-                                                                                                                </c:forEach>
+                                                                                                                <option value="0">User Role</option>
                                                                                                             </select>
                                                                                                         </div>
 
@@ -354,32 +323,30 @@
                                                                                                                 <input type="radio" value="1" class="form-control mt-2" id="updateStatus1" name="updateStatus" style="font-size: 2px;" aria-describedby="inputGroupPrepend">
                                                                                                                     <label for="updateStatus2" class="ml-2" style="font-size: 15px">Inactive</label>
                                                                                                                     <input type="radio" value="0" class="form-control mt-2" id="updateStatus2" name="updateStatus" style="font-size: 2px;" aria-describedby="inputGroupPrepend">
-                                                                                                                        <label for="updateStatus3" class="ml-2" style="font-size: 15px">Not Verify Email</label>
-                                                                                                                        <input type="radio" value="2" class="form-control mt-2" id="updateStatus3" name="updateStatus" style="font-size: 2px;" aria-describedby="inputGroupPrepend">
-                                                                                                                            </div>                                    
-                                                                                                                            </div>
-                                                                                                                            </div>
-                                                                                                                            </div>
-                                                                                                                            <div class="modal-footer" style="margin: 0 auto; display: flex; justify-content: center" >
-                                                                                                                                <button class="btn btn-opacity-success" type="submit">Save</button>
-                                                                                                                            </div>
-                                                                                                                            </form>
-                                                                                                                            </div>
-                                                                                                                            </div>
-                                                                                                                            </div>
-                                                                                                                            <!---->
-                                                                                                                            <!-- End:: Footer-->
-                                                                                                                            </div>
-                                                                                                                            <!-- End::Main header-->
-                                                                                                                            </div>
-                                                                                                                            </div>
+                                                                                                                        </div>                                    
+                                                                                                                        </div>
+                                                                                                                        </div>
+                                                                                                                        </div>
+                                                                                                                        <div class="modal-footer" style="margin: 0 auto; display: flex; justify-content: center" >
+                                                                                                                            <button class="btn btn-opacity-success" type="submit">Save</button>
+                                                                                                                        </div>
+                                                                                                                        </form>
+                                                                                                                        </div>
+                                                                                                                        </div>
+                                                                                                                        </div>
+                                                                                                                        <!---->
+                                                                                                                        <!-- End:: Footer-->
+                                                                                                                        </div>
+                                                                                                                        <!-- End::Main header-->
+                                                                                                                        </div>
+                                                                                                                        </div>
 
-                                                                                                                            <script src="admin-template/js/vendors.bundle.min.js"></script>
-                                                                                                                            <script src="admin-template/js/main.bundle.min.js"></script>
-                                                                                                                            <script src="admin-template/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-                                                                                                                            <script src="admin-template/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-                                                                                                                            <script src="admin-template/js/pages/datatables/basicDatatable.min.js"></script>
-                                                                                                                            <script type="text/javascript">
+                                                                                                                        <script src="admin-template/js/vendors.bundle.min.js"></script>
+                                                                                                                        <script src="admin-template/js/main.bundle.min.js"></script>
+                                                                                                                        <script src="admin-template/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+                                                                                                                        <script src="admin-template/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+                                                                                                                        <script src="admin-template/js/pages/datatables/basicDatatable.min.js"></script>
+                                                                                                                        <script type="text/javascript">
                                                         let currentIndex;
                                                         let oldText;
                                                         $(".sort-handler").click(function (e) {
@@ -458,65 +425,60 @@
                                                                 theme: "classic"
                                                             });
                                                         });
-                                                        function onPage(pageNo, pageSie, search, filterRole, filterStatus) {
+                                                        function onPage(pageNo, pageSize, search, filterType, filterStatus) {
                                                             if (search === '') {
-                                                                if (filterRole === 0) {
-                                                                    window.location.href = `admin-alluser?pageNo=` + pageNo + `&filterStatus=` + filterStatus;
+                                                                if (filterType === 'User Role') {
+                                                                    window.location.href = `admin-settings?pageNo=` + pageNo + `&filterStatus=` + filterStatus;
                                                                 }
-                                                                if (filterStatus === 0) {
-                                                                    window.location.href = `admin-alluser?pageNo=` + pageNo + `&filterRole=` + filterRole;
+                                                                if (filterType === 'User Role') {
+                                                                    window.location.href = `admin-settings?pageNo=` + pageNo + `&filterType=` + filterType;
                                                                 }
-                                                                if (filterRole === 0 && filterStatus === 0) {
-                                                                    window.location.href = `admin-alluser?pageNo=` + pageNo;
+                                                                if (filterType === 'User Role' && filterStatus === 0) {
+                                                                    window.location.href = `admin-settings?pageNo=` + pageNo;
                                                                 }
-                                                                window.location.href = `admin-alluser?pageNo=` + pageNo + `&filterRole=` + filterRole + `&filterStatus=` + filterStatus;
+                                                                window.location.href = `admin-settings?pageNo=` + pageNo + `&filterType=` + filterType + `&filterStatus=` + filterStatus;
                                                             } else {
-                                                                window.location.href = `admin-alluser?pageNo=` + pageNo + `&filterRole=` + filterRole + `&filterStatus=` + filterStatus + `&search=` + search;
+                                                                window.location.href = `admin-settings?pageNo=` + pageNo + `&filterType=` + filterType + `&filterStatus=` + filterStatus + `&search=` + search;
                                                             }
                                                         }
                                                         function filter() {
                                                             const searchValue = "${search}";
-                                                            const filterRole = document.getElementById("filterRole").value;
+                                                            const filterType = document.getElementById("filterType").value;
                                                             const filterStatus = document.getElementById("filterStatus").value;
                                                             if (searchValue === '') {
-                                                                if (filterRole !== 0 && filterStatus !== 3) {
-                                                                    window.location.href = `admin-alluser?pageNo=1&filterRole=` + filterRole + `&filterStatus=` + filterStatus;
-                                                                } else if (filterRole !== 0) {
-                                                                    window.location.href = `admin-alluser?pageNo=1&filterRole=` + filterRole;
+                                                                if (filterType !== 'User Role' && filterStatus !== 3) {
+                                                                    window.location.href = `admin-settings?pageNo=1&filterType=` + filterType + `&filterStatus=` + filterStatus;
+                                                                } else if (filterType !== 'User Role') {
+                                                                    window.location.href = `admin-settings?pageNo=1&filterType=` + filterType;
                                                                 } else if (filterStatus !== 3) {
-                                                                    window.location.href = `admin-alluser?pageNo=1&filterStatus=` + filterStatus;
+                                                                    window.location.href = `admin-settings?pageNo=1&filterStatus=` + filterStatus;
                                                                 }
                                                             } else {
-                                                                if (filterRole !== 0 && filterStatus !== 3) {
-                                                                    window.location.href = `admin-alluser?pageNo=1&filterRole=` + filterRole + `&filterStatus=` + filterStatus + '&search=' + searchValue;
-                                                                } else if (filterRole !== 0) {
-                                                                    window.location.href = `admin-alluser?pageNo=1&filterRole=` + filterRole + '&search=' + searchValue;
+                                                                if (filterType !== 'User Role' && filterStatus !== 3) {
+                                                                    window.location.href = `admin-settings?pageNo=1&filterType=` + filterType + `&filterStatus=` + filterStatus + '&search=' + searchValue;
+                                                                } else if (filterType !== 'User Role') {
+                                                                    window.location.href = `admin-settings?pageNo=1&filterType=` + filterType + '&search=' + searchValue;
                                                                 } else if (filterStatus !== 3) {
-                                                                    window.location.href = `admin-alluser?pageNo=1&filterStatus=` + filterStatus + '&search=' + searchValue;
+                                                                    window.location.href = `admin-settings?pageNo=1&filterStatus=` + filterStatus + '&search=' + searchValue;
                                                                 }
                                                             }
                                                         }
                                                         function search() {
+                                                            const filterType = "${filterType}";
                                                             const filterStatus = "${filterStatus}";
-                                                            const filterRole = "${filterRole}";
                                                             const searchValue = document.getElementById("textSearch").value;
                                                             if (searchValue === '') {
-                                                                window.location.href = `admin-alluser?filterStatus=` + filterStatus + `&filterRole=` + filterRole;
+                                                                window.location.href = `admin-settings?filterType=` + filterType + `&filterStatus=` + filterStatus;
                                                             } else
-                                                                window.location.href = `admin-alluser?filterStatus=` + filterStatus + `&filterRole=` + filterRole + `&search=` + searchValue;
+                                                                window.location.href = `admin-settings?filterType=` + filterType + `&filterStatus=` + filterStatus + `&search=` + searchValue;
                                                         }
                                                         $('#editModal').on('show.bs.modal', function (event) {
                                                             var button = $(event.relatedTarget); // Button that triggered the modal
                                                             var status = button.data('status'); // Extract value from data-* attributes
-                                                            var role = button.data('role');
-                                                            var id = button.data('userid');
+                                                            var type = button.data('type');
+                                                            var itemid = button.data('itemid');
                                                             var name = button.data('name');
-                                                            var avatar = button.data('avatar');
-                                                            var username = button.data('username');
-                                                            var email = button.data('email');
-                                                            console.log(status);
-                                                            console.log(role);
-                                                            console.log(id);
+                                                            var display = button.data('display');
                                                             // Set the selected value of the "statusRadio" radio buttons based on the "data-status" attribute
                                                             if (status === 1) {
                                                                 $('#updateStatus1').prop('checked', 'checked');
@@ -525,22 +487,19 @@
                                                             } else {
                                                                 $('#updateStatus2').prop('checked', 'checked');
                                                             }
-                                                            $('#updateId').attr('value', id);
-                                                            $('#updateAvatar').attr('value', avatar);
-                                                            $('#updateFullName').attr('value', name);
-                                                            $('#updateUsername3').attr('value', username);
-                                                            $('#updateUsername').attr('value', username);
-                                                            $('#updateEmail').attr('value', email);
-                                                            $('#updateRole').val(role)
-                                                            $('#updateRole').val(role).trigger('change');
+                                                            $('#updateName').attr('value', name);
+                                                            $('#updateDisplay').attr('value', display);
+                                                            $('#updateId').attr('value', itemid);
+                                                            $('#updateType').val(type)
+                                                            $('#updateType').val(type).trigger('change');
 
                                                         });
                                                         function openModal(id) {
                                                             $("#ModalDelete").modal('show');
                                                         }
                                                         ;
-                                                                                                                            </script>
-                                                                                                                            </body>
+                                                                                                                        </script>
+                                                                                                                        </body>
 
 
-                                                                                                                            </html>
+                                                                                                                        </html>

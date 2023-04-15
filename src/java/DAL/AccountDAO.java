@@ -381,7 +381,8 @@ public class AccountDAO extends DBContext {
                     + "    `account`.`status`,\n"
                     + "    `account`.`createDate`,\n"
                     + "    `account`.`rid`,\n"
-                    + "    `role`.`rname`\n"
+                    + "    `role`.`rname`,\n"
+                    + "    `role`.`status` as rolestatus \n"
                     + "FROM `swp391_se1632_g2`.`account` inner join `swp391_se1632_g2`.`role`\n"
                     + "ON `account`.`rid` = `role`.`rid`\n"
                     + "WHERE `account`.`userName` = ? and `account`.`password` = ?;";
@@ -395,7 +396,7 @@ public class AccountDAO extends DBContext {
                 Account account;
 
                 Role role = new Role(rs.getInt("rid"), rs.getString("rname"));
-
+                role.setStatus(rs.getInt("rolestatus"));
                 if (role.getRname().equalsIgnoreCase("student")) {
                     account = getStudentByUserName(userName, role);
                 } else if (role.getRname().equalsIgnoreCase("teacher")) {

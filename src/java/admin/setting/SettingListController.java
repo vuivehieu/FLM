@@ -1,28 +1,26 @@
-package common.elective;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+package admin.setting;
 
-
-import DAL.DAO;
-import java.io.IOException;
-import java.io.PrintWriter;
+import DAL.AccountDAO;
+import DAL.RoleDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Curriculum;
+import java.io.IOException;
+import java.io.PrintWriter;
+import model.PaginationModel;
 
 /**
  *
- * @author phanh
+ * @author ADMIN
  */
-@WebServlet(urlPatterns={"/viewElective"})
-public class ViewElectiveController extends HttpServlet {
+@WebServlet(name="SettingListController", urlPatterns={"/admin-settings"})
+public class SettingListController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -39,10 +37,10 @@ public class ViewElectiveController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ViewElectiveController</title>");  
+            out.println("<title>Servlet AdminAllUserController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ViewElectiveController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet AdminAllUserController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,34 +57,41 @@ public class ViewElectiveController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String id_raw = request.getParameter("id");
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("userRole")) {
-                    if (Integer.parseInt(cookie.getValue()) != 6 && Integer.parseInt(cookie.getValue()) != 5 && Integer.parseInt(cookie.getValue()) != 7) {
-                        response.sendRedirect("home");
-                        return;
-                    }
-
-                }
-            }
+        int pageNo = 1;
+        int pageSize = 5;
+        String search = "";
+        String filterType = "User Role";
+        int filterStatus = 3;
+        if(request.getParameter("pageNo")!=null){
+                   if(Integer.parseInt(request.getParameter("pageNo"))!=0){
+            pageNo = Integer.parseInt(request.getParameter("pageNo"));
+        } 
         }
-        try {
-            
-            int id = Integer.parseInt(id_raw);
-            
-            DAO dao = new DAO();
-            
-            Curriculum cur = dao.getCurriculumByCurid(id);
-            
-            request.setAttribute("cur", cur);
-            
-        } catch (NumberFormatException e) {
-            System.out.println("ViewElectiveController -> doGet(): " + e);
+        if(request.getParameter("filterType")!=null){
+                if(!request.getParameter("filterType").equals("User Role")||!request.getParameter("filterType").equals("")){
+            filterType = request.getParameter("filterType");
         }
-        
-        request.getRequestDispatcher("gui/common/elective/viewElective.jsp").forward(request, response);
+        }
+        if(request.getParameter("filterStatus")!=null){
+                    if(!(request.getParameter("filterStatus").equals(""))||Integer.parseInt(request.getParameter("filterStatus"))!=3){
+            filterStatus = Integer.parseInt(request.getParameter("filterStatus"));
+        }
+        }
+        if(request.getParameter("search")!=null){
+                  if(!request.getParameter("search").equals("")){
+            search = request.getParameter("search");
+        }  
+        }
+        PaginationModel paginationModel = new PaginationModel(pageNo,pageSize, search, filterStatus,filterType, true);
+        RoleDAO roleDAO = new RoleDAO();
+        request.setAttribute("totalPages", roleDAO.countAllSettingByPageAndFilter(paginationModel));
+        request.setAttribute("pagination", paginationModel);
+        request.setAttribute("roles", roleDAO.getAllRole());
+        request.setAttribute("search", paginationModel.getSearch());
+        request.setAttribute("filterStatus", paginationModel.getFilterStatus());
+        request.setAttribute("filterType", paginationModel.getFilterType());
+        request.setAttribute("list", roleDAO.getAllSettingByPageAndFilter(paginationModel));
+        request.getRequestDispatcher("gui/admin/setting/list.jsp").forward(request, response);
     } 
 
     /** 
