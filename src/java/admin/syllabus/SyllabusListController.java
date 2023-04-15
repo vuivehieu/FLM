@@ -65,17 +65,24 @@ public class SyllabusListController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DAO dao = new DAO();
+
+//        Account a = (Account) request.getSession().getAttribute("account");
         Cookie[] cookies = request.getCookies();
         int uid = 0;
-        if(cookies!=null){
-            for(Cookie cookie:cookies){
-                if(cookie.getName().equals("userId")){
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("userRole")) {
+                    if ((Integer.parseInt(cookie.getValue()) != 6) && (Integer.parseInt(cookie.getValue()) != 5) && (Integer.parseInt(cookie.getValue()) != 7) && (Integer.parseInt(cookie.getValue()) != 4) && (Integer.parseInt(cookie.getValue()) != 8)) {
+                        response.sendRedirect("home");
+                        return;
+                    }
+
+                }
+                if (cookie.getName().equals("userId")) {
                     uid = Integer.parseInt(cookie.getValue());
                 }
             }
         }
-//        Account a = (Account) request.getSession().getAttribute("account");
-
         List<Syllabus> list = dao.getSyllabusByAccountID(uid);
 
         String key = request.getParameter("keySearch");

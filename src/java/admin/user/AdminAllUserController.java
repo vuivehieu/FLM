@@ -14,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.PaginationModel;
 
 /**
  *
@@ -57,11 +58,43 @@ public class AdminAllUserController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
+        int pageNo = 1;
+        int pageSize = 5;
+        String search = "";
+        int filterRole = 0;
+        int filterStatus = 3;
+        if(request.getParameter("pageNo")!=null){
+                   if(Integer.parseInt(request.getParameter("pageNo"))!=0){
+            pageNo = Integer.parseInt(request.getParameter("pageNo"));
+        } 
+        }
+        if(request.getParameter("filterRole")!=null){
+                if(!request.getParameter("filterRole").equals("")||Integer.parseInt(request.getParameter("filterRole"))!=0){
+            filterRole = Integer.parseInt(request.getParameter("filterRole"));
+        }
+        }
+        if(request.getParameter("filterStatus")!=null){
+                    if(!request.getParameter("filterStatus").equals("")||Integer.parseInt(request.getParameter("filterStatus"))!=3){
+            filterStatus = Integer.parseInt(request.getParameter("filterStatus"));
+        }
+        }
+        if(request.getParameter("search")!=null){
+                  if(!request.getParameter("search").equals("")){
+            search = request.getParameter("search");
+        }  
+        }
+        PaginationModel paginationModel = new PaginationModel(pageNo,pageSize, search, filterRole, filterStatus);
         AccountDAO accountDAO = new AccountDAO();
         RoleDAO roleDAO = new RoleDAO();
+        request.setAttribute("totalPages", accountDAO.countAllAccountByPageAndFilter(paginationModel));
+        request.setAttribute("pagination", paginationModel);
         request.setAttribute("roles", roleDAO.getAllRole());
-        request.setAttribute("list", accountDAO.getAllAccount());
+        request.setAttribute("search", paginationModel.getSearch());
+        request.setAttribute("filterStatus", paginationModel.getFilterStatus());
+        request.setAttribute("filterRole", paginationModel.getFilterRole());
+        request.setAttribute("list", accountDAO.getAllAccountByPageAndFilter(paginationModel));
+        System.out.print(accountDAO.countAllAccountByPageAndFilter(paginationModel));
+        System.out.print(accountDAO.getAllAccountByPageAndFilter(paginationModel).size());
         request.getRequestDispatcher("gui/admin/user/allUser.jsp").forward(request, response);
     } 
 

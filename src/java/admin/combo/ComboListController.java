@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -164,7 +165,17 @@ public class ComboListController extends HttpServlet {
         start = (page - 1) * numberPerPage;
         end = Math.min(page * numberPerPage, size);
         listByPage = new DAO().listByPage(list, start, end);
-
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("userRole")) {
+                    if (Integer.parseInt(cookie.getValue()) != 6 && Integer.parseInt(cookie.getValue()) != 5 && Integer.parseInt(cookie.getValue()) != 7) {
+                        response.sendRedirect("home");
+                        return;
+                    }
+                }
+            }
+        }
         request.setAttribute("numberOfPage", numberOfPage);
         request.setAttribute("key", key);
         request.setAttribute("size", size);

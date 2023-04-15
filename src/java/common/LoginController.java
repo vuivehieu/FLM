@@ -82,11 +82,14 @@ public class LoginController extends HttpServlet {
 
         Account a = ad.checkLogin(userName, password);
         if (a != null) {
-
+            if(a.getRole().getStatus()==0){
+                request.setAttribute("error", "Tài Khoản Không Có Quyền Truy Cập");
+                request.getRequestDispatcher("/gui/common/home.jsp").forward(request, response);
+                return;
+            }
             if (a.getStatus() == 2) {
                 request.setAttribute("error", "Vui Lòng Vào Mail Xác Nhận Trong 5p ! <a href='https://mail.google.com/'>Gmail</a>");
                 request.getRequestDispatcher("/gui/common/home.jsp").forward(request, response);
-
             } else if (a.getStatus() == 1) {
                 HttpSession session = request.getSession();
                 if (session.getAttribute("account") == null) {
@@ -98,7 +101,7 @@ public class LoginController extends HttpServlet {
                 roleCookie.setMaxAge(604800);
                 response.addCookie(userIdCookie);
                 response.addCookie(roleCookie);
-                response.sendRedirect("home");
+                request.getRequestDispatcher("/gui/common/home.jsp").forward(request, response);
             }else if(a.getStatus() == 0 ){
                 request.setAttribute("error", "Tài Khoản Đã Bị Khóa !");
                 request.getRequestDispatcher("/gui/common/home.jsp").forward(request, response);
