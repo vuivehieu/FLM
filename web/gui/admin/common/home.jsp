@@ -10,82 +10,43 @@
 
 
     <head>
-        <title>EEducation Master Template</title>
-        <!-- META TAGS -->
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="EEducation master is one of the best eEducational html template, it's suitable for all eEducation websites like university,college,school,online eEducation,tution center,distance eEducation,computer eEducation">
-        <meta name="keyword" content="eEducation html template, university template, college template, school template, online eEducation template, tution center template">
-        <!-- FAV ICON(BROWSER TAB ICON) -->
-        <link rel="shortcut icon" href="images/fav.ico" type="image/x-icon">
-        <!-- GOOGLE FONT -->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700%7CJosefin+Sans:600,700" rel="stylesheet">
-        <!-- FONTAWESOME ICONS -->
-        <link rel="stylesheet" href="css/font-awesome.min.css">
-        <!-- ALL CSS FILES -->
-        <link href="css/materialize.css" rel="stylesheet">
-        <link href="css/bootstrap.css" rel="stylesheet" />
-        <link href="css/style.css" rel="stylesheet" />
-        <!-- RESPONSIVE.CSS ONLY FOR MOBILE AND TABLET VIEWS -->
-        <link href="css/style-mob.css" rel="stylesheet" />
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="js/html5shiv.js"></script>
-            <script src="js/respond.min.js"></script>
-            <![endif]-->
-        <style>
-            .sb2-1 {
-                height:  100%
-            }
-        </style>
+
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
+        <link rel="stylesheet" href="admin-template/css/vendors.bundle.min.css" />
+        <link rel="stylesheet" href="admin-template/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css" />
+        <link rel="stylesheet" href="admin-template/css/main.bundle.min.css"/>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js" defer="defer"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+        <title>FLM</title>
     </head>
 
     <body>
-        
-        <jsp:include page="heading/heading.jsp"/>
+        <div class="app-admin-wrap-layout-1 sidebar-full sidebar-theme-slate">
+            <jsp:include page="heading/heading.jsp"/>
+            <div class="main-content-wrap">
 
-        <!--== BODY CONTNAINER ==-->
-        <div class="container-fluid sb2">
-            <div class="row">
-                
-                        <jsp:include page="sidebar/sidebarLeft.jsp"/>
+                <header class="main-header bg-card d-flex flex-row justify-content-between align-items-center px-lg">
+                    <!-- Start::Header menu-->
+                    <!-- End::Header menu-->
+                </header>
+                <div class="main-content-body">
 
-
-                <!--== BODY INNER CONTAINER ==-->
-                <div class="sb2-2">
-                    <!--== breadcrumbs ==-->
-                    <div class="sb2-2-2">
-                        <ul>
-                            
-                            <li class=""><a href="#">This is System Management page</a></li>
-                        </ul>
-                    </div>
-                    <!--== DASHBOARD INFO ==-->
-                    
-
-                    <!--== User Details ==-->
-                    
-
-                    <!--== User Details ==-->
-                    
-
-                    
-
-                    
-                    <!--== Latest Activity ==-->
-                    
                 </div>
-
             </div>
         </div>
-
-        <!--Import jQuery before materialize.js-->
-        <script src="js/main.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/materialize.min.js"></script>
-        <script src="js/custom.js"></script>
+        <script src="admin-template/js/vendors.bundle.min.js"></script>
+        <script src="admin-template/js/main.bundle.min.js"></script>
+        <script src="admin-template/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="admin-template/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+        <script src="admin-template/js/pages/datatables/basicDatatable.min.js"></script>
     </body>
 
 

@@ -5,8 +5,10 @@
 package admin.user;
 
 import DAL.AccountDAO;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -59,15 +61,35 @@ public class AdminUpdateUserController extends HttpServlet{
     throws ServletException, IOException {
 //        processRequest(request, response);
         AccountDAO accountDAO = new AccountDAO();
-        String userName = request.getParameter("studentUsername");
-        int role = Integer.parseInt(request.getParameter("roleEdit"));
-        int status = Integer.parseInt(request.getParameter("statusRadio"));
+        String userName = request.getParameter("updateUsername");
+        int id = Integer.parseInt(request.getParameter("updateId"));
+        int uid = 0;
+        int roleId = 0;
+        Cookie[] cookies = request.getCookies();
+                if(cookies!=null){
+            for(Cookie cookie:cookies){
+                if(cookie.getName().equals("userId")){
+                    uid = Integer.parseInt(cookie.getValue());
+                }
+                if(cookie.getName().equals("userRole")){
+                    roleId = Integer.parseInt(cookie.getValue());
+                }
+            }
+        }
+        int role = Integer.parseInt(request.getParameter("updateRole"));
+        int status = Integer.parseInt(request.getParameter("updateStatus"));
         Account a = new Account();
         a.setStatus(status);
         a.setUserName(userName);
         accountDAO.updateStatus(a);
         accountDAO.updateRole(role, userName);
-        response.sendRedirect(request.getContextPath() + "/admin-alluser");
+        String page = "";
+        if(id == uid && roleId != role){
+            page = "/logout";
+        }else{
+            page = "/admin-alluser";
+        }
+        response.sendRedirect(request.getContextPath() + page);
     }
 
     /** 

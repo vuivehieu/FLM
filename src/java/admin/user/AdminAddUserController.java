@@ -5,6 +5,7 @@
 
 package admin.user;
 
+import DAL.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Account;
+import model.Role;
 
 /**
  *
@@ -68,7 +71,28 @@ public class AdminAddUserController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
+        AccountDAO accountDAO = new AccountDAO();
+        String userName = request.getParameter("inputUsername");
+        String fullName = request.getParameter("inputFullName");
+        String email = request.getParameter("inputEmail");
+        String password = request.getParameter("inputPassword");
+        String avatar = request.getParameter("inputAvatar");
+        int role = Integer.parseInt(request.getParameter("inputRole"));
+        int status = Integer.parseInt(request.getParameter("inputStatus"));
+        Account a = new Account();
+        a.setDisplayName(fullName);
+        a.setEmail(email);
+        a.setPassword(Custom.ConvertMD5.convertPassToMD5(password));
+        a.setIsBlock(false);
+        a.setStatus(status);
+        a.setCreateDate(new java.sql.Date(System.currentTimeMillis()));
+        a.setRole(new Role(role, null));
+        a.setUserName(userName);
+                if(accountDAO.checkByUsernameAndEmail(a.getUserName(), a.getEmail())){
+                            accountDAO.addUser(a);
+                }
+        response.sendRedirect(request.getContextPath() + "/admin-alluser");
     }
 
     /** 

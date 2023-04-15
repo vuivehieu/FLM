@@ -5,7 +5,7 @@
             <div class="app-user text-center">
                 <div class="app-user-photo"><img src="images/avatar/default.png" alt="" /></div>
                 <div class="app-user-info"><span class="app-user-name">ADMIN</span>
-                    <div class="app-user-control"><a class="control-item" href="/admin/user/profile"><i class="material-icons">person</i></a><a class="control-item" href="/logout"><i class="material-icons"> exit_to_app</i></a></div>
+                    <div class="app-user-control"><a class="control-item" href="/admin/user/profile"><i class="material-icons">person</i></a><a class="control-item" href="logout"><i class="material-icons"> exit_to_app</i></a></div>
                 </div>
             </div>
             <!-- End:: user-->

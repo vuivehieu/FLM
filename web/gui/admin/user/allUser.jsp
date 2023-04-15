@@ -130,16 +130,20 @@
                                                             </c:if>
                                                         </td>
                                                         <td>
-                                                            <button id="btnDetail" onclick="handleUpdate(${item.id})"
+                                                            <button id="btnDetail"
+                                                                    data-status="${user.status}" data-role="${user.role.rid}" data-name="${user.displayName}" data-username="${user.userName}" data-email="${user.email}" data-avatar="${user.avatar}" data-userid="${user.accountID}"
+                                                                    data-target="#editModal"
+                                                                    data-toggle="modal"
+                                                                    aria-hidden="true"
                                                                     class="btn text-primary rounded-circle m-0 btn-sm btn-icon"
                                                                     style="height: 0px !important;"><i
                                                                     class="material-icons">edit</i>
                                                                 <div class="ripple-container"></div>
                                                             </button>
                                                             <button
-                                                                    class="btn text-danger rounded-circle m-0 btn-sm btn-icon"
-                                                                    style="height: 0px !important;" onclick="document.getElementById('deleteLink').href = 'delete-user?id=${result.id}&pageNo=${pagination.pageNo}&search=${search}&filter=${filter}';
-                                                                            openModal(${result.id})"><i
+                                                                class="btn text-danger rounded-circle m-0 btn-sm btn-icon"
+                                                                style="height: 0px !important;" onclick="document.getElementById('deleteLink').href = 'admin-deleteuser?id=${user.accountID}&pageNo=${pagination.pageNo}&search=${search}&filter=${filter}';
+                                                                        openModal(${result.id})"><i
                                                                     class="material-icons">delete</i></button>
                                                         </td>
                                                     </tr>
@@ -217,7 +221,7 @@
 
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <form id="formAdd" class="needs-validation" method="POST" action="user-add">
+                                <form id="formAdd" class="needs-validation" method="POST" action="admin-adduser">
                                     <div class="modal-header" style="background: #304156;padding: 10px;">
                                         <h5 class="modal-title" id="exampleModalAdd" style="color: white">Add User</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -227,94 +231,155 @@
                                     <div class="modal-body">
                                         <div class="row">
                                             <div class="form-group col-md-12">
-                                                <label for="inputUsername" class="ml-2" style="font-size: 15px">Username</label>
+                                                <label for="inputUsername" class="ml-2" style="font-size: 15px; color:black">Username</label>
                                                 <div class="input-group">
                                                     <input type="text" class="form-control mt-2" id="inputUsername" placeholder="Input Username" name="inputUsername" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
-                                                        <div class="invalid-feedback">
-                                                            Please Input Name
-                                                        </div>
-                                                        <div class="valid-feedback">
-                                                            OK
-                                                        </div>
                                                 </div>
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <label for="inputFullName" class="ml-2" style="font-size: 15px">Fullname</label>
+                                                <label for="inputPassword" class="ml-2" style="font-size: 15px; color:black">Password</label>
+                                                <div class="input-group">
+                                                    <input type="password" class="form-control mt-2" id="inputPassword" placeholder="Input Username" name="inputPassword" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label for="inputFullName" class="ml-2" style="font-size: 15px; color:black">Fullname</label>
                                                 <div class="input-group">
                                                     <input type="text" class="form-control mt-2" id="inputFullName" placeholder="Input Fullname" name="inputFullName" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
-                                                        <div class="invalid-feedback">
-                                                            Please Input Full Name
-                                                        </div>
-                                                        <div class="valid-feedback">
-                                                            OK
-                                                        </div>
+
                                                 </div>
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <label for="inputEmail" class="ml-2" style="font-size: 15px">Email</label>
+                                                <label for="inputEmail" class="ml-2" style="font-size: 15px; color:black">Email</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control mt-2" id="inputEmail" placeholder="Input Fullname" name="inputEmail" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
-                                                        <div class="invalid-feedback">
-                                                            Please Input Email
-                                                        </div>
-                                                        <div class="valid-feedback">
-                                                            OK
-                                                        </div>
+                                                    <input type="email" class="form-control mt-2" id="inputEmail" placeholder="Input Email" name="inputEmail" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+
                                                 </div>
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <label for="inputAvatar" class="ml-2" style="font-size: 15px">Avatar</label>
+                                                <label for="inputAvatar" class="ml-2" style="font-size: 15px; color:black">Avatar</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control mt-2" id="inputAvatar" placeholder="Input Fullname" name="inputAvatar" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
-                                                        <div class="invalid-feedback">
-                                                            Please Input Avatar
-                                                        </div>
-                                                        <div class="valid-feedback">
-                                                            OK
-                                                        </div>
+                                                    <input type="text" class="form-control mt-2" id="inputAvatar" placeholder="Input Avatar" name="inputAvatar" aria-describedby="inputGroupPrepend" style="font-size: 14px;">
                                                 </div>
                                             </div>
                                             <label class="ml-2" style="font-size: 15px;margin-left:.5rem!important;">Role</label>
                                             <div class="form-group col-md-12">
-                                                <select class="form-control js-basic-example2" id="inputRole" style="width: 100%" required>
-                                                <c:forEach items="${roles}" var="role">
-                                                    <c:if test="${role.rid != 6}">
-                                                        <option value="${role.rid}" ${filterRole == role.rid? 'selected' : ''}><c:out value="${role.rname}"/></option>
-                                                    </c:if>
-                                                </c:forEach>
-                                            </select>
+                                                <select class="form-control js-basic-example2" id="inputRole" name="inputRole" style="width: 100%" required>
+                                                    <c:forEach items="${roles}" var="role">
+                                                        <c:if test="${role.rid != 6}">
+                                                            <option value="${role.rid}"><c:out value="${role.rname}"/></option>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </select>
                                             </div>
-                                            <label class="ml-2" style="font-size: 15px;margin-left:.5rem!important;">Status</label>
-                                            <div class="form-group col-md-6">                              
+
+                                            <div class="col-md-12 form-group">
+                                                <label class="ml-2" style="font-size: 15px">Status</label>
+                                            </div>
+                                            <div class="form-group col-md-6">
                                                 <div class="input-group">
                                                     <label for="inputStatus1" class="ml-2" style="font-size: 15px">Active</label>
                                                     <input type="radio" value="1" class="form-control mt-2" id="inputStatus1" name="inputStatus" style="font-size: 2px;" aria-describedby="inputGroupPrepend">
-                                                <label for="inputStatus2" class="ml-2" style="font-size: 15px">Inactive</label>
-                                                <input type="radio" value="0" class="form-control mt-2" id="inputStatus2" name="inputStatus" style="font-size: 2px;" aria-describedby="inputGroupPrepend">
-                                                </div>                                    
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer" style="margin: 0 auto; display: flex; justify-content: center" >
-                                        <button class="btn btn-opacity-success" type="submit">Save</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <!---->
-                    <!-- End:: Footer-->
-                </div>
-                <!-- End::Main header-->
-            </div>
-        </div>
+                                                        <label for="inputStatus2" class="ml-2" style="font-size: 15px">Inactive</label>
+                                                        <input type="radio" value="0" class="form-control mt-2" id="inputStatus2" name="inputStatus" style="font-size: 2px;" aria-describedby="inputGroupPrepend">
+                                                            </div>                                    
+                                                            </div>
+                                                            </div>
+                                                            </div>
+                                                            <div class="modal-footer" style="margin: 0 auto; display: flex; justify-content: center" >
+                                                                <button class="btn btn-opacity-success" type="submit">Save</button>
+                                                            </div>
+                                                            </form>
+                                                            </div>
+                                                            </div>
+                                                            </div>
+                                                            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-        <script src="admin-template/js/vendors.bundle.min.js"></script>
-        <script src="admin-template/js/main.bundle.min.js"></script>
-        <script src="admin-template/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-        <script src="admin-template/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-        <script src="admin-template/js/pages/datatables/basicDatatable.min.js"></script>
-        <script type="text/javascript">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <form id="formEdit" class="needs-validation" method="POST" action="admin-updateuser">
+                                                                            <div class="modal-header" style="background: #304156;padding: 10px;">
+                                                                                <h5 class="modal-title" id="exampleModalAdd" style="color: white">Edit User</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true" style="color: white">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <div class="row">
+                                                                                    <div class="form-group col-md-12">
+                                                                                        <label for="updateUsername" class="ml-2" style="font-size: 15px; color:black">Username</label>
+                                                                                        <div class="input-group">
+                                                                                            <input type="text" class="form-control mt-2" id="updateUsername" disabled placeholder="Input Username" value="" name="updateUsername4" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                                                                <input type="text" class="form-control mt-2" id="updateUsername3" placeholder="Input Username" value="" name="updateUsername" aria-describedby="inputGroupPrepend" style="font-size: 14px;display: none">
+                                                                                                    <input type="text" class="form-control mt-2" id="updateId" placeholder="Input Username" value="" name="updateId" aria-describedby="inputGroupPrepend" style="font-size: 14px;display: none">
+                                                                                                        </div>
+                                                                                                        </div>
+                                                                                                        <div class="form-group col-md-12">
+                                                                                                            <label for="updateFullName" class="ml-2" style="font-size: 15px; color:black">Fullname</label>
+                                                                                                            <div class="input-group">
+                                                                                                                <input type="text" class="form-control mt-2" id="updateFullName" disabled placeholder="Input Fullname" value="" name="updateFullName" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="form-group col-md-12">
+                                                                                                            <label for="updateEmail" class="ml-2" style="font-size: 15px; color:black">Email</label>
+                                                                                                            <div class="input-group">
+                                                                                                                <input type="text" class="form-control mt-2" id="updateEmail" disabled placeholder="Input Fullname" value="" name="updateEmail" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="form-group col-md-12">
+                                                                                                            <label for="updateAvatar" class="ml-2" style="font-size: 15px; color:black">Avatar</label>  
+                                                                                                            <div class="input-group">
+                                                                                                                <input type="text" class="form-control mt-2" id="updateAvatar" disabled placeholder="Input Fullname" value="" name="updateAvatar" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <label class="ml-2" style="font-size: 15px;margin-left:.5rem!important;">Role</label>
+                                                                                                        <div class="form-group col-md-12">
+                                                                                                            <select class="form-control js-basic-example2" id="updateRole" name="updateRole" style="width: 100%" required>
+                                                                                                                <c:forEach items="${roles}" var="role">
+                                                                                                                    <c:if test="${role.rid != 6}">
+                                                                                                                        <option value="${role.rid}"><c:out value="${role.rname}"/></option>
+                                                                                                                    </c:if>
+                                                                                                                </c:forEach>
+                                                                                                            </select>
+                                                                                                        </div>
+
+                                                                                                        <div class="col-md-12 form-group">
+                                                                                                            <label class="ml-2" style="font-size: 15px">Status</label>
+                                                                                                        </div>
+                                                                                                        <div class="form-group col-md-12">
+                                                                                                            <div class="input-group">
+                                                                                                                <label for="updateStatus1" class="ml-2" style="font-size: 15px">Active</label>
+                                                                                                                <input type="radio" value="1" class="form-control mt-2" id="updateStatus1" name="updateStatus" style="font-size: 2px;" aria-describedby="inputGroupPrepend">
+                                                                                                                    <label for="updateStatus2" class="ml-2" style="font-size: 15px">Inactive</label>
+                                                                                                                    <input type="radio" value="0" class="form-control mt-2" id="updateStatus2" name="updateStatus" style="font-size: 2px;" aria-describedby="inputGroupPrepend">
+                                                                                                                        <label for="updateStatus3" class="ml-2" style="font-size: 15px">Not Verify Email</label>
+                                                                                                                        <input type="radio" value="2" class="form-control mt-2" id="updateStatus3" name="updateStatus" style="font-size: 2px;" aria-describedby="inputGroupPrepend">
+                                                                                                                            </div>                                    
+                                                                                                                            </div>
+                                                                                                                            </div>
+                                                                                                                            </div>
+                                                                                                                            <div class="modal-footer" style="margin: 0 auto; display: flex; justify-content: center" >
+                                                                                                                                <button class="btn btn-opacity-success" type="submit">Save</button>
+                                                                                                                            </div>
+                                                                                                                            </form>
+                                                                                                                            </div>
+                                                                                                                            </div>
+                                                                                                                            </div>
+                                                                                                                            <!---->
+                                                                                                                            <!-- End:: Footer-->
+                                                                                                                            </div>
+                                                                                                                            <!-- End::Main header-->
+                                                                                                                            </div>
+                                                                                                                            </div>
+
+                                                                                                                            <script src="admin-template/js/vendors.bundle.min.js"></script>
+                                                                                                                            <script src="admin-template/js/main.bundle.min.js"></script>
+                                                                                                                            <script src="admin-template/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+                                                                                                                            <script src="admin-template/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+                                                                                                                            <script src="admin-template/js/pages/datatables/basicDatatable.min.js"></script>
+                                                                                                                            <script type="text/javascript">
                                                         $(document).ready(function () {
                                                             $(".js-basic-example2").select2({
                                                                 theme: "classic"
@@ -367,219 +432,42 @@
                                                             } else
                                                                 window.location.href = `admin-alluser?filterStatus=` + filterStatus + `&filterRole=` + filterRole + `&search=` + searchValue;
                                                         }
+                                                        $('#editModal').on('show.bs.modal', function (event) {
+                                                            var button = $(event.relatedTarget); // Button that triggered the modal
+                                                            var status = button.data('status'); // Extract value from data-* attributes
+                                                            var role = button.data('role');
+                                                            var id = button.data('userid');
+                                                            var name = button.data('name');
+                                                            var avatar = button.data('avatar');
+                                                            var username = button.data('username');
+                                                            var email = button.data('email');
+                                                            console.log(status);
+                                                            console.log(role);
+                                                            console.log(id);
+                                                            // Set the selected value of the "statusRadio" radio buttons based on the "data-status" attribute
+                                                            if (status === 1) {
+                                                                $('#updateStatus1').prop('checked', 'checked');
+                                                            } else if (status === 2) {
+                                                                $('#updateStatus3').prop('checked', 'checked');
+                                                            } else {
+                                                                $('#updateStatus2').prop('checked', 'checked');
+                                                            }
+                                                            $('#updateId').attr('value', id);
+                                                            $('#updateAvatar').attr('value', avatar);
+                                                            $('#updateFullName').attr('value', name);
+                                                            $('#updateUsername3').attr('value', username);
+                                                            $('#updateUsername').attr('value', username);
+                                                            $('#updateEmail').attr('value', email);
+                                                            $('#updateRole').val(role)
+                                                            $('#updateRole').val(role).trigger('change');
 
+                                                        });
                                                         function openModal(id) {
                                                             $("#ModalDelete").modal('show');
-
                                                         }
-        </script>
-    </body>
-    <!--        <div class="container-fluid sb2">
-                <div class="row">
-    <%--<jsp:include page="../common/sidebar/sidebarLeft.jsp"/>--%>
-
-    == BODY INNER CONTAINER ==
-    <div class="sb2-2">
-        == breadcrumbs ==
-        <div class="d-flex">
-            <div class="sb2-2-2">
-                <ul>
-                    <li><a href="dashboard"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-                    <li class="active-bre"><a>Users</a></li>
-                </ul>
-            </div>
-            <div class="float-right">
-                <a href="admin-adduser"><button class="btn btn-warning">Add User</button></a>
-            </div>
-        </div>
+                                                        ;
+                                                                                                                            </script>
+                                                                                                                            </body>
 
 
-        == User Details ==
-        <div class="sb2-2-3">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="box-inn-sp">
-                        <div class="inn-title">
-                            <h4>List User</h4>
-                            <p>All about students like name, student id, phone, email, country, city and more</p>    
-                        </div>
-
-                        <div class="tab-inn">
-
-                            <div class="table-responsive table-desi">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6"></div>
-                                                                                    <div class="col-md-6 col-sm-6 mob-hide">
-                                                                                        <form class="app-search">
-                                                                                            <input type="text" placeholder="Search..." class="form-control">
-                                                                                            <a href="#"><i class="fa fa-search"></i></a>
-                                                                                        </form>
-                                                                                    </div>
-                                    <div id="filterDiv" class="filterDiv" style="display: none">
-                                        <div class="row">
-                                            <div class="col">
-                                                <select name="roleFilter" class="browser-default" id="roleFilter">
-                                                    <option selected value="">All role</option>
-    <c:forEach items="${roles}" var="role">
-        <option value="${role.rname}"><c:out value="${role.rname}"></c:out></option>
-    </c:forEach>
-</select>
-</div>
-<div class="col">
-<select name="statusFilter" class="browser-default" id="statusFilter">
-    <option selected value="">All status</option>
-    <option value="Block">Block</option>
-    <option value="Active">Active</option>
-    <option value="Not Verify Email">Not Verify Email</option>
-</select>
-</div>
-<div class="col">
-<p id="nameOrder">
-    Sort By Name: 
-</p>
-</div>
-<div class="col">
-<select name="nameOrderSelect" class="browser-default" id="nameOrderSelect">
-    <option selected value="">None</option>
-    <option value="asc">Ascending</option>
-    <option value="desc">Descending</option>
-</select>
-</div>
-<div class="col">
-<input type="text" name="userSearchTxt" class="userSearchTxt" id="userSearchTxt" value="" placeholder="Search for user..."/>
-</div>
-</div>
-</div>
-</div>
-
-<table id="example" class="table table-hover" style="width:100%">
-<thead>
-<tr>
-<th></th>
-<th>Name</th>
-<th>UserName</th>
-<th>Email</th>
-<th>Role</th>
-<th>Status</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-    <c:forEach items="${list}" var="user">
-        <tr>
-            <td><span class="list-img"><img src="${user.avatar}" alt=""></span></td>
-            <td>
-                <a href="#">
-                    <span class="list-enq-name">${user.displayName}</span>
-                </a>
-            </td>
-            <td>${user.userName}</td>
-            <td>${user.email}</td>
-            <td>${user.role.rname}</td>
-            <td>
-                <span class="label ${user.status == 0 ? 'label-danger' : user.status == 1 ? 'label-success' : user.status ==2 ? 'label-warning' : ''}">
-        ${user.status == 0 ? 'Block' : user.status == 1 ? 'Active' : user.status == 2 ? 'Not Verify Email' : '' }</span>
-</td>
-<td>
-    <button type="button" class="ad-st-view" data-toggle="modal" data-target="#editModal" data-status="${user.status}" data-role="${user.role.rid}" data-name="${user.displayName}" data-username="${user.userName}" data-email="${user.email}">Edit</button>
-    <a href="admin-student-details.html" class="ad-">Block</a>
-</td>
-</tr>
-    </c:forEach>
-
-</tbody>
-</table>
-
-
-</div>
-                                <div class="pg-pagina">
-                                    <ul class="pagination">
-                                        <li class="disabled"><a href="#!">Pre</a></li>
-                                        <li class="active"><a href="#!">1</a></li>
-                                        <li class="waves-effect"><a href="#!">2</a></li>
-                                        <li class="waves-effect"><a href="#!">3</a></li>
-                                        <li class="waves-effect"><a href="#!">4</a></li>
-                                        <li class="waves-effect"><a href="#!">5</a></li>
-                                        <li class="waves-effect"><a href="#!">Next</a></li>
-                                    </ul>
-
-                                </div>
-</div>
-</div>
-</div>
-</div>
-
-
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 100px;">
-<div class="modal-dialog" role="document">
-<div class="modal-content">
-<div class="modal-header">
-<h5 class="modal-title" id="exampleModalLabel">Edit Student</h5>
-<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-<span aria-hidden="true">&times;</span>
-</button>
-</div>
-<div class="modal-body">
-<form action="admin-updateuser" id="updateForm" method="post">
-<div class="form-group">
-<label for="studentName" class="col-form-label">Name</label>
-<input type="text" id="studentName" name="studentName" value="" disabled="disabled" style="font-size: 15px; color: black"/>
-</div>
-<div class="form-group">
-<label for="studentUsername" class="col-form-label">Username</label>
-<input type="text" value="" id="studentUsername" name="studentUsername" style="font-size: 15px; color: black; display: none"/>
-<input type="text" value="" id="studentUsername2" name="studentUsername" disabled="disabled" style="font-size: 15px; color: black"/>
-</div>
-<div class="form-group">
-<label for="studentEmail" class="col-form-label">Email</label>
-<input type="text" value="" id="studentEmail" name="studentEmail" disabled="disabled" style="font-size: 15px; color: black"/>
-</div>
-<div class="form-group">
-<label for="roleSelect" class="col-form-label">Role</label>
-<select name="roleEdit" class="browser-default" id="roleSelect" required="true">
-    <%--<c:forEach items="${roles}" var="role">--%>
-        <option value="${role.rid}"><c:out value="${role.rname}"></c:out></option>
-    <%--</c:forEach>--%>
-</select>
-</div>
-<div class="form-group">
-<p>Status</p>
-<input type="radio" id="activeStatus" name="statusRadio" value="1">
-<label for="activeStatus">Active</label><br>
-<input type="radio" id="inactiveStatus" name="statusRadio" value="0">
-<label for="inactiveStatus">Inactive</label><br>
-</div>
-</form>
-</div>
-<div class="modal-footer">
-<button type="button" class="btn btn-primary" onclick="submitForm()">Save</button>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-</div>
-</div>
-
-Import jQuery before materialize.js
-<script src="js/main.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-
-<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.bootstrap4.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.colVis.min.js"></script>
-<script src="js/materialize.min.js"></script>
-<script src="js/custom.js"></script>
-</body>-->
-
-
-</html>
+                                                                                                                            </html>

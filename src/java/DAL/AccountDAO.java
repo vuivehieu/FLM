@@ -482,7 +482,23 @@ public class AccountDAO extends DBContext {
 
         return result.equalsIgnoreCase("");
     }
+    public boolean checkByUsernameAndEmail(String username, String email){
+         int result = 0;
+        try {
+            String sql1 = "select COUNT(*) as count from account where email = ? or username=?";
 
+            PreparedStatement st1 = connection.prepareStatement(sql1);
+            st1.setString(1, email);
+            st1.setString(2, username);
+            ResultSet rs1 = st1.executeQuery();
+            if (rs1.next()) {
+                result += rs1.getInt("count");
+            }
+        } catch (SQLException e) {
+            System.out.println("AccountDAO -> checkRegister(): " + e);
+        }
+        return result == 0;
+    }
     public boolean checkEmail(String email) {
         String result = "";
         try {
@@ -587,6 +603,31 @@ public class AccountDAO extends DBContext {
             return st.executeUpdate();
         } catch (SQLException e) {
             System.out.println("AccountDAO -> register(): " + e);
+
+        }
+        return 0;
+    }
+    
+    public int addUser(Account a) {
+        try {
+
+            String sql = "INSERT INTO `swp391_se1632_g2`.`account`\n"
+                    + "(`userName`, `password`, `displayName`, `email`, `avatar`, `isBlock`, `status`, `createDate`, `rid`)\n"
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, a.getUserName());
+            st.setString(2, a.getPassword());
+            st.setString(3, a.getDisplayName());
+            st.setString(4, a.getEmail());
+            st.setString(5, a.getAvatar());
+            st.setBoolean(6, a.isIsBlock());
+            st.setInt(7, a.getStatus());
+            st.setDate(8, a.getCreateDate());
+            st.setInt(9, a.getRole().getRid());   // role = 1 => guest
+            return st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("AccountDAO -> addUser(): " + e);
 
         }
         return 0;
@@ -725,6 +766,20 @@ public class AccountDAO extends DBContext {
 
         } catch (SQLException e) {
             System.out.println(" AccountDAO -> changeAvatar(): " + e);
+
+        }
+    }
+
+    public void deleteUser(int id) {
+        try {
+
+            String sql = "DELETE from account where accountID = ?";
+
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.execute();
+        } catch (SQLException e) {
+            System.out.println(" AccountDAO -> deleteUser(): " + e);
 
         }
     }
