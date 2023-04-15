@@ -14,35 +14,40 @@
                   <h4 class="mt-1 mb-5 pb-1">Forgot password</h4>
                 </div>
                     
-                  <div class="form-outline mb-4">
-                    <input type="text" class="form-control validate" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;"
+                  <div class="form-group mb-4">
+                      <label class="form-label" for="emailForgot">Email</label>
+                    <input type="text" class="form-control validate" style="font-size: 15px; "
                       placeholder="Email" id="emailForgot" onFocus="focusEmailForgot()"/>
-                    <label class="form-label" for="emailForgot">Email</label>
+                    
                   </div>
 
-                  <div class="form-outline mb-4">
+                  <div class="form-group mb-4">
+                      <label class="form-label" for="passwordForgot">New Password</label>
                     <input type="password" onFocus="focusPassForgot()" class="form-control validate" 
-                           style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;" disabled  id="passwordForgot"  />
-                    <label class="form-label" for="passwordForgot">New Password</label>
+                           style="font-size: 15px; " disabled  id="passwordForgot"  />
+                    
                   </div>
                     
-                  <div class="form-outline mb-4">
-                     <input type="password" onFocus="focusConfirmPassForgot()" class="form-control validate" 
-                            style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;" disabled id="comfirm-passwordForgot"  />
+                  <div class="form-group mb-4">
                       <label class="form-label" for="comfirm-passwordForgot">Confirm password</label>
+                     <input type="password" onFocus="focusConfirmPassForgot()" class="form-control validate" 
+                            style="font-size: 15px; " disabled id="comfirm-passwordForgot"  />
+                      
                   </div>
                        
                 <div class="row">
                   <div class="col-md-6 mb-4">
-                    <div class="form-outline">
+                    <div class="form-group">
+                        <label class="form-label" for="verifyCodeForgot">Input Code</label>
                          <input type="text" class="form-control validate" onFocus="focusInputCodeForgot()"
-                           id="verifyCodeForgot" style="font-size: 15px; background-color: unset !important; border-bottom: unset !important;"/>
-                       <label class="form-label" for="verifyCodeForgot">Input Code</label>
+                           id="verifyCodeForgot" style="font-size: 15px;"/>
+                       
                     </div>
                   </div>
                   <div class="col-md-6 mb-4">
                     <div class="form-outline">
-                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button" style="font-size: 15px;" 
+                        <label class="form-label" for="verifyCodeBtnForgot"></label>
+                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button" style="font-size: 15px; margin-top: 5px;" 
                                 id="verifyCodeBtnForgot" onclick="verifyEmailForgot()">Verify Email</button>
                     </div>
                   </div>

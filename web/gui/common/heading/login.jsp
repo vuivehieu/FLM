@@ -17,14 +17,14 @@
                     <form class="s12" action="login" method="post">
                       <p>Please login to your account</p>
 
-                      <div class="form-outline mb-4">
+                      <div class="form-group mb-4">
+                           <label class="form-label" for="form2Example11">Username</label>
                         <input type="text" id="form2Example11" class="form-control" style="font-size: 15px;" name="userName" />
-                        <label class="form-label" for="form2Example11">Username</label>
                       </div>
 
-                      <div class="form-outline mb-4">
+                      <div class="form-group mb-4">
+                          <label class="form-label" for="form2Example22">Password</label>
                         <input type="password" id="form2Example22" class="form-control" style="font-size: 15px;" name="password" />
-                        <label class="form-label" for="form2Example22">Password</label>
                       </div>
 
                       <div class="text-center pt-1 mb-5 pb-1">
