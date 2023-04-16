@@ -91,7 +91,7 @@ public class RegisterController extends HttpServlet {
         AccountDAO ad = new AccountDAO();
         
         Role r = new Role(1, "Guest");
-        Account a = new Account(new DAO().getLastAccountID() + 1, userName, password, fullName, email, "", false, 1, Custom.Common.getCurrentDate(), r);
+        Account a = new Account(new DAO().getLastAccountID() + 1, userName, password, fullName, email, "images/avatar/default.png", false, 1, Custom.Common.getCurrentDate(), r);
         
         if(ad.checkRegisterEdit(userName, email)){
             if(ad.register(a) != 0){
