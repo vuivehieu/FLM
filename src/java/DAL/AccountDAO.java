@@ -16,7 +16,7 @@ public class AccountDAO extends DBContext {
 
     public void resetPass(int accountID, String password) {
         try {
-            String sql = "UPDATE `swp391_se1632_g2`.`account`\n"
+            String sql = "UPDATE `swp391_bl5_g6`.`account`\n"
                     + "SET\n"
                     + "`password` = ?"
                     + "WHERE `accountID` = ?;";
@@ -118,7 +118,7 @@ public class AccountDAO extends DBContext {
                     + "    `account`.`createDate`,\n"
                     + "    `account`.`rid`,\n"
                     + "    `role`.`rname`\n"
-                    + "FROM `swp391_se1632_g2`.`account` inner join `swp391_se1632_g2`.`role`\n"
+                    + "FROM `swp391_bl5_g6`.`account` inner join `swp391_bl5_g6`.`role`\n"
                     + "ON `account`.`rid` = `role`.`rid`;";
 
             PreparedStatement st = connection.prepareStatement(sql);
@@ -165,7 +165,7 @@ public class AccountDAO extends DBContext {
                     + "    `account`.`createDate`,\n"
                     + "    `account`.`rid`,\n"
                     + "    `role`.`rname`\n"
-                    + "FROM `swp391_se1632_g2`.`account` inner join `swp391_se1632_g2`.`role`\n"
+                    + "FROM `swp391_bl5_g6`.`account` inner join `swp391_bl5_g6`.`role`\n"
                     + "ON `account`.`rid` = `role`.`rid` WHERE `account`.`status`!=4 ";
             if (pagination.getFilterRole() != 0 || pagination.getFilterStatus() != 3 || !pagination.getSearch().equals("")) {
                 sql += " AND";
@@ -225,7 +225,7 @@ public class AccountDAO extends DBContext {
 
         int count = 0;
         try {
-            String sql = "SELECT COUNT(*) as count FROM `swp391_se1632_g2`.`account` INNER JOIN `swp391_se1632_g2`.`role`\n"
+            String sql = "SELECT COUNT(*) as count FROM `swp391_bl5_g6`.`account` INNER JOIN `swp391_bl5_g6`.`role`\n"
                     + "ON `account`.`rid` = `role`.`rid`";
             if (pagination.getFilterRole() != 0 || pagination.getFilterStatus() != 3 || !pagination.getSearch().equals("")) {
                 sql += " WHERE";
@@ -283,7 +283,7 @@ public class AccountDAO extends DBContext {
                     + "    `account`.`createDate`,\n"
                     + "    `account`.`rid`,\n"
                     + "    `role`.`rname`"
-                    + "FROM `swp391_se1632_g2`.`account` inner join `swp391_se1632_g2`.`role`\n"
+                    + "FROM `swp391_bl5_g6`.`account` inner join `swp391_bl5_g6`.`role`\n"
                     + "ON `account`.`rid` = `role`.`rid`\n"
                     + "WHERE `account`.`userName` = ?;";
 
@@ -335,8 +335,8 @@ public class AccountDAO extends DBContext {
                     + "`student`.`curid`,\n"
                     + "`student`.`semester`,\n"
                     + "`student`.`isActive`\n"
-                    + " FROM `swp391_se1632_g2`.`account` inner join `swp391_se1632_g2`.`role`\n"
-                    + " ON `account`.`rid` = `role`.`rid`inner join `swp391_se1632_g2`.`student`\n"
+                    + " FROM `swp391_bl5_g6`.`account` inner join `swp391_bl5_g6`.`role`\n"
+                    + " ON `account`.`rid` = `role`.`rid`inner join `swp391_bl5_g6`.`student`\n"
                     + " ON `account`.`userName` = `student`.`userName`\n"
                     + "WHERE `account`.`userName` = ?";
 
@@ -377,7 +377,7 @@ public class AccountDAO extends DBContext {
                     + "    `account`.`rid`,\n"
                     + "    `role`.`rname`,\n"
                     + "    `role`.`status` as rolestatus \n"
-                    + "FROM `swp391_se1632_g2`.`account` inner join `swp391_se1632_g2`.`role`\n"
+                    + "FROM `swp391_bl5_g6`.`account` inner join `swp391_bl5_g6`.`role`\n"
                     + "ON `account`.`rid` = `role`.`rid`\n"
                     + "WHERE `account`.`userName` = ? and `account`.`password` = ? and (`account`.`status`!=4 OR `account`.`status`!=0);";
 
@@ -415,7 +415,7 @@ public class AccountDAO extends DBContext {
         try {
 
             String sql = "SELECT `account`.`userName`\n"
-                    + "FROM `swp391_se1632_g2`.`account`"
+                    + "FROM `swp391_bl5_g6`.`account`"
                     + "WHERE `account`.`userName` = ? ;";
 
             PreparedStatement st = connection.prepareStatement(sql);
@@ -427,7 +427,7 @@ public class AccountDAO extends DBContext {
             }
 
             String sql1 = "SELECT `account`.`email`\n"
-                    + "FROM `swp391_se1632_g2`.`account`"
+                    + "FROM `swp391_bl5_g6`.`account`"
                     + "WHERE `account`.`email` = ?;";
 
             PreparedStatement st1 = connection.prepareStatement(sql1);
@@ -449,7 +449,7 @@ public class AccountDAO extends DBContext {
         try {
 
             String sql = "SELECT `account`.`userName`\n"
-                    + "FROM `swp391_se1632_g2`.`account`"
+                    + "FROM `swp391_bl5_g6`.`account`"
                     + "WHERE `account`.`userName` = ? ;";
 
             PreparedStatement st = connection.prepareStatement(sql);
@@ -461,7 +461,7 @@ public class AccountDAO extends DBContext {
             }
 
             String sql1 = "SELECT `account`.`email`\n"
-                    + "FROM `swp391_se1632_g2`.`account`"
+                    + "FROM `swp391_bl5_g6`.`account`"
                     + "WHERE `account`.`email` = ?;";
 
             PreparedStatement st1 = connection.prepareStatement(sql1);
@@ -481,7 +481,7 @@ public class AccountDAO extends DBContext {
     public boolean checkByUsernameAndEmail(String username, String email) {
         int result = 0;
         try {
-            String sql1 = "select COUNT(*) as count from account where email = ? or username=?";
+            String sql1 = "select COUNT(*) as count from account where status !=4 and (email = ? or username=?)";
 
             PreparedStatement st1 = connection.prepareStatement(sql1);
             st1.setString(1, email);
@@ -583,7 +583,7 @@ public class AccountDAO extends DBContext {
     public int register(Account a) {
         try {
 
-            String sql = "INSERT INTO `swp391_se1632_g2`.`account`\n"
+            String sql = "INSERT INTO `swp391_bl5_g6`.`account`\n"
                     + "(`userName`, `password`, `displayName`, `email`, `avatar`, `isBlock`, `status`, `createDate`, `rid`)\n"
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
@@ -608,7 +608,7 @@ public class AccountDAO extends DBContext {
     public int addUser(Account a) {
         try {
 
-            String sql = "INSERT INTO `swp391_se1632_g2`.`account`\n"
+            String sql = "INSERT INTO `swp391_bl5_g6`.`account`\n"
                     + "(`userName`, `password`, `displayName`, `email`, `avatar`, `isBlock`, `status`, `createDate`, `rid`)\n"
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
@@ -633,7 +633,7 @@ public class AccountDAO extends DBContext {
     public int changePassword(String newPassword, Account a) {
         try {
 
-            String sql = "UPDATE `swp391_se1632_g2`.`account` SET `password` = ?\n"
+            String sql = "UPDATE `swp391_bl5_g6`.`account` SET `password` = ?\n"
                     + "WHERE `userName` = ?;";
 
             PreparedStatement st = connection.prepareStatement(sql);
@@ -664,8 +664,8 @@ public class AccountDAO extends DBContext {
                     + "    `account`.`rid`,\n"
                     + "`role`.`rname`,\n"
                     + "`lecturer`.`lid`\n"
-                    + " FROM `swp391_se1632_g2`.`account` inner join `swp391_se1632_g2`.`role`\n"
-                    + " ON `account`.`rid` = `role`.`rid` inner join `swp391_se1632_g2`.`lecturer`\n"
+                    + " FROM `swp391_bl5_g6`.`account` inner join `swp391_bl5_g6`.`role`\n"
+                    + " ON `account`.`rid` = `role`.`rid` inner join `swp391_bl5_g6`.`lecturer`\n"
                     + " ON `account`.`userName` = `lecturer`.`userName`\n"
                     + "WHERE `account`.`userName` = ?";
 
@@ -691,7 +691,7 @@ public class AccountDAO extends DBContext {
     public void updateProfile(Account a) {
         try {
 
-            String sql = "UPDATE `swp391_se1632_g2`.`account`\n"
+            String sql = "UPDATE `swp391_bl5_g6`.`account`\n"
                     + "SET\n"
                     + "`displayName` = ?,\n"
                     + "`email` = ?\n"
@@ -713,7 +713,7 @@ public class AccountDAO extends DBContext {
     public void updateStatus(Account a) {
         try {
 
-            String sql = "UPDATE `swp391_se1632_g2`.`account`\n"
+            String sql = "UPDATE `swp391_bl5_g6`.`account`\n"
                     + "SET\n"
                     + "`status` = ?\n"
                     + "WHERE `userName` = ?;";
@@ -733,7 +733,7 @@ public class AccountDAO extends DBContext {
     public void updateRole(int role, String username) {
         try {
 
-            String sql = "UPDATE `swp391_se1632_g2`.`account`\n"
+            String sql = "UPDATE `swp391_bl5_g6`.`account`\n"
                     + "SET\n"
                     + "`rid` = ?\n"
                     + "WHERE `userName` = ?;";

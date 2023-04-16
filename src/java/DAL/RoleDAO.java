@@ -38,7 +38,7 @@ public class RoleDAO extends DBContext {
 
     public void ChangeRoleStatus(int id, int status) {
         try {
-            String sql = "UPDATE `swp391_se1632_g2`.`role`"
+            String sql = "UPDATE `swp391_bl5_g6`.`role`"
                     + " set role.status = ? "
                     + "where role.rid= ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -54,7 +54,7 @@ public class RoleDAO extends DBContext {
 
         List<Role> list = new ArrayList<>();
         try {
-            String sql = "SELECT * from `swp391_se1632_g2`.`role`\n";
+            String sql = "SELECT * from `swp391_bl5_g6`.`role`\n";
             if (!pagination.getFilterType().equals("User Role") || pagination.getFilterStatus() != 3 || !pagination.getSearch().equals("")) {
                 sql += " WHERE";
                 if (!pagination.getFilterType().equals("User Role")) {
@@ -106,7 +106,7 @@ public class RoleDAO extends DBContext {
 
         int count = 0;
         try {
-            String sql = "SELECT COUNT(*) as count FROM `swp391_se1632_g2`.`role`";
+            String sql = "SELECT COUNT(*) as count FROM `swp391_bl5_g6`.`role`";
             if (!pagination.getFilterType().equals("User Role") || pagination.getFilterStatus() != 3 || !pagination.getSearch().equals("")) {
                 sql += " WHERE";
                 if (!pagination.getFilterType().equals("User Role")) {
@@ -152,7 +152,7 @@ public class RoleDAO extends DBContext {
 
     public void insertRole(Role r) {
         try {
-            String sql = "INSERT INTO `swp391_se1632_g2`.`role`\n"
+            String sql = "INSERT INTO `swp391_bl5_g6`.`role`\n"
                     + "(`rid`,\n"
                     + "`rname`,\n"
                     + "`status`,\n"
@@ -160,16 +160,42 @@ public class RoleDAO extends DBContext {
                     + "`description`,\n"
                     + "`type`)\n"
                     + "VALUES\n"
-                    + "(?,\n"
+                    + "(null,\n"
                     + "?,\n"
                     + "?,\n"
                     + "?,\n"
                     + "?,\n"
                     + "?);";
             PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, r.getRname());
+            st.setInt(2, r.getStatus());
+            st.setInt(3, r.getDisplayOrder());
+            st.setString(4, r.getDescription());
+            st.setString(5, "User Role");
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println("RoleDAO -> insertRole(): " + e);
+        }
+    }
+
+    public void updateRole(Role r) {
+        try {
+            String sql = "UPDATE `swp391_bl5_g6`.`role`\n"
+                    + "SET\n"
+                    + "`rname` = ?,\n"
+                    + "`status` = ?,\n"
+                    + "`display_order` = ?,\n"
+                    + "`description` = ? \n"
+                    + "WHERE `rid` = ?;";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, r.getRname());
+            st.setInt(2, r.getStatus());
+            st.setInt(3, r.getDisplayOrder());
+            st.setString(4, r.getDescription());
+            st.setInt(5, r.getRid());
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("RoleDAO -> updateRole(): " + e);
         }
     }
 }

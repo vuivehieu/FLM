@@ -16,7 +16,7 @@ public class ElectiveDAO extends DBContext {
 
     public void add(Elective el) {
         try {
-            String sql = "INSERT INTO `swp391_se1632_g2`.`elective`\n"
+            String sql = "INSERT INTO `swp391_bl5_g6`.`elective`\n"
                     + "(`ename`, `tag`, `subjectName_EN`, `subjectName_VI`, `note`, `createDate`, `isActive`)\n"
                     + "VALUES (?, ?, ?, ?, ?, ?, ?);";
 
@@ -39,7 +39,7 @@ public class ElectiveDAO extends DBContext {
 
     public void update(Elective el) {
         try {
-            String sql = "UPDATE `swp391_se1632_g2`.`elective` SET\n"
+            String sql = "UPDATE `swp391_bl5_g6`.`elective` SET\n"
                     + "`ename` = ?,\n"
                     + "`tag` = ?,\n"
                     + "`subjectName_EN` = ?,\n"
@@ -66,7 +66,7 @@ public class ElectiveDAO extends DBContext {
 
     public void deleteSubject(int eid, String subjectCode) {
         try {
-            String sql = "DELETE FROM `swp391_se1632_g2`.`elective_subject`\n"
+            String sql = "DELETE FROM `swp391_bl5_g6`.`elective_subject`\n"
                     + "WHERE 	`elective_subject`.`eid` = ? AND \n"
                     + "		`elective_subject`.`subjectCode` = ?;";
 
@@ -84,7 +84,7 @@ public class ElectiveDAO extends DBContext {
         try {
 
             for (String code : subjectCode) {
-                String sql = "INSERT INTO `swp391_se1632_g2`.`elective_subject` (`eid`, `subjectCode`)\n"
+                String sql = "INSERT INTO `swp391_bl5_g6`.`elective_subject` (`eid`, `subjectCode`)\n"
                         + "VALUES (? , ?);";
                 PreparedStatement st = connection.prepareStatement(sql);
                 st.setInt(1, eid);

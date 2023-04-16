@@ -517,7 +517,7 @@ ADD	CONSTRAINT fk_grade_student FOREIGN KEY (stid) REFERENCES Student(stid);
 
 /************************* Insert ****************************/
 /** role **/
-INSERT INTO `swp391_se1632_g2`.`role` (`rname`)
+INSERT INTO `swp391_bl5_g6`.`role` (`rname`)
 VALUES 	(N'Guest'), 
 		(N'Student'), 
 		(N'Teacher'), 
@@ -528,7 +528,7 @@ VALUES 	(N'Guest'),
         (N'Syllabus Reviewer');
   
 /** account **/
-INSERT INTO `swp391_se1632_g2`.`account` (`userName`, `password`, `displayName`, `email`, `avatar`, `isBlock`, `status`, `createDate`, `rid`)
+INSERT INTO `swp391_bl5_g6`.`account` (`userName`, `password`, `displayName`, `email`, `avatar`, `isBlock`, `status`, `createDate`, `rid`)
 VALUES	('admin', 'E10ADC3949BA59ABBE56E057F20F883E', N'Phan Minh Hiếu', 'hieupmhe163385@fpt.edu.vn',  'images/avatar/admin.png',  0, 1, NOW(), 6),
 		('student', 'C81E728D9D4C2F636F067F89CC14862C', N'Nguyễn Mạnh Đức', 'manhduc@gmail.com', 'images/avatar/student.png', 0, 1, NOW(), 2),
 		('student1', 'ECCBC87E4B5CE2FE28308FD9F2A7BAF3', N'Nguyễn Duy Anh', 'duyanh@gmail.com', 'images/avatar/student.png',  0, 1, NOW(), 2),
@@ -540,7 +540,7 @@ VALUES	('admin', 'E10ADC3949BA59ABBE56E057F20F883E', N'Phan Minh Hiếu', 'hieup
         
 
 /** Decision **/
-INSERT INTO `swp391_se1632_g2`.`decision`(`decisionNo`, `decisionName`, `approveDate`, `note`, `createDate`, `isActive`, `fileName`)
+INSERT INTO `swp391_bl5_g6`.`decision`(`decisionNo`, `decisionName`, `approveDate`, `note`, `createDate`, `isActive`, `fileName`)
 VALUES 	(N'1095/QĐ-ĐHFPT', N'QĐ Về việc bổ sung các học phần Trải nghiệm khởi nghiệp vào Chương trình đào tạo đại học hệ chính quy', '2022/11/28', N'', '2022/12/02', 1, ''), 
 		(N'1076/QĐ-ĐHFPT', N'Ban hành điều chỉnh CTĐT', '2022/11/24', N'', '2022/11/24', 1, ''), 
 		(N'973/QĐ-ĐHFPT', N'Ban hành điều chỉnh CTĐT từ kì Spring 2023', '2022/10/26', N'', '2022/10/28', 1, ''), 
@@ -564,7 +564,7 @@ VALUES 	(N'1095/QĐ-ĐHFPT', N'QĐ Về việc bổ sung các học phần Trả
         (N'670/QĐ-ĐHFPT', N'Ban hành đề cương chi tiết học kì Fall 2022', '2022/08/05', N'', '2022/08/05', 1, '');
         
 /** major **/
-INSERT INTO `swp391_se1632_g2`.`major`(`majorName_En`, `majorName_Vi`, `keyword`, `image`)
+INSERT INTO `swp391_bl5_g6`.`major`(`majorName_En`, `majorName_Vi`, `keyword`, `image`)
 VALUES	('Software Engineer', N'Kĩ Thuật Phần Mềm', 'SE', 'images/h-about.jpg'),
 		('Multimedia Communication', N'Chuyên Ngành Truyền Thông Đa Phương Tiện', 'MC', 'images/h-adm1.jpg'),
 		('Marketing', N'Chuyên Ngành Marketing', 'MKT', 'images/h-cam.jpg'),
@@ -580,7 +580,7 @@ VALUES	('Software Engineer', N'Kĩ Thuật Phần Mềm', 'SE', 'images/h-about.
         ('Other', N'Khác', 'KH', 'images/h-about.jpg');
  
 /** Curriculum **/
-INSERT INTO `swp391_se1632_g2`.`curriculum` (`curCode`, `majorID`, `decisionNo`, `curName_EN`, `curName_VI`, `description`, `isApproved`, `isActive`, `image`)
+INSERT INTO `swp391_bl5_g6`.`curriculum` (`curCode`, `majorID`, `decisionNo`, `curName_EN`, `curName_VI`, `description`, `isApproved`, `isActive`, `image`)
 VALUES	(N'BIT_SE_K16B', 1, N'1095/QĐ-ĐHFPT', 'Bachelor Program of Information Technology, Software Engineering Major', N'Chương trình cử nhân ngành CNTT, chuyên ngành Kỹ thuật phần mềm', 'Training Information Technology (IT)/Software Engineering (SE) specialty engineers with personality and capacity to meet the needs of society, mastering professional knowledge and practice, being able to organize, implement and promote the creativity in jobs related to the trained specialty as well as pursue further education and research.<br>The training program aims to:<br>a) To equip students with fundamental knowledge of mathematics and the IT industry together with fundamental and specialized methodologies, technologies related to the trained specialty.<br>b) Train students the necessary virtues and skills in the professional working environment, know how to apply specialized knowledge of SE specialty into practical work.<br>c) Provide students with a strong foundation in foreign languages, science, culture and society, promoting their autonomy and creativity in study, work and life.', 1, 1, 'images/course/sm-1.jpg'),
 		(N'BIT_SE_K16C', 1, N'1095/QĐ-ĐHFPT', 'Bachelor Program of Information Technology, Software Engineering Major', N'Chương trình cử nhân ngành CNTT, chuyên ngành Kỹ thuật phần mềm', 'Training Information Technology (IT)/Software Engineering (SE) specialty engineers with personality and capacity to meet the needs of society, mastering professional knowledge and practice, being able to organize, implement and promote the creativity in jobs related to the trained specialty as well as pursue further education and research.<br>The training program aims to:<br>a) To equip students with fundamental knowledge of mathematics and the IT industry together with fundamental and specialized methodologies, technologies related to the trained specialty.<br>b) Train students the necessary virtues and skills in the professional working environment, know how to apply specialized knowledge of SE specialty into practical work.<br>c) Provide students with a strong foundation in foreign languages, science, culture and society, promoting their autonomy and creativity in study, work and life.', 1, 1, 'images/course/sm-2.jpg'),
         (N'BBA_MC_K16B', 2, N'1095/QĐ-ĐHFPT', 'Bachelor Program of Business Administration, Multimedia Communication Major', N'Chương trình cử nhân ngành QTKD, chuyên ngành QTTTĐPT', N'1. Training Objectives General objectives: The program of Bachelor of Business Administration, Multimedia communication specialty aims to train bachelors with personality and capacity to meet the needs of society, mastering professional knowledge and pr...', 1, 1, ''), 
@@ -738,7 +738,7 @@ VALUES	(N'BIT_SE_K16B', 1, N'1095/QĐ-ĐHFPT', 'Bachelor Program of Information 
 		(N'BMC', 12, N'1039/QĐ-ĐHFPT', 'Multimedia Communication', N'Truyền thông đa phương tiện', N'Kiến thức ngành tự chọn nhóm 1 (chọn 2/4) WED201 Thiết kế website cơ bản Web Design DTG302 Thiết kế hình ảnh và âm thanh trong làm phim (Visual Effects - Principles of Compositing) TPG20x Nghệ thuật đồ họa chữ 1 (Typography 1) MID201 Thiết kế tương t...', 1, 1, '');	
   
 /** Subject **/  
-INSERT INTO `swp391_se1632_g2`.`subject` (`subjectCode`, `subjectName_En`, `subjectName_Vi`, `semester`, `noCredit`, `note`, `createDate`, `isCombo`, `comboName`, `isElective`, `electiveName`, `isActive`)
+INSERT INTO `swp391_bl5_g6`.`subject` (`subjectCode`, `subjectName_En`, `subjectName_Vi`, `semester`, `noCredit`, `note`, `createDate`, `isCombo`, `comboName`, `isElective`, `electiveName`, `isActive`)
 VALUES	('OTP101', 'Orientation and General Training Program', N'Định hướng và Rèn luyện tập trung', '0', 0, '', now(), 0, '', 0, '', 1),
 		('PEN', 'Preparation English', N'Tiếng Anh chuẩn bị', '0', 0, '', now(), 0, '', 0, '', 1),
 		('PHE_COM*1', 'Physical Education 1', N'TGiáo dục thể chất 1', '0', 2, 'Combo', now(), 1, 'PHE_COM', 0, '', 1),
@@ -832,7 +832,7 @@ VALUES	('OTP101', 'Orientation and General Training Program', N'Định hướng
         
         
 /** PLO **/        
-INSERT INTO `swp391_se1632_g2`.`plo`(`ploName`, `ploDescription`, `isActive`)
+INSERT INTO `swp391_bl5_g6`.`plo`(`ploName`, `ploDescription`, `isActive`)
 VALUES	(N'PLO1', N'Demonstrate basic knowledge of social sciences, politics and law, national security and defense, contributing to the formation of worldview and scientific methodology.', 1), 
 		(N'PLO2', N'Demonstrate an entrepreneurial, creative, critical, and problem-solving mindset.', 1), 
 		(N'PLO3', N'Communicating and working in groups effectively in academic and practical environments.', 1), 
@@ -917,7 +917,7 @@ VALUES	(N'PLO1', N'Demonstrate basic knowledge of social sciences, politics and 
 		(N'PLO14', N'Have in-depth knowledge and skills for Hotel Management or have fundamental knowledge and skills for a related major', 1);
         
 /** PO **/
-INSERT INTO `swp391_se1632_g2`.`po` (`poName`, `poDescription`, `isActive`)
+INSERT INTO `swp391_bl5_g6`.`po` (`poName`, `poDescription`, `isActive`)
 VALUES	('PO1', 'Having basic knowledge of social sciences, politics and law, security and defense, foundational knowledge of the IT industry & in-depth knowledge of the specialized training: techniques, methods, technologies, in-depth application areas; development trends in the world; at the same time understand the overall market, context, functions and tasks of the professions in the specialized training.', 1),
 		('PO2', 'Be able to work as a full member of a professional team in the field of training: participate in designing, selecting techniques and technologies in line with development trends, solving technical problems; understand technology trends and user requirements; can do the complete solution development plan; performance management and change management in his or her part of the job; understand state policies in specialized fields.', 1),
 		('PO3', 'Mastering professional skills and soft skills of 21st century citizens (thinking skills, work skills, skills in using work tools, life skills in a global society.)', 1),
@@ -925,7 +925,7 @@ VALUES	('PO1', 'Having basic knowledge of social sciences, politics and law, sec
 		('PO5', 'Honesty, high discipline in study and work, know how to work effectively in groups; know how to behave culturally at work and in society; dynamic, creative and willing to learn constantly. Demonstrate professional attitude and behavior with the ability to conceive of ideas, design, implement and operate systems in the context of corporation and society.', 1);
         
  /** po_mapping_plo **/
- INSERT INTO `swp391_se1632_g2`.`po_mapping_plo` (`curid`, `ploid`, `poid`, `isMapping`)
+ INSERT INTO `swp391_bl5_g6`.`po_mapping_plo` (`curid`, `ploid`, `poid`, `isMapping`)
 VALUES	(2 , 1, 1, 1),
 		(2 , 2, 1, 1),
 		(2 , 2, 3, 1),
@@ -955,7 +955,7 @@ VALUES	(2 , 1, 1, 1),
 		(2 , 18, 4, 1);
  
 /** Syllabus **/
-INSERT INTO `swp391_se1632_g2`.`syllabus`(`subjectCode`, `accountID`, `decisionNo`, `slbName_EN`, `slbName_VI`, `degreeLevel`, `timeAllocation`, `description`, `studentTask`, `tool`, `isApproved`, `isActive`, `approvedDate`, `note`, `MinAvgMarkToPass`)
+INSERT INTO `swp391_bl5_g6`.`syllabus`(`subjectCode`, `accountID`, `decisionNo`, `slbName_EN`, `slbName_VI`, `degreeLevel`, `timeAllocation`, `description`, `studentTask`, `tool`, `isApproved`, `isActive`, `approvedDate`, `note`, `MinAvgMarkToPass`)
 VALUES	('OTP101', 7, '670/QĐ-ĐHFPT', 'Orientaiton and General Training Program', N'Định hướng và Rèn luyện tập trung', N'Bachelor', N'5 weeks (fulltime) = 280h<br>* Module 1: Orientation-Định hướng (1 week: 8h/day * 5 days = 40h)<br>* Module 2: Military Training-Giáo dục quốc phòng (110 slots * 1.5h/slot = 165h)<br>* Module 3: Experience Program 22 slots - 1.5h = 33 h<br>* Module 4: Vovinam 28 slots * 1,5h/slot = 42h', N'Orientation and general training program includes 4 modules :<br>* Module 1: Orientation<br>Main activities of this module are:<br>- Organizing the opening ceremony for students.<br>- Organizing health check amd making students'' cards.<br>- Arranging classes for students and organizing class meeting.<br>- Introducing to students about FPT corporation, FPT university, functional departments, training regulations and how to use information systems to support students'' learning.<br>- Sharing study skills for university students.<br>- Sharing about topics related to community activities. ( For example: activities towards sustainable development, volunteering activities...)<br>* Module 2: Military training the program prescribed by the Ministry of Education and Training.Implementing the program prescribed by the Ministry of Education and Training.<br>* Module 3: Experience program<br>Main activities of this module are:<br>- Organizing research and review memoirs.<br>- Organizing seminars<br>- Organizing experiential activities for students (Towards sustainable development and volunteering for the community)<br>* Module 4: Vovinam<br>Follow the outline VOV114.<br>Objectives of orientation and training program are:<br>1) Instruct students to complete procedures before a new semester.<br>2) Provide students with knowledge about FPT corporation, FPT university and functional departments which support students during the period of study at the university.<br>3) Introduce to students about Curriculum, FU training model and regulations as well as how to use information systems to enable students to adapt new learning environment.<br>4) Educate students the fundamentals of military and national security, build and enrich patriotism, national pride through history lessons, seminars, documentaries, field trips to military bases and memoirs about two prolonged resistance wars of Viet Nam.<br>5) Train the willpower and improve physical strengths, fitness and sense of responsibilities through physical education lessons and combat practice in the field.<br>6) Train team spirit, disciplines, shape good attitude and behaviors towards friends, teachers and educational environment.<br>7) Enhance student experiences with extra-curricular activities. Strengthen the sense of community through community and volunteering activities and the ones towards the sustainable development.', N'Attend enough activities of the university.', N'', 11, 1, '2022/08/05', N'', 0),
 		('CEA201', 7, '1009/QĐ-ĐHFPT', 'Computer Organization and Architecture', N'Tổ chức và Kiến trúc máy tính', N'Bachelor', N'Study hour (150h) = 45h contact hours + 1h final exam + 104h self-study', N'This course in an introduction to computer architecture and organization. It will cover topics in both the physical design of the computer (organization) and the logical design of the computer (architecture). The main contents include the organization of a simple stored-program computer: CPU, busses and memory; Instruction sets, machine code, and assembly language; Conventions for assembly language generated by compilers; Floating-point number representation; Hardware organization of simple processors; Address translation and virtual memory; Very introductory examples of input/output devices, interrupt handling and multi-tasking systems.<br>Chapter covered: Computer Evolution and Performance; A Top-Level View of Computer Function and Interconnection; Cache Memory; Internal Memory; External Memory; Input/Output; Operating System Support; Instruction Sets: Characteristics and Functions; Processor Structure and Function; Reduced Instruction Set Computers; Instruction-Level Parallelism and Superscalar Processors; Parallel Processing; Multicore Computers.', N'Upon successful completion of this course, students should:<br>1. Knowledge:<br>- Understand the structure and function of computers generally and a distinction between computer organization and computer architecture.<br>- Understand computer organization: roles of processors, main memory, and interface between the computer and peripherals<br>- Understand computer architecture: instruction set, the number of bits used to represent various data types, I/O mechanism and techniques for addressing memory<br>2. Skills:<br>- Be able to solve binary math operations using the computer.<br>- Be able to write simple assembly language programs<br>- Be able to prepare engineering reports and do presentations scientifically<br>- Be able to apply knowledges to do research projects.', N'', 1, 1, '2022/12/22', N'', 5), 
 		('CSI104', 7, '1341/QĐ-ĐHFPT', 'Introduction to Computer Science', N'Nhập môn khoa học máy tính', N'Bachelor', N'Study hour (150h) = 45h contact hours + 1h final exam + 104h self-study', N'This course provides an overview of computer Fundamentals. Topics cover all areas of computer science in breadth such as computer organization, network, operating system, data structure , file structure, social and ethical issues.<br>Major Instructional Areas<br>- Introduction to Von Neumann Model and computer components<br>- Numbering system & data representation<br>- Different data types and operations on data<br>- The concepts of computer networking and internet<br>- Operating system<br>- Introduction to basic algorithms and algorithms representation<br>- Introduction to Data structure and File structure<br>- The concepts of database<br>- software engineering<br>- Computing Security & Ethics', N'"Students must attend more than 80% of contact sessions in order to be accepted to the final examination.<br>- Students are responsible to do all exercises, assignments and labs given by instructor in class or at home and submit on time<br>- Use laptop in class only for learning purpose<br>- Promptly access to the http://cms.fpt.edu.vn for up-to-date course information"', N'', 1, 1, '2022/12/22', N'', 5), 
@@ -996,7 +996,7 @@ VALUES	('OTP101', 7, '670/QĐ-ĐHFPT', 'Orientaiton and General Training Program
 		('PRO192', 8, '1095/QĐ-ĐHFPT' , 'Object-Oriented Programming', N'Lập trình hướng đối tượng', 'Bachelor', 'Study hour (150h) = 45h contact hours 1h final exam 104h self-study', '-This subject introduces the student to object-oriented programming. The student learns to build reusable objects, encapsulate data and logic within a class, inherit one class from another and implement polymorphism.<br>- Compose technical documentation of a Java program using internal comments.<br>- Adhere to object-oriented programming principles including encapsulation, polymorphism and inheritance when writing program code.<br>- Trace the execution of Java program logic to determine what a program does or to validate the correctness of a program.<br>', '- Students must attend at least 80% of contact slots in order to be accepted to the final examination.<br>- Student is responsible to do all exercises given by instructor in class or at home and submit on time.<br>- Use laptop in class only for learning purpose<br>- Promptly access to the FU CMS at http://cms.fpt.edu.vn for up-to-date course information.<br>', 'Text Book, NetBean x.x, Internet', 1, 1, '2022/12/22', '', 5);
        
 /** Combo **/
-INSERT INTO `swp391_se1632_g2`.`combo`(`tag`, `comboName_EN`, `comboName_VI`, `note`, `createDate`, `isActive`)
+INSERT INTO `swp391_bl5_g6`.`combo`(`tag`, `comboName_EN`, `comboName_VI`, `note`, `createDate`, `isActive`)
 VALUES	('PHE_COM1', '', N'Vovinam BIT_GD_K16D,K17A', '', now(), 1),
 		('PHE_COM2', '', N'Cờ vua BIT_SE_K15A', '', now(), 1),
 		('SE_COM3', 'Topic on .NET Programming', N'Chủ đề lập trình .NET BIT_SE_K15A', '', now(), 1),
@@ -1008,7 +1008,7 @@ VALUES	('PHE_COM1', '', N'Vovinam BIT_GD_K16D,K17A', '', now(), 1),
 		('SE_COM5.1.1', 'Topic on Japanese Bridge Engineer', N'Chủ đề Kỹ sư cầu nối Nhật Bản (Định hướng Tiếng Nhật CNTT: Lựa chọn JFE301 và 1 trong 2 học phần JIS401, JIT401 để triển khai ở kỳ 8) BIT_SE_K15C', '', now(), 1);
 
 /** curriculum_combo **/        
-INSERT INTO `swp391_se1632_g2`.`curriculum_combo`(`curid`, `cid`)
+INSERT INTO `swp391_bl5_g6`.`curriculum_combo`(`curid`, `cid`)
 VALUES	(2, 1),
 		(2, 2),
 		(2, 3),
@@ -1021,7 +1021,7 @@ VALUES	(2, 1),
         
         
 /** combo_subject **/
-INSERT INTO `swp391_se1632_g2`.`combo_subject` (`subjectCode`, `cid`, `semester`)
+INSERT INTO `swp391_bl5_g6`.`combo_subject` (`subjectCode`, `cid`, `semester`)
 VALUES 	('VOV114', 1, '0'),
 		('VOV124', 1, '1'),
 		('VOV134', 1, '2'),
@@ -1056,19 +1056,19 @@ VALUES 	('VOV114', 1, '0'),
         
 
 /** Elective **/
-INSERT INTO `swp391_se1632_g2`.`elective`(`ename`, `tag`, `subjectName_EN`, `subjectName_VI`, `note`, `createDate`, `isActive`)
+INSERT INTO `swp391_bl5_g6`.`elective`(`ename`, `tag`, `subjectName_EN`, `subjectName_VI`, `note`, `createDate`, `isActive`)
 VALUES ('BIT_GD_K16D,K17A TMI_ELE', 'TMI_ELE', 'Traditional musical instrument', N'Nhạc cụ truyền thống', 'Migrate data at 10/28/2022 8:10:20 AM by khanhnk6', now(), 1),
 		('SE_Entrepreneurship 2 and Combos', 'SE_EXE_ELE', 'SE_Entrepreneurship 2 and Combos', N'Nhóm môn Khởi nghiệp 2 và Combos', N'1. Nếu sinh viên đã học EXE101 ở kì 7, Sinh viên phải chọn EXE201 và 1 trong 2 môn còn lại của các combo đã chọn ở kì 5; 2. Nếu sinh viên đã học SYB302c ở kì 7, sinh viên sẽ học tất cả các môn còn lại của các combo đã chọn ở kì 5, cụ thể: SE_COM3 (PRU211m, PRN231); SE_COM4 (MMA301, WDP301); IS_COM5.1 (JFE301 và 1 trong 2 học phần JIS401, JIT401), IS_COM5.2 (JPD326), IS_COM6 (KOR411); SE_COM7 (DMT301,AIT301); SE_COM8 (CPV301, SDE301);', now(), 1),
 		('Entrepreneurship Group 1', 'EXE_ELE', 'Entrepreneurship Group 1', N'Nhóm môn Khởi nghiệp 1', N'Nếu Cơ sở (Campus) chọn triển khai thử nghiệm Trải nghiệm khởi nghiệp thì sinh viên học EXE101, nếu không thì sinh viên học SYB302c.', now(), 1);       
         
 /** curriculum_elective**/
-INSERT INTO `swp391_se1632_g2`.`curriculum_elective` (`curid`, `eid`)
+INSERT INTO `swp391_bl5_g6`.`curriculum_elective` (`curid`, `eid`)
 VALUES	(2, 1),
 		(2, 2),
 		(2, 3);
         
 /** elective_ subject **/
-INSERT INTO `swp391_se1632_g2`.`elective_subject` (`eid`, `subjectCode`)
+INSERT INTO `swp391_bl5_g6`.`elective_subject` (`eid`, `subjectCode`)
 VALUES	(1, 'TRG102'),
 		(1, 'ĐTR102'),
 		(1, 'ĐTB102'),
@@ -1092,7 +1092,7 @@ VALUES	(1, 'TRG102'),
 		(3, 'SYB302c');
         
 /** curriculum_subject */
-INSERT INTO `swp391_se1632_g2`.`curriculum_subject` (`curid`, `subjectCode`)
+INSERT INTO `swp391_bl5_g6`.`curriculum_subject` (`curid`, `subjectCode`)
 VALUES	(1, 'OTP101'), 
 		(1, 'PEN'), 
 		(1, 'PHE_COM*1'), 
@@ -1623,7 +1623,7 @@ VALUES	(1, 'OTP101'),
         
         
 /** pre **/        
-INSERT INTO `swp391_se1632_g2`.`prerequisite`(`slbid`, `subjectCode`, `preReqCode`)
+INSERT INTO `swp391_bl5_g6`.`prerequisite`(`slbid`, `subjectCode`, `preReqCode`)
 VALUES	(1, null, 'None'), 
 		(2, null, ''), 
 		(3, null, ''), 
@@ -1671,7 +1671,7 @@ VALUES	(1, null, 'None'),
         (37, 'MLN122', 'MLN122');
 
 /** Assessment **/
-INSERT INTO `swp391_se1632_g2`.`assessment`
+INSERT INTO `swp391_bl5_g6`.`assessment`
 (`slbid`,`category`,`type`,`part`,`weight`,`completionCriteria`,`duration`,`questionType`,`noQuestion`,`knowledge_Skill`,`gradingGuide`,`note`,`isAcitve`, `accountID`)
 VALUES	(2, 'Assignment', 'on-going', 2, 0.3, '>0', N'Option 1: At home Option2: (For Constructivism Approach only): Follow lecturer''s proposal', N'Option 1: Developing Assemly program Option 2 (For Constructivism Approach only): Follow lecturer''s proposal', N'Option 1: 2 Option 2 (For Constructivism Approach only): Follow lecturer''s proposal1: 2 Option 2: Follow lecturer''s proposal', N'Basic programs', N'Teachers assess their works on their computers', N'30% of total progress mark', 1, 7), 
 		(2, 'Exercises', 'on-going', 4, 0.3, '>0', N'Option 1: N/A Option2: (For Constructivism Approach only): Follow lecturer''s proposal', N'Option 1: Writing Option 2 (For Constructivism Approach only): Follow lecturer''s proposal', N'Option 1: Depends on chapters Option 2 (For Constructivism Approach only): Follow lecturer''s proposal1: Depends on chapters; Option 2: Follow lecturer''s proposalon chapters', N'Studied chapters; knowledge and skills', N'Students write answers to their notebook', N'30% of total progress mark', 1, 7), 
@@ -1686,7 +1686,7 @@ VALUES	(2, 'Assignment', 'on-going', 2, 0.3, '>0', N'Option 1: At home Option2: 
 		(4, 'Final Exam Resit', 'final exam', 1, 0.4, '4', N'60''', N'Computer gradable', N'50<br>Structure:<br>• level 1: 10%<br>• level 2: 80%<br>• level 3: 10%', N'All studied chapters. Each studied Chapter contributes 2-8 questions, depending on the number of topics in the Chapter.', N'by Exam Board', N'~10% of questions is a2 objective oriented', 1, 7);
 
 /** Material **/
-INSERT INTO `swp391_se1632_g2`.`material`(`slbid`, `description`, `author`, `publisher`, `publishedDate`, `edition`, `ISBN`, `isMainMaterial`, `isHardCopy`, `isOnline`, `note`, `isActive`, `accountID`)
+INSERT INTO `swp391_bl5_g6`.`material`(`slbid`, `description`, `author`, `publisher`, `publishedDate`, `edition`, `ISBN`, `isMainMaterial`, `isHardCopy`, `isOnline`, `note`, `isActive`, `accountID`)
 VALUES	(1, N'Introductory documents aout FPT Group and FPT University', N'', N'', null, N'', N'', 0, 0, 0, N'', 1, 7), 
 		(1, N'Hồi ký: Từ nhân dân mà ra', N'', N'', null, N'', N'', 0, 0, 0, N'', 1, 7), 
 		(1, N'Hồi ký: Những điều đọng lại qua hai cuộc chiến tranh', N'', N'', null, N'', N'', 0, 0, 0, N'', 1, 7), 
@@ -1938,7 +1938,7 @@ VALUES	(1, N'Introductory documents aout FPT Group and FPT University', N'', N''
         
 		 
 /** Session **/
-INSERT INTO `swp391_se1632_g2`.`session` (`slbid`, `sesNo`, `topic`, `learning_Teaching_Type`, `ITU`, `StudentMaterial`, `dowload`, `StudentTask`, `urls`, `note`, `isActive`, `accountID`)
+INSERT INTO `swp391_bl5_g6`.`session` (`slbid`, `sesNo`, `topic`, `learning_Teaching_Type`, `ITU`, `StudentMaterial`, `dowload`, `StudentTask`, `urls`, `note`, `isActive`, `accountID`)
 VALUES	(1, 1, N'Orientation week<br>Week 1', 'Offline', 'IT', N'Ref [1]. The introduction of FPT corporation and FPT university.', '', N'- Attend the opening ceremony and class meetings.<br>- Attend introduction sessions about the university, deparments, libraries, training regulations and curricula.<br>- Attens seminars about study skills at university.<br>- Attend health check sessions.', '', '', 1, 7), 
 		(1, 2, N'Collective Training program<br>Week 2', 'Offline', 'IT', N'Ref[2]. "Hồi ký: Từ nhân dân mà ra"', '', N'- Attend enough activities and sessions.', '', '', 1, 7), 
 		(1, 3, N'Collective Training program<br>Week 2<br>Fulltime Training Program<br>Week 3', 'Offline', 'IT', N'Ref[3]. "Hồi ký: Những điều đọng lại qua hai cuộc chiến tranh"', '', N'- Attend enough activities and sessions.', '', '', 1, 7), 
@@ -2126,7 +2126,7 @@ VALUES	(1, 1, N'Orientation week<br>Week 1', 'Offline', 'IT', N'Ref [1]. The int
 		(4, 60, N'Progress Test 3', 'Offline', 'U', N'', '', N'', '', '',1 , 7);
 
 /** Question **/ 
-INSERT INTO `swp391_se1632_g2`.`question` (`sesid`, `qname`, `details`, `answer`, `isActive`, `accountID`)
+INSERT INTO `swp391_bl5_g6`.`question` (`sesid`, `qname`, `details`, `answer`, `isActive`, `accountID`)
 VALUES	(21, 'CQ1.1', N'What is computer architecture? What is computer organization? Example?', N'Câu Trả Lời', 1, 7), 
 		(21, 'CQ1.2', N'What is the distinction between computer organization and computer architecture?', N'Câu Trả Lời', 1, 7), 
 		(22, 'CQ1.3', N'Explain about Structure of computer. Explain about Functions of computer.', N'Câu Trả Lời', 1, 7), 
@@ -2251,22 +2251,22 @@ VALUES	(21, 'CQ1.1', N'What is computer architecture? What is computer organizat
 
         
 /** student **/
-INSERT INTO `swp391_se1632_g2`.`student` (`stid`, `userName`, `curid`, `semester`, `isActive`)
+INSERT INTO `swp391_bl5_g6`.`student` (`stid`, `userName`, `curid`, `semester`, `isActive`)
 VALUES	('SE160001', 'student', 2, '5', 1),
 		('SE160002', 'student1', 2, '5', 1);
 
 /** lecturer **/
-INSERT INTO `swp391_se1632_g2`.`lecturer` (`userName`)
+INSERT INTO `swp391_bl5_g6`.`lecturer` (`userName`)
 VALUES	('teacher');
 
 /** attandance **/
-INSERT INTO `swp391_se1632_g2`.`attandance` (`sesid`, `stid`, `present`, `description`, `date`, `startTime`, `endTime`)
+INSERT INTO `swp391_bl5_g6`.`attandance` (`sesid`, `stid`, `present`, `description`, `date`, `startTime`, `endTime`)
 VALUES	(1 , 'SE160001', 1, 'leaning 1', '2023/01/21','10:50 AM', '12:50 PM'),
 		(2 , 'SE160001', 1, 'leaning 1', '2023/01/22','10:50 AM', '12:50 PM'),
 		(2 , 'SE160002', 1, 'leaning 1', '2023/01/22','10:50 AM', '12:50 PM');
 
 /** student_subject **/
-/*INSERT INTO `swp391_se1632_g2`.`student_subject` (`stid`, `subjectCode`, `isLearning`, `startDate`, `endDate`, `status`)
+/*INSERT INTO `swp391_bl5_g6`.`student_subject` (`stid`, `subjectCode`, `isLearning`, `startDate`, `endDate`, `status`)
 VALUES	('SE160001', 'OTP101', 1, '2022/01/01', '2023/01/01', 0),
 		('SE160001', 'PEN', 1, '2022/01/01', '2023/01/01', 0),
 		('SE160001', 'PHE_COM*1', 1, '2022/01/01', '2023/01/01', 0),
@@ -2316,7 +2316,7 @@ VALUES	('SE160001', 'OTP101', 1, '2022/01/01', '2023/01/01', 0),
 		('SE160001', 'VNR202', -1, '2022/01/01', '2023/01/01', -1);  
         */
         
-INSERT INTO `swp391_se1632_g2`.`subject_mapping_plo` (`subjectCode`, `ploid`, `isMapping`)
+INSERT INTO `swp391_bl5_g6`.`subject_mapping_plo` (`subjectCode`, `ploid`, `isMapping`)
 VALUES	('OTP101', 1, 1),
 		('OTP101', 3, 1),
 		('OTP101', 5, 1),        
@@ -2502,7 +2502,7 @@ VALUES	('OTP101', 1, 1),
 		('WDP301', 17, 1, 7),
         ('WDP301', 18, 1, 7);
         */
-INSERT INTO `swp391_se1632_g2`.`lo` (`slbid`, `cloName`, `cloDetail`, `loDetail`, `isActive`)
+INSERT INTO `swp391_bl5_g6`.`lo` (`slbid`, `cloName`, `cloDetail`, `loDetail`, `isActive`)
 VALUES 	(10, N'1', N'CLO1', N'Understand the concepts of object oriented (OO) programs to solve problems and fundamentals of object-oriented programming in Java', 1), 
 		(10, N'2', N'CLO2', N'Practice basic Java language syntax and semantics to write Java programs and use concepts such as variables, conditional and iterative execution methods', 1), 
 		(10, N'3', N'CLO3', N'Uses streams to read and write data from/to different types of sources/targets', 1), 
@@ -2516,7 +2516,7 @@ VALUES 	(10, N'1', N'CLO1', N'Understand the concepts of object oriented (OO) pr
         
         
 /** plo_curriculum **/
-INSERT INTO `swp391_se1632_g2`.`plo_curriculum` (`curid`, `ploid`)
+INSERT INTO `swp391_bl5_g6`.`plo_curriculum` (`curid`, `ploid`)
 VALUES 	(2, 1),
 		(2, 2),
         (2, 3),
@@ -2537,7 +2537,7 @@ VALUES 	(2, 1),
         (2, 18);
         
 /** po_curriculum **/
-INSERT INTO `swp391_se1632_g2`.`po_curriculum` (`curid`, `poid`)
+INSERT INTO `swp391_bl5_g6`.`po_curriculum` (`curid`, `poid`)
 VALUES 	(2, 1),
 		(2, 2),
         (2, 3),

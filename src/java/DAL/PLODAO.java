@@ -13,7 +13,7 @@ public class PLODAO extends DBContext {
     public void add(String name, String description, boolean isActive) {
         try {
 
-            String sql = "INSERT INTO `swp391_se1632_g2`.`plo` (`ploName`,`ploDescription`,`isActive`)\n"
+            String sql = "INSERT INTO `swp391_bl5_g6`.`plo` (`ploName`,`ploDescription`,`isActive`)\n"
                     + "VALUES (?, ?, ?);";
 
             PreparedStatement st = connection.prepareStatement(sql);
@@ -31,7 +31,7 @@ public class PLODAO extends DBContext {
     public void update(String name, String description, boolean isActive, int ploid) {
         try {
 
-            String sql = "UPDATE `swp391_se1632_g2`.`plo` SET\n"
+            String sql = "UPDATE `swp391_bl5_g6`.`plo` SET\n"
                     + "`ploName` = ?,\n"
                     + "`ploDescription` = ?,\n"
                     + "`isActive` = ?\n"

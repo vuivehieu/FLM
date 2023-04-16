@@ -54,7 +54,7 @@ public class SessionDAO extends DBContext {
 
     public void add(Session s) {
         try {
-            String sql = "INSERT INTO `swp391_se1632_g2`.`session`\n"
+            String sql = "INSERT INTO `swp391_bl5_g6`.`session`\n"
                     + "(`slbid`, `sesNo`, `topic`, `learning_Teaching_Type`, `ITU`, `StudentMaterial`\n"
                     + ", `dowload`, `StudentTask`, `urls`, `note`, `isActive`, `accountID`)\n"
                     + "VALUES\n"

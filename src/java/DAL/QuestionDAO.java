@@ -43,7 +43,7 @@ public class QuestionDAO extends DBContext {
 
     public void add(Question q) {
         try {
-            String sql = "INSERT INTO `swp391_se1632_g2`.`question`\n"
+            String sql = "INSERT INTO `swp391_bl5_g6`.`question`\n"
                     + "(`sesid`, `qname`, `details`, `answer`, `isActive`, `accountID`)\n"
                     + "VALUES (?, ?, ?, ?, ?, ?);";
 

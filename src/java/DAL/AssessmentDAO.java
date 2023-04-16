@@ -18,7 +18,7 @@ public class AssessmentDAO extends DBContext {
     public void add(Assessment ass) {
         try {
 
-            String sql = "INSERT INTO `swp391_se1632_g2`.`assessment`\n"
+            String sql = "INSERT INTO `swp391_bl5_g6`.`assessment`\n"
                     + "(`category`, `type`, `part`, `weight`, `completionCriteria`, `duration`, `questionType`,\n"
                     + " `noQuestion`, `knowledge_Skill`, `gradingGuide`, `note`, `isAcitve`, `accountId`, `slbid`)\n"
                     + "VALUES\n"
@@ -51,7 +51,7 @@ public class AssessmentDAO extends DBContext {
     public void update(Assessment ass) {
         try {
 
-            String sql = "UPDATE `swp391_se1632_g2`.`assessment` SET\n"
+            String sql = "UPDATE `swp391_bl5_g6`.`assessment` SET\n"
                     + "`category` = ?,\n"
                     + "`type` = ?,\n"
                     + "`part` = ?,\n"

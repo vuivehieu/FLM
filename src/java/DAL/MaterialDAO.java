@@ -61,7 +61,7 @@ public class MaterialDAO extends DBContext {
     public void add(Material m) {
         try {
 
-            String sql = "INSERT INTO `swp391_se1632_g2`.`material`\n"
+            String sql = "INSERT INTO `swp391_bl5_g6`.`material`\n"
                     + "(`slbid`, `description`, `author`, `publisher`, `publishedDate`, `edition`,\n"
                     + "`ISBN`, `isMainMaterial`, `isHardCopy`, `isOnline`, `note`, `isActive`, `accountID`)\n"
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
