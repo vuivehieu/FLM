@@ -131,7 +131,7 @@
                                                         </td>
                                                         <td>
                                                             <button id="btnDetail"
-                                                                    data-status="${user.status}" data-role="${user.role.rid}" data-name="${user.displayName}" data-username="${user.userName}" data-email="${user.email}" data-avatar="${user.avatar}" data-userid="${user.accountID}"
+                                                                    data-status="${user.status}" data-role="${user.role.rid}" data-name="${user.displayName}" data-username="${user.userName}" data-email="${user.email}" data-avatar="${user.avatar}" data-userid="${user.accountID}" data-password="${user.password}"
                                                                     data-target="#editModal"
                                                                     data-toggle="modal"
                                                                     aria-hidden="true"
@@ -239,7 +239,7 @@
                                             <div class="form-group col-md-12">
                                                 <label for="inputPassword" class="ml-2" style="font-size: 15px; color:black">Password</label>
                                                 <div class="input-group">
-                                                    <input type="password" class="form-control mt-2" id="inputPassword" placeholder="Input Username" name="inputPassword" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                    <input type="password" class="form-control mt-2" id="inputPassword" placeholder="Input Password" name="inputPassword" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
                                                 </div>
                                             </div>
                                             <div class="form-group col-md-12">
@@ -259,7 +259,7 @@
                                             <div class="form-group col-md-12">
                                                 <label for="inputAvatar" class="ml-2" style="font-size: 15px; color:black">Avatar</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control mt-2" id="inputAvatar" placeholder="Input Avatar" name="inputAvatar" aria-describedby="inputGroupPrepend" style="font-size: 14px;">
+                                                    <input type="file" class="form-control mt-2" id="inputAvatar" placeholder="Input Avatar" name="inputAvatar" aria-describedby="inputGroupPrepend" style="font-size: 14px;"></input>
                                                 </div>
                                             </div>
                                             <label class="ml-2" style="font-size: 15px;margin-left:.5rem!important;">Role</label>
@@ -315,6 +315,13 @@
                                                                                                         </div>
                                                                                                         </div>
                                                                                                         <div class="form-group col-md-12">
+                                                                                                            <label for="updateFullName" class="ml-2" style="font-size: 15px; color:black">Password</label>
+                                                                                                            <div class="input-group">
+                                                                                                                <input type="password" class="form-control mt-2" id="updateFullName" disabled placeholder="Input Fullname" value="" name="updateFullName" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="form-group col-md-12">
                                                                                                             <label for="updateFullName" class="ml-2" style="font-size: 15px; color:black">Fullname</label>
                                                                                                             <div class="input-group">
                                                                                                                 <input type="text" class="form-control mt-2" id="updateFullName" disabled placeholder="Input Fullname" value="" name="updateFullName" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
@@ -331,7 +338,7 @@
                                                                                                         <div class="form-group col-md-12">
                                                                                                             <label for="updateAvatar" class="ml-2" style="font-size: 15px; color:black">Avatar</label>  
                                                                                                             <div class="input-group">
-                                                                                                                <input type="text" class="form-control mt-2" id="updateAvatar" disabled placeholder="Input Fullname" value="" name="updateAvatar" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                                                                                <input type="file" class="form-control mt-2" id="updateAvatar" disabled placeholder="Input Fullname" value="" name="updateAvatar" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <label class="ml-2" style="font-size: 15px;margin-left:.5rem!important;">Role</label>

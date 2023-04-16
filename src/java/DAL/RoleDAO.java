@@ -35,6 +35,7 @@ public class RoleDAO extends DBContext {
         }
         return roleList;
     }
+
     public void ChangeRoleStatus(int id, int status) {
         try {
             String sql = "UPDATE `swp391_se1632_g2`.`role`"
@@ -90,7 +91,7 @@ public class RoleDAO extends DBContext {
             ResultSet rs = st.executeQuery();
 
             while (rs.next()) {
-                Role role = new Role(rs.getInt("rid"), rs.getString("rname"), rs.getInt("status"), rs.getInt("display_order"), rs.getString("description"),rs.getString("type"));
+                Role role = new Role(rs.getInt("rid"), rs.getString("rname"), rs.getInt("status"), rs.getInt("display_order"), rs.getString("description"), rs.getString("type"));
                 list.add(role);
             }
 
@@ -100,8 +101,8 @@ public class RoleDAO extends DBContext {
         }
         return list;
     }
-    
-        public int countAllSettingByPageAndFilter(PaginationModel pagination) {
+
+    public int countAllSettingByPageAndFilter(PaginationModel pagination) {
 
         int count = 0;
         try {
@@ -126,7 +127,7 @@ public class RoleDAO extends DBContext {
             }
             sql += ";";
             PreparedStatement st = connection.prepareStatement(sql);
-             int i = 1;
+            int i = 1;
             if (!pagination.getFilterType().equals("User Role")) {
                 st.setInt(i++, pagination.getFilterRole());
             }
@@ -147,5 +148,28 @@ public class RoleDAO extends DBContext {
             System.out.println("RoleDAO -> countAllSettingByPageAndFilter(): " + e);
         }
         return (int) Math.ceil((double) count / pagination.getPageSize());
+    }
+
+    public void insertRole(Role r) {
+        try {
+            String sql = "INSERT INTO `swp391_se1632_g2`.`role`\n"
+                    + "(`rid`,\n"
+                    + "`rname`,\n"
+                    + "`status`,\n"
+                    + "`display_order`,\n"
+                    + "`description`,\n"
+                    + "`type`)\n"
+                    + "VALUES\n"
+                    + "(?,\n"
+                    + "?,\n"
+                    + "?,\n"
+                    + "?,\n"
+                    + "?,\n"
+                    + "?);";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("RoleDAO -> insertRole(): " + e);
+        }
     }
 }

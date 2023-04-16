@@ -166,9 +166,9 @@ public class AccountDAO extends DBContext {
                     + "    `account`.`rid`,\n"
                     + "    `role`.`rname`\n"
                     + "FROM `swp391_se1632_g2`.`account` inner join `swp391_se1632_g2`.`role`\n"
-                    + "ON `account`.`rid` = `role`.`rid`";
+                    + "ON `account`.`rid` = `role`.`rid` WHERE `account`.`status`!=4 ";
             if (pagination.getFilterRole() != 0 || pagination.getFilterStatus() != 3 || !pagination.getSearch().equals("")) {
-                sql += " WHERE";
+                sql += " AND";
                 if (pagination.getFilterRole() != 0) {
                     sql += " role.rid = ?";
                 }
@@ -185,7 +185,7 @@ public class AccountDAO extends DBContext {
                     sql += " (account.userName LIKE ? OR account.email LIKE ? OR account.displayName LIKE ?)";
                 }
             }
-            sql += " LIMIT "+ (pagination.getPageNo()-1) * pagination.getPageSize() +","+ pagination.getPageSize() +";";
+            sql += " LIMIT " + (pagination.getPageNo() - 1) * pagination.getPageSize() + "," + pagination.getPageSize() + ";";
             PreparedStatement st = connection.prepareStatement(sql);
             int i = 1;
             if (pagination.getFilterRole() != 0) {
@@ -206,16 +206,10 @@ public class AccountDAO extends DBContext {
                 String userName = rs.getString("userName");
 
                 Role role = new Role(rs.getInt("rid"), rs.getString("rname"));
-
-                if (role.getRname().equalsIgnoreCase("student")) {
-                    account = getStudentByUserName(userName, role);
-                } else if (role.getRname().equalsIgnoreCase("teacher")) {
-                    account = getLecturerByUserName(userName, role);
-                } else {
                     account = new Account(rs.getInt("accountID"), rs.getString("userName"), rs.getString("password"),
                             rs.getString("displayName"), rs.getString("email"), rs.getString("avatar"), rs.getBoolean("isBlock"),
                             rs.getInt("status"), rs.getDate("createDate"), role);
-                }
+
 
                 list.add(account);
             }
@@ -385,7 +379,7 @@ public class AccountDAO extends DBContext {
                     + "    `role`.`status` as rolestatus \n"
                     + "FROM `swp391_se1632_g2`.`account` inner join `swp391_se1632_g2`.`role`\n"
                     + "ON `account`.`rid` = `role`.`rid`\n"
-                    + "WHERE `account`.`userName` = ? and `account`.`password` = ?;";
+                    + "WHERE `account`.`userName` = ? and `account`.`password` = ? and (`account`.`status`!=4 OR `account`.`status`!=0);";
 
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, userName);
@@ -483,8 +477,9 @@ public class AccountDAO extends DBContext {
 
         return result.equalsIgnoreCase("");
     }
-    public boolean checkByUsernameAndEmail(String username, String email){
-         int result = 0;
+
+    public boolean checkByUsernameAndEmail(String username, String email) {
+        int result = 0;
         try {
             String sql1 = "select COUNT(*) as count from account where email = ? or username=?";
 
@@ -500,6 +495,7 @@ public class AccountDAO extends DBContext {
         }
         return result == 0;
     }
+
     public boolean checkEmail(String email) {
         String result = "";
         try {
@@ -608,7 +604,7 @@ public class AccountDAO extends DBContext {
         }
         return 0;
     }
-    
+
     public int addUser(Account a) {
         try {
 
@@ -774,11 +770,11 @@ public class AccountDAO extends DBContext {
     public void deleteUser(int id) {
         try {
 
-            String sql = "DELETE from account where accountID = ?";
+            String sql = "Update account set status = 4 where accountID = ?";
 
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, id);
-            st.execute();
+            st.executeUpdate();
         } catch (SQLException e) {
             System.out.println(" AccountDAO -> deleteUser(): " + e);
 
