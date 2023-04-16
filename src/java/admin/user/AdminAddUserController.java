@@ -85,10 +85,14 @@ public class AdminAddUserController extends HttpServlet {
         a.setEmail(email);
         a.setPassword(Custom.ConvertMD5.convertPassToMD5(password));
         a.setIsBlock(false);
+        a.setAvatar(avatar);
         a.setStatus(status);
         a.setCreateDate(new java.sql.Date(System.currentTimeMillis()));
         a.setRole(new Role(role, null));
         a.setUserName(userName);
+        if (a.getAvatar().equals("")) {
+            a.setAvatar("images/avatar/default.png");
+        }
                 if(accountDAO.checkByUsernameAndEmail(a.getUserName(), a.getEmail())){
                             accountDAO.addUser(a);
                 }

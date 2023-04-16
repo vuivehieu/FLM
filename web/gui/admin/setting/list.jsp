@@ -195,7 +195,7 @@
                             <div class="modal-content">
                                 <div class="modal-header" style="background: #304156;padding: 10px;">
                                     <h5 class="modal-title" id="exampleModalLabel" style="color: white">
-                                        Delete User</h5>
+                                        Change Setting Status</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true" style="color: white">&times;</span>
                                     </button>
@@ -217,7 +217,7 @@
 
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <form id="formAdd" class="needs-validation" method="POST" action="admin-adduser">
+                                <form id="formAdd" class="needs-validation" method="POST" action="add-setting">
                                     <div class="modal-header" style="background: #304156;padding: 10px;">
                                         <h5 class="modal-title" id="exampleModalAdd" style="color: white">Add Setting</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -229,25 +229,25 @@
                                             <div class="form-group col-md-12">
                                                 <label for="inputName" class="ml-2" style="font-size: 15px; color:black">Name</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control mt-2" id="inputName" placeholder="Input Username" name="inputName" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                    <input type="text" class="form-control mt-2" id="inputName" placeholder="Input Name" name="inputName" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
                                                 </div>
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label for="inputDisplay" class="ml-2" style="font-size: 15px; color:black">Display Order</label>
                                                 <div class="input-group">
-                                                    <input type="password" class="form-control mt-2" id="inputDisplay" placeholder="Input Username" name="inputDisplay" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                    <input type="number" class="form-control mt-2" id="inputDisplay" placeholder="Input Display Order" name="inputDisplay" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
                                                 </div>
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label for="inputDescription" class="ml-2" style="font-size: 15px; color:black">Description</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control mt-2" id="inputFullName" placeholder="Input Fullname" name="inputFullName" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                    <input type="text" class="form-control mt-2" id="inputDescription" placeholder="Input Description" name="inputDescription" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
 
                                                 </div>
                                             </div>
                                             <label class="ml-2" style="font-size: 15px;margin-left:.5rem!important;">Type</label>
                                             <div class="form-group col-md-12">
-                                                <select class="form-control js-basic-example2" id="inputRole" name="inputRole" style="width: 100%" required>
+                                                <select class="form-control js-basic-example2" id="inputType" name="inputType" style="width: 100%" required>
                                                     <option value="0">User Role</option>
                                                 </select>
                                             </div>
@@ -288,15 +288,15 @@
                                                                                     <div class="form-group col-md-12">
                                                                                         <label for="updateName" class="ml-2" style="font-size: 15px; color:black">Name</label>
                                                                                         <div class="input-group">
-                                                                                            <input type="text" class="form-control mt-2" id="updateName" disabled placeholder="Input Username" value="" name="updateName" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                                                            <input type="text" class="form-control mt-2" id="updateName" disabled placeholder="Input Name" value="" name="updateName" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
                                                                                                 <input type="text" class="form-control mt-2" id="updateName2" placeholder="Input Username" value="" name="updateName2" aria-describedby="inputGroupPrepend" style="font-size: 14px;display: none">
                                                                                                     <input type="text" class="form-control mt-2" id="updateId" placeholder="Input Username" value="" name="updateId" aria-describedby="inputGroupPrepend" style="font-size: 14px;display: none">
                                                                                                         </div>
                                                                                                         </div>
                                                                                                         <div class="form-group col-md-12">
-                                                                                                            <label for="updateDisplay" class="ml-2" style="font-size: 15px; color:black">Display Order</label>
+                                                                                                            <label for="updateDisplayOrder" class="ml-2" style="font-size: 15px; color:black">Display Order</label>
                                                                                                             <div class="input-group">
-                                                                                                                <input type="text" class="form-control mt-2" id="updateDisplay" disabled placeholder="Input Fullname" value="" name="updateDisplay" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                                                                                <input type="text" class="form-control mt-2" id="updateDisplayOrder" disabled placeholder="Input Fullname" value="" name="updateDisplay" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
 
                                                                                                             </div>
                                                                                                         </div>
@@ -309,7 +309,7 @@
                                                                                                         </div>
                                                                                                         <label class="ml-2" style="font-size: 15px;margin-left:.5rem!important;">Type</label>
                                                                                                         <div class="form-group col-md-12">
-                                                                                                            <select class="form-control js-basic-example2" id="updateRole" name="updateRole" style="width: 100%" required>
+                                                                                                            <select class="form-control js-basic-example2" id="updateType" name="updateType" style="width: 100%" required>
                                                                                                                 <option value="0">User Role</option>
                                                                                                             </select>
                                                                                                         </div>

@@ -83,7 +83,7 @@ public class LoginController extends HttpServlet {
         Account a = ad.checkLogin(userName, password);
         if (a != null) {
             if(a.getRole().getStatus()==0){
-                request.setAttribute("error", "Tài Khoản Không Có Quyền Truy Cập");
+                request.setAttribute("error", "Oops you don’t have permission to use the system at the moment!");
                 request.getRequestDispatcher("/gui/common/home.jsp").forward(request, response);
                 return;
             }
