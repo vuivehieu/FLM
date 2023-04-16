@@ -226,9 +226,9 @@ public class AccountDAO extends DBContext {
         int count = 0;
         try {
             String sql = "SELECT COUNT(*) as count FROM `swp391_bl5_g6`.`account` INNER JOIN `swp391_bl5_g6`.`role`\n"
-                    + "ON `account`.`rid` = `role`.`rid`";
+                    + "ON `account`.`rid` = `role`.`rid` WHERE `account`.`status`!=4 ";
             if (pagination.getFilterRole() != 0 || pagination.getFilterStatus() != 3 || !pagination.getSearch().equals("")) {
-                sql += " WHERE";
+                sql += "AND";
                 if (pagination.getFilterRole() != 0) {
                     sql += " `role`.`rid` = ?";
                 }
