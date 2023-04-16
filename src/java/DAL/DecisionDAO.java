@@ -40,7 +40,7 @@ public class DecisionDAO extends DBContext {
     public void update(Decision dec) {
         try {
 
-            String sql = "UPDATE `swp391_se1632_g2`.`decision` SET\n"
+            String sql = "UPDATE `swp391_bl5_g6`.`decision` SET\n"
                     + "`decisionName` = ?,\n"
                     + "`approveDate` = ?,\n"
                     + "`note` = ?,\n"

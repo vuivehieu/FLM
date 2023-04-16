@@ -37,7 +37,7 @@ public class RoleDAO extends DBContext {
     }
     public void ChangeRoleStatus(int id, int status) {
         try {
-            String sql = "UPDATE `swp391_se1632_g2`.`role`"
+            String sql = "UPDATE `swp391_bl5_g6`.`role`"
                     + " set role.status = ? "
                     + "where role.rid= ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -53,7 +53,7 @@ public class RoleDAO extends DBContext {
 
         List<Role> list = new ArrayList<>();
         try {
-            String sql = "SELECT * from `swp391_se1632_g2`.`role`\n";
+            String sql = "SELECT * from `swp391_bl5_g6`.`role`\n";
             if (!pagination.getFilterType().equals("User Role") || pagination.getFilterStatus() != 3 || !pagination.getSearch().equals("")) {
                 sql += " WHERE";
                 if (!pagination.getFilterType().equals("User Role")) {
@@ -105,7 +105,7 @@ public class RoleDAO extends DBContext {
 
         int count = 0;
         try {
-            String sql = "SELECT COUNT(*) as count FROM `swp391_se1632_g2`.`role`";
+            String sql = "SELECT COUNT(*) as count FROM `swp391_bl5_g6`.`role`";
             if (!pagination.getFilterType().equals("User Role") || pagination.getFilterStatus() != 3 || !pagination.getSearch().equals("")) {
                 sql += " WHERE";
                 if (!pagination.getFilterType().equals("User Role")) {

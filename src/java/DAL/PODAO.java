@@ -17,7 +17,7 @@ public class PODAO extends DBContext {
     public void add(String name, String description, boolean isActive) {
         try {
 
-            String sql = "INSERT INTO `swp391_se1632_g2`.`po` (`poName`,`poDescription`,`isActive`)\n"
+            String sql = "INSERT INTO `swp391_bl5_g6`.`po` (`poName`,`poDescription`,`isActive`)\n"
                     + "VALUES (?, ?, ?);";
 
             PreparedStatement st = connection.prepareStatement(sql);
@@ -35,7 +35,7 @@ public class PODAO extends DBContext {
     public void update(String name, String description, boolean isActive, int poid) {
         try {
 
-            String sql = "UPDATE `swp391_se1632_g2`.`po` SET\n"
+            String sql = "UPDATE `swp391_bl5_g6`.`po` SET\n"
                     + "`poName` = ?,\n"
                     + "`poDescription` = ?,\n"
                     + "`isActive` = ?\n"

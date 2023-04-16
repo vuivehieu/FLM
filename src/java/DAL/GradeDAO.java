@@ -36,7 +36,7 @@ public class GradeDAO extends DBContext {
                     + "    `grade`.`stid`,\n"
                     + "    `grade`.`value`,\n"
                     + "    `grade`.`comment`\n"
-                    + "FROM `swp391_se1632_g2`.`grade`\n"
+                    + "FROM `swp391_bl5_g6`.`grade`\n"
                     + "WHERE `grade`.`assdeid` = ? and  `grade`.`stid` = ?;";
 
             PreparedStatement st = connection.prepareStatement(sql);
@@ -58,10 +58,10 @@ public class GradeDAO extends DBContext {
     public float getTotalGradeOfAssessmentBySubjectCodeANdMore(int slbid, int assid, String stid) {
         try {
 
-            String sql = "select ( sum(`grade`.`value` * `assessmentdetail`.`weight`) ) from `swp391_se1632_g2`.`assessment` inner join `swp391_se1632_g2`.`assessmentdetail`\n"
-                    + "                    on `assessment`.`assid` = `assessmentdetail`.`assID` inner join `swp391_se1632_g2`.`grade`\n"
-                    + "                    on `assessmentdetail`.`assdeID` = `grade`.`assdeid` inner join `swp391_se1632_g2`.`student` \n"
-                    + "                    on `grade`.`stid` = `student`.`stid` inner join `swp391_se1632_g2`.`syllabus`\n"
+            String sql = "select ( sum(`grade`.`value` * `assessmentdetail`.`weight`) ) from `swp391_bl5_g6`.`assessment` inner join `swp391_bl5_g6`.`assessmentdetail`\n"
+                    + "                    on `assessment`.`assid` = `assessmentdetail`.`assID` inner join `swp391_bl5_g6`.`grade`\n"
+                    + "                    on `assessmentdetail`.`assdeID` = `grade`.`assdeid` inner join `swp391_bl5_g6`.`student` \n"
+                    + "                    on `grade`.`stid` = `student`.`stid` inner join `swp391_bl5_g6`.`syllabus`\n"
                     + "                    on `syllabus`.`slbid` = `assessment`.`slbid`\n"
                     + "                    where `syllabus`.`slbid` = ? and `assessment`.`assid` = ? and `student`.`stid` = ?\n"
                     + "                    group by `student`.`stid`, `assessmentdetail`.`weight`;";
@@ -88,10 +88,10 @@ public class GradeDAO extends DBContext {
 
             String sql = "SELECT SUM(t.totalAssessment)\n"
                     + "            FROM (select ( sum(`grade`.`value` * `assessmentdetail`.`weight`) ) as totalAssessment\n"
-                    + "					from `swp391_se1632_g2`.`assessment` inner join `swp391_se1632_g2`.`assessmentdetail`\n"
-                    + "					on `assessment`.`assid` = `assessmentdetail`.`assID` inner join `swp391_se1632_g2`.`grade`\n"
-                    + "					on `assessmentdetail`.`assdeID` = `grade`.`assdeid` inner join `swp391_se1632_g2`.`student` \n"
-                    + "					on `grade`.`stid` = `student`.`stid` inner join `swp391_se1632_g2`.`syllabus`\n"
+                    + "					from `swp391_bl5_g6`.`assessment` inner join `swp391_bl5_g6`.`assessmentdetail`\n"
+                    + "					on `assessment`.`assid` = `assessmentdetail`.`assID` inner join `swp391_bl5_g6`.`grade`\n"
+                    + "					on `assessmentdetail`.`assdeID` = `grade`.`assdeid` inner join `swp391_bl5_g6`.`student` \n"
+                    + "					on `grade`.`stid` = `student`.`stid` inner join `swp391_bl5_g6`.`syllabus`\n"
                     + "					on `syllabus`.`slbid` = `assessment`.`slbid`\n"
                     + "					where `syllabus`.`slbid` = ? and `student`.`stid` = ?\n"
                     + "					group by `student`.`stid`, `assessmentdetail`.`weight`) as t;";
