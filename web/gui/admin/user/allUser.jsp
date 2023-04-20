@@ -542,7 +542,7 @@
                                                             $('#updateUsername3').attr('value', username);
                                                             $('#updateUsername').attr('value', username);
                                                             $('#updateEmail').attr('value', email);
-                                                            $('#updateRole').val(role)
+                                                            $('#updateRole').val(role);
                                                             $('#updateRole').val(role).trigger('change');
 
                                                         });

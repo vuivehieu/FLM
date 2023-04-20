@@ -166,7 +166,7 @@ public class AccountDAO extends DBContext {
                     + "    `account`.`rid`,\n"
                     + "    `role`.`rname`\n"
                     + "FROM `swp391_bl5_g6`.`account` inner join `swp391_bl5_g6`.`role`\n"
-                    + "ON `account`.`rid` = `role`.`rid`";
+                    + "ON `account`.`rid` = `role`.`rid` WHERE `account`.`status`!=4 ";
             if (pagination.getFilterRole() != 0 || pagination.getFilterStatus() != 3 || !pagination.getSearch().equals("")) {
                 sql += " AND";
                 if (pagination.getFilterRole() != 0) {
@@ -226,9 +226,9 @@ public class AccountDAO extends DBContext {
         int count = 0;
         try {
             String sql = "SELECT COUNT(*) as count FROM `swp391_bl5_g6`.`account` INNER JOIN `swp391_bl5_g6`.`role`\n"
-                    + "ON `account`.`rid` = `role`.`rid`";
+                    + "ON `account`.`rid` = `role`.`rid` WHERE `account`.`status`!=4 ";
             if (pagination.getFilterRole() != 0 || pagination.getFilterStatus() != 3 || !pagination.getSearch().equals("")) {
-                sql += " WHERE";
+                sql += "AND";
                 if (pagination.getFilterRole() != 0) {
                     sql += " `role`.`rid` = ?";
                 }
@@ -481,7 +481,7 @@ public class AccountDAO extends DBContext {
     public boolean checkByUsernameAndEmail(String username, String email) {
         int result = 0;
         try {
-            String sql1 = "select COUNT(*) as count from account where email = ? or username=?";
+            String sql1 = "select COUNT(*) as count from account where status !=4 and (email = ? or username=?)";
 
             PreparedStatement st1 = connection.prepareStatement(sql1);
             st1.setString(1, email);

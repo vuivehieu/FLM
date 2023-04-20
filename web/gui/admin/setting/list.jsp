@@ -98,6 +98,7 @@
                                                     <th class="sort-handler cursor-pointer">ID</th>
                                                     <th class="sort-handler cursor-pointer">Name</th>
                                                     <th class="sort-handler cursor-pointer">Type</th>
+                                                    <th class="sort-handler cursor-pointer">Description</th>
                                                     <th class="sort-handler cursor-pointer">Display Order</th>
                                                     <th>Status</th>
                                                     <th></th>
@@ -109,6 +110,9 @@
                                                             ${item.rname}
                                                         </td>
                                                         <td>${item.type}</td>
+                                                        <td>
+                                                            ${item.description}
+                                                        </td>
                                                         <td>${item.displayOrder}</td>
                                                         <td>
                                                             <c:if test="${item.status == 1}">
@@ -120,7 +124,7 @@
                                                         </td>
                                                         <td>
                                                             <button id="btnDetail"
-                                                                    data-status="${item.status}" data-type="${item.type}" data-name="${item.rname}" data-display="${item.displayOrder}" data-itemid="${item.rid}"
+                                                                    data-status="${item.status}" data-type="${item.type}" data-name="${item.rname}" data-display="${item.displayOrder}" data-itemid="${item.rid}" data-description="${item.description}"
                                                                     data-target="#editModal"
                                                                     data-toggle="modal"
                                                                     aria-hidden="true"
@@ -241,7 +245,7 @@
                                             <div class="form-group col-md-12">
                                                 <label for="inputDescription" class="ml-2" style="font-size: 15px; color:black">Description</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control mt-2" id="inputDescription" placeholder="Input Description" name="inputDescription" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                    <input type="text" class="form-control mt-2" id="inputDescription" placeholder="Input Description" name="inputDescription" aria-describedby="inputGroupPrepend" style="font-size: 14px;">
 
                                                 </div>
                                             </div>
@@ -276,7 +280,7 @@
 
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
-                                                                        <form id="formEdit" class="needs-validation" method="POST" action="admin-updateuser">
+                                                                        <form id="formEdit" class="needs-validation" method="POST" action="update-setting">
                                                                             <div class="modal-header" style="background: #304156;padding: 10px;">
                                                                                 <h5 class="modal-title" id="exampleModalAdd" style="color: white">Edit Setting</h5>
                                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -288,29 +292,28 @@
                                                                                     <div class="form-group col-md-12">
                                                                                         <label for="updateName" class="ml-2" style="font-size: 15px; color:black">Name</label>
                                                                                         <div class="input-group">
-                                                                                            <input type="text" class="form-control mt-2" id="updateName" disabled placeholder="Input Name" value="" name="updateName" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
-                                                                                                <input type="text" class="form-control mt-2" id="updateName2" placeholder="Input Username" value="" name="updateName2" aria-describedby="inputGroupPrepend" style="font-size: 14px;display: none">
+                                                                                            <input type="text" class="form-control mt-2" id="updateName" placeholder="Input Name" value="" name="updateName" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
                                                                                                     <input type="text" class="form-control mt-2" id="updateId" placeholder="Input Username" value="" name="updateId" aria-describedby="inputGroupPrepend" style="font-size: 14px;display: none">
                                                                                                         </div>
                                                                                                         </div>
                                                                                                         <div class="form-group col-md-12">
                                                                                                             <label for="updateDisplayOrder" class="ml-2" style="font-size: 15px; color:black">Display Order</label>
                                                                                                             <div class="input-group">
-                                                                                                                <input type="text" class="form-control mt-2" id="updateDisplayOrder" disabled placeholder="Input Fullname" value="" name="updateDisplay" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                                                                                <input type="number" class="form-control mt-2" id="updateDisplayOrder" placeholder="Input Display Order" value="" name="updateDisplayOrder" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
 
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <div class="form-group col-md-12">
                                                                                                             <label for="updateDescription" class="ml-2" style="font-size: 15px; color:black">Description</label>
                                                                                                             <div class="input-group">
-                                                                                                                <input type="text" class="form-control mt-2" id="updateDescription" disabled placeholder="Input Fullname" value="" name="updateDescription" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
+                                                                                                                <input type="text" class="form-control mt-2" id="updateDescription" placeholder="Input Description" value="" name="updateDescription" aria-describedby="inputGroupPrepend" required style="font-size: 14px;">
 
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <label class="ml-2" style="font-size: 15px;margin-left:.5rem!important;">Type</label>
                                                                                                         <div class="form-group col-md-12">
                                                                                                             <select class="form-control js-basic-example2" id="updateType" name="updateType" style="width: 100%" required>
-                                                                                                                <option value="0">User Role</option>
+                                                                                                                <option value="0" selected>User Role</option>
                                                                                                             </select>
                                                                                                         </div>
 
@@ -476,6 +479,7 @@
                                                             var button = $(event.relatedTarget); // Button that triggered the modal
                                                             var status = button.data('status'); // Extract value from data-* attributes
                                                             var type = button.data('type');
+                                                            var description = button.data('description');
                                                             var itemid = button.data('itemid');
                                                             var name = button.data('name');
                                                             var display = button.data('display');
@@ -488,10 +492,10 @@
                                                                 $('#updateStatus2').prop('checked', 'checked');
                                                             }
                                                             $('#updateName').attr('value', name);
-                                                            $('#updateDisplay').attr('value', display);
+                                                            $('#updateDescription').attr('value', description);
+                                                            $('#updateDisplayOrder').attr('value', display);
                                                             $('#updateId').attr('value', itemid);
-                                                            $('#updateType').val(type)
-                                                            $('#updateType').val(type).trigger('change');
+                                                            $('#updateType').val(type);
 
                                                         });
                                                         function openModal(id) {
