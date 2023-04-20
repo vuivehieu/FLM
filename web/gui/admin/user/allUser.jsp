@@ -259,7 +259,11 @@
                                             <div class="form-group col-md-12">
                                                 <label for="inputAvatar" class="ml-2" style="font-size: 15px; color:black">Avatar</label>
                                                 <div class="input-group">
-                                                    <input type="file" class="form-control mt-2" id="inputAvatar" placeholder="Input Avatar" name="inputAvatar" aria-describedby="inputGroupPrepend" style="font-size: 14px;"></input>
+                                                    <!--<input accept="image/*" type="file" class="form-control mt-2" id="inputAvatar" placeholder="Input Avatar" 
+                                                    name="inputAvatar" aria-describedby="inputGroupPrepend" style="font-size: 14px;"></input>-->
+                                                    <input accept="image/*" type="file" class="form-control mt-2" id="inputAvatar" placeholder="Input Avatar" 
+                                                    name="inputAvatar" aria-describedby="inputGroupPrepend" style="font-size: 14px;"
+                                                           onchange="updatePreview(this, 'image-preview')" ></input>
                                                 </div>
                                             </div>
                                             <label class="ml-2" style="font-size: 15px;margin-left:.5rem!important;">Role</label>
@@ -546,6 +550,18 @@
                                                             $("#ModalDelete").modal('show');
                                                         }
                                                         ;
+                                                        
+                                                         function updatePreview(input, target) {
+                                   let file = input.files[0];
+                                   let reader = new FileReader();
+
+                                   reader.readAsDataURL(file);
+                                   reader.onload = function () {
+                                       let img = document.getElementById(target);
+                                       // can also use "this.result"
+                                       img.src = reader.result;
+                                   }
+                               }
                                                                                                                             </script>
                                                                                                                             </body>
 

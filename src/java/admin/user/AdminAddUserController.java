@@ -13,6 +13,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import model.Account;
 import model.Role;
 
@@ -77,7 +80,33 @@ public class AdminAddUserController extends HttpServlet {
         String fullName = request.getParameter("inputFullName");
         String email = request.getParameter("inputEmail");
         String password = request.getParameter("inputPassword");
-        String avatar = request.getParameter("inputAvatar");
+//        String avatar = request.getParameter("inputAvatar");
+        
+        Part file = request.getPart("inputAvatar");
+        String fileName = file.getSubmittedFileName();
+        String[] fields = fileName.split("\\.");
+        String convert = "." + fields[1];
+        String avatar = "";
+        if (!fileName.isEmpty()) {
+//            String uploadPath = "C:/Users/phanh/OneDrive/Máy tính/Template-SWP391/G2/SWP391-G2/web/images/avatar/" + convert;
+            String uploadPath = "C:/Users/PC/Desktop/FPT/FLM/web/images/avatar" + convert;
+
+            try {
+                FileOutputStream fos = new FileOutputStream(uploadPath);
+                InputStream is = file.getInputStream();
+
+                byte[] data = new byte[is.available()];
+                is.read(data);
+                fos.write(data);
+                fos.close();
+
+                avatar = "images/avatar/" + convert;
+
+            } catch (IOException e) {
+                System.out.println(e);
+            }
+        }
+        
         int role = Integer.parseInt(request.getParameter("inputRole"));
         int status = Integer.parseInt(request.getParameter("inputStatus"));
         Account a = new Account();
